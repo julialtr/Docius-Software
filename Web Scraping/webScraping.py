@@ -31,24 +31,23 @@ barraPesquisa.send_keys(Keys.RETURN)
 time.sleep(3)
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
-results = soup.find_all('div', class_="vtex-search-result-3-x-galleryItem")
+resultados = soup.find_all('div', class_="vtex-search-result-3-x-galleryItem")
 
-for result in results:
-    title = result.find('span', class_="vtex-product-summary-2-x-productBrand vtex-product-summary-2-x-brandName t-body")
-    price1 = result.find_all('span', class_="vtex-product-price-1-x-currencyInteger vtex-product-price-1-x-currencyInteger--product-summary")
-    price2 = result.find_all('span', class_="vtex-product-price-1-x-currencyDecimal vtex-product-price-1-x-currencyDecimal--product-summary")
-    price3 = result.find_all('span', class_="vtex-product-price-1-x-currencyFraction vtex-product-price-1-x-currencyFraction--product-summary")
-    price = ''
+for item in resultados:
+    nome = item.find('span', class_="vtex-product-summary-2-x-productBrand")
+    precoInteiro = item.find_all('span', class_="vtex-product-price-1-x-currencyInteger")
+    precoDecimal = item.find_all('span', class_="vtex-product-price-1-x-currencyDecimal")
+    precoFracao = item.find_all('span', class_="vtex-product-price-1-x-currencyFraction")
+    preco = ''
     
-    if price1:
-        price += price1[-1].text
+    if precoInteiro:
+        preco += precoInteiro[-1].text
     
-    if price2:
-        price += price2[-1].text
+    if precoFracao:
+        preco += precoFracao[-1].text
     
-    if price3:
-        price += price3[-1].text
+    if precoFracao:
+        preco += precoFracao[-1].text
     
-    if title and price:
-        print(f"{title.text} - {price}")
-             
+    if nome and preco:
+        print(f"{nome.text} - {preco}")
