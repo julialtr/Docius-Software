@@ -6,4 +6,4 @@ O Web Scraping é uma técnica utilizada para coletar dados de sites, transforma
 - Linguagem: Python
 
 Arquitetura:
-- API em Python
+- API em Python (Utilizando Flask)
