@@ -53,13 +53,14 @@ def scraping(driver, url, conteudoPesquisa):
             precoFormatado = re.search(r'\d+,\d+', preco)
             if precoFormatado:
                 precoFormatado = precoFormatado.group()
+                precoFormatado = precoFormatado.replace(',', '.')
 
             if nome == '' or preco == '':
                 continue
 
-            produtos.append(Produto(nome, precoFormatado, Mercados.GIASSI.value))
+            produtos.append(Produto(nome, float(precoFormatado), Mercados.GIASSI.value))
 
-        return produtos
+        return produtos, 200
     
     except Exception as e:
-        print(f"Ocorreu um erro na busca dos preços do mercado Giassi: {e}")
+        return {"error": f"{e}"}, 400

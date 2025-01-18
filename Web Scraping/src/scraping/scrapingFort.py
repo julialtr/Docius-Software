@@ -46,8 +46,9 @@ def scraping(driver, url, conteudoPesquisa):
                 precoFormatado = re.search(r'\d+,\d+', precoFormatado)
                 if precoFormatado:
                     precoFormatado = precoFormatado.group()
+                    precoFormatado = precoFormatado.replace(',', '.')
 
-                produtos.append(Produto(nome, precoFormatado, Mercados.FORT.value))  
+                produtos.append(Produto(nome, float(precoFormatado), Mercados.FORT.value))  
 
             paginas = soup.find_all('li', class_="pagination-button")
             clicarProximaPagina = False 
@@ -70,7 +71,7 @@ def scraping(driver, url, conteudoPesquisa):
             if clicarProximaPagina == False:
                 break
 
-        return produtos
+        return produtos, 200
     
     except Exception as e:
-        print(f"Ocorreu um erro na busca dos preços do mercado Fort: {e}")
+        return {"error": f"{e}"}, 400
