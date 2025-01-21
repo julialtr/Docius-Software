@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from bs4 import BeautifulSoup
 from constants.enums import Mercados
@@ -14,6 +16,12 @@ def scraping(driver, url, conteudoPesquisa):
 
         driver.get(url)
         time.sleep(3)
+
+        cookies = driver.find_element(By.ID, "privacytools-banner-consent")
+        driver.execute_script("arguments[0].remove();", cookies)
+
+        cookies = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "cc-btn.cc-deny")))
+        cookies.click()
 
         ignorarCEP = driver.find_element(By.CLASS_NAME, "modalCep-content--see-more")
         ignorarCEP.click()  

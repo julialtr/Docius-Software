@@ -21,7 +21,7 @@ def get_produtos():
 
     produtos, httpResult = scraping(ids_mercados, texto_pesquisa)
 
-    return jsonify({"status": httpResult, "total_itens": len(produtos), "dados": produtos})
+    return jsonify({"status": httpResult, "total_itens": len(produtos), "dados": produtos}), httpResult
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

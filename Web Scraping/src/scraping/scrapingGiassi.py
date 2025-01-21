@@ -15,6 +15,11 @@ def scraping(driver, url, conteudoPesquisa):
         driver.get(url)
         time.sleep(3)
 
+        cookies = driver.find_element(By.ID, "cookiescript_injected")   
+
+        if cookies.is_displayed():
+            driver.execute_script("arguments[0].remove();", cookies)    
+
         barraPesquisa = driver.find_element(By.CLASS_NAME, "vtex-input-prefix__group")
         barraPesquisa.click()
         time.sleep(2)   
@@ -23,11 +28,6 @@ def scraping(driver, url, conteudoPesquisa):
         barraPesquisa.send_keys(conteudoPesquisa)
         barraPesquisa.send_keys(Keys.RETURN)
         time.sleep(3)   
-
-        cookies = driver.find_element(By.ID, "cookiescript_injected")   
-
-        if cookies.is_displayed():
-            driver.execute_script("arguments[0].remove();", cookies)    
 
         while True:
             try:

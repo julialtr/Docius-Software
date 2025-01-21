@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 from constants.enums import Mercados
 import constants.links
 
 from . import scrapingFort
 from . import scrapingGiassi
-import json
 
 def scraping(ids_mercados, texto_pesquisa):
-    chromeOptions = Options()
-    chromeOptions.add_argument("--headless")
-    chromeOptions.add_argument("--no-sandbox")
-    chromeOptions.add_argument("--disable-dev-shm-usage")
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(options=chromeOptions)
+    service = Service('/usr/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
 
     produtos = []
 
@@ -24,6 +26,7 @@ def scraping(ids_mercados, texto_pesquisa):
             novosProdutos, httpResult = scrapingFort.scraping(driver, url, texto_pesquisa)
 
             if httpResult == 400:
+                driver.quit()
                 return novosProdutos, httpResult
 
             produtos.extend(novosProdutos)
@@ -32,6 +35,7 @@ def scraping(ids_mercados, texto_pesquisa):
             novosProdutos, httpResult = scrapingGiassi.scraping(driver, url, texto_pesquisa)
 
             if httpResult == 400:
+                driver.quit()
                 return novosProdutos, httpResult
 
             produtos.extend(novosProdutos)
@@ -41,4 +45,5 @@ def scraping(ids_mercados, texto_pesquisa):
         for produto in produtos
     ]
 
+    driver.quit()
     return produtos, 200
