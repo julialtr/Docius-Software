@@ -7,6 +7,11 @@ O Web Scraping é uma técnica utilizada para coletar dados de sites, transforma
 - Bibliotecas: Selenium e BeautifulSoup
 - Linguagem: Python
 
+## Docker
+O Docker é utilizado para criar contêiners específicos da aplicação, fazendo-os rodar em um ambiente isolado e exclusivo. Ele simula um ambiente de desenvolvimento virtualizado, adaptado com as dependências necessárias para o funcionamento do projeto.
+- Docker para API em Python
+- Docker para Banco de Dados
+
 # Arquitetura:
 ## API
 -  Biblioteca: Flask
