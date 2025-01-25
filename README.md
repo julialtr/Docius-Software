@@ -19,6 +19,7 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 -  Linguagem: Python
 
 ## Banco de Dados
-- Objetivo: Armanezar os dados do software fornecendo um banco de dados base com as empresas e um banco de dados exclusivo para os dados de cada empresa.
+- Objetivo: Armanezar os dados do software fornecendo um banco de dados base com as empresas e um banco de dados exclusivo para os dados de cada empresa
+- Diagrama de Entidades: https://miro.com/app/board/uXjVLpmbh28=/?share_link_id=428525371290
 - Tipo: Relacional
 - SGBD: PostgresSQL
