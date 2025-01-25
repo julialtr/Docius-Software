@@ -14,5 +14,11 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 
 # Arquitetura:
 ## API
+-  Objetivo: Fornecer os dados adquiridos pelo Web Scraping
 -  Biblioteca: Flask
 -  Linguagem: Python
+
+## Banco de Dados
+- Objetivo: Armanezar os dados do software fornecendo um banco de dados base com as empresas e um banco de dados exclusivo para os dados de cada empresa.
+- Tipo: Relacional
+- SGBD: PostgresSQL
