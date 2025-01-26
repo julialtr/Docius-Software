@@ -1,0 +1,17 @@
+﻿using AutoMapper;
+
+namespace Docius.API.Extensions;
+
+public static class MapperConfigurationExtension
+{
+    public static void RegisterProfiles(this IMapperConfigurationExpression configuration)
+    {
+        configuration.AddProfiles(GetProfiles());
+    }
+    private static Profile[] GetProfiles()
+    {
+        return new Profile[]
+        {
+        };
+    }
+}
