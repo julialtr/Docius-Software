@@ -18,8 +18,12 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 -  Biblioteca: Flask
 -  Linguagem: Python
 
+## API
+- Objetivo: Fazer a conexão e realizar operações sobre o banco de dados
+- Biblioteca: ASP .Net Core e Entity Framework
+- Linguagem: C#
+
 ## Banco de Dados
 - Objetivo: Armanezar os dados do software fornecendo um banco de dados base com as empresas e um banco de dados exclusivo para os dados de cada empresa
-- Diagrama de Entidades: https://miro.com/app/board/uXjVLpmbh28=/?share_link_id=428525371290
 - Tipo: Relacional
 - SGBD: PostgresSQL
