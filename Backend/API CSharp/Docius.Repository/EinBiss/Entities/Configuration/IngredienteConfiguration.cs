@@ -1,5 +1,4 @@
 ﻿using Docius.Repository.EinBiss.Entities.Models;
-using Docius.Repository.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,12 +14,11 @@ public class IngredienteConfiguration : IEntityTypeConfiguration<Ingrediente>
         builder.Property(entity => entity.Preco).IsRequired();
         builder.Property(entity => entity.Quantidade).IsRequired();
         builder.Property(entity => entity.Medida).IsRequired();
-        builder.Property(entity => entity.UnidadeMedidaId).IsRequired();
-        builder.Property(entity => entity.CategoriaIngredienteId).IsRequired();
 
         builder.HasOne(entity => entity.UnidadeMedida)
             .WithMany()
-            .HasForeignKey(entity => entity.UnidadeMedidaId);
+            .HasForeignKey(entity => entity.UnidadeMedidaId)
+            .IsRequired();
 
         builder.HasOne(entity => entity.Fornecedor)
             .WithMany()
@@ -28,6 +26,7 @@ public class IngredienteConfiguration : IEntityTypeConfiguration<Ingrediente>
 
         builder.HasOne(entity => entity.CategoriaIngrediente)
             .WithMany()
-            .HasForeignKey(entity => entity.CategoriaIngredienteId);
+            .HasForeignKey(entity => entity.CategoriaIngredienteId)
+            .IsRequired();
     }
 }

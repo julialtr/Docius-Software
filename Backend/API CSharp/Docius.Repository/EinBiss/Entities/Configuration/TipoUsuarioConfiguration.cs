@@ -1,5 +1,4 @@
 ﻿using Docius.Repository.EinBiss.Entities.Models;
-using Docius.Repository.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -8,7 +8,7 @@ public class DecoracaoBoloPedido : EntityBase<int>
 {
     [Column("foto")]
     [Required]
-    public List<byte> Foto { get; set; }
+    public Byte[] Foto { get; set; }
 
     public virtual List<DecoracaoBoloPedidoPersonalizacao> DecoracaoBoloPedidoPersonalizacao { get; set; }
 }

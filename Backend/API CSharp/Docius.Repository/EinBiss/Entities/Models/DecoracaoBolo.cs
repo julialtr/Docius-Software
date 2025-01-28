@@ -8,7 +8,7 @@ public class DecoracaoBolo : EntityBase<int>
 {
     [Column("foto")]
     [Required]
-    public List<byte> Foto { get; set; }
+    public Byte[] Foto { get; set; }
 
     [Column("flores_naturais")]
     public bool FloresNaturais { get; set; }

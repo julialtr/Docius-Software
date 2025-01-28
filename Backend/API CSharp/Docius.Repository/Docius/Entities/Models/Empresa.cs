@@ -12,7 +12,7 @@ public class Empresa : EntityBase<int>
     public string Nome { get; set; }
 
     [Column("logo")]
-    public List<byte> Logo { get; set; }
+    public Byte[] Logo { get; set; }
 
     [Column("dominio")]
     [MaxLength(100)]

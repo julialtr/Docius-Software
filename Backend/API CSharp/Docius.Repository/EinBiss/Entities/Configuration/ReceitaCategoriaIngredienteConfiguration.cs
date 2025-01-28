@@ -1,5 +1,4 @@
 ﻿using Docius.Repository.EinBiss.Entities.Models;
-using Docius.Repository.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,10 +13,10 @@ public class ReceitaCategoriaIngredienteConfiguration : IEntityTypeConfiguration
         builder.Property(entity => entity.Medida).IsRequired();
         builder.Property(entity => entity.ReceitaId).IsRequired();
         builder.Property(entity => entity.CategoriaIngredienteId).IsRequired();
-        builder.Property(entity => entity.UnidadeMedidaId).IsRequired();
 
         builder.HasOne(entity => entity.UnidadeMedida)
             .WithMany()
-            .HasForeignKey(entity => entity.UnidadeMedidaId);
+            .HasForeignKey(entity => entity.UnidadeMedidaId)
+            .IsRequired();
     }
 }

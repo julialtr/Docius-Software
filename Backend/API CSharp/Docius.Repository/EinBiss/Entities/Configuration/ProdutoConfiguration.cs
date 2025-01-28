@@ -1,5 +1,4 @@
 ﻿using Docius.Repository.EinBiss.Entities.Models;
-using Docius.Repository.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,15 +12,15 @@ public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
 
         builder.Property(entity => entity.Nome).IsRequired();
         builder.Property(entity => entity.Preco).IsRequired();
-        builder.Property(entity => entity.ReceitaId).IsRequired();
-        builder.Property(entity => entity.CategoriaProdutoId).IsRequired();
 
         builder.HasOne(entity => entity.Receita)
             .WithMany()
-            .HasForeignKey(entity => entity.ReceitaId);
+            .HasForeignKey(entity => entity.ReceitaId)
+            .IsRequired();
 
         builder.HasOne(entity => entity.CategoriaProduto)
             .WithMany()
-            .HasForeignKey(entity => entity.CategoriaProdutoId);
+            .HasForeignKey(entity => entity.CategoriaProdutoId)
+            .IsRequired();
     }
 }

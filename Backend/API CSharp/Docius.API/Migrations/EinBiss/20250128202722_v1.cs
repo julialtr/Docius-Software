@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -44,7 +43,7 @@ namespace Docius.API.Migrations.EinBiss
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    foto = table.Column<List<byte>>(type: "smallint[]", nullable: false),
+                    foto = table.Column<byte[]>(type: "bytea", nullable: false),
                     flores_naturais = table.Column<bool>(type: "boolean", nullable: false),
                     collor_cake = table.Column<bool>(type: "boolean", nullable: false),
                     metalizado = table.Column<bool>(type: "boolean", nullable: false),
@@ -62,7 +61,7 @@ namespace Docius.API.Migrations.EinBiss
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    foto = table.Column<List<byte>>(type: "smallint[]", nullable: false)
+                    foto = table.Column<byte[]>(type: "bytea", nullable: false)
                 },
                 constraints: table =>
                 {
