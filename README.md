@@ -1,4 +1,4 @@
-Docius é um software desenvolvido para um TCC de Ciências da Computação. A ideia dele é ser um software voltado para a gestão integrada de confeitarias por encomendas.
+Docius é um software desenvolvido para um TCC de Ciências da Computação. A ideia dele é ser um software voltado para a gestão integrada de confeitarias por encomendas, utilizando tecnologias inovadoras.
 
 # Tecnologias:
 
@@ -12,6 +12,9 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 - Docker para API em Python
 - Docker para Banco de Dados
 
+## Entity Framework
+O Entity Framework é utilizado para fazer a conexão entre a API e o banco de dados de maneira mais eficiente. Com ele, foram criadas as tabelas do banco de dados, que são migradas para o banco de dados. Essa ferramenta garante praticidade na criação e no versionamento das tabelas após alterações. 
+
 # Arquitetura:
 ## API
 -  Objetivo: Fornecer os dados adquiridos pelo Web Scraping
@@ -20,7 +23,7 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 
 ## API
 - Objetivo: Fazer a conexão e realizar operações sobre o banco de dados
-- Biblioteca: ASP .Net Core e Entity Framework
+- Biblioteca: ASP .Net Core
 - Linguagem: C#
 
 ## Banco de Dados
