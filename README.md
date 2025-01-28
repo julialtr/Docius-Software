@@ -14,20 +14,6 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 
 ## Entity Framework
 O Entity Framework é utilizado para fazer a conexão entre a API e o banco de dados de maneira mais eficiente. Com ele, foram criadas as tabelas do banco de dados, que são migradas para o banco de dados. Essa ferramenta garante praticidade na criação e no versionamento das tabelas após alterações. 
-- Comando para criar os arquivos de migração:
-
-
-_dotnet ef migrations add v1 --context DociusContext --output-dir Migrations/Docius_
-
-
-_dotnet ef migrations add v1 --context EinBissContext --output-dir Migrations/EinBiss_
-- Comando para atualizar o banco de dados de acordo com os arquivos de migração:
-
-  
-_dotnet ef database update --context DociusContext_
-
-
-_dotnet ef database update --context EinBissContext_
 
 # Arquitetura:
 ## API
