@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
-using Docius.Repository;
+using Docius.Repository.Docius;
+using Docius.Repository.EinBiss;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -67,22 +68,22 @@ public static class ServiceExtensions
 
     public static void ConfigureDataBase(this IServiceCollection services, IConfiguration configuration)
     {
-        string connString = configuration.GetConnectionString("Docius");
+        string connStringDocius = configuration.GetConnectionString("Docius");
 
         services.AddDbContext<DociusContext>(options =>
         {
-            options.UseNpgsql(connString, x =>
+            options.UseNpgsql(connStringDocius, x =>
             {
                 x.EnableRetryOnFailure(10);
                 x.MigrationsAssembly("Docius.API");
             });
         });
 
-        connString = configuration.GetConnectionString("EinBiss");
+        string connStringEinBiss = configuration.GetConnectionString("EinBiss");
 
         services.AddDbContext<EinBissContext>(options =>
         {
-            options.UseNpgsql(connString, x =>
+            options.UseNpgsql(connStringEinBiss, x =>
             {
                 x.EnableRetryOnFailure(10);
                 x.MigrationsAssembly("Docius.API");
@@ -91,6 +92,7 @@ public static class ServiceExtensions
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
+
     public static void RegisterServices(this IServiceCollection services)
     {
     }
