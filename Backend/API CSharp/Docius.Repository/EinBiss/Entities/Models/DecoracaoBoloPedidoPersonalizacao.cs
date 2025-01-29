@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Docius.Repository.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
