@@ -6,7 +6,7 @@ public static class WebApplicationExtensions
 {
     public static WebApplication Configure(this WebApplication app)
     {
-        //app.ConfigureExceptionHandling();
+        app.ConfigureExceptionHandling();
         app.UseCors();
         app.UseRouting();
         app.UseAuthentication();
