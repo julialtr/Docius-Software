@@ -15,6 +15,9 @@ O Docker é utilizado para criar contêiners específicos da aplicação, fazend
 ## Entity Framework
 O Entity Framework é utilizado para fazer a conexão entre a API e o banco de dados de maneira mais eficiente. Com ele, foram criadas as tabelas do banco de dados, que são migradas para o banco de dados. Essa ferramenta garante praticidade na criação e no versionamento das tabelas após alterações. 
 
+## JwtBearer
+O JwtBearer é uma biblioteca responsável por fazer a autenticação para APIs. Ela gera um token de acordo com os dados informados, se estes forem corretos. O token é utilizado para se conectar a API e ter o acesso as rotas disponíveis.
+
 # Arquitetura:
 ## API
 -  Objetivo: Fornecer os dados adquiridos pelo Web Scraping
