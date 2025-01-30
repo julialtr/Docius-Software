@@ -49,28 +49,28 @@ public sealed class EinBissEntityService
     public UnidadeMedidaEntityService UnidadeMedida => _entityServiceUnidadeMedida.Value;
     public UsuarioEntityService Usuario => _entityServiceUsuario.Value;
 
-    public EinBissEntityService(EinBissEntityService service, EinBissContext context)
+    public EinBissEntityService(EinBissContext context)
     {
-        _entityServiceCardapio = new(() => new CardapioEntityService(service, context));
-        _entityServiceCategoriaIngrediente = new(() => new CategoriaIngredienteEntityService(service, context));
-        _entityServiceCategoriaProduto = new(() => new CategoriaProdutoEntityService(service, context));
-        _entityServiceDecoracaoBolo = new(() => new DecoracaoBoloEntityService(service, context));
-        _entityServiceDecoracaoBoloPedido = new(() => new DecoracaoBoloPedidoEntityService(service, context));
-        _entityServiceDecoracaoBoloPedidoPersonalizacao = new(() => new DecoracaoBoloPedidoPersonalizacaoEntityService(service, context));
-        _entityServiceFornecedor = new(() => new FornecedorEntityService(service, context));
-        _entityServiceGasto = new(() => new GastoEntityService(service, context));
-        _entityServiceIngrediente = new(() => new IngredienteEntityService(service, context));
-        _entityServicePedido = new(() => new PedidoEntityService(service, context));
-        _entityServicePedidoProduto = new(() => new PedidoProdutoEntityService(service, context));
-        _entityServicePersonalizacao = new(() => new PersonalizacaoEntityService(service, context));
-        _entityServicePrecificacao = new(() => new PrecificacaoEntityService(service, context));
-        _entityServiceProduto = new(() => new ProdutoEntityService(service, context));
-        _entityServiceReceita = new(() => new ReceitaEntityService(service, context));
-        _entityServiceReceitaCategoriaIngrediente = new(() => new ReceitaCategoriaIngredienteEntityService(service, context));
-        _entityServiceStatusPedido = new(() => new StatusPedidoEntityService(service, context));
-        _entityServiceStatusPedidoProduto = new(() => new StatusPedidoProdutoEntityService(service, context));
-        _entityServiceTipoUsuario = new(() => new TipoUsuarioEntityService(service, context));
-        _entityServiceUnidadeMedida = new(() => new UnidadeMedidaEntityService(service, context));
-        _entityServiceUsuario = new(() => new UsuarioEntityService(service, context));
+        _entityServiceCardapio = new(() => new CardapioEntityService(this, context));
+        _entityServiceCategoriaIngrediente = new(() => new CategoriaIngredienteEntityService(this, context));
+        _entityServiceCategoriaProduto = new(() => new CategoriaProdutoEntityService(this, context));
+        _entityServiceDecoracaoBolo = new(() => new DecoracaoBoloEntityService(this, context));
+        _entityServiceDecoracaoBoloPedido = new(() => new DecoracaoBoloPedidoEntityService(this, context));
+        _entityServiceDecoracaoBoloPedidoPersonalizacao = new(() => new DecoracaoBoloPedidoPersonalizacaoEntityService(this, context));
+        _entityServiceFornecedor = new(() => new FornecedorEntityService(this, context));
+        _entityServiceGasto = new(() => new GastoEntityService(this, context));
+        _entityServiceIngrediente = new(() => new IngredienteEntityService(this, context));
+        _entityServicePedido = new(() => new PedidoEntityService(this, context));
+        _entityServicePedidoProduto = new(() => new PedidoProdutoEntityService(this, context));
+        _entityServicePersonalizacao = new(() => new PersonalizacaoEntityService(this, context));
+        _entityServicePrecificacao = new(() => new PrecificacaoEntityService(this, context));
+        _entityServiceProduto = new(() => new ProdutoEntityService(this, context));
+        _entityServiceReceita = new(() => new ReceitaEntityService(this, context));
+        _entityServiceReceitaCategoriaIngrediente = new(() => new ReceitaCategoriaIngredienteEntityService(this, context));
+        _entityServiceStatusPedido = new(() => new StatusPedidoEntityService(this, context));
+        _entityServiceStatusPedidoProduto = new(() => new StatusPedidoProdutoEntityService(this, context));
+        _entityServiceTipoUsuario = new(() => new TipoUsuarioEntityService(this, context));
+        _entityServiceUnidadeMedida = new(() => new UnidadeMedidaEntityService(this, context));
+        _entityServiceUsuario = new(() => new UsuarioEntityService(this, context));
     }
 }

@@ -9,8 +9,8 @@ public sealed class DociusEntityService
 
     public EmpresaEntityService Empresa => _entityServiceEmpresa.Value;
 
-    public DociusEntityService(DociusEntityService service, DociusContext context)
+    public DociusEntityService(DociusContext context)
     {
-        _entityServiceEmpresa = new(() => new EmpresaEntityService(service, context));
+        _entityServiceEmpresa = new(() => new EmpresaEntityService(this, context));
     }
 }
