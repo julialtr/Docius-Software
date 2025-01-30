@@ -23,6 +23,7 @@ O Entity Framework é utilizado para fazer a conexão entre a API e o banco de d
 
 ## API
 - Objetivo: Fazer a conexão e realizar operações sobre o banco de dados
+- Arquitetura: Divisão entre API, Repository e Service
 - Biblioteca: ASP .Net Core
 - Linguagem: C#
 
