@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Docius.Service\Docius.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\V1\" />
+  </ItemGroup>
+
 </Project>

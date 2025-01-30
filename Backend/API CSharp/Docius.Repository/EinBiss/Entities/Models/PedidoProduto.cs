@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class PedidoProdutoFiltro : FiltroBase<int>
+{
+}
+
 [Table("pedidos_produtos")]
 public class PedidoProduto : EntityBase<int>
 {

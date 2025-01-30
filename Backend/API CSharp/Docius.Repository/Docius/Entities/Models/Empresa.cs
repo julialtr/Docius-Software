@@ -4,6 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Docius.Repository.Entities.Models;
 
+public class EmpresaFiltro : FiltroBase<int>
+{
+    [MaxLength(100)]
+    public string Dominio { get; set; }
+}
+
 [Table("empresas")]
 public class Empresa : EntityBase<int>
 {

@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class UnidadeMedidaFiltro : FiltroBase<int>
+{
+}
+
 [Table("unidades_medidas")]
 public class UnidadeMedida : EntityBase<int>
 {
@@ -12,6 +16,6 @@ public class UnidadeMedida : EntityBase<int>
     [Required]
     public string Sigla { get; set; }
 
-    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
-    public virtual List<Ingrediente> Ingrediente { get; set; }
+    public virtual ReceitaCategoriaIngrediente[] ReceitaCategoriaIngrediente { get; set; }
+    public virtual Ingrediente[] Ingrediente { get; set; }
 }

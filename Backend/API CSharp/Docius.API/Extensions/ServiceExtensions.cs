@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Docius.Repository.Docius;
 using Docius.Repository.EinBiss;
+using Docius.Service.EntityService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -95,5 +96,7 @@ public static class ServiceExtensions
 
     public static void RegisterServices(this IServiceCollection services)
     {
+        services.AddScoped<DociusEntityService>();
+        services.AddScoped<EinBissEntityService>();
     }
 }

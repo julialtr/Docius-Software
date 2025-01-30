@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class ReceitaFiltro : FiltroBase<int>
+{
+}
+
 [Table("receitas")]
 public class Receita : EntityBase<int>
 {
@@ -29,7 +33,7 @@ public class Receita : EntityBase<int>
 
     public virtual Precificacao Precificacao { get; set; }
 
-    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
+    public virtual ReceitaCategoriaIngrediente[] ReceitaCategoriaIngrediente { get; set; }
 
-    public virtual List<Produto> Produto { get; set; }
+    public virtual Produto[] Produto { get; set; }
 }

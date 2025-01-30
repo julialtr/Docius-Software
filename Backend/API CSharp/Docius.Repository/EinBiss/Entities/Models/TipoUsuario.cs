@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class TipoUsuarioFiltro : FiltroBase<int>
+{
+}
+
 [Table("tipos_usuarios")]
 public class TipoUsuario : EntityBase<int>
 {
@@ -12,5 +16,5 @@ public class TipoUsuario : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    public virtual List<Usuario> Usuarios { get; set; }
+    public virtual Usuario[] Usuarios { get; set; }
 }

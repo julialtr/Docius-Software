@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class DecoracaoBoloPedidoPersonalizacaoFiltro : FiltroBase<int>
+{
+}
+
 [Table("decoracoes_bolos_pedidos_personalizacoes")]
 public class DecoracaoBoloPedidoPersonalizacao : EntityBase<int>
 {

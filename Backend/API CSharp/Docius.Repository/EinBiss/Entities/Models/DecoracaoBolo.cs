@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class DecoracaoBoloFiltro : FiltroBase<int>
+{
+}
+
 [Table("decoracoes_bolos")]
 public class DecoracaoBolo : EntityBase<int>
 {

@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class ReceitaCategoriaIngredienteFiltro : FiltroBase<int>
+{
+}
+
 [Table("receitas_categorias_ingredientes")]
 public class ReceitaCategoriaIngrediente : EntityBase<int>
 {

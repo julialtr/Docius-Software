@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class FornecedorFiltro : FiltroBase<int>
+{
+}
+
 [Table("fornecedores")]
 public class Fornecedor : EntityBase<int>
 {
@@ -20,5 +24,5 @@ public class Fornecedor : EntityBase<int>
     [MaxLength(100)]
     public string Site { get; set; }
 
-    public virtual List<Ingrediente> Ingrediente { get; set; }
+    public virtual Ingrediente[] Ingrediente { get; set; }
 }

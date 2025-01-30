@@ -4,6 +4,10 @@ using Docius.Repository.Core;
 
 namespace Docius.Repository.EinBiss.Entities.Models;
 
+public class StatusPedidoProdutoFiltro : FiltroBase<int>
+{
+}
+
 [Table("status_pedidos_produtos")]
 public class StatusPedidoProduto : EntityBase<int>
 {
@@ -12,5 +16,5 @@ public class StatusPedidoProduto : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    public virtual List<PedidoProduto> PedidoProduto { get; set; }
+    public virtual PedidoProduto[] PedidoProduto { get; set; }
 }
