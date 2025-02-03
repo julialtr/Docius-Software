@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Docius.API.Profiles;
 
 namespace Docius.API.Extensions;
 
@@ -12,6 +13,7 @@ public static class MapperConfigurationExtension
     {
         return new Profile[]
         {
+                new ProfileUsuario(),
         };
     }
 }

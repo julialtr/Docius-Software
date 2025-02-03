@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Docius.API.Extensions;
 
@@ -10,17 +12,19 @@ public static class AuthorizationExtensions
         var environment = builder.Environment;
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-       .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, j =>
-       {
-           j.Authority = configuration.GetConnectionString("Authority");
-           j.RequireHttpsMetadata = false;
-           j.TokenValidationParameters = new()
-           {
-               ValidateAudience = false,
-               ValidateIssuer = false,
-               ValidateIssuerSigningKey = true
-           };
-       });
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["JwtSettings:Issuer"],
+                ValidAudience = configuration["JwtSettings:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]))
+            };
+        });
 
         services.AddAuthorization();
     }

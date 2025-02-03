@@ -13,6 +13,11 @@ public sealed class UsuarioEntityService : EntityServiceBase<EinBissEntityServic
 
     protected override void OnCreateQuery(ref IQueryable<Usuario> query, UsuarioFiltro filter)
     {
+        if (!string.IsNullOrEmpty(filter.Login))
+            query = query.Where(q => q.Login == filter.Login);
+
+        if (!string.IsNullOrEmpty(filter.Senha))
+            query = query.Where(q => q.Senha == filter.Senha);
     }
 
     protected override void OnValidateEntity(Usuario entity)

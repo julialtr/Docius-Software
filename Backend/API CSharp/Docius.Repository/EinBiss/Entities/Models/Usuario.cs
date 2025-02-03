@@ -6,6 +6,9 @@ namespace Docius.Repository.EinBiss.Entities.Models;
 
 public class UsuarioFiltro : FiltroBase<int>
 {
+    public string Login { get; set; }
+
+    public string Senha { get; set; }
 }
 
 [Table("usuarios")]
