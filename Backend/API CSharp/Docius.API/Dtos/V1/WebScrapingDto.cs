@@ -1,22 +1,24 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Docius.Repository.ServicosTerceiros.Dados;
 
-public class WebScrapingFilterDto
+public class WebScrapingFiltroDto
 {
-    [JsonPropertyName("ids_mercados")]
+    [Required]
     public int[] IdsMercados { get; set; }
 
-    [JsonPropertyName("texto_pesquisa")]
+    [Required]
     public string TextoPesquisa { get; set; }
 }
 
-public class WebScrapingResponseDto
+public class WebScrapingRetornoDto
 {
-    public WebScrapingDataDto[] Dados { get; set; }
+    public string Mensagem { get; set; }
+
+    public WebScrapingDadosDto[] Dados { get; set; }
 }
 
-public class WebScrapingDataDto
+public class WebScrapingDadosDto
 {
     public int IdMercado { get; set; }
 

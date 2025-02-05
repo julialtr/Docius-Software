@@ -16,26 +16,26 @@ public sealed class ProxyEntityService
         _configuration = configuration;
     }
 
-    public async Task<WebScrapingResponse> GetProdutosAsync(WebScrapingFilter webScrapingFilter)
+    public async Task<WebScrapingRetorno> GetProdutosAsync(WebScrapingFiltro filter)
     {
         var queryParams = new Dictionary<string, string>();
 
-        if (webScrapingFilter.IdsMercados != null && webScrapingFilter.IdsMercados.Any())
-            queryParams.Add("ids_mercados", string.Join(",", webScrapingFilter.IdsMercados));
+        if (filter.IdsMercados != null && filter.IdsMercados.Any())
+            queryParams.Add("ids_mercados", string.Join(",", filter.IdsMercados));
 
-        if (!string.IsNullOrWhiteSpace(webScrapingFilter.TextoPesquisa))
-            queryParams.Add("texto_pesquisa", webScrapingFilter.TextoPesquisa);
+        if (!string.IsNullOrWhiteSpace(filter.TextoPesquisa))
+            queryParams.Add("texto_pesquisa", filter.TextoPesquisa);
 
         string url = QueryHelpers.AddQueryString(_configuration["Urls:WebScrapingAPI"] + "get-produtos", queryParams);
 
         var response = await _httpClient.GetAsync(url);
         string responseContent = await response.Content.ReadAsStringAsync();
 
-        WebScrapingResponse webScrapingResponse = JsonSerializer.Deserialize<WebScrapingResponse>(responseContent);
+        var data = JsonSerializer.Deserialize<WebScrapingRetorno>(responseContent);
 
-        if (!response.IsSuccessStatusCode || webScrapingResponse == null || !string.IsNullOrEmpty(webScrapingResponse.Mensagem))
-            throw new Exception($"Erro ao buscar produtos. Detalhes: {webScrapingResponse?.Mensagem ?? "Ocorreu um erro inesperado."}");
+        if (!response.IsSuccessStatusCode || data == null || !string.IsNullOrEmpty(data.Mensagem))
+            throw new Exception($"Erro ao buscar produtos. Detalhes: {data?.Mensagem ?? "Ocorreu um erro inesperado."}");
 
-        return webScrapingResponse;
+        return data;
     }
 }

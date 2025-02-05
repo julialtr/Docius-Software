@@ -6,8 +6,8 @@ public class ProfileWebScraping: ProfileBase
 {
     public ProfileWebScraping()
     {
-        CreateMap<WebScrapingResponse, WebScrapingResponseDto>();
-        CreateMap<WebScrapingData, WebScrapingDataDto>();
-        CreateMap<WebScrapingFilterDto, WebScrapingFilter>();
+        CreateMap<WebScrapingRetorno, WebScrapingRetornoDto>();
+        CreateMap<WebScrapingDados, WebScrapingDadosDto>();
+        CreateMap<WebScrapingFiltroDto, WebScrapingFiltro>();
     }
 }

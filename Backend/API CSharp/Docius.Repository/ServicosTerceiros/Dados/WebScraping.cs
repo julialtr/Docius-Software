@@ -2,7 +2,7 @@
 
 namespace Docius.Repository.ServicosTerceiros.Dados;
 
-public class WebScrapingFilter
+public class WebScrapingFiltro
 {
     [JsonPropertyName("ids_mercados")]
     public int[] IdsMercados {  get; set; }
@@ -11,16 +11,16 @@ public class WebScrapingFilter
     public string TextoPesquisa { get; set; }
 }
 
-public class WebScrapingResponse
+public class WebScrapingRetorno
 {
     [JsonPropertyName("mensagem")]
     public string Mensagem { get; set; }
 
     [JsonPropertyName("dados")]
-    public WebScrapingData[] Dados { get; set; }
+    public WebScrapingDados[] Dados { get; set; }
 }
 
-public class WebScrapingData
+public class WebScrapingDados
 {
     [JsonPropertyName("id_mercado")]
     public int IdMercado { get; set; }
