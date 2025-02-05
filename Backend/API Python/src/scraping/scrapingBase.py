@@ -25,7 +25,7 @@ def scraping(ids_mercados, texto_pesquisa):
             url = constants.links.LINK_FORT
             novosProdutos, httpResult = scrapingFort.scraping(driver, url, texto_pesquisa)
 
-            if httpResult == 400:
+            if httpResult != 200:
                 driver.quit()
                 return novosProdutos, httpResult
 

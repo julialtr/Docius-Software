@@ -99,5 +99,6 @@ public static class ServiceExtensions
         services.AddScoped<DociusEntityService>();
         services.AddScoped<EinBissEntityService>();
         services.AddScoped<AutenticacaoEntityService>();
+        services.AddScoped<ProxyEntityService>().AddHttpClient<ProxyEntityService>();
     }
 }

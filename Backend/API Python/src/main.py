@@ -12,16 +12,25 @@ def get_produtos():
         ids_mercados = ids_mercados.split(',')
         ids_mercados = [int(id) for id in ids_mercados]
     else:
-        return jsonify({"error": "Campo ids_mercados nao foi informado."}), 400
+        return jsonify({
+            "mensagem": "Campo ids_mercados não foi informado.",
+            "dados": None
+        }), 400
     
     texto_pesquisa = request.args.get('texto_pesquisa')
 
     if texto_pesquisa == None:
-        return jsonify({"error": "Campo texto_pesquisa nao foi informado."}), 400
+        return jsonify({
+            "mensagem": "Campo texto_pesquisa nao foi informado.",
+            "dados": None
+        }), 400
 
     produtos, httpResult = scraping(ids_mercados, texto_pesquisa)
 
-    return jsonify({"status": httpResult, "total_itens": len(produtos), "dados": produtos}), httpResult
+    return jsonify({
+        "mensagem": "",
+        "dados": produtos
+    }), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

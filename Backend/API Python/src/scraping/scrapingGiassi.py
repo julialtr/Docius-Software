@@ -63,4 +63,7 @@ def scraping(driver, url, conteudoPesquisa):
         return produtos, 200
     
     except Exception as e:
-        return {"error": f"{e}"}, 400
+        return { 
+            "mensagem": f"{e}",
+            "dados": None
+        }, 400

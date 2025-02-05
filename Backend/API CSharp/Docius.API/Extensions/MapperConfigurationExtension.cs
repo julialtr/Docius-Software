@@ -14,6 +14,7 @@ public static class MapperConfigurationExtension
         return new Profile[]
         {
                 new ProfileUsuario(),
+                new ProfileWebScraping(),
         };
     }
 }
