@@ -18,6 +18,12 @@ O Entity Framework é utilizado para fazer a conexão entre a API e o banco de d
 ## JwtBearer
 O JwtBearer é uma biblioteca responsável por fazer a autenticação para APIs. Ela gera um token de acordo com os dados informados, se estes forem corretos. O token é utilizado para se conectar a API e ter o acesso as rotas disponíveis.
 
+## Componentização
+A componentização é um conceito aplicado aos projetos web para fazer a divisão da aplicação em pequenos componentes. Esses, são independentes e podem ser reutilizados dentro da aplicação.
+
+## Next.js
+O Next.js é um framework que auxilia na criação de aplicações web. O uso dele se torna benéfico tendo em vista que na criação da aplicação ele já oferece uma estrutura básica para o desenvolvimento, além de configurar algumas dependências e funcionalidade importantes, tais como o roteamento e o Server-Side Rendering (SSR).
+
 # Arquitetura:
 ## API
 -  Objetivo: Fornecer os dados adquiridos pelo Web Scraping
@@ -34,3 +40,10 @@ O JwtBearer é uma biblioteca responsável por fazer a autenticação para APIs.
 - Objetivo: Armanezar os dados do software fornecendo um banco de dados base com as empresas e um banco de dados exclusivo para os dados de cada empresa
 - Tipo: Relacional
 - SGBD: PostgresSQL
+
+## Aplicação Web
+- Objetivo: Renderizar o conteúdo na tela para o usuário
+- Biblioteca: React
+- Linguagens: HTML, CSS (Sass) e TypeScript
+- Frameworks: Tailwind e Bootstrap
+- Padrões: BEM (Block - Element - Modifier) e OOCSS (Object-Oriented CSS)
