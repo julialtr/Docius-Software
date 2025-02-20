@@ -1,5 +1,6 @@
 import { Usuario } from "@/pages/Usuario/interfaces";
 import { LINK_API } from "@/utils/constants";
+import { Warning } from "@/hooks/warning";
 
 export const login = async (usuario: Usuario) => {
   try {
@@ -12,7 +13,7 @@ export const login = async (usuario: Usuario) => {
       body: JSON.stringify(usuario),
     });
 
-    if (response.status == 401) throw new Error("Email ou senha inválidos.");
+    if (response.status == 401) throw new Warning("Email ou senha inválidos.");
     else if (!response.ok) throw new Error("Erro de conexão com a API.");
 
     return await response.json();

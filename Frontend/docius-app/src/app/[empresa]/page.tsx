@@ -4,20 +4,27 @@ import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
+import router from "next/router";
+
+import { findEmpresas } from "@/services/empresa";
+import { login } from "@/services/usuario";
+
+import { Empresa } from "@/app/[empresa]/interfaces";
+import { Usuario } from "@/pages/Usuario/interfaces";
+
+import PaginaNaoEncontrada from "@/pages/Geral/PaginaNaoEncontrada";
+import CarregandoPagina from "@/pages/Geral/CarregandoPagina";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { findEmpresas } from "@/services/empresa";
-import PaginaNaoEncontrada from "@/pages/Geral/PaginaNaoEncontrada";
-import CarregandoPagina from "@/pages/Geral/CarregandoPagina";
-import { Empresa } from "@/app/[empresa]/interfaces";
-import { Usuario } from "@/pages/Usuario/interfaces";
-import { login } from "@/services/usuario";
-import router from "next/router";
+
+import { useToast } from "@/hooks/use-toast";
+import { Warning } from "@/hooks/warning";
 
 export default function Login() {
+  const { toast } = useToast();
   const [dadosEmpresa, setDadosEmpresa] = useState<Empresa>();
   const [dados, setDados] = useState<Usuario>({ email: "", senha: "" });
   const [loading, setLoading] = useState(true);
@@ -34,9 +41,23 @@ export default function Login() {
           setDadosEmpresa(data[0]);
         }
       } catch (error) {
-        console.error(error);
+        if (error instanceof Warning) {
+          console.log(error);
 
-        //Tratamento de Erro
+          toast({
+            variant: "warning",
+            title: "Erro ao buscar empresas",
+            description: error.message,
+          });
+        } else if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao buscar empresas",
+            description: error.message,
+          });
+        }
       } finally {
         setLoading(false);
       }
@@ -54,9 +75,23 @@ export default function Login() {
       localStorage.setItem("token", response.token);
       router.push("/dashboard");
     } catch (error) {
-      console.error(error);
+      if (error instanceof Warning) {
+        console.log(error);
 
-      //Tratamento de Erro
+        toast({
+          variant: "warning",
+          title: "Erro ao fazer login",
+          description: error.message,
+        });
+      } else if (error instanceof Error) {
+        console.error(error);
+
+        toast({
+          variant: "destructive",
+          title: "Erro ao fazer login",
+          description: error.message,
+        });
+      }
     }
   };
 
@@ -137,7 +172,7 @@ export default function Login() {
                 className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
                 type="submit"
               >
-                {loading ? "Entrando..." : "Entrar"}
+                Entrar
               </Button>
             </form>
             <div className="mt-6 text-center text-sm">
