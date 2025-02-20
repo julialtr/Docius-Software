@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import router from "next/router";
 
 import { login } from "@/services/usuario";
 
-import { Usuario } from "@/pages/Usuario/interfaces";
+import { UsuarioFiltro } from "@/pages/[empresa]/login/interfaces";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,9 +16,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
 
-export default function Login() {
+export default function Login({ dominio }: { dominio: string }) {
   const { toast } = useToast();
-  const [dados, setDados] = useState<Usuario>({ email: "", senha: "" });
+  const [dados, setDados] = useState<UsuarioFiltro>({ email: "", senha: "" });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -28,7 +27,6 @@ export default function Login() {
       const response = await login(dados);
 
       localStorage.setItem("token", response.token);
-      router.push("/dashboard");
     } catch (error) {
       if (error instanceof Warning) {
         console.log(error);
@@ -96,7 +94,7 @@ export default function Login() {
         <div className="mt-6 text-center text-sm">
           Ainda não tem uma conta?{" "}
           <Link
-            href="/cadastro"
+            href={`/${dominio}/Cadastro`}
             className="text-amber-700 hover:text-amber-900 hover:underline"
           >
             Cadastre-se

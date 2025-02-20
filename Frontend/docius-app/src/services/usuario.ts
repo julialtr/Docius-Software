@@ -1,4 +1,4 @@
-import { Usuario } from "@/pages/Usuario/interfaces";
+import { Usuario } from "@/pages/[empresa]/login/interfaces";
 import { LINK_API } from "@/utils/constants";
 import { Warning } from "@/hooks/warning";
 
