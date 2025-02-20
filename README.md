@@ -45,5 +45,4 @@ O Next.js é um framework que auxilia na criação de aplicações web. O uso de
 - Objetivo: Renderizar o conteúdo na tela para o usuário
 - Biblioteca: React
 - Linguagens: HTML, CSS (Sass) e TypeScript
-- Frameworks: Tailwind e Bootstrap
-- Padrões: BEM (Block - Element - Modifier) e OOCSS (Object-Oriented CSS)
+- Frameworks: Tailwind
