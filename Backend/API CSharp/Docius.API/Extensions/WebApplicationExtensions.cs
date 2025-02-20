@@ -7,7 +7,7 @@ public static class WebApplicationExtensions
     public static WebApplication Configure(this WebApplication app)
     {
         app.ConfigureExceptionHandling();
-        app.UseCors();
+        app.UseCors("CorsPolicy");
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();

@@ -17,11 +17,11 @@ public class ProxyController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(WebScrapingRetornoDto[]), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetProdutos([FromQuery] WebScrapingFiltroDto filterDto)
+    [ProducesResponseType(typeof(ReadWebScrapingRetornoDto[]), StatusCodes.Status200OK)]
+    public async Task<IActionResult> FindProdutos([FromQuery] WebScrapingFiltroDto filterDto)
     {
         var response = await _proxyEntityService.GetProdutosAsync(Mapper.Map<WebScrapingFiltro>(filterDto));
 
-        return Ok(Mapper.Map<WebScrapingRetornoDto>(response));
+        return Ok(Mapper.Map<ReadWebScrapingRetornoDto>(response));
     }
 }

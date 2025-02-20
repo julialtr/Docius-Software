@@ -24,13 +24,13 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public IActionResult Login([FromBody] UsuarioFiltroDto usuarioDto)
+    public IActionResult Login([FromBody] UsuarioFiltroDto filtroDto)
     {
-        IActionResult status = Find(usuarioDto);
+        IActionResult status = Find(filtroDto);
 
         if (status is not NoContentResult)
         {
-            var token = _autenticacaoEntityService.GenerateAccessToken(usuarioDto.Login);
+            var token = _autenticacaoEntityService.GenerateAccessToken(filtroDto.Email);
             return Ok(new { AccessToken = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 

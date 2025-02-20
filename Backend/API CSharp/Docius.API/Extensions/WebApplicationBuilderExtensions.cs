@@ -12,6 +12,7 @@ public static class WebApplicationBuilderExtensions
     {
         IServiceCollection services = builder.Services;
 
+        services.ConfigureCors();
         services.ConfigureDataBase(builder.Configuration);
 
         services.RegisterServices();

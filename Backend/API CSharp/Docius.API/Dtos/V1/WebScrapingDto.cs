@@ -11,14 +11,14 @@ public class WebScrapingFiltroDto
     public string TextoPesquisa { get; set; }
 }
 
-public class WebScrapingRetornoDto
+public class ReadWebScrapingRetornoDto
 {
     public string Mensagem { get; set; }
 
-    public WebScrapingDadosDto[] Dados { get; set; }
+    public ReadWebScrapingDadosDto[] Dados { get; set; }
 }
 
-public class WebScrapingDadosDto
+public class ReadWebScrapingDadosDto
 {
     public int IdMercado { get; set; }
 

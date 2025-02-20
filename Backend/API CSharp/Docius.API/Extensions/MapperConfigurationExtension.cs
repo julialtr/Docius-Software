@@ -15,6 +15,7 @@ public static class MapperConfigurationExtension
         {
                 new ProfileUsuario(),
                 new ProfileWebScraping(),
+                new ProfileEmpresa(),
         };
     }
 }

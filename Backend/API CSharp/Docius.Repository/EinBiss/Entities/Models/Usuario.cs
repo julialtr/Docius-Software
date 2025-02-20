@@ -6,24 +6,16 @@ namespace Docius.Repository.EinBiss.Entities.Models;
 
 public class UsuarioFiltro : FiltroBase<int>
 {
-    public string Login { get; set; }
+    [MaxLength(100)]
+    public string Email { get; set; }
 
+    [MaxLength(50)]
     public string Senha { get; set; }
 }
 
 [Table("usuarios")]
 public class Usuario : EntityBase<int>
 {
-    [Column("login")]
-    [MaxLength(50)]
-    [Required]
-    public string Login { get; set; }
-
-    [Column("senha")]
-    [MaxLength(50)]
-    [Required]
-    public string Senha { get; set; }
-
     [Column("nome")]
     [MaxLength(100)]
     [Required]
@@ -33,6 +25,11 @@ public class Usuario : EntityBase<int>
     [MaxLength(100)]
     [Required]
     public string Email { get; set; }
+
+    [Column("senha")]
+    [MaxLength(50)]
+    [Required]
+    public string Senha { get; set; }
 
     [Column("tipo_usuario_id")]
     public int TipoUsuarioId { get; set; }

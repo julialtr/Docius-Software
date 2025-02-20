@@ -15,11 +15,11 @@ public sealed class AutenticacaoEntityService
         _configuration = configuration;
     }
 
-    public JwtSecurityToken GenerateAccessToken(string login)
+    public JwtSecurityToken GenerateAccessToken(string email)
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, login),
+            new Claim(ClaimTypes.Name, email),
         };
 
         var token = new JwtSecurityToken(

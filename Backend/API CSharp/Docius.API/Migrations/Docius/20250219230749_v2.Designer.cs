@@ -2,6 +2,7 @@
 using Docius.Repository.Docius;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Docius.API.Migrations.Docius
 {
     [DbContext(typeof(DociusContext))]
-    partial class DociusContextModelSnapshot : ModelSnapshot
+    [Migration("20250219230749_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,15 +33,10 @@ namespace Docius.API.Migrations.Docius
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CaminhoImagem1")
+                    b.Property<string>("CaminhoImagemExtra")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("caminho_imagem_1");
-
-                    b.Property<string>("CaminhoImagem2")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("caminho_imagem_2");
+                        .HasColumnName("caminho_imagem_extra");
 
                     b.Property<string>("CaminhoLogo")
                         .IsRequired()
@@ -56,6 +54,12 @@ namespace Docius.API.Migrations.Docius
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("nome");
+
+                    b.Property<string>("Slogan")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("slogan");
 
                     b.HasKey("Id");
 

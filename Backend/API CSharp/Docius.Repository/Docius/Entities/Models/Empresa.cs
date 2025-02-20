@@ -18,8 +18,17 @@ public class Empresa : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    [Column("logo")]
-    public Byte[] Logo { get; set; }
+    [Column("caminho_logo")]
+    [Required]
+    public string CaminhoLogo { get; set; }
+
+    [Column("caminho_imagem_1")]
+    [Required]
+    public string CaminhoImagem1 { get; set; }
+
+    [Column("caminho_imagem_2")]
+    [Required]
+    public string CaminhoImagem2 { get; set; }
 
     [Column("dominio")]
     [MaxLength(100)]

@@ -17,4 +17,4 @@ insert into unidades_medidas values (2, 'kg');
 insert into unidades_medidas values (3, 'ml');
 insert into unidades_medidas values (4, 'l');
 
-insert into usuarios values (1, 'julia', 'julia123', 'Julia Letícia Trapp', 'julialtrapp@hotmail.com', 2);
+insert into usuarios values (1, 'Julia Letícia Trapp', 'julialtrapp@hotmail.com', 'julia123', 2);

@@ -22,6 +22,15 @@ public sealed class EmpresaEntityService : EntityServiceBase<DociusEntityService
         if (string.IsNullOrEmpty(entity.Nome))
             throw new WarningException("Nome deve ser informado.");
 
+        if (string.IsNullOrEmpty(entity.CaminhoLogo))
+            throw new WarningException("CaminhoLogo deve ser informado.");
+
+        if (string.IsNullOrEmpty(entity.CaminhoImagem1))
+            throw new WarningException("CaminhoImagem1 deve ser informado.");
+
+        if (string.IsNullOrEmpty(entity.CaminhoImagem2))
+            throw new WarningException("CaminhoImagem2 deve ser informado.");
+
         if (string.IsNullOrEmpty(entity.Dominio))
             throw new WarningException("Dominio deve ser informado.");
     }
