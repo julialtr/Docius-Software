@@ -8,7 +8,11 @@ export const findEmpresas = async (dominio: string) => {
 
     const response = await fetch(`${LINK_API}/empresa?Dominio=${dominio}`);
 
-    if (!response.ok) throw new Error("Erro de conexão com a API.");
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw new Error(errorData.message || "Erro de conexão com a API.");
+    }
 
     if (response.status == 204)
       throw new Warning("É necessário informar uma URL válida.");

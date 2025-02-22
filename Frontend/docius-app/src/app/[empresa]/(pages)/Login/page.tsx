@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-
-import Link from "next/link";
-
+import { UsuarioFiltro } from "@/app/[empresa]/(pages)/Login/interfaces";
 import { login } from "@/services/usuario";
 
-import { UsuarioFiltro } from "@/app/[empresa]/(pages)/Login/interfaces";
+import Link from "next/link";
 
 import Logo from "@/app/_components/Logo";
 import { Button } from "@/app/_components/ui/button";
@@ -27,10 +25,13 @@ export default function Login() {
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [dados, setDados] = useState<UsuarioFiltro>({ email: "", senha: "" });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await login(dados);
@@ -54,7 +55,16 @@ export default function Login() {
           description: error.message,
         });
       }
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDados((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -76,12 +86,12 @@ export default function Login() {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   required
+                  disabled={isLoading}
                   value={dados?.email}
-                  onChange={(e) =>
-                    setDados({ ...dados, email: e.target.value })
-                  }
+                  onChange={handleChange}
                   className="border-amber-200 focus:border-amber-500"
                 />
               </div>
@@ -91,20 +101,21 @@ export default function Login() {
                 </div>
                 <Input
                   id="senha"
+                  name="senha"
                   type="password"
                   required
+                  disabled={isLoading}
                   value={dados?.senha}
-                  onChange={(e) =>
-                    setDados({ ...dados, senha: e.target.value })
-                  }
+                  onChange={handleChange}
                   className="border-amber-200 focus:border-amber-500"
                 />
               </div>
               <Button
                 className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
                 type="submit"
+                disabled={isLoading}
               >
-                Entrar
+                {isLoading ? "Entrando..." : "Entrar"}
               </Button>
             </form>
             <div className="mt-6 text-center text-sm">
