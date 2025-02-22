@@ -1,4 +1,4 @@
-export default function CarregandoPagina() {
+export default function Loading() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-amber-50 to-orange-50">
       <div className="container flex min-h-screen flex-col items-center justify-center gap-6">

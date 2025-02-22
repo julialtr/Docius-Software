@@ -7,13 +7,16 @@ import Image from "next/image"
 import Link from "next/link"
 import { UtensilsCrossed, ArrowLeft } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
 
-export default function CadastroPage() {
+import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card"
+import { Label } from "@radix-ui/react-label"
+import { Input } from "@/app/_components/ui/input"
+import { Button } from "@/app/_components/ui/button"
+import Logo from "@/app/_components/Logo"
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext"
+
+export default function Cadastro() {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -22,6 +25,9 @@ export default function CadastroPage() {
     password: "",
     confirmPassword: "",
   })
+
+  const { dadosEmpresa } = useDadosEmpresa();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -79,36 +85,7 @@ export default function CadastroPage() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-amber-50 to-orange-50">
       <div className="container relative min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 py-8">
-        {/* Seção do Logo */}
-        <div className="text-center lg:w-1/3 space-y-4 order-1 lg:order-none">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="rounded-full bg-gradient-to-r from-amber-600 to-red-600 p-3">
-              <UtensilsCrossed className="h-8 w-8 text-white" />
-            </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-600 to-red-600 bg-clip-text text-transparent">
-              Doce Confeitaria
-            </h1>
-            <p className="text-muted-foreground max-w-[250px]">
-              Junte-se a nós e descubra um mundo de sabores especiais
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 mt-8">
-            <Image
-              src="/placeholder.svg?height=200&width=200"
-              alt="Doce 1"
-              width={200}
-              height={200}
-              className="rounded-2xl object-cover"
-            />
-            <Image
-              src="/placeholder.svg?height=200&width=200"
-              alt="Doce 2"
-              width={200}
-              height={200}
-              className="rounded-2xl object-cover mt-8"
-            />
-          </div>
-        </div>
+       <Logo />
 
         {/* Formulário de Cadastro */}
         <Card className="w-full max-w-md border-none bg-white/80 backdrop-blur-sm">
@@ -182,12 +159,12 @@ export default function CadastroPage() {
             <div className="mt-6 text-center space-y-4">
               <div className="text-sm">
                 Já tem uma conta?{" "}
-                <Link href="/login" className="text-amber-700 hover:text-amber-900 hover:underline">
+                <Link href={`/${dadosEmpresa?.dominio}/Login`}  className="text-amber-700 hover:text-amber-900 hover:underline">
                   Entre aqui
                 </Link>
               </div>
               <Button variant="ghost" className="text-amber-700 hover:text-amber-900" asChild>
-                <Link href="/login" className="gap-2">
+                <Link href={`/${dadosEmpresa?.dominio}/Login`} className="gap-2">
                   <ArrowLeft className="h-4 w-4" />
                   Voltar para o login
                 </Link>

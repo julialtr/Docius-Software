@@ -1,8 +1,9 @@
-import { Usuario } from "@/pages/[empresa]/login/interfaces";
+
 import { LINK_API } from "@/utils/constants";
 import { Warning } from "@/hooks/warning";
+import { UsuarioFiltro } from "@/app/[empresa]/(pages)/Login/interfaces";
 
-export const login = async (usuario: Usuario) => {
+export const login = async (usuario: UsuarioFiltro) => {
   try {
     const response = await fetch(`${LINK_API}/autenticacao/login`, {
       method: "POST",

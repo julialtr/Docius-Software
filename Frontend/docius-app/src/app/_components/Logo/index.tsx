@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Empresa } from "@/app/[empresa]/interfaces";
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 
-export default function Logo({ dadosEmpresa }: { dadosEmpresa: Empresa }) {
+export default function Logo() {
+  const { dadosEmpresa } = useDadosEmpresa();
+
   return (
     <div className="text-center lg:w-1/3 space-y-4 order-1">
       <div className="flex flex-col items-center space-y-4">
