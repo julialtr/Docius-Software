@@ -110,13 +110,19 @@ export default function Login() {
                   className="border-amber-200 focus:border-amber-500"
                 />
               </div>
-              <Button
-                className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
-                type="submit"
-                disabled={isLoading}
+              <Link
+                href={`/${dadosEmpresa?.dominio}/Cadastros/Clientes`}
+                passHref
+                legacyBehavior
               >
-                {isLoading ? "Entrando..." : "Entrar"}
-              </Button>
+                <Button
+                  className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Entrando..." : "Entrar"}
+                </Button>
+              </Link>
             </form>
             <div className="mt-6 text-center text-sm">
               Ainda não tem uma conta?{" "}
