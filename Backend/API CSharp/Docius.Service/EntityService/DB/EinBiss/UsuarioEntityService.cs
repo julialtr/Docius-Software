@@ -1,6 +1,7 @@
 ﻿using Docius.Repository.EinBiss;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService.Core;
+using Docius.Service.EntityService.Data;
 using System.ComponentModel;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
@@ -31,10 +32,24 @@ public sealed class UsuarioEntityService : EntityServiceBase<EinBissEntityServic
         if (string.IsNullOrEmpty(entity.Senha))
             throw new WarningException("O campo Senha deve ser informado.");
 
-        if (entity.TipoUsuarioId != 0)
+        if (entity.TipoUsuarioId == 0)
             ValidateId(entity.TipoUsuarioId, "O campo TipoUsuarioId deve ser informado.", "O campo TipoUsuarioId informado é inválido.");
 
         if (Where(e => (e.Id != entity.Id && e.Email == entity.Email)).Any())
             throw new WarningException("Usuário já cadastrado. Faça o login para acessar o sistema.");
+    }
+
+    public List<UsuarioPedidos> LePedidosUsuarios()
+    {
+        var usuarios = EntityService.Usuario.Entity
+            .Where(usuario => usuario.TipoUsuarioId == (int)ETipoUsuario.Cliente)
+            .Select(usuario => new UsuarioPedidos
+            {
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                QtdPedidos = usuario.Pedido.Count()
+            });
+
+        return usuarios.ToList();
     }
 }

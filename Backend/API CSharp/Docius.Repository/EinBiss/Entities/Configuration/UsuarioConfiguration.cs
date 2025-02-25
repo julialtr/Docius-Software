@@ -16,7 +16,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 
         builder.HasIndex(entity => entity.Email).IsUnique();
 
-        builder.Property(entity => entity.TipoUsuarioId).HasDefaultValue(1);
+        builder.Property(entity => entity.TipoUsuarioId).HasDefaultValue(ETipoUsuario.Cliente);
 
         builder.HasOne(entity => entity.TipoUsuario)
             .WithMany()
