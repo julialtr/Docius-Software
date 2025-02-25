@@ -20,6 +20,7 @@ import {
 
 import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
+import Loading from "@/app/loading";
 
 export default function Login() {
   const { toast } = useToast();
@@ -67,7 +68,9 @@ export default function Login() {
     }));
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="min-h-screen w-full bg-gradient-to-br from-amber-50 to-orange-50">
       <div className="container relative min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 py-8">
         <Logo />

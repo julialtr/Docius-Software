@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { Usuario } from "./interfaces";
+import { CreateUsuario } from "../(admin)/Cadastros/Clientes/interfaces";
 import { createUsuario } from "@/services/usuario";
 
 import Link from "next/link";
@@ -19,13 +19,14 @@ import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 
 import { useToast } from "@/hooks/use-toast";
+import Loading from "@/app/loading";
 
 export default function Cadastro() {
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [dados, setDados] = useState<Usuario>({
+  const [dados, setDados] = useState<CreateUsuario>({
     nome: "",
     email: "",
     senha: "",
@@ -76,7 +77,9 @@ export default function Cadastro() {
     }));
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="min-h-screen w-full bg-gradient-to-br from-amber-50 to-orange-50">
       <div className="container relative min-h-screen flex flex-col lg:flex-row items-center justify-center gap-8 py-8">
         <Logo />

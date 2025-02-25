@@ -1,0 +1,213 @@
+"use client";
+
+import type React from "react";
+import { useState } from "react";
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
+
+import Image from "next/image";
+import Link from "next/link";
+
+import {
+  LayoutDashboard,
+  ClipboardList,
+  ShoppingCart,
+  Package,
+  Coffee,
+  LogOut,
+  Users,
+  Truck,
+  ShoppingBasket,
+  Book,
+  DollarSign,
+  ChevronDown,
+  PanelLeftClose,
+  PanelLeft,
+} from "lucide-react";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/app/_components/ui/tooltip";
+import { Button } from "@/app/_components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/app/_components/ui/collapsible";
+
+export default function Menu() {
+  const { dadosEmpresa } = useDadosEmpresa();
+
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const MenuLink = ({
+    href,
+    icon: Icon,
+    label,
+    isActive = false,
+  }: {
+    href: string;
+    icon: React.ElementType;
+    label: string;
+    isActive?: boolean;
+  }) => {
+    const content = (
+      <Link
+        href={href}
+        className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors
+          ${
+            isActive
+              ? "text-amber-900 bg-amber-100"
+              : "text-gray-700 hover:bg-amber-50 hover:text-amber-700"
+          }
+          ${isSidebarCollapsed ? "justify-center" : ""}
+        `}
+      >
+        <Icon className="h-5 w-5" />
+        {!isSidebarCollapsed && <span>{label}</span>}
+      </Link>
+    );
+
+    return isSidebarCollapsed ? (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>{content}</TooltipTrigger>
+          <TooltipContent side="right">
+            <p>{label}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    ) : (
+      content
+    );
+  };
+
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside
+        className={`${
+          isSidebarCollapsed ? "w-20" : "w-64"
+        } bg-white border-r border-gray-200 transition-all duration-300 ease-in-out relative`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Toggle Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute -right-4 top-6 h-8 w-8 rounded-full border bg-white shadow-md"
+            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          >
+            {isSidebarCollapsed ? (
+              <PanelLeft className="h-4 w-4" />
+            ) : (
+              <PanelLeftClose className="h-4 w-4" />
+            )}
+          </Button>
+
+          {/* Logo */}
+          <div className="p-1 border-b border-gray-200">
+            <div className={`flex items-center gap-2 justify-center`}>
+              <Image
+                src={`/assets/${dadosEmpresa?.caminhoLogo}?height=100&width=100&priority`}
+                alt="Logo"
+                width={100}
+                height={100}
+              />
+            </div>
+          </div>
+
+          {/* Menu Items */}
+          <nav className="flex-1 p-4 space-y-1">
+            <MenuLink
+              href="/admin/dashboard"
+              icon={LayoutDashboard}
+              label="Dashboard"
+            />
+
+            <div>
+              <Collapsible defaultOpen>
+                <CollapsibleTrigger
+                  className={`flex w-full items-center px-4 py-2 text-amber-900 bg-amber-50 rounded-md
+                  ${isSidebarCollapsed ? "justify-center" : "justify-between"}`}
+                >
+                  <div className="flex items-center gap-2">
+                    <ClipboardList className="h-5 w-5" />
+                    {!isSidebarCollapsed && <span>Cadastros</span>}
+                  </div>
+                  {!isSidebarCollapsed && <ChevronDown className="h-4 w-4" />}
+                </CollapsibleTrigger>
+                <CollapsibleContent
+                  className={`mt-1 space-y-1 ${
+                    isSidebarCollapsed ? "" : "pl-4"
+                  }`}
+                >
+                  <MenuLink
+                    href="/admin/cadastros/clientes"
+                    icon={Users}
+                    label="Clientes"
+                    isActive
+                  />
+                  <MenuLink
+                    href="/admin/cadastros/fornecedores"
+                    icon={Truck}
+                    label="Fornecedores"
+                  />
+                  <MenuLink
+                    href="/admin/cadastros/ingredientes"
+                    icon={ShoppingBasket}
+                    label="Ingredientes"
+                  />
+                  <MenuLink
+                    href="/admin/cadastros/receitas"
+                    icon={Book}
+                    label="Receitas"
+                  />
+                  <MenuLink
+                    href="/admin/cadastros/gastos-fixos"
+                    icon={DollarSign}
+                    label="Gastos Fixos"
+                  />
+                </CollapsibleContent>
+              </Collapsible>
+            </div>
+
+            <MenuLink
+              href="/admin/pedidos"
+              icon={ShoppingCart}
+              label="Pedidos"
+            />
+
+            <MenuLink href="/admin/estoque" icon={Package} label="Estoque" />
+
+            <MenuLink href="/admin/cardapio" icon={Coffee} label="Cardápio" />
+          </nav>
+
+          {/* Logout Button */}
+          <div className="p-4 border-t border-gray-200">
+            <Link
+              href={`/${dadosEmpresa?.dominio}`}
+              passHref
+              legacyBehavior
+            >
+              <Button
+                variant="ghost"
+                className={`w-full text-gray-700 hover:text-red-600 hover:bg-red-50
+                ${
+                  isSidebarCollapsed
+                    ? "justify-center px-2"
+                    : "justify-start px-4"
+                }`}
+              >
+                <LogOut className="h-5 w-5" />
+                {!isSidebarCollapsed && <span>Sair</span>}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </aside>
+    </div>
+  );
+}

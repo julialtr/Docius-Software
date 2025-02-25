@@ -1,9 +1,11 @@
 import { LINK_API } from "@/utils/constants";
 import { Warning } from "@/hooks/warning";
-import { UsuarioFiltro } from "@/app/[empresa]/(pages)/Login/interfaces";
-import { Usuario } from "@/app/[empresa]/(pages)/Cadastro/interfaces";
+import {
+  CreateUsuario,
+  FilterUsuario,
+} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Clientes/interfaces";
 
-export const login = async (usuario: UsuarioFiltro) => {
+export const login = async (usuario: FilterUsuario) => {
   try {
     const response = await fetch(`${LINK_API}/autenticacao/login`, {
       method: "POST",
@@ -23,7 +25,7 @@ export const login = async (usuario: UsuarioFiltro) => {
   }
 };
 
-export const createUsuario = async (usuario: Usuario) => {
+export const createUsuario = async (usuario: CreateUsuario) => {
   try {
     const response = await fetch(`${LINK_API}/usuario`, {
       method: "POST",

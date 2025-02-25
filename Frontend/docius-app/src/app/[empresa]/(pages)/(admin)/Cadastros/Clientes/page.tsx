@@ -3,286 +3,96 @@
 import type React from "react";
 
 import { useState } from "react";
-import {
-  UtensilsCrossed,
-  LayoutDashboard,
-  ClipboardList,
-  ShoppingCart,
-  Package,
-  Coffee,
-  LogOut,
-  Users,
-  Truck,
-  Egg,
-  Book,
-  DollarSign,
-  Search,
-  ChevronDown,
-  ArrowUpDown,
-  ChevronUp,
-  ChevronDownIcon,
-  PanelLeftClose,
-  PanelLeft,
-} from "lucide-react";
-import Link from "next/link";
+import { Search } from "lucide-react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/app/_components/ui/tooltip";
 import { Button } from "@/app/_components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/app/_components/ui/collapsible";
 import { Input } from "@/app/_components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/app/_components/ui/table";
-
-// Tipos
-type SortConfig = {
-  key: keyof Cliente;
-  direction: "asc" | "desc";
-} | null;
-
-interface Cliente {
-  id: number;
-  nome: string;
-  email: string;
-  pedidos: number;
-}
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/app/_components/ui/table";
+import Menu from "@/app/_components/Menu";
+import { requestSort, SortConfig, sortData } from "@/utils/sort";
+import SortIcon from "@/app/_components/Sort";
+import { ReadUsuarioPedidos } from "./interfaces";
+import Loading from "@/app/loading";
 
 // Dados mockados para exemplo
 const clientesData = [
-  { id: 1, nome: "Maria Silva", email: "maria@email.com", pedidos: 15 },
-  { id: 2, nome: "João Santos", email: "joao@email.com", pedidos: 8 },
-  { id: 3, nome: "Ana Oliveira", email: "ana@email.com", pedidos: 23 },
-  { id: 4, nome: "Pedro Costa", email: "pedro@email.com", pedidos: 5 },
-  { id: 5, nome: "Lucia Pereira", email: "lucia@email.com", pedidos: 12 },
-  { id: 6, nome: "Carlos Souza", email: "carlos@email.com", pedidos: 19 },
-  { id: 7, nome: "Julia Lima", email: "julia@email.com", pedidos: 7 },
-  { id: 8, nome: "Roberto Alves", email: "roberto@email.com", pedidos: 31 },
+  { id: 1, nome: "Maria Silva", email: "maria@email.com", qtdPedidos: 15 },
+  { id: 2, nome: "João Santos", email: "joao@email.com", qtdPedidos: 8 },
+  { id: 3, nome: "Ana Oliveira", email: "ana@email.com", qtdPedidos: 23 },
+  { id: 4, nome: "Pedro Costa", email: "pedro@email.com", qtdPedidos: 5 },
+  { id: 5, nome: "Lucia Pereira", email: "lucia@email.com", qtdPedidos: 12 },
+  { id: 6, nome: "Carlos Souza", email: "carlos@email.com", qtdPedidos: 19 },
+  { id: 7, nome: "Julia Lima", email: "julia@email.com", qtdPedidos: 7 },
+  { id: 8, nome: "Roberto Alves", email: "roberto@email.com", qtdPedidos: 31 },
 ];
 
-export default function ClientesPage() {
+
+export default function CadastroClientes() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortConfig, setSortConfig] = useState<SortConfig>(null);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [sortConfig, setSortConfig] = useState<SortConfig<ReadUsuarioPedidos>>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Função para ordenar
-  const sortData = (data: Cliente[]): Cliente[] => {
-    if (!sortConfig) return data;
+  //const [dados, setDados] = useState<ReadUsuarioPedidos>({
+  //  id: 0,
+  //  nome: "",
+  //  email: "",
+  //  qtdPedidos: 0,
+  //});
 
-    return [...data].sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? -1 : 1;
-      }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-  };
-
-  // Função para requisitar ordenação
-  const requestSort = (key: keyof Cliente) => {
-    let direction: "asc" | "desc" = "asc";
-
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
-      direction = "desc";
-    }
-
-    setSortConfig({ key, direction });
-  };
-
-  // Função para renderizar o ícone de ordenação
-  const getSortIcon = (columnKey: keyof Cliente) => {
-    if (sortConfig?.key !== columnKey) {
-      return <ArrowUpDown className="ml-2 h-4 w-4" />;
-    }
-
-    return sortConfig.direction === "asc" ? (
-      <ChevronUp className="ml-2 h-4 w-4" />
-    ) : (
-      <ChevronDownIcon className="ml-2 h-4 w-4" />
-    );
-  };
-
-  // Filtra e ordena os dados
-  const filteredClientes = sortData(
+  const dadosFiltrados = sortData(
     clientesData.filter(
-      (cliente) =>
-        cliente.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        cliente.email.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+      (item) =>
+        item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.email.toLowerCase().includes(searchTerm.toLowerCase())
+    ),
+    sortConfig
   );
 
-  const MenuLink = ({
-    href,
-    icon: Icon,
-    label,
-    isActive = false,
-  }: {
-    href: string;
-    icon: React.ElementType;
-    label: string;
-    isActive?: boolean;
-  }) => {
-    const content = (
-      <Link
-        href={href}
-        className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors
-          ${
-            isActive
-              ? "text-amber-900 bg-amber-100"
-              : "text-gray-700 hover:bg-amber-50 hover:text-amber-700"
-          }
-          ${isSidebarCollapsed ? "justify-center" : ""}
-        `}
-      >
-        <Icon className="h-5 w-5" />
-        {!isSidebarCollapsed && <span>{label}</span>}
-      </Link>
-    );
+  //useEffect(() => {
+  //  const loginOnLoad = async () => {
+  //    setIsLoading(true);
+//
+  //    try {
+  //      const response = await login(dados);
+  //      localStorage.setItem("token", response.token);
+  //    } catch (error) {
+  //      if (error instanceof Warning) {
+  //        console.log(error);
+//
+  //        toast({
+  //          variant: "warning",
+  //          title: "Erro ao fazer login",
+  //          description: error.message,
+  //        });
+  //      } else if (error instanceof Error) {
+  //        console.error(error);
+//
+  //        toast({
+  //          variant: "destructive",
+  //          title: "Erro ao fazer login",
+  //          description: error.message,
+  //        });
+  //      }
+  //    } finally {
+  //      setIsLoading(false);
+  //    }
+  //  };
+//
+  //  loginOnLoad();
+  //}, []); // O array vazio faz com que o useEffect rode apenas uma vez
 
-    return isSidebarCollapsed ? (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>{content}</TooltipTrigger>
-          <TooltipContent side="right">
-            <p>{label}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    ) : (
-      content
-    );
-  };
-
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside
-        className={`${
-          isSidebarCollapsed ? "w-16" : "w-64"
-        } bg-white border-r border-gray-200 transition-all duration-300 ease-in-out relative`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Toggle Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute -right-4 top-6 h-8 w-8 rounded-full border bg-white shadow-md"
-            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-          >
-            {isSidebarCollapsed ? (
-              <PanelLeft className="h-4 w-4" />
-            ) : (
-              <PanelLeftClose className="h-4 w-4" />
-            )}
-          </Button>
-
-          {/* Logo */}
-          <div className="p-6 border-b border-gray-200">
-            <div
-              className={`flex items-center gap-2 ${
-                isSidebarCollapsed ? "justify-center" : ""
-              }`}
-            >
-              <UtensilsCrossed className="h-6 w-6 text-amber-600" />
-              {!isSidebarCollapsed && (
-                <span className="font-semibold text-lg text-amber-900">
-                  Doce Confeitaria
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Menu Items */}
-          <nav className="flex-1 p-4 space-y-1">
-            <MenuLink
-              href="/admin/dashboard"
-              icon={LayoutDashboard}
-              label="Dashboard"
-            />
-
-            <div>
-              <Collapsible defaultOpen>
-                <CollapsibleTrigger
-                  className={`flex w-full items-center px-4 py-2 text-amber-900 bg-amber-50 rounded-md
-                  ${isSidebarCollapsed ? "justify-center" : "justify-between"}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <ClipboardList className="h-5 w-5" />
-                    {!isSidebarCollapsed && <span>Cadastros</span>}
-                  </div>
-                  {!isSidebarCollapsed && <ChevronDown className="h-4 w-4" />}
-                </CollapsibleTrigger>
-                <CollapsibleContent
-                  className={`mt-1 space-y-1 ${
-                    isSidebarCollapsed ? "" : "pl-4"
-                  }`}
-                >
-                  <MenuLink
-                    href="/admin/cadastros/clientes"
-                    icon={Users}
-                    label="Clientes"
-                    isActive
-                  />
-                  <MenuLink
-                    href="/admin/cadastros/fornecedores"
-                    icon={Truck}
-                    label="Fornecedores"
-                  />
-                  <MenuLink
-                    href="/admin/cadastros/ingredientes"
-                    icon={Egg}
-                    label="Ingredientes"
-                  />
-                  <MenuLink
-                    href="/admin/cadastros/receitas"
-                    icon={Book}
-                    label="Receitas"
-                  />
-                  <MenuLink
-                    href="/admin/cadastros/gastos-fixos"
-                    icon={DollarSign}
-                    label="Gastos Fixos"
-                  />
-                </CollapsibleContent>
-              </Collapsible>
-            </div>
-
-            <MenuLink
-              href="/admin/pedidos"
-              icon={ShoppingCart}
-              label="Pedidos"
-            />
-
-            <MenuLink href="/admin/estoque" icon={Package} label="Estoque" />
-
-            <MenuLink href="/admin/cardapio" icon={Coffee} label="Cardápio" />
-          </nav>
-
-          {/* Logout Button */}
-          <div className="p-4 border-t border-gray-200">
-            <Button
-              variant="ghost"
-              className={`w-full text-gray-700 hover:text-red-600 hover:bg-red-50
-                ${
-                  isSidebarCollapsed
-                    ? "justify-center px-2"
-                    : "justify-start px-4"
-                }`}
-            >
-              <LogOut className="h-5 w-5" />
-              {!isSidebarCollapsed && <span>Sair</span>}
-            </Button>
-          </div>
-        </div>
-      </aside>
+      <Menu />
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto">
@@ -315,44 +125,59 @@ export default function ClientesPage() {
                   <TableHead>
                     <Button
                       variant="ghost"
-                      onClick={() => requestSort("nome")}
+                      onClick={() =>
+                        setSortConfig(requestSort("nome", sortConfig))
+                      }
                       className="hover:bg-transparent p-0 font-semibold flex items-center"
                     >
                       Nome
-                      {getSortIcon("nome")}
+                      <SortIcon<ReadUsuarioPedidos>
+                        columnKey="nome"
+                        sortConfig={sortConfig}
+                      />
                     </Button>
                   </TableHead>
                   <TableHead>
                     <Button
                       variant="ghost"
-                      onClick={() => requestSort("email")}
+                      onClick={() =>
+                        setSortConfig(requestSort("email", sortConfig))
+                      }
                       className="hover:bg-transparent p-0 font-semibold flex items-center"
                     >
                       Email
-                      {getSortIcon("email")}
+                      <SortIcon<ReadUsuarioPedidos>
+                        columnKey="email"
+                        sortConfig={sortConfig}
+                      />
                     </Button>
                   </TableHead>
                   <TableHead className="text-right">
                     <Button
                       variant="ghost"
-                      onClick={() => requestSort("pedidos")}
+                      onClick={() =>
+                        setSortConfig(requestSort("qtdPedidos", sortConfig))
+                      }
                       className="hover:bg-transparent p-0 font-semibold flex items-center justify-end ml-auto"
                     >
                       Quantidade de Pedidos
-                      {getSortIcon("pedidos")}
+                      <SortIcon<ReadUsuarioPedidos>
+                        columnKey="qtdPedidos"
+                        sortConfig={sortConfig}
+                      />
                     </Button>
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredClientes.map((cliente) => (
+                {dadosFiltrados.map((cliente) => (
                   <TableRow key={cliente.id} className="hover:bg-gray-50">
                     <TableCell className="font-medium">
                       {cliente.nome}
                     </TableCell>
                     <TableCell>{cliente.email}</TableCell>
                     <TableCell className="text-right">
-                      {cliente.pedidos}
+                      {cliente.qtdPedidos}
                     </TableCell>
                   </TableRow>
                 ))}
