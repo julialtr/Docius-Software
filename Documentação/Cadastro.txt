@@ -1,0 +1,15 @@
+A tela de cadastro é destinada aos usuários que estão em seu primeiro acesso ao site e que gostariam de se tornarem clientes da confeitaria acessada. Com o cadastro, é disponibilizado acesso à plataforma, como a tela de cardápio, pedidos, acompanhamento de pedidos e outros.
+
+Após o cadastro, o usuário poderá fazer o login na plataforma.
+
+Campos: 
+
+Nome Completo: nome completo do usuário
+E-mail: e-mail que será utilizado para o cadastro único e login. Deve ser um e-mail válido. Não será possível fazer o cadastro com a mesma conta de e-mail já cadastrada no sistema.
+Senha: senha escolhida pelo usuário para o acesso a plataforma. Ela deve ter pelo menos 6 caracteres.
+
+Ações:
+Botão Criar conta: irá criar a conta do usuário na confeitaria acessada.
+Botão Entre aqui: para os usuários que já possuem conta mas que por alguma razão acessaram a tela de cadastro, é um botão facilitador que retorna para a tela de login.
+
+Pelo fato do software atender apenas a confeitarias por encomenda, demais informações sobre endereço ou dados pessoais não serão necessários nesse momento.

@@ -6,7 +6,6 @@ using Docius.Service.EntityService;
 using Docius.Service.EntityService.DB.EinBiss;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace Docius.API.Controllers.V1;
 
@@ -30,8 +29,8 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
 
         if (status is not NoContentResult)
         {
-            var token = _autenticacaoEntityService.GenerateAccessToken(filtroDto.Email);
-            return Ok(new { AccessToken = new JwtSecurityTokenHandler().WriteToken(token) });
+            _autenticacaoEntityService.GenerateAccessToken(filtroDto.Email);
+            return Ok();
         }
 
         return Unauthorized("As credenciais fornecidas estão inválidas.");

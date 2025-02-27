@@ -61,9 +61,10 @@ public static class ServiceExtensions
         services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy", builder =>
-                builder.AllowAnyOrigin()
+               builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
                 .AllowAnyMethod()
-                .AllowAnyHeader());
+                .AllowAnyHeader()
+                .AllowCredentials());
         });
     }
 
@@ -96,6 +97,8 @@ public static class ServiceExtensions
 
     public static void RegisterServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
+
         services.AddScoped<DociusEntityService>();
         services.AddScoped<EinBissEntityService>();
         services.AddScoped<AutenticacaoEntityService>();

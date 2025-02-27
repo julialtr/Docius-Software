@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { UsuarioFiltro } from "@/app/[empresa]/(pages)/Login/interfaces";
+import { FilterUsuario } from "../(admin)/Cadastros/Clientes/interfaces";
 import { login } from "@/services/usuario";
 
 import Link from "next/link";
@@ -21,23 +21,25 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [dados, setDados] = useState<UsuarioFiltro>({ email: "", senha: "" });
+  const [dados, setDados] = useState<FilterUsuario>({ email: "", senha: "" });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-      const response = await login(dados);
+      await login(dados);
 
-      localStorage.setItem("token", response.token);
+      router.push(`/${dadosEmpresa?.dominio}/Cadastros/Clientes`);
     } catch (error) {
       if (error instanceof Warning) {
         console.log(error);
@@ -113,19 +115,13 @@ export default function Login() {
                   className="border-amber-200 focus:border-amber-500"
                 />
               </div>
-              <Link
-                href={`/${dadosEmpresa?.dominio}/Cadastros/Clientes`}
-                passHref
-                legacyBehavior
+              <Button
+                className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
+                type="submit"
+                disabled={isLoading}
               >
-                <Button
-                  className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 text-white"
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Entrando..." : "Entrar"}
-                </Button>
-              </Link>
+                {isLoading ? "Entrando..." : "Entrar"}
+              </Button>
             </form>
             <div className="mt-6 text-center text-sm">
               Ainda não tem uma conta?{" "}

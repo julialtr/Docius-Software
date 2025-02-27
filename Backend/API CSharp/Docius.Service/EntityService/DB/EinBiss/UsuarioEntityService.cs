@@ -45,6 +45,7 @@ public sealed class UsuarioEntityService : EntityServiceBase<EinBissEntityServic
             .Where(usuario => usuario.TipoUsuarioId == (int)ETipoUsuario.Cliente)
             .Select(usuario => new UsuarioPedidos
             {
+                Id = usuario.Id,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 QtdPedidos = usuario.Pedido.Count()

@@ -6,7 +6,13 @@ export const findEmpresas = async (dominio: string) => {
     if (!dominio || dominio.length == 0)
       throw new Warning("É necessário informar uma URL válida.");
 
-    const response = await fetch(`${LINK_API}/empresa?Dominio=${dominio}`);
+    const response = await fetch(`${LINK_API}/empresa?Dominio=${dominio}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: "include"
+  });
 
     if (!response.ok) {
       const errorData = await response.json();

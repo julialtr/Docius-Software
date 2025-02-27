@@ -24,6 +24,18 @@ public static class AuthorizationExtensions
                 ValidAudience = configuration["JwtSettings:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]))
             };
+
+            options.Events = new JwtBearerEvents
+            {
+                OnMessageReceived = ctx =>
+                {
+                    ctx.Request.Cookies.TryGetValue("accessToken", out var accessToken);
+                    if (!string.IsNullOrEmpty(accessToken))
+                        ctx.Token = accessToken;
+
+                    return Task.CompletedTask;
+                }
+            };
         });
 
         services.AddAuthorization();

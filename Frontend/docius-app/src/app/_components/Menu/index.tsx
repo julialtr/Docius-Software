@@ -122,7 +122,7 @@ export default function Menu() {
           {/* Menu Items */}
           <nav className="flex-1 p-4 space-y-1">
             <MenuLink
-              href="/admin/dashboard"
+              href={`/${dadosEmpresa?.dominio}/Dashboard`}
               icon={LayoutDashboard}
               label="Dashboard"
             />
@@ -145,28 +145,28 @@ export default function Menu() {
                   }`}
                 >
                   <MenuLink
-                    href="/admin/cadastros/clientes"
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/Clientes`}
                     icon={Users}
                     label="Clientes"
                     isActive
                   />
                   <MenuLink
-                    href="/admin/cadastros/fornecedores"
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/Fornecedores`}
                     icon={Truck}
                     label="Fornecedores"
                   />
                   <MenuLink
-                    href="/admin/cadastros/ingredientes"
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/Ingredientes`}
                     icon={ShoppingBasket}
                     label="Ingredientes"
                   />
                   <MenuLink
-                    href="/admin/cadastros/receitas"
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/Receitas`}
                     icon={Book}
                     label="Receitas"
                   />
                   <MenuLink
-                    href="/admin/cadastros/gastos-fixos"
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/GastosFixos`}
                     icon={DollarSign}
                     label="Gastos Fixos"
                   />
@@ -175,23 +175,27 @@ export default function Menu() {
             </div>
 
             <MenuLink
-              href="/admin/pedidos"
+              href={`/${dadosEmpresa?.dominio}/Pedidos`}
               icon={ShoppingCart}
               label="Pedidos"
             />
 
-            <MenuLink href="/admin/estoque" icon={Package} label="Estoque" />
+            <MenuLink
+              href={`/${dadosEmpresa?.dominio}/Estoque`}
+              icon={Package}
+              label="Estoque"
+            />
 
-            <MenuLink href="/admin/cardapio" icon={Coffee} label="Cardápio" />
+            <MenuLink
+              href={`/${dadosEmpresa?.dominio}/Cardapio`}
+              icon={Coffee}
+              label="Cardápio"
+            />
           </nav>
 
           {/* Logout Button */}
           <div className="p-4 border-t border-gray-200">
-            <Link
-              href={`/${dadosEmpresa?.dominio}`}
-              passHref
-              legacyBehavior
-            >
+            <Link href={`/${dadosEmpresa?.dominio}`} passHref legacyBehavior>
               <Button
                 variant="ghost"
                 className={`w-full text-gray-700 hover:text-red-600 hover:bg-red-50

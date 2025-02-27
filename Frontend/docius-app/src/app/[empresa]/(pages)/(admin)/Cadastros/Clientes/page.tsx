@@ -1,9 +1,11 @@
 "use client";
 
 import type React from "react";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
+
+import { ReadUsuarioPedidos } from "./interfaces";
+import { findUsuarios } from "@/services/usuario";
 
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
@@ -16,38 +18,25 @@ import {
   TableRow,
 } from "@/app/_components/ui/table";
 import Menu from "@/app/_components/Menu";
-import { requestSort, SortConfig, sortData } from "@/utils/sort";
 import SortIcon from "@/app/_components/Sort";
-import { ReadUsuarioPedidos } from "./interfaces";
 import Loading from "@/app/loading";
 
-// Dados mockados para exemplo
-const clientesData = [
-  { id: 1, nome: "Maria Silva", email: "maria@email.com", qtdPedidos: 15 },
-  { id: 2, nome: "João Santos", email: "joao@email.com", qtdPedidos: 8 },
-  { id: 3, nome: "Ana Oliveira", email: "ana@email.com", qtdPedidos: 23 },
-  { id: 4, nome: "Pedro Costa", email: "pedro@email.com", qtdPedidos: 5 },
-  { id: 5, nome: "Lucia Pereira", email: "lucia@email.com", qtdPedidos: 12 },
-  { id: 6, nome: "Carlos Souza", email: "carlos@email.com", qtdPedidos: 19 },
-  { id: 7, nome: "Julia Lima", email: "julia@email.com", qtdPedidos: 7 },
-  { id: 8, nome: "Roberto Alves", email: "roberto@email.com", qtdPedidos: 31 },
-];
+import { requestSort, SortConfig, sortData } from "@/utils/sort";
 
+import { Warning } from "@/hooks/warning";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CadastroClientes() {
+  const { toast } = useToast();
+  const [dados, setDados] = useState<ReadUsuarioPedidos[]>([]);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortConfig, setSortConfig] = useState<SortConfig<ReadUsuarioPedidos>>(null);
+  const [sortConfig, setSortConfig] =
+    useState<SortConfig<ReadUsuarioPedidos>>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  //const [dados, setDados] = useState<ReadUsuarioPedidos>({
-  //  id: 0,
-  //  nome: "",
-  //  email: "",
-  //  qtdPedidos: 0,
-  //});
-
   const dadosFiltrados = sortData(
-    clientesData.filter(
+    dados?.filter(
       (item) =>
         item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,38 +44,38 @@ export default function CadastroClientes() {
     sortConfig
   );
 
-  //useEffect(() => {
-  //  const loginOnLoad = async () => {
-  //    setIsLoading(true);
-//
-  //    try {
-  //      const response = await login(dados);
-  //      localStorage.setItem("token", response.token);
-  //    } catch (error) {
-  //      if (error instanceof Warning) {
-  //        console.log(error);
-//
-  //        toast({
-  //          variant: "warning",
-  //          title: "Erro ao fazer login",
-  //          description: error.message,
-  //        });
-  //      } else if (error instanceof Error) {
-  //        console.error(error);
-//
-  //        toast({
-  //          variant: "destructive",
-  //          title: "Erro ao fazer login",
-  //          description: error.message,
-  //        });
-  //      }
-  //    } finally {
-  //      setIsLoading(false);
-  //    }
-  //  };
-//
-  //  loginOnLoad();
-  //}, []); // O array vazio faz com que o useEffect rode apenas uma vez
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await findUsuarios();
+        setDados(response);
+      } catch (error) {
+        if (error instanceof Warning) {
+          console.log(error);
+
+          toast({
+            variant: "warning",
+            title: "Erro ao ler o cadastro de clientes",
+            description: error.message,
+          });
+        } else if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao ler o cadastro de clientes",
+            description: error.message,
+          });
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
 
   return isLoading ? (
     <Loading />
@@ -170,7 +159,7 @@ export default function CadastroClientes() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {dadosFiltrados.map((cliente) => (
+                {dadosFiltrados?.map((cliente) => (
                   <TableRow key={cliente.id} className="hover:bg-gray-50">
                     <TableCell className="font-medium">
                       {cliente.nome}
