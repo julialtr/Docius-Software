@@ -24,12 +24,6 @@ import {
   PanelLeft,
 } from "lucide-react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/app/_components/ui/tooltip";
 import { Button } from "@/app/_components/ui/button";
 import {
   Collapsible,
@@ -37,52 +31,12 @@ import {
   CollapsibleTrigger,
 } from "@/app/_components/ui/collapsible";
 
+import MenuLink from "./Link";
+
 export default function Menu() {
   const { dadosEmpresa } = useDadosEmpresa();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
-  const MenuLink = ({
-    href,
-    icon: Icon,
-    label,
-    isActive = false,
-  }: {
-    href: string;
-    icon: React.ElementType;
-    label: string;
-    isActive?: boolean;
-  }) => {
-    const content = (
-      <Link
-        href={href}
-        className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors
-          ${
-            isActive
-              ? "text-amber-900 bg-amber-100"
-              : "text-gray-700 hover:bg-amber-50 hover:text-amber-700"
-          }
-          ${isSidebarCollapsed ? "justify-center" : ""}
-        `}
-      >
-        <Icon className="h-5 w-5" />
-        {!isSidebarCollapsed && <span>{label}</span>}
-      </Link>
-    );
-
-    return isSidebarCollapsed ? (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>{content}</TooltipTrigger>
-          <TooltipContent side="right">
-            <p>{label}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    ) : (
-      content
-    );
-  };
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -111,10 +65,11 @@ export default function Menu() {
           <div className="p-1 border-b border-gray-200">
             <div className={`flex items-center gap-2 justify-center`}>
               <Image
-                src={`/assets/${dadosEmpresa?.caminhoLogo}?height=100&width=100&priority`}
+                src={`/assets/${dadosEmpresa?.caminhoLogo}?height=100&width=100`}
                 alt="Logo"
                 width={100}
                 height={100}
+                priority
               />
             </div>
           </div>
@@ -125,6 +80,7 @@ export default function Menu() {
               href={`/${dadosEmpresa?.dominio}/Dashboard`}
               icon={LayoutDashboard}
               label="Dashboard"
+              isSidebarCollapsed={isSidebarCollapsed}
             />
 
             <div>
@@ -148,27 +104,31 @@ export default function Menu() {
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Clientes`}
                     icon={Users}
                     label="Clientes"
-                    isActive
+                    isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Fornecedores`}
                     icon={Truck}
                     label="Fornecedores"
+                    isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Ingredientes`}
                     icon={ShoppingBasket}
                     label="Ingredientes"
+                    isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Receitas`}
                     icon={Book}
                     label="Receitas"
+                    isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink
                     href={`/${dadosEmpresa?.dominio}/Cadastros/GastosFixos`}
                     icon={DollarSign}
                     label="Gastos Fixos"
+                    isSidebarCollapsed={isSidebarCollapsed}
                   />
                 </CollapsibleContent>
               </Collapsible>
@@ -178,18 +138,21 @@ export default function Menu() {
               href={`/${dadosEmpresa?.dominio}/Pedidos`}
               icon={ShoppingCart}
               label="Pedidos"
+              isSidebarCollapsed={isSidebarCollapsed}
             />
 
             <MenuLink
               href={`/${dadosEmpresa?.dominio}/Estoque`}
               icon={Package}
               label="Estoque"
+              isSidebarCollapsed={isSidebarCollapsed}
             />
 
             <MenuLink
               href={`/${dadosEmpresa?.dominio}/Cardapio`}
               icon={Coffee}
               label="Cardápio"
+              isSidebarCollapsed={isSidebarCollapsed}
             />
           </nav>
 

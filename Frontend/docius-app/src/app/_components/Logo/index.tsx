@@ -10,10 +10,11 @@ export default function Logo() {
     <div className="text-center lg:w-1/3 space-y-4 order-1">
       <div className="flex flex-col items-center space-y-4">
         <Image
-          src={`/assets/${dadosEmpresa?.caminhoLogo}?height=250&width=250&priority`}
+          src={`/assets/${dadosEmpresa?.caminhoLogo}?height=250&width=250`}
           alt="Logo"
           width={250}
           height={250}
+          priority
         />
       </div>
       <div className="grid grid-cols-2 gap-4 mt-8">
