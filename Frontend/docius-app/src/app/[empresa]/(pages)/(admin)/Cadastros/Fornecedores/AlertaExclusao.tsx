@@ -20,7 +20,6 @@ import {
 } from "@/app/_components/ui/alert-dialog";
 
 import { useToast } from "@/hooks/use-toast";
-import { Warning } from "@/hooks/warning";
 
 export default function AlertaExclusao({
   dados,

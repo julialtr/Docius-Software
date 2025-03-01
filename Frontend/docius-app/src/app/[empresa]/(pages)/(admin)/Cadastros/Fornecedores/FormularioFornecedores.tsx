@@ -21,7 +21,6 @@ import { Button } from "@/app/_components/ui/button";
 import { Label } from "@/app/_components/ui/label";
 
 import { useToast } from "@/hooks/use-toast";
-import { Warning } from "@/hooks/warning";
 
 export default function FormularioFornecedores({
   dados,
@@ -88,15 +87,7 @@ export default function FormularioFornecedores({
 
       handleCloseDialog();
     } catch (error) {
-      if (error instanceof Warning) {
-        console.log(error);
-
-        toast({
-          variant: "warning",
-          title: "Erro ao salvar fornecedor",
-          description: error.message,
-        });
-      } else if (error instanceof Error) {
+      if (error instanceof Error) {
         console.error(error);
 
         toast({

@@ -13,7 +13,6 @@ import { Input } from "@/app/_components/ui/input";
 import Menu from "@/app/_components/Menu";
 
 import { useToast } from "@/hooks/use-toast";
-import { Warning } from "@/hooks/warning";
 import Loading from "@/app/loading";
 
 export default function CadastroFornecedores() {
