@@ -2,11 +2,10 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Globe, MapPin, Pencil } from "lucide-react";
-import Link from "next/link";
-
-import { ReadFornecedor } from "./interfaces";
+import { Pencil } from "lucide-react";
+import { TabelaIngredientes } from "./TabelaIngredientes";
 import AlertaExclusao from "./AlertaExclusao";
+import { ReadCategoriaIngrediente } from "./interfaces";
 
 import { Button } from "@/app/_components/ui/button";
 import {
@@ -18,37 +17,35 @@ import {
   TableRow,
 } from "@/app/_components/ui/table";
 import SortIcon from "@/app/_components/Sort";
+import { Badge } from "@/app/_components/ui/badge";
 
 import { requestSort, SortConfig, sortData } from "@/utils/sort";
 
-export default function TabelaFornecedores({
+export default function TabelaCategoriasIngredientes({
   dados,
   searchTerm,
   onDadosChange,
   onIsDialogOpenChange,
-  onFornecedorChange,
+  onCategoriaChange,
 }: {
-  dados: ReadFornecedor[];
+  dados: ReadCategoriaIngrediente[];
   searchTerm: string;
-  onDadosChange: (novosDados: ReadFornecedor[]) => void;
+  onDadosChange: (novosDados: ReadCategoriaIngrediente[]) => void;
   onIsDialogOpenChange: (isDialogOpen: boolean) => void;
-  onFornecedorChange: (fornecedor: ReadFornecedor) => void;
+  onCategoriaChange: (categoria: ReadCategoriaIngrediente) => void;
 }) {
   const [sortConfig, setSortConfig] =
-    useState<SortConfig<ReadFornecedor>>(null);
+    useState<SortConfig<ReadCategoriaIngrediente>>(null);
 
   const dadosFiltrados = sortData(
-    dados?.filter(
-      (item) =>
-        item?.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item?.endereco?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item?.site?.toLowerCase().includes(searchTerm.toLowerCase())
+    dados?.filter((item) =>
+      item?.nome?.toLowerCase().includes(searchTerm.toLowerCase())
     ),
     sortConfig
   );
 
-  const handleEdit = (fornecedor: ReadFornecedor) => {
-    onFornecedorChange(fornecedor);
+  const handleEdit = (categoria: ReadCategoriaIngrediente) => {
+    onCategoriaChange(categoria);
     onIsDialogOpenChange(true);
   };
 
@@ -64,7 +61,7 @@ export default function TabelaFornecedores({
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
                 Nome
-                <SortIcon<ReadFornecedor>
+                <SortIcon<ReadCategoriaIngrediente>
                   columnKey="nome"
                   sortConfig={sortConfig}
                 />
@@ -74,26 +71,13 @@ export default function TabelaFornecedores({
               <Button
                 variant="ghost"
                 onClick={() =>
-                  setSortConfig(requestSort("endereco", sortConfig))
+                  setSortConfig(requestSort("qtd_ingredientes", sortConfig))
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
-                Endereço
-                <SortIcon<ReadFornecedor>
-                  columnKey="endereco"
-                  sortConfig={sortConfig}
-                />
-              </Button>
-            </TableHead>
-            <TableHead>
-              <Button
-                variant="ghost"
-                onClick={() => setSortConfig(requestSort("site", sortConfig))}
-                className="hover:bg-transparent p-0 font-semibold flex items-center"
-              >
-                Site
-                <SortIcon<ReadFornecedor>
-                  columnKey="site"
+                Quantidade de Ingredientes
+                <SortIcon<ReadCategoriaIngrediente>
+                  columnKey="qtd_ingredientes"
                   sortConfig={sortConfig}
                 />
               </Button>
@@ -104,42 +88,31 @@ export default function TabelaFornecedores({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dadosFiltrados?.map((fornecedor) => (
-            <TableRow key={fornecedor.id}>
-              <TableCell className="font-medium">{fornecedor.nome}</TableCell>
+          {dadosFiltrados?.map((categoria) => (
+            <TableRow key={categoria.id}>
+              <TableCell className="font-medium">{categoria.nome}</TableCell>
               <TableCell>
-                <div className="flex items-center gap-1">
-                  {fornecedor.endereco.length ? (
-                    <MapPin className="h-4 w-4 text-gray-500" />
-                  ) : null}
-                  {fornecedor.endereco}
-                </div>
+                {categoria.ingredientes?.length ? (
+                  <Badge variant="secondary">
+                    {categoria.ingredientes?.length} ingrediente(s)
+                  </Badge>
+                ) : 0}
               </TableCell>
-              <TableCell>
-                <Link
-                  href={fornecedor.site}
-                  target="_blank"
-                  className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
-                >
-                  {fornecedor.site.length ? (
-                    <Globe className="h-4 w-4" />
-                  ) : null}
-                  {fornecedor.site}
-                </Link>
-              </TableCell>
+
               <TableCell>
                 <div className="flex items-center gap-2">
+                  <TabelaIngredientes categoria={categoria} />
                   <Button
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 text-amber-700 hover:text-amber-900"
-                    onClick={() => handleEdit(fornecedor)}
+                    onClick={() => handleEdit(categoria)}
                   >
                     <Pencil className="h-4 w-4" />
                   </Button>
                   <AlertaExclusao
                     dados={dados}
-                    id={fornecedor.id}
+                    categoria={categoria}
                     onDadosChange={onDadosChange}
                   />
                 </div>

@@ -17,6 +17,9 @@ public static class MapperConfigurationExtension
                 new ProfileWebScraping(),
                 new ProfileEmpresa(),
                 new ProfileFornecedor(),
+                new ProfileCategoriaIngrediente(),
+                new ProfileIngrediente(),
+                new ProfileUnidadeMedida(),
         };
     }
 }

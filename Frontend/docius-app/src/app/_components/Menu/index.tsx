@@ -22,6 +22,7 @@ import {
   ChevronDown,
   PanelLeftClose,
   PanelLeft,
+  Layers,
 } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
@@ -110,6 +111,12 @@ export default function Menu() {
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Fornecedores`}
                     icon={Truck}
                     label="Fornecedores"
+                    isSidebarCollapsed={isSidebarCollapsed}
+                  />
+                  <MenuLink
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/CategoriasIngredientes`}
+                    icon={Layers}
+                    label="Categorias de Ingredientes"
                     isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink

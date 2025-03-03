@@ -3,11 +3,10 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
-
-import TabelaFornecedores from "./TabelaFornecedores";
-import FormularioFornecedores from "./FormularioFornecedores";
-import { ReadFornecedor } from "./interfaces";
-import { findFornecedores } from "@/services/fornecedor";
+import TabelaCategoriasIngredientes from "./TabelaCategoriasIngredientes";
+import FormularioCategoriasIngredientes from "./FormularioCategoriasIngredientes";
+import { ReadCategoriaIngrediente } from "./interfaces";
+import { findCategoriasIngredientes } from "@/services/categoriaIngrediente";
 
 import { Input } from "@/app/_components/ui/input";
 import Menu from "@/app/_components/Menu";
@@ -15,10 +14,12 @@ import Menu from "@/app/_components/Menu";
 import { useToast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
 
-export default function CadastroFornecedores() {
+export default function CategoriasIngredientes() {
   const { toast } = useToast();
-  const [dados, setDados] = useState<ReadFornecedor[]>([]);
-  const [fornecedor, setFornecedor] = useState<ReadFornecedor | null>(null);
+  const [dados, setDados] = useState<ReadCategoriaIngrediente[]>([]);
+  const [categoria, setCategoria] = useState<ReadCategoriaIngrediente | null>(
+    null
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,7 @@ export default function CadastroFornecedores() {
       setIsLoading(true);
 
       try {
-        const response = await findFornecedores();
+        const response = await findCategoriasIngredientes();
         setDados(response);
       } catch (error) {
         if (error instanceof Error) {
@@ -37,7 +38,7 @@ export default function CadastroFornecedores() {
 
           toast({
             variant: "destructive",
-            title: "Erro ao ler o cadastro de fornecedores",
+            title: "Erro ao ler o cadastro de categorias de ingredientes",
             description: error.message,
           });
         }
@@ -49,7 +50,7 @@ export default function CadastroFornecedores() {
     loadData();
   }, []);
 
-  const handleDadosChange = (novosDados: ReadFornecedor[]) => {
+  const handleDadosChange = (novosDados: ReadCategoriaIngrediente[]) => {
     setDados(novosDados);
   };
 
@@ -57,8 +58,10 @@ export default function CadastroFornecedores() {
     setIsDialogOpen(isDialogOpen);
   };
 
-  const handleFornecedorChange = (fornecedor: ReadFornecedor | null) => {
-    setFornecedor(fornecedor);
+  const handleCategoriaChange = (
+    categoria: ReadCategoriaIngrediente | null
+  ) => {
+    setCategoria(categoria);
   };
 
   return isLoading ? (
@@ -66,16 +69,15 @@ export default function CadastroFornecedores() {
   ) : (
     <div className="flex h-screen bg-gray-100">
       <Menu />
-
       {/* Main Content */}
       <main className="flex-1 overflow-auto">
         <div className="p-8">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Fornecedores
+              Categorias de Ingredientes
             </h1>
             <p className="text-gray-600">
-              Gerencie os fornecedores cadastrados no sistema
+              Gerencie as categorias de ingredientes cadastrados no sistema
             </p>
           </div>
 
@@ -84,29 +86,29 @@ export default function CadastroFornecedores() {
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
-                placeholder="Buscar fornecedores..."
+                placeholder="Buscar categorias..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
               />
             </div>
-            <FormularioFornecedores
+            <FormularioCategoriasIngredientes
               dados={dados}
               isDialogOpen={isDialogOpen}
-              fornecedor={fornecedor}
+              categoria={categoria}
               onDadosChange={handleDadosChange}
               onIsDialogOpenChange={handleIsDialogOpenChange}
-              onFornecedorChange={handleFornecedorChange}
+              onCategoriaChange={handleCategoriaChange}
             />
           </div>
 
-          {/* Suppliers Table */}
-          <TabelaFornecedores
+          {/* Categories Table */}
+          <TabelaCategoriasIngredientes
             dados={dados}
             searchTerm={searchTerm}
             onDadosChange={handleDadosChange}
             onIsDialogOpenChange={handleIsDialogOpenChange}
-            onFornecedorChange={handleFornecedorChange}
+            onCategoriaChange={handleCategoriaChange}
           />
         </div>
       </main>
