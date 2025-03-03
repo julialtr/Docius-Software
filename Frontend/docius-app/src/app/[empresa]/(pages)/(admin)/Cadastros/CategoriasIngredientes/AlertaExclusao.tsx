@@ -38,8 +38,8 @@ export default function AlertaExclusao({
       onDadosChange(dados.filter((f) => f.id !== id));
 
       toast({
-        title: "Categoria de Ingrediente removida",
-        description: "A categoria de ingrediente foi removida com sucesso.",
+        title: "Categoria excluída",
+        description: "A categoria foi excluída com sucesso",
         variant: "success",
       });
     } catch (error) {
@@ -48,7 +48,7 @@ export default function AlertaExclusao({
 
         toast({
           variant: "destructive",
-          title: "Erro ao deletar categoria de ingrediente",
+          title: "Erro ao excluir a categoria",
           description: error.message,
         });
       }
@@ -75,8 +75,8 @@ export default function AlertaExclusao({
           </AlertDialogTitle>
           <AlertDialogDescription>
             {categoria?.qtdIngredientes
-              ? "Não é possível excluir uma categoria com ingredientes vinculados."
-              : "Tem certeza que deseja excluir a categoria? Esta ação não pode ser desfeita."}
+              ? "Não é possível excluir uma categoria com ingredientes vinculados"
+              : "Tem certeza que deseja excluir a categoria? Esta ação não pode ser desfeita"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

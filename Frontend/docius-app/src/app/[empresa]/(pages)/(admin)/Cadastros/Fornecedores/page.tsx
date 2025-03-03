@@ -37,7 +37,7 @@ export default function CadastroFornecedores() {
 
           toast({
             variant: "destructive",
-            title: "Erro ao ler o cadastro de fornecedores",
+            title: "Erro ao ler fornecedores",
             description: error.message,
           });
         }

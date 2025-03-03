@@ -83,9 +83,9 @@ export default function FormularioCategoriasIngredientes({
 
       toast({
         title: dadosCategoria.id
-          ? "Categoria de Ingrediente atualizada"
-          : "Categoria de Ingrediente criada",
-        description: "As informações foram salvas com sucesso.",
+          ? "Categoria atualizada"
+          : "Categoria criada",
+        description: "As informações foram salvas com sucesso",
         variant: "success",
       });
 
@@ -96,7 +96,7 @@ export default function FormularioCategoriasIngredientes({
 
         toast({
           variant: "destructive",
-          title: "Erro ao salvar categoria de ingrediente",
+          title: "Erro ao salvar a categoria de ingrediente",
           description: error.message,
         });
       }
@@ -127,19 +127,18 @@ export default function FormularioCategoriasIngredientes({
     >
       <DialogTrigger asChild>
         <Button className="bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700">
-          <PlusCircle className="h-4 w-4 mr-2" />
-          Nova Categoria
+          <PlusCircle className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {categoria ? "Editar Categoria" : "Nova Categoria"}
+            {categoria ? "Editar categoria" : "Nova categoria"}
           </DialogTitle>
           <DialogDescription>
             {categoria
-              ? "Edite as informações de categoria de ingrediente no formulário abaixo."
-              : "Preencha as informações da nova categoria de ingrediente no formulário abaixo."}
+              ? "Edite as informações da categoria no formulário abaixo"
+              : "Preencha as informações da categoria no formulário abaixo"}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">

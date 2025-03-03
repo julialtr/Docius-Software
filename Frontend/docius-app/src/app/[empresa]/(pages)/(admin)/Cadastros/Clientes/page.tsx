@@ -35,7 +35,7 @@ export default function CadastroClientes() {
 
           toast({
             variant: "warning",
-            title: "Erro ao ler o cadastro de clientes",
+            title: "Erro ao ler clientes",
             description: error.message,
           });
         } else if (error instanceof Error) {
@@ -43,7 +43,7 @@ export default function CadastroClientes() {
 
           toast({
             variant: "destructive",
-            title: "Erro ao ler o cadastro de clientes",
+            title: "Erro ao ler clientes",
             description: error.message,
           });
         }

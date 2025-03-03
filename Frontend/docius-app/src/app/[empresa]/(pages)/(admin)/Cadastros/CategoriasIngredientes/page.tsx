@@ -38,7 +38,7 @@ export default function CategoriasIngredientes() {
 
           toast({
             variant: "destructive",
-            title: "Erro ao ler o cadastro de categorias de ingredientes",
+            title: "Erro ao ler as categorias",
             description: error.message,
           });
         }
@@ -77,7 +77,7 @@ export default function CategoriasIngredientes() {
               Categorias de Ingredientes
             </h1>
             <p className="text-gray-600">
-              Gerencie as categorias de ingredientes cadastrados no sistema
+              Gerencie as categorias de ingredientes cadastradas no sistema
             </p>
           </div>
 

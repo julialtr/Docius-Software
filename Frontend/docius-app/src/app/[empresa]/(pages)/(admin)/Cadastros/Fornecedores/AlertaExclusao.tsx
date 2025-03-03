@@ -38,8 +38,8 @@ export default function AlertaExclusao({
       onDadosChange(dados.filter((f) => f.id !== id));
 
       toast({
-        title: "Fornecedor removido",
-        description: "O fornecedor foi removido com sucesso.",
+        title: "Fornecedor excluído",
+        description: "O fornecedor foi excluído com sucesso",
         variant: "success",
       });
     } catch (error) {
@@ -48,7 +48,7 @@ export default function AlertaExclusao({
 
         toast({
           variant: "destructive",
-          title: "Erro ao deletar fornecedor",
+          title: "Erro ao excluir fornecedor",
           description: error.message,
         });
       }
@@ -75,8 +75,8 @@ export default function AlertaExclusao({
           </AlertDialogTitle>
           <AlertDialogDescription>
             {fornecedor?.qtdIngredientes
-              ? "Não é possível excluir um fornecedor com ingredientes vinculados."
-              : "Tem certeza que deseja excluir o fornecedor? Esta ação não pode ser desfeita."}
+              ? "Não é possível excluir um fornecedor com ingredientes vinculados"
+              : "Tem certeza que deseja excluir o fornecedor? Esta ação não pode ser desfeita"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

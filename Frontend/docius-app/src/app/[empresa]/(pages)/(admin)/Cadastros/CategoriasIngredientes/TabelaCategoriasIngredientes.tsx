@@ -75,7 +75,7 @@ export default function TabelaCategoriasIngredientes({
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
-                Quantidade de Ingredientes
+                Quantidade de ingredientes
                 <SortIcon<ReadCategoriaIngrediente>
                   columnKey="qtdIngredientes"
                   sortConfig={sortConfig}

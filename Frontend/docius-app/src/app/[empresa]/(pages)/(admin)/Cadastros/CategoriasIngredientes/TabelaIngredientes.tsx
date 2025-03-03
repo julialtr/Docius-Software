@@ -52,7 +52,7 @@ export function TabelaIngredientes({
         </SheetHeader>
         <div className="mt-6">
           {categoria?.qtdIngredientes === 0 ? (
-            <SheetDescription>
+            <SheetDescription className="text-amber-700">
               Nenhum ingrediente cadastrado nesta categoria
             </SheetDescription>
           ) : (
@@ -85,7 +85,7 @@ export function TabelaIngredientes({
                           className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
                         >
                           {ingrediente.fornecedor.nome}
-                          <ExternalLink className="h-3 w-3" />
+                          <ExternalLink className="h-4 w-4" />
                         </Link>
                       ) : (
                         ingrediente.fornecedor.nome

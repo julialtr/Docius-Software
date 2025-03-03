@@ -44,6 +44,7 @@ export default function FormularioFornecedores({
     nome: "",
     endereco: "",
     site: "",
+    qtdIngredientes: 0,
   });
 
   useEffect(() => {
@@ -81,7 +82,7 @@ export default function FormularioFornecedores({
         title: dadosFornecedor.id
           ? "Fornecedor atualizado"
           : "Fornecedor criado",
-        description: "As informações foram salvas com sucesso.",
+        description: "As informações foram salvas com sucesso",
         variant: "success",
       });
 
@@ -92,7 +93,7 @@ export default function FormularioFornecedores({
 
         toast({
           variant: "destructive",
-          title: "Erro ao salvar fornecedor",
+          title: "Erro ao salvar o fornecedor",
           description: error.message,
         });
       }
@@ -107,6 +108,7 @@ export default function FormularioFornecedores({
       nome: "",
       endereco: "",
       site: "",
+      qtdIngredientes: 0,
     });
   };
 
@@ -123,19 +125,18 @@ export default function FormularioFornecedores({
     >
       <DialogTrigger asChild>
         <Button className="bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700">
-          <PlusCircle className="h-4 w-4 mr-2" />
-          Novo Fornecedor
+          <PlusCircle className="h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {fornecedor ? "Editar Fornecedor" : "Novo Fornecedor"}
+            {fornecedor ? "Editar fornecedor" : "Novo fornecedor"}
           </DialogTitle>
           <DialogDescription>
             {fornecedor
-              ? "Edite as informações do fornecedor no formulário abaixo."
-              : "Preencha as informações do novo fornecedor no formulário abaixo."}
+              ? "Edite as informações do fornecedor no formulário abaixo"
+              : "Preencha as informações do novo fornecedor no formulário abaixo"}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">

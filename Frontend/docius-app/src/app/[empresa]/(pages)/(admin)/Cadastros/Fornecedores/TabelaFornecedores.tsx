@@ -139,7 +139,7 @@ export default function TabelaFornecedores({
                   </Button>
                   <AlertaExclusao
                     dados={dados}
-                    id={fornecedor.id}
+                    fornecedor={fornecedor}
                     onDadosChange={onDadosChange}
                   />
                 </div>

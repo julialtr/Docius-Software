@@ -74,9 +74,9 @@ export default function TabelaClientes({
                 onClick={() =>
                   setSortConfig(requestSort("qtdPedidos", sortConfig))
                 }
-                className="hover:bg-transparent p-0 font-semibold flex items-center justify-end ml-auto"
+                className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
-                Quantidade de Pedidos
+                Quantidade de pedidos
                 <SortIcon<ReadUsuarioPedidos>
                   columnKey="qtdPedidos"
                   sortConfig={sortConfig}
@@ -90,7 +90,7 @@ export default function TabelaClientes({
             <TableRow key={cliente.id} className="hover:bg-gray-50">
               <TableCell className="font-medium">{cliente.nome}</TableCell>
               <TableCell>{cliente.email}</TableCell>
-              <TableCell className="text-right">{cliente.qtdPedidos}</TableCell>
+              <TableCell>{cliente.qtdPedidos}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -9,20 +9,19 @@ import Link from "next/link";
 
 import {
   LayoutDashboard,
-  ClipboardList,
-  ShoppingCart,
+  FilePlus2,
+  ReceiptText,
   Package,
-  Coffee,
+  BookOpenText,
   LogOut,
   Users,
   Truck,
-  ShoppingBasket,
   Book,
   DollarSign,
   ChevronDown,
-  PanelLeftClose,
-  PanelLeft,
+  Menu,
   Layers,
+  PackageCheck,
 } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
@@ -34,7 +33,7 @@ import {
 
 import MenuLink from "./Link";
 
-export default function Menu() {
+export default function MenuComponent() {
   const { dadosEmpresa } = useDadosEmpresa();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -55,11 +54,7 @@ export default function Menu() {
             className="absolute -right-4 top-6 h-8 w-8 rounded-full border bg-white shadow-md"
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           >
-            {isSidebarCollapsed ? (
-              <PanelLeft className="h-4 w-4" />
-            ) : (
-              <PanelLeftClose className="h-4 w-4" />
-            )}
+            <Menu className="h-4 w-4" />
           </Button>
 
           {/* Logo */}
@@ -91,7 +86,7 @@ export default function Menu() {
                   ${isSidebarCollapsed ? "justify-center" : "justify-between"}`}
                 >
                   <div className="flex items-center gap-2">
-                    <ClipboardList className="h-5 w-5" />
+                    <FilePlus2 className={isSidebarCollapsed ? "h4 w-4" : "h-6 w-6"} />
                     {!isSidebarCollapsed && <span>Cadastros</span>}
                   </div>
                   {!isSidebarCollapsed && <ChevronDown className="h-4 w-4" />}
@@ -121,7 +116,7 @@ export default function Menu() {
                   />
                   <MenuLink
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Ingredientes`}
-                    icon={ShoppingBasket}
+                    icon={Package}
                     label="Ingredientes"
                     isSidebarCollapsed={isSidebarCollapsed}
                   />
@@ -143,21 +138,21 @@ export default function Menu() {
 
             <MenuLink
               href={`/${dadosEmpresa?.dominio}/Pedidos`}
-              icon={ShoppingCart}
+              icon={ReceiptText}
               label="Pedidos"
               isSidebarCollapsed={isSidebarCollapsed}
             />
 
             <MenuLink
               href={`/${dadosEmpresa?.dominio}/Estoque`}
-              icon={Package}
+              icon={PackageCheck}
               label="Estoque"
               isSidebarCollapsed={isSidebarCollapsed}
             />
 
             <MenuLink
               href={`/${dadosEmpresa?.dominio}/Cardapio`}
-              icon={Coffee}
+              icon={BookOpenText}
               label="Cardápio"
               isSidebarCollapsed={isSidebarCollapsed}
             />
@@ -175,7 +170,7 @@ export default function Menu() {
                     : "justify-start px-4"
                 }`}
               >
-                <LogOut className="h-5 w-5" />
+                <LogOut className={isSidebarCollapsed ? "h4 w-4" : "h-6 w-6"} />
                 {!isSidebarCollapsed && <span>Sair</span>}
               </Button>
             </Link>

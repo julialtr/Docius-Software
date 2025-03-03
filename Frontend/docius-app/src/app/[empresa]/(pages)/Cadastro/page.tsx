@@ -40,7 +40,7 @@ export default function Cadastro() {
       toast({
         variant: "warning",
         title: "Senha fraca",
-        description: "A senha deve ter pelo menos 6 caracteres.",
+        description: "A senha deve ter pelo menos 6 caracteres",
       });
       return;
     }
@@ -52,8 +52,8 @@ export default function Cadastro() {
 
       toast({
         variant: "success",
-        title: "Cadastro realizado!",
-        description: "Sua conta foi criada com sucesso.",
+        title: "Cadastro realizado",
+        description: "Sua conta foi criada com sucesso",
       });
     } catch (error) {
       if (error instanceof Error) {

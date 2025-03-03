@@ -36,7 +36,7 @@ export default function MenuLink({
           ${isSidebarCollapsed ? "justify-center" : ""}
         `}
     >
-      <Icon className="h-5 w-5" />
+      <Icon className="h-6 w-6" />
       {!isSidebarCollapsed && <span>{label}</span>}
     </Link>
   );
