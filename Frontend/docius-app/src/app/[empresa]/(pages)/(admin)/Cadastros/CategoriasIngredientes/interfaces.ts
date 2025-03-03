@@ -3,7 +3,7 @@ import { ReadIngredienteCategoriaIngrediente } from "../Ingredientes/interfaces"
 export interface ReadCategoriaIngrediente {
   id: number;
   nome: string;
-  qtd_ingredientes: number;
+  qtdIngredientes: number;
   ingredientes: ReadIngredienteCategoriaIngrediente[];
 }
 

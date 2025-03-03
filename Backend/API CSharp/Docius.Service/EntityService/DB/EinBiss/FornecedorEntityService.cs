@@ -20,4 +20,19 @@ public sealed class FornecedorEntityService : EntityServiceBase<EinBissEntitySer
         if (string.IsNullOrEmpty(entity.Nome))
             throw new WarningException("O campo Nome deve ser informado.");
     }
+
+    public List<FornecedorIngredientes> LeFornecedorIngredientes()
+    {
+        var fornecedores = EntityService.Fornecedor.Entity
+            .Select(fornecedor => new FornecedorIngredientes
+            {
+                Id = fornecedor.Id,
+                Nome = fornecedor.Nome,
+                Endereco = fornecedor.Endereco,
+                Site = fornecedor.Site,
+                QtdIngredientes = fornecedor.Ingrediente.Count(),
+            });
+
+        return fornecedores.ToList();
+    }
 }

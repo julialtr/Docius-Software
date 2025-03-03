@@ -51,55 +51,51 @@ export function TabelaIngredientes({
           </SheetDescription>
         </SheetHeader>
         <div className="mt-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Nome</TableHead>
-                <TableHead>Marca</TableHead>
-                <TableHead>Preço</TableHead>
-                <TableHead>Quantidade</TableHead>
-                <TableHead>Fornecedor</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {categoria.ingredientes?.map((ingrediente) => (
-                <TableRow key={ingrediente.id}>
-                  <TableCell className="font-medium">
-                    {ingrediente.nome}
-                  </TableCell>
-                  <TableCell>{ingrediente.marca}</TableCell>
-                  <TableCell>{formatMoney(ingrediente.preco)}</TableCell>
-                  <TableCell>
-                    {ingrediente.quantidade} {ingrediente.unidadeMedida.nome}
-                  </TableCell>
-                  <TableCell>
-                    {ingrediente.fornecedor.site ? (
-                      <Link
-                        href={ingrediente.fornecedor.site}
-                        target="_blank"
-                        className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
-                      >
-                        {ingrediente.fornecedor.nome}
-                        <ExternalLink className="h-3 w-3" />
-                      </Link>
-                    ) : (
-                      ingrediente.fornecedor.nome
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-              {categoria.qtd_ingredientes === 0 && (
+          {categoria?.qtdIngredientes === 0 ? (
+            <SheetDescription>
+              Nenhum ingrediente cadastrado nesta categoria
+            </SheetDescription>
+          ) : (
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell
-                    colSpan={5}
-                    className="text-center text-muted-foreground"
-                  >
-                    Nenhum ingrediente cadastrado nesta categoria
-                  </TableCell>
+                  <TableHead>Nome</TableHead>
+                  <TableHead>Marca</TableHead>
+                  <TableHead>Preço</TableHead>
+                  <TableHead>Quantidade</TableHead>
+                  <TableHead>Fornecedor</TableHead>
                 </TableRow>
-              )}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {categoria.ingredientes?.map((ingrediente) => (
+                  <TableRow key={ingrediente.id}>
+                    <TableCell className="font-medium">
+                      {ingrediente.nome}
+                    </TableCell>
+                    <TableCell>{ingrediente.marca}</TableCell>
+                    <TableCell>{formatMoney(ingrediente.preco)}</TableCell>
+                    <TableCell>
+                      {ingrediente.quantidade} {ingrediente.unidadeMedida.nome}
+                    </TableCell>
+                    <TableCell>
+                      {ingrediente.fornecedor.site ? (
+                        <Link
+                          href={ingrediente.fornecedor.site}
+                          target="_blank"
+                          className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
+                        >
+                          {ingrediente.fornecedor.nome}
+                          <ExternalLink className="h-3 w-3" />
+                        </Link>
+                      ) : (
+                        ingrediente.fornecedor.nome
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </div>
       </SheetContent>
     </Sheet>

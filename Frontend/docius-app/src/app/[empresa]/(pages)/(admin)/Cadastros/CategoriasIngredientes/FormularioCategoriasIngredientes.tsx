@@ -46,7 +46,7 @@ export default function FormularioCategoriasIngredientes({
     useState<ReadCategoriaIngrediente>({
       id: 0,
       nome: "",
-      qtd_ingredientes: 0,
+      qtdIngredientes: 0,
       ingredientes: [],
     });
 
@@ -109,7 +109,7 @@ export default function FormularioCategoriasIngredientes({
     setDadosCategoria({
       id: 0,
       nome: "",
-      qtd_ingredientes: 0,
+      qtdIngredientes: 0,
       ingredientes: [],
     });
   };

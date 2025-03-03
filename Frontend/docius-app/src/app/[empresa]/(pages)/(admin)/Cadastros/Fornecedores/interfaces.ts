@@ -3,6 +3,7 @@ export interface ReadFornecedor {
   nome: string;
   endereco: string;
   site: string;
+  qtdIngredientes: number;
 }
 
 export interface CreateFornecedor {

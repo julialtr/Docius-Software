@@ -3,7 +3,7 @@
 import type React from "react";
 import { Trash2 } from "lucide-react";
 
-import { ReadFornecedores } from "./interfaces";
+import { ReadFornecedor } from "./interfaces";
 import { deleteFornecedor } from "@/services/fornecedor";
 
 import { Button } from "@/app/_components/ui/button";
@@ -23,12 +23,12 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function AlertaExclusao({
   dados,
-  id,
+  fornecedor,
   onDadosChange,
 }: {
-  dados: ReadFornecedores[];
-  id: number;
-  onDadosChange: (novosDados: ReadFornecedores[]) => void;
+  dados: ReadFornecedor[];
+  fornecedor: ReadFornecedor;
+  onDadosChange: (novosDados: ReadFornecedor[]) => void;
 }) {
   const { toast } = useToast();
 
@@ -68,16 +68,21 @@ export default function AlertaExclusao({
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Confirmar exclusão</AlertDialogTitle>
+          <AlertDialogTitle>
+            {fornecedor?.qtdIngredientes
+              ? "Aviso exclusão"
+              : "Confirmar exclusão"}
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            Tem certeza que deseja excluir o fornecedor? Esta ação não pode ser
-            desfeita.
+            {fornecedor?.qtdIngredientes
+              ? "Não é possível excluir um fornecedor com ingredientes vinculados."
+              : "Tem certeza que deseja excluir o fornecedor? Esta ação não pode ser desfeita."}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => handleDelete(id)}
+            onClick={() => handleDelete(fornecedor.id)}
             className="bg-red-600 hover:bg-red-700"
           >
             Excluir

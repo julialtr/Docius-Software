@@ -11,6 +11,8 @@ public class ProfileFornecedor: ProfileBase
         CreateMap<CreateFornecedorDto, Fornecedor>();
         CreateMap<UpdateFornecedorDto, Fornecedor>();
         CreateMap<Fornecedor, ReadFornecedorDto>();
+        
+        CreateMap<FornecedorIngredientes, ReadFornecedorDto>();
 
         CreateMap<Fornecedor, ReadFornecedorIngredientesDto>();
     }

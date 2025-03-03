@@ -43,7 +43,9 @@ public class FornecedorController : CrudControllerBase<FornecedorEntityService, 
     [ProducesResponseType(typeof(ReadFornecedorDto[]), StatusCodes.Status200OK)]
     public IActionResult FindFornecedores([FromQuery] FornecedorFiltroDto filtroDto)
     {
-        return Find(filtroDto);
+        var fornecedores = EntityService.LeFornecedorIngredientes();
+
+        return Ok(Mapper.Map<List<ReadFornecedorDto>>(fornecedores));
     }
 
     protected override void OnSetEntityService()

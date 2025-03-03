@@ -33,6 +33,8 @@ public class ReadFornecedorDto : ReadDtoBase<int>
     public string Endereco { get; set; }
 
     public string Site { get; set; }
+
+    public int QtdIngredientes { get; set; }
 }
 
 public class ReadFornecedorIngredientesDto : ReadDtoBase<int>

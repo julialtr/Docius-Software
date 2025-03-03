@@ -71,13 +71,13 @@ export default function TabelaCategoriasIngredientes({
               <Button
                 variant="ghost"
                 onClick={() =>
-                  setSortConfig(requestSort("qtd_ingredientes", sortConfig))
+                  setSortConfig(requestSort("qtdIngredientes", sortConfig))
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
                 Quantidade de Ingredientes
                 <SortIcon<ReadCategoriaIngrediente>
-                  columnKey="qtd_ingredientes"
+                  columnKey="qtdIngredientes"
                   sortConfig={sortConfig}
                 />
               </Button>

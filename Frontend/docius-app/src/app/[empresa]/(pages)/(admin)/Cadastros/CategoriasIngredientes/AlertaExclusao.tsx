@@ -69,12 +69,12 @@ export default function AlertaExclusao({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {categoria.qtd_ingredientes
+            {categoria?.qtdIngredientes
               ? "Aviso exclusão"
               : "Confirmar exclusão"}
           </AlertDialogTitle>
           <AlertDialogDescription>
-            {categoria.qtd_ingredientes
+            {categoria?.qtdIngredientes
               ? "Não é possível excluir uma categoria com ingredientes vinculados."
               : "Tem certeza que deseja excluir a categoria? Esta ação não pode ser desfeita."}
           </AlertDialogDescription>
