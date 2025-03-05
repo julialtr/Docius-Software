@@ -6,30 +6,30 @@ namespace Docius.Repository.EinBiss.Entities.Models;
 
 public class IngredienteFiltro : FiltroBase<int>
 {
+    public int CategoriaIngredienteId { get; set; }
 }
 
 [Table("ingredientes")]
 public class Ingrediente : EntityBase<int>
 {
+    [Column("nome")]
+    [MaxLength(50)]
+    public string Nome { get; set; }
+
     [Column("marca")]
     [MaxLength(50)]
-    [Required]
     public string Marca { get; set; }
 
     [Column("preco")]
-    [Required]
     public decimal Preco { get; set; }
 
     [Column("quantidade")]
-    [Required]
     public int Quantidade { get; set; }
 
     [Column("medida")]
-    [Required]
     public decimal Medida { get; set; }
 
     [Column("unidade_medida_id")]
-    [Required]
     public int UnidadeMedidaId { get; set; }
 
     public virtual UnidadeMedida UnidadeMedida { get; set; }
@@ -40,7 +40,6 @@ public class Ingrediente : EntityBase<int>
     public virtual Fornecedor Fornecedor { get; set; }
 
     [Column("categoria_ingrediente_id")]
-    [Required]
     public int CategoriaIngredienteId { get; set; }
 
     public virtual CategoriaIngrediente CategoriaIngrediente { get; set; }

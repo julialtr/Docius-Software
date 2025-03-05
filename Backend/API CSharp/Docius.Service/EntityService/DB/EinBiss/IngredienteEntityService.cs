@@ -17,6 +17,9 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
 
     protected override void OnValidateEntity(Ingrediente entity)
     {
+        if (string.IsNullOrEmpty(entity.Nome))
+            throw new WarningException("O campo Nome deve ser informado.");
+
         if (string.IsNullOrEmpty(entity.Marca))
             throw new WarningException("O campo Marca deve ser informado.");
 
@@ -38,11 +41,44 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
         if (entity.Medida < 0)
             throw new WarningException("O campo Medida deve ser positivo.");
 
-        ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
+        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
 
         if (entity.FornecedorId != 0)
-            ValidateId(entity.FornecedorId, "O campo FornecedorId deve ser informado.", "O campo FornecedorId informado é inválido.");
+            EntityService.Fornecedor.ValidateId(entity.FornecedorId, "O campo FornecedorId deve ser informado.", "O campo FornecedorId informado é inválido.");
 
-        ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
+        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
+    }
+
+    public List<Ingrediente> LeIngredientes(IngredienteFiltro filtro)
+    {
+        var ingredientes = EntityService.Ingrediente.Entity
+            .Where(e => filtro.CategoriaIngredienteId == 0 || e.CategoriaIngredienteId.Equals(filtro.CategoriaIngredienteId))
+            .Select(ingrediente => new Ingrediente
+            {
+                Id = ingrediente.Id,
+                Nome = ingrediente.Nome,
+                Marca = ingrediente.Marca,
+                Preco = ingrediente.Preco,
+                Quantidade = ingrediente.Quantidade,
+                Medida = ingrediente.Medida,
+                UnidadeMedida = ingrediente.UnidadeMedida != null ? new UnidadeMedida
+                {
+                    Id = ingrediente.UnidadeMedida.Id,
+                    Sigla = ingrediente.UnidadeMedida.Sigla
+                } : null,
+                Fornecedor = ingrediente.Fornecedor != null ? new Fornecedor
+                {
+                    Id = ingrediente.Fornecedor.Id,
+                    Nome = ingrediente.Fornecedor.Nome,
+                    Site = ingrediente.Fornecedor.Site
+                } : null,
+                CategoriaIngrediente = ingrediente.CategoriaIngrediente != null ? new CategoriaIngrediente
+                {
+                    Id = ingrediente.CategoriaIngrediente.Id,
+                    Nome = ingrediente.CategoriaIngrediente.Nome,
+                } : null,
+            });
+
+        return ingredientes.ToList();
     }
 }

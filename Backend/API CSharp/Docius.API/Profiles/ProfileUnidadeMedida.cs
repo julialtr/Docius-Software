@@ -7,6 +7,7 @@ public class ProfileUnidadeMedida: ProfileBase
 {
     public ProfileUnidadeMedida()
     {
+        CreateMap<UnidadeMedidaFiltroDto, UnidadeMedidaFiltro>();
         CreateMap<UnidadeMedida, ReadUnidadeMedidaDto>();
     }
 }

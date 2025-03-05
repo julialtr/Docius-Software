@@ -26,6 +26,6 @@ public sealed class ReceitaEntityService : EntityServiceBase<EinBissEntityServic
         if (TimeOnly.MinValue == entity.Tempo)
             throw new WarningException("O campo Tempo deve ser informado.");
 
-        ValidateId(entity.PrecificacaoId, "O campo PrecificacaoId deve ser informado.", "O campo PrecificacaoId informado é inválido.");
+        EntityService.Precificacao.ValidateId(entity.PrecificacaoId, "O campo PrecificacaoId deve ser informado.", "O campo PrecificacaoId informado é inválido.");
     }
 }

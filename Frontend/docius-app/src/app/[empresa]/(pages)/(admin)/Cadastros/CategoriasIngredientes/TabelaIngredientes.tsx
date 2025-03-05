@@ -19,18 +19,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/app/_components/ui/table";
+import { formatMoney } from "@/utils/format";
+import { useEffect, useState } from "react";
+import { findIngredientes } from "@/services/ingrediente";
+import { ReadIngrediente } from "../Ingredientes/interfaces";
+import { useToast } from "@/hooks/use-toast";
 
 export function TabelaIngredientes({
   categoria,
 }: {
   categoria: ReadCategoriaIngrediente;
 }) {
-  const formatMoney = (value: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(value);
-  };
+  const { toast } = useToast();
+
+  const [dados, setDados] = useState<ReadIngrediente[]>([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await findIngredientes({
+          categoriaIngredienteId: categoria.id,
+        });
+        setDados(response);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao ler ingredientes",
+            description: error.message,
+          });
+        }
+      }
+    };
+
+    loadData();
+  }, []);
 
   return (
     <Sheet>
@@ -67,7 +92,7 @@ export function TabelaIngredientes({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {categoria.ingredientes?.map((ingrediente) => (
+                {dados?.map((ingrediente) => (
                   <TableRow key={ingrediente.id}>
                     <TableCell className="font-medium">
                       {ingrediente.nome}
@@ -75,7 +100,7 @@ export function TabelaIngredientes({
                     <TableCell>{ingrediente.marca}</TableCell>
                     <TableCell>{formatMoney(ingrediente.preco)}</TableCell>
                     <TableCell>
-                      {ingrediente.quantidade} {ingrediente.unidadeMedida.nome}
+                      {ingrediente.quantidade} {ingrediente.unidadeMedida.sigla}
                     </TableCell>
                     <TableCell>
                       {ingrediente.fornecedor.site ? (

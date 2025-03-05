@@ -23,8 +23,8 @@ public sealed class ReceitaCategoriaIngredienteEntityService : EntityServiceBase
         if (entity.Medida < 0)
             throw new WarningException("O campo Medida deve ser positivo.");
 
-        ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
-        ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
-        ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
+        EntityService.Receita.ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
+        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
+        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
     }
 }

@@ -30,26 +30,6 @@ public sealed class CategoriaIngredienteEntityService : EntityServiceBase<EinBis
                 Id = categoriaIngrediente.Id,
                 Nome = categoriaIngrediente.Nome,
                 QtdIngredientes = categoriaIngrediente.Ingrediente.Count(),
-                Ingrediente = categoriaIngrediente.Ingrediente
-                    .Select(ingrediente => new Ingrediente
-                    {
-                        Id = ingrediente.Id,
-                        Marca = ingrediente.Marca,
-                        Preco = ingrediente.Preco,
-                        Quantidade = ingrediente.Quantidade,
-                        Medida = ingrediente.Medida,
-                        UnidadeMedida = ingrediente.UnidadeMedida != null ? new UnidadeMedida
-                        {
-                            Id = ingrediente.UnidadeMedida.Id,
-                            Sigla = ingrediente.UnidadeMedida.Sigla
-                        } : null,
-                        Fornecedor = ingrediente.Fornecedor != null ? new Fornecedor
-                        {
-                            Id = ingrediente.Fornecedor.Id,
-                            Nome = ingrediente.Fornecedor.Nome,
-                            Site = ingrediente.Fornecedor.Site
-                        } : null,
-                    }).ToArray()
             });
 
         return categoriasIngredientes.ToList();

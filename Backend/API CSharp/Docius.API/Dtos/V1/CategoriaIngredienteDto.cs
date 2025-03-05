@@ -23,6 +23,4 @@ public class ReadCategoriaIngredienteDto : ReadDtoBase<int>
     public string Nome { get; set; }
     
     public int QtdIngredientes { get; set; }
-
-    public ReadIngredienteCategoriaIngredienteDto[] Ingrediente { get; set; }
 }

@@ -1,10 +1,7 @@
-import { ReadIngredienteCategoriaIngrediente } from "../Ingredientes/interfaces";
-
 export interface ReadCategoriaIngrediente {
   id: number;
   nome: string;
   qtdIngredientes: number;
-  ingredientes: ReadIngredienteCategoriaIngrediente[];
 }
 
 export interface CreateCategoriaIngrediente {

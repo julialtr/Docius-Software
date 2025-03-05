@@ -33,7 +33,7 @@ public sealed class UsuarioEntityService : EntityServiceBase<EinBissEntityServic
             throw new WarningException("O campo Senha deve ser informado.");
 
         if (entity.TipoUsuarioId == 0)
-            ValidateId(entity.TipoUsuarioId, "O campo TipoUsuarioId deve ser informado.", "O campo TipoUsuarioId informado é inválido.");
+            EntityService.TipoUsuario.ValidateId(entity.TipoUsuarioId, "O campo TipoUsuarioId deve ser informado.", "O campo TipoUsuarioId informado é inválido.");
 
         if (Where(e => (e.Id != entity.Id && e.Email == entity.Email)).Any())
             throw new WarningException("Usuário já cadastrado. Faça o login para acessar o sistema.");

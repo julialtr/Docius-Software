@@ -26,7 +26,7 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
         if (entity.Preco < 0)
             throw new WarningException("O campo Preco deve ser positivo.");
 
-        ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
-        ValidateId(entity.CategoriaProdutoId, "O campo CategoriaProdutoId deve ser informado.", "O campo ReceitaId informado é inválido.");
+        EntityService.Receita.ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
+        EntityService.CategoriaProduto.ValidateId(entity.CategoriaProdutoId, "O campo CategoriaProdutoId deve ser informado.", "O campo ReceitaId informado é inválido.");
     }
 }

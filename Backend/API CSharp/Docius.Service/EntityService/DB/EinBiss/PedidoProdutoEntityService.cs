@@ -20,13 +20,13 @@ public sealed class PedidoProdutoEntityService : EntityServiceBase<EinBissEntity
         if (entity.Quantidade == 0)
             throw new WarningException("O campo Quantidade deve ser informado.");
 
-        ValidateId(entity.PedidoId, "O campo PedidoId deve ser informado.", "O campo PedidoId informado é inválido.");
-        ValidateId(entity.ProdutoId, "O campo ProdutoId deve ser informado.", "O campo ProdutoId informado é inválido.");
+        EntityService.Pedido.ValidateId(entity.PedidoId, "O campo PedidoId deve ser informado.", "O campo PedidoId informado é inválido.");
+        EntityService.Produto.ValidateId(entity.ProdutoId, "O campo ProdutoId deve ser informado.", "O campo ProdutoId informado é inválido.");
 
         if (entity.StatusPedidoProdutoId != 0)
-            ValidateId(entity.StatusPedidoProdutoId, "O campo StatusPedidoProdutoId deve ser informado.", "O campo StatusPedidoProdutoId informado é inválido.");
+            EntityService.StatusPedidoProduto.ValidateId(entity.StatusPedidoProdutoId, "O campo StatusPedidoProdutoId deve ser informado.", "O campo StatusPedidoProdutoId informado é inválido.");
 
         if (entity.PersonalizacaoId != 0)
-            ValidateId(entity.PersonalizacaoId, "O campo PersonalizacaoId deve ser informado.", "O campo PersonalizacaoId informado é inválido.");
+            EntityService.Personalizacao.ValidateId(entity.PersonalizacaoId, "O campo PersonalizacaoId deve ser informado.", "O campo PersonalizacaoId informado é inválido.");
     }
 }

@@ -166,7 +166,8 @@ public abstract class EntityOperations<TEntity, TEntityTypeId, TFilter> : IEntit
 
         if (isEmpty)
             throw new WarningException(string.IsNullOrEmpty(emptyIdMessage) ? $"O ID de {typeof(TEntity).Name} não foi informado." : emptyIdMessage);
-        var invalid = Where(e => e.Id.Equals(id)).Any() == false;
+        
+        var invalid = Entity.Where(e => e.Id.Equals(id)).Any() == false;
 
         if (invalid)
             throw new WarningException(string.IsNullOrEmpty(invalidIdMessage) ? $"O ID de {typeof(TEntity).Name} informado é inválido." : invalidIdMessage);

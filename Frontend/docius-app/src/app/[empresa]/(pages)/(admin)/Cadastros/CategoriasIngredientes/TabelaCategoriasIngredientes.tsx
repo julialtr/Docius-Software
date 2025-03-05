@@ -17,7 +17,6 @@ import {
   TableRow,
 } from "@/app/_components/ui/table";
 import SortIcon from "@/app/_components/Sort";
-import { Badge } from "@/app/_components/ui/badge";
 
 import { requestSort, SortConfig, sortData } from "@/utils/sort";
 
@@ -91,14 +90,7 @@ export default function TabelaCategoriasIngredientes({
           {dadosFiltrados?.map((categoria) => (
             <TableRow key={categoria.id}>
               <TableCell className="font-medium">{categoria.nome}</TableCell>
-              <TableCell>
-                {categoria.ingredientes?.length ? (
-                  <Badge variant="secondary">
-                    {categoria.ingredientes?.length} ingrediente(s)
-                  </Badge>
-                ) : 0}
-              </TableCell>
-
+              <TableCell>{categoria.qtdIngredientes}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
                   <TabelaIngredientes categoria={categoria} />

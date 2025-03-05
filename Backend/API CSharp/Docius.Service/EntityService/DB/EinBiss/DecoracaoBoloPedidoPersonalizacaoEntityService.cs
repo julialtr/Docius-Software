@@ -17,9 +17,9 @@ public sealed class DecoracaoBoloPedidoPersonalizacaoEntityService : EntityServi
     protected override void OnValidateEntity(DecoracaoBoloPedidoPersonalizacao entity)
     {
         if (entity.DecoracaoBoloPedidoId != 0)
-            ValidateId(entity.DecoracaoBoloPedidoId, "O campo DecoracaoBoloPedidoId deve ser informado.", "O campo DecoracaoBoloPedidoId informado é inválido.");
+            EntityService.DecoracaoBoloPedido.ValidateId(entity.DecoracaoBoloPedidoId, "O campo DecoracaoBoloPedidoId deve ser informado.", "O campo DecoracaoBoloPedidoId informado é inválido.");
 
         if (entity.PersonalizacaoId != 0)
-            ValidateId(entity.PersonalizacaoId, "O campo PersonalizacaoId deve ser informado.", "O campo PersonalizacaoId informado é inválido.");
+            EntityService.Personalizacao.ValidateId(entity.PersonalizacaoId, "O campo PersonalizacaoId deve ser informado.", "O campo PersonalizacaoId informado é inválido.");
     }
 }

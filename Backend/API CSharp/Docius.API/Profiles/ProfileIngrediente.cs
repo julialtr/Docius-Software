@@ -7,6 +7,9 @@ public class ProfileIngrediente: ProfileBase
 {
     public ProfileIngrediente()
     {
-        CreateMap<Ingrediente, ReadIngredienteCategoriaIngredienteDto>();
+        CreateMap<IngredienteFiltroDto, IngredienteFiltro>();
+        CreateMap<CreateIngredienteDto, Ingrediente>();
+        CreateMap<UpdateIngredienteDto, Ingrediente>();
+        CreateMap<Ingrediente, ReadIngredienteDto>();
     }
 }

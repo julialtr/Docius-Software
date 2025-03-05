@@ -11,6 +11,7 @@ public class ProfileCategoriaIngrediente: ProfileBase
         CreateMap<CategoriaIngredienteFiltroDto, CategoriaIngredienteFiltro>();
         CreateMap<CreateCategoriaIngredienteDto, CategoriaIngrediente>();
         CreateMap<UpdateCategoriaIngredienteDto, CategoriaIngrediente>();
+        CreateMap<CategoriaIngrediente, ReadCategoriaIngredienteDto>();
 
         CreateMap<CategoriaIngredienteIngredientes, ReadCategoriaIngredienteDto>();
     }
