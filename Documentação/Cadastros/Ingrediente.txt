@@ -1,0 +1,1 @@
+Tela disponível apenas para o usuário administrador.

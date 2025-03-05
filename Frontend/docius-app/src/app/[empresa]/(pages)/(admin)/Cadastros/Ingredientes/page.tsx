@@ -3,6 +3,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
+import Loading from "@/app/loading";
 
 import TabelaIngredientes from "./TabelaIngredientes";
 import FormularioIngredientes from "./FormularioIngredientes";
@@ -13,7 +14,6 @@ import { Input } from "@/app/_components/ui/input";
 import Menu from "@/app/_components/Menu";
 
 import { useToast } from "@/hooks/use-toast";
-import Loading from "@/app/loading";
 
 export default function CadastroIngredientes() {
   const { toast } = useToast();
