@@ -13,7 +13,7 @@ export interface CreateIngrediente {
   quantidade: number;
   medida: number;
   unidadeMedidaId: number;
-  fornecedorId: number;
+  fornecedorId?: number;
   categoriaIngredienteId: number;
 }
 
@@ -24,7 +24,7 @@ export interface UpdateIngrediente {
   quantidade: number;
   medida: number;
   unidadeMedidaId: number;
-  fornecedorId: number;
+  fornecedorId?: number;
   categoriaIngredienteId: number;
 }
 
@@ -48,7 +48,7 @@ export function updateConvert(ingrediente: ReadIngrediente): UpdateIngrediente {
     quantidade: ingrediente.quantidade,
     medida: ingrediente.medida,
     unidadeMedidaId: ingrediente.unidadeMedida.id,
-    fornecedorId: ingrediente.fornecedor.id,
+    ...(ingrediente.fornecedor.id && { fornecedorId: ingrediente.fornecedor.id }),
     categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
   };
 }
@@ -61,7 +61,7 @@ export function createConvert(ingrediente: ReadIngrediente): CreateIngrediente {
     quantidade: ingrediente.quantidade,
     medida: ingrediente.medida,
     unidadeMedidaId: ingrediente.unidadeMedida.id,
-    fornecedorId: ingrediente.fornecedor.id,
+    ...(ingrediente.fornecedor.id && { fornecedorId: ingrediente.fornecedor.id }),
     categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
   };
 }

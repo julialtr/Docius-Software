@@ -35,7 +35,7 @@ public class Ingrediente : EntityBase<int>
     public virtual UnidadeMedida UnidadeMedida { get; set; }
 
     [Column("fornecedor_id")]
-    public int FornecedorId { get; set; }
+    public int? FornecedorId { get; set; }
 
     public virtual Fornecedor Fornecedor { get; set; }
 

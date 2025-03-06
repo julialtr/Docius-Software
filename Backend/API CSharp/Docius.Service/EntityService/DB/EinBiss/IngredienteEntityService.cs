@@ -43,8 +43,8 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
 
         EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
 
-        if (entity.FornecedorId != 0)
-            EntityService.Fornecedor.ValidateId(entity.FornecedorId, "O campo FornecedorId deve ser informado.", "O campo FornecedorId informado é inválido.");
+        if (entity.FornecedorId.HasValue && entity.FornecedorId == 0)
+            EntityService.Fornecedor.ValidateId(entity.FornecedorId.Value, "O campo FornecedorId deve ser informado.", "O campo FornecedorId informado é inválido.");
 
         EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
     }
@@ -70,7 +70,7 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
                 {
                     Id = ingrediente.Fornecedor.Id,
                     Nome = ingrediente.Fornecedor.Nome,
-                    Site = ingrediente.Fornecedor.Site
+                    Site = ingrediente.Fornecedor.Site,
                 } : null,
                 CategoriaIngrediente = ingrediente.CategoriaIngrediente != null ? new CategoriaIngrediente
                 {

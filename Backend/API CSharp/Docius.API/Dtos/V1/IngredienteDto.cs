@@ -27,7 +27,7 @@ public class CreateIngredienteDto : CreateDtoBase
     [Required]
     public int UnidadeMedidaId { get; set; }
 
-    public int FornecedorId { get; set; }
+    public int? FornecedorId { get; set; }
 
     [Required]
     public int CategoriaIngredienteId { get; set; }
