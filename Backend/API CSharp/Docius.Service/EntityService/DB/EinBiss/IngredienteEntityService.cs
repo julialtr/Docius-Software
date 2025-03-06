@@ -18,35 +18,32 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
     protected override void OnValidateEntity(Ingrediente entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
         if (string.IsNullOrEmpty(entity.Marca))
-            throw new WarningException("O campo Marca deve ser informado.");
+            throw new WarningException("Marca deve ser informada.");
 
         if (entity.Preco == 0)
-            throw new WarningException("O campo Preco deve ser informado.");
+            throw new WarningException("Preço deve ser informado.");
 
         if (entity.Preco < 0)
-            throw new WarningException("O campo Preco deve ser positivo.");
-
-        if (entity.Quantidade == 0)
-            throw new WarningException("O campo Quantidade deve ser informado.");
+            throw new WarningException("Preço deve ser positivo.");
 
         if (entity.Quantidade < 0)
-            throw new WarningException("O campo Quantidade deve ser positivo.");
+            throw new WarningException("Quantidade deve ser positiva.");
 
         if (entity.Medida == 0)
-            throw new WarningException("O campo Medida deve ser informado.");
+            throw new WarningException("Medida deve ser informada.");
 
         if (entity.Medida < 0)
-            throw new WarningException("O campo Medida deve ser positivo.");
+            throw new WarningException("Medida deve ser positiva.");
 
-        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
+        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "Unidade de medida deve ser informada.", "Unidade de medida informada é inválida.");
 
         if (entity.FornecedorId.HasValue && entity.FornecedorId == 0)
-            EntityService.Fornecedor.ValidateId(entity.FornecedorId.Value, "O campo FornecedorId deve ser informado.", "O campo FornecedorId informado é inválido.");
+            EntityService.Fornecedor.ValidateId(entity.FornecedorId.Value, "Fornecedor deve ser informado.", "Fornecedor informado é inválido.");
 
-        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
+        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "Categoria de ingrediente deve ser informada.", "Categoria de ingrediente informada é inválida.");
     }
 
     public List<Ingrediente> LeIngredientes(IngredienteFiltro filtro)

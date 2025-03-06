@@ -18,24 +18,24 @@ public sealed class PrecificacaoEntityService : EntityServiceBase<EinBissEntityS
     protected override void OnValidateEntity(Precificacao entity)
     {
         if (entity.ValorInsumos == 0)
-            throw new WarningException("O campo ValorInsumos deve ser informado.");
+            throw new WarningException("Valor dos insumos deve ser informado.");
 
         if (entity.ValorInsumos < 0)
-            throw new WarningException("O campo ValorInsumos deve ser positivo.");
+            throw new WarningException("Valor dos insumos deve ser positivo.");
 
         if (entity.ValorSalario == 0)
-            throw new WarningException("O campo ValorSalario deve ser informado.");
+            throw new WarningException("Valor do salário deve ser informado.");
 
         if (entity.ValorSalario < 0)
-            throw new WarningException("O campo ValorSalario deve ser positivo.");
+            throw new WarningException("Valor do salário deve ser positivo.");
 
         if (entity.QtdHorasMensais == 0)
-            throw new WarningException("O campo QtdHorasMensais deve ser informado.");
+            throw new WarningException("Quantidade de horas semanais deve ser informada.");
 
         if (entity.QtdHorasMensais < 0)
-            throw new WarningException("O campo QtdHorasMensais deve ser positivo.");
+            throw new WarningException("Quantidade de horas semanais deve ser positiva.");
 
         if (entity.QtdMesesConsiderarGastos < 0)
-            throw new WarningException("O campo QtdMesesConsiderarGastos deve ser positivo.");
+            throw new WarningException("Quantidade de meses para considerar gastos deve ser positiva.");
     }
 }

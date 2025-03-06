@@ -24,16 +24,16 @@ public sealed class UsuarioEntityService : EntityServiceBase<EinBissEntityServic
     protected override void OnValidateEntity(Usuario entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
         if (string.IsNullOrEmpty(entity.Email))
-            throw new WarningException("O campo Email deve ser informado.");
+            throw new WarningException("Email deve ser informado.");
         
         if (string.IsNullOrEmpty(entity.Senha))
-            throw new WarningException("O campo Senha deve ser informado.");
+            throw new WarningException("Senha deve ser informada.");
 
         if (entity.TipoUsuarioId == 0)
-            EntityService.TipoUsuario.ValidateId(entity.TipoUsuarioId, "O campo TipoUsuarioId deve ser informado.", "O campo TipoUsuarioId informado é inválido.");
+            EntityService.TipoUsuario.ValidateId(entity.TipoUsuarioId, "Tipo de usuário deve ser informado.", "Tipo de usuário informado é inválido.");
 
         if (Where(e => (e.Id != entity.Id && e.Email == entity.Email)).Any())
             throw new WarningException("Usuário já cadastrado. Faça o login para acessar o sistema.");

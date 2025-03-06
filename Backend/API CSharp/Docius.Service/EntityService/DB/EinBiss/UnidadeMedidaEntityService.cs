@@ -18,6 +18,6 @@ public sealed class UnidadeMedidaEntityService : EntityServiceBase<EinBissEntity
     protected override void OnValidateEntity(UnidadeMedida entity)
     {
         if (string.IsNullOrEmpty(entity.Sigla))
-            throw new WarningException("O campo Sigla deve ser informado.");
+            throw new WarningException("Sigla deve ser informada.");
     }
 }

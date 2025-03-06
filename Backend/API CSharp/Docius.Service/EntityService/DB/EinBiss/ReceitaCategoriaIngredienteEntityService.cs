@@ -18,13 +18,13 @@ public sealed class ReceitaCategoriaIngredienteEntityService : EntityServiceBase
     protected override void OnValidateEntity(ReceitaCategoriaIngrediente entity)
     {
         if (entity.Medida == 0)
-            throw new WarningException("O campo Medida deve ser informado.");
+            throw new WarningException("Medida deve ser informada.");
 
         if (entity.Medida < 0)
-            throw new WarningException("O campo Medida deve ser positivo.");
+            throw new WarningException("Medida deve ser positiva.");
 
-        EntityService.Receita.ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
-        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "O campo CategoriaIngredienteId deve ser informado.", "O campo CategoriaIngredienteId informado é inválido.");
-        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "O campo UnidadeMedidaId deve ser informado.", "O campo UnidadeMedidaId informado é inválido.");
+        EntityService.Receita.ValidateId(entity.ReceitaId, "Receita deve ser informada.", "Receita informada é inválida.");
+        EntityService.CategoriaIngrediente.ValidateId(entity.CategoriaIngredienteId, "Categoria de ingrediente deve ser informada.", "Categoria de ingrediente informada é inválida.");
+        EntityService.UnidadeMedida.ValidateId(entity.UnidadeMedidaId, "Unidade de medida deve ser informada.", "Unidade de medida informada é inválida.");
     }
 }

@@ -18,6 +18,6 @@ public sealed class StatusPedidoEntityService : EntityServiceBase<EinBissEntityS
     protected override void OnValidateEntity(StatusPedido entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
     }
 }

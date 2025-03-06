@@ -18,6 +18,6 @@ public sealed class DecoracaoBoloEntityService : EntityServiceBase<EinBissEntity
     protected override void OnValidateEntity(DecoracaoBolo entity)
     {
         if (entity.Foto == null || entity.Foto.Length == 0)
-            throw new WarningException("O campo Foto deve ser informado.");
+            throw new WarningException("Foto deve ser informada.");
     }
 }

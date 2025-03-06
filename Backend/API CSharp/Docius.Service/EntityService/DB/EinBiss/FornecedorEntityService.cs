@@ -18,7 +18,7 @@ public sealed class FornecedorEntityService : EntityServiceBase<EinBissEntitySer
     protected override void OnValidateEntity(Fornecedor entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
     }
 
     public List<FornecedorIngredientes> LeFornecedorIngredientes()

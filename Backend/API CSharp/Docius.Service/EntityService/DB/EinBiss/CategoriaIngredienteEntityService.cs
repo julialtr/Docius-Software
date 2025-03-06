@@ -19,7 +19,7 @@ public sealed class CategoriaIngredienteEntityService : EntityServiceBase<EinBis
     protected override void OnValidateEntity(CategoriaIngrediente entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
     }
 
     public List<CategoriaIngredienteIngredientes> LeCategoriaIngredienteIngredientes()

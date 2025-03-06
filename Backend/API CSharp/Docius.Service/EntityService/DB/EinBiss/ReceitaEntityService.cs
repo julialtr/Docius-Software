@@ -18,14 +18,14 @@ public sealed class ReceitaEntityService : EntityServiceBase<EinBissEntityServic
     protected override void OnValidateEntity(Receita entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
         if (entity.QtdPorcoes < 0)
-            throw new WarningException("O campo QtdPorcoes deve ser positivo.");
+            throw new WarningException("Quantidade de porções deve ser positiva.");
 
         if (TimeOnly.MinValue == entity.Tempo)
-            throw new WarningException("O campo Tempo deve ser informado.");
+            throw new WarningException("Tempo deve ser informado.");
 
-        EntityService.Precificacao.ValidateId(entity.PrecificacaoId, "O campo PrecificacaoId deve ser informado.", "O campo PrecificacaoId informado é inválido.");
+        EntityService.Precificacao.ValidateId(entity.PrecificacaoId, "Precificação deve ser informada.", "Precificação informada é inválida.");
     }
 }

@@ -18,11 +18,11 @@ public sealed class CategoriaProdutoEntityService : EntityServiceBase<EinBissEnt
     protected override void OnValidateEntity(CategoriaProduto entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
-        EntityService.Cardapio.ValidateId(entity.CardapioId, "O campo CardapioId deve ser informado.", "O campo CardapioId informado é inválido.");
+        EntityService.Cardapio.ValidateId(entity.CardapioId, "Cardápio deve ser informado.", "Cardápio informado é inválido.");
 
         if (entity.CategoriaProdutoSuperiorId != 0)
-            EntityService.CategoriaProduto.ValidateId(entity.CardapioId, "O campo CategoriaProdutoSuperiorId deve ser informado.", "O campo CategoriaProdutoSuperiorId informado é inválido.");
+            EntityService.CategoriaProduto.ValidateId(entity.CardapioId, "Categoria superior do produto deve ser informada.", "Categoria superior do produto informada é inválida.");
     }
 }

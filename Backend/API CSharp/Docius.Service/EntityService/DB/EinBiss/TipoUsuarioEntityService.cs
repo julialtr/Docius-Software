@@ -18,6 +18,6 @@ public sealed class TipoUsuarioEntityService : EntityServiceBase<EinBissEntitySe
     protected override void OnValidateEntity(TipoUsuario entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
     }
 }

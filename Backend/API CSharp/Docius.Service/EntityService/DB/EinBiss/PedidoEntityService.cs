@@ -18,11 +18,11 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
     protected override void OnValidateEntity(Pedido entity)
     {
         if (DateTime.MinValue == entity.DataHoraEntrega)
-            throw new WarningException("O campo DataHoraEntrega deve ser informado.");
+            throw new WarningException("Data/Hora de entrega deve ser informada.");
 
-        EntityService.Usuario.ValidateId(entity.UsuarioId, "O campo UsuarioId deve ser informado.", "O campo UsuarioId informado é inválido.");
+        EntityService.Usuario.ValidateId(entity.UsuarioId, "Usuário deve ser informado.", "Usuário informado é inválido.");
 
         if (entity.StatusPedidoId != 0)
-            EntityService.StatusPedido.ValidateId(entity.StatusPedidoId, "O campo StatusPedidoId deve ser informado.", "O campo StatusPedidoId informado é inválido.");
+            EntityService.StatusPedido.ValidateId(entity.StatusPedidoId, "Status do pedido deve ser informado.", "Status do pedido informado é inválido.");
     }
 }

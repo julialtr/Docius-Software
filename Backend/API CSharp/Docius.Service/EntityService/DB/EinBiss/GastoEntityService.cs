@@ -18,12 +18,12 @@ public sealed class GastoEntityService : EntityServiceBase<EinBissEntityService,
     protected override void OnValidateEntity(Gasto entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
         if (entity.Valor == 0)
-            throw new WarningException("O campo Valor deve ser informado.");
+            throw new WarningException("Valor deve ser informado.");
 
         if (entity.Valor < 0)
-            throw new WarningException("O campo Valor deve ser positivo.");
+            throw new WarningException("Valor deve ser positivo.");
     }
 }

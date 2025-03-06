@@ -18,15 +18,15 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
     protected override void OnValidateEntity(Produto entity)
     {
         if (string.IsNullOrEmpty(entity.Nome))
-            throw new WarningException("O campo Nome deve ser informado.");
+            throw new WarningException("Nome deve ser informado.");
 
         if (entity.Preco == 0)
-            throw new WarningException("O campo Preco deve ser informado.");
+            throw new WarningException("Preço deve ser informado.");
 
         if (entity.Preco < 0)
-            throw new WarningException("O campo Preco deve ser positivo.");
+            throw new WarningException("Preço deve ser positivo.");
 
-        EntityService.Receita.ValidateId(entity.ReceitaId, "O campo ReceitaId deve ser informado.", "O campo ReceitaId informado é inválido.");
-        EntityService.CategoriaProduto.ValidateId(entity.CategoriaProdutoId, "O campo CategoriaProdutoId deve ser informado.", "O campo ReceitaId informado é inválido.");
+        EntityService.Receita.ValidateId(entity.ReceitaId, "Receita deve ser informada.", "Receita informada é inválida.");
+        EntityService.CategoriaProduto.ValidateId(entity.CategoriaProdutoId, "Categoria do produto deve ser informada.", "Categoria do produto informada é inválida.");
     }
 }
