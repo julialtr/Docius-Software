@@ -25,7 +25,7 @@ import {
 import SortIcon from "@/app/_components/Sort";
 
 import { formatMoney } from "@/utils/format";
-import { requestSort, SortConfig } from "@/utils/sort";
+import { requestSort, SortConfig, sortData } from "@/utils/sort";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -39,6 +39,10 @@ export function TabelaIngredientes({
 
   const [sortConfig, setSortConfig] =
     useState<SortConfig<ReadIngrediente>>(null);
+
+  useEffect(() => {
+    setDados(sortData(dados, sortConfig));
+  }, [sortConfig]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -199,17 +203,17 @@ export function TabelaIngredientes({
                     <TableCell>{formatMoney(ingrediente.preco)}</TableCell>
                     <TableCell>{ingrediente.quantidade}</TableCell>
                     <TableCell>
-                      {ingrediente.fornecedor.site ? (
+                      {ingrediente.fornecedor?.site ? (
                         <Link
-                          href={ingrediente.fornecedor.site}
+                          href={ingrediente.fornecedor?.site}
                           target="_blank"
                           className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
                         >
-                          {ingrediente.fornecedor.nome}
+                          {ingrediente.fornecedor?.nome}
                           <ExternalLink className="h-4 w-4" />
                         </Link>
                       ) : (
-                        ingrediente.fornecedor.nome
+                        ingrediente.fornecedor?.nome
                       )}
                     </TableCell>
                   </TableRow>

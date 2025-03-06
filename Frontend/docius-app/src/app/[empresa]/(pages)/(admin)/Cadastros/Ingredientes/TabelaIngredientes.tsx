@@ -169,7 +169,7 @@ export default function TabelaIngredientes({
               <TableCell>
                 <div className="flex items-center gap-1">
                   <Tag className="h-4 w-4 text-amber-600" />
-                  {ingrediente.categoriaIngrediente.nome}
+                  {ingrediente.categoriaIngrediente?.nome}
                 </div>
               </TableCell>
               <TableCell className="font-medium">{ingrediente.nome}</TableCell>
@@ -177,23 +177,23 @@ export default function TabelaIngredientes({
               <TableCell>
                 <div className="flex items-center gap-1">
                   <Scale className="h-4 w-4 text-gray-500" />
-                  {ingrediente.medida} {ingrediente.unidadeMedida.sigla}
+                  {ingrediente.medida} {ingrediente.unidadeMedida?.sigla}
                 </div>
               </TableCell>
               <TableCell>{formatMoney(ingrediente.preco)}</TableCell>
               <TableCell>{ingrediente.quantidade}</TableCell>
               <TableCell>
-                {ingrediente.fornecedor.site ? (
+                {ingrediente.fornecedor?.site ? (
                   <Link
-                    href={ingrediente.fornecedor.site}
+                    href={ingrediente.fornecedor?.site}
                     target="_blank"
                     className="flex items-center gap-1 text-amber-700 hover:text-amber-900"
                   >
-                    {ingrediente.fornecedor.nome}
+                    {ingrediente.fornecedor?.nome}
                     <ExternalLink className="h-4 w-4" />
                   </Link>
                 ) : (
-                  ingrediente.fornecedor.nome
+                  ingrediente.fornecedor?.nome
                 )}
               </TableCell>
               <TableCell>
