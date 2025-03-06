@@ -12,6 +12,5 @@ public class GastoConfiguration : IEntityTypeConfiguration<Gasto>
 
         builder.Property(entity => entity.Nome).IsRequired();
         builder.Property(entity => entity.Valor).IsRequired();
-        builder.Property(entity => entity.Data).IsRequired();
     }
 }

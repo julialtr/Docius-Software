@@ -19,8 +19,4 @@ public class Gasto : EntityBase<int>
     [Column("valor")]
     [Required]
     public decimal Valor { get; set; }
-
-    [Column("data")]
-    [Required]
-    public DateOnly Data { get; set; }
 }

@@ -25,8 +25,5 @@ public sealed class GastoEntityService : EntityServiceBase<EinBissEntityService,
 
         if (entity.Valor < 0)
             throw new WarningException("O campo Valor deve ser positivo.");
-
-        if (DateOnly.MinValue == entity.Data)
-            throw new WarningException("O campo Data deve ser informado.");
     }
 }
