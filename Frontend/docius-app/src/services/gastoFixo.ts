@@ -1,12 +1,12 @@
 import {
-  CreateFornecedor,
-  UpdateFornecedor,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Fornecedores/interfaces";
+  CreateGastoFixo,
+  UpdateGastoFixo,
+} from "@/app/[empresa]/(pages)/(admin)/Cadastros/GastosFixos/interfaces";
 import { LINK_API } from "@/utils/constants";
 
-export const findFornecedores = async () => {
+export const findGastosFixos = async () => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor`, {
+    const response = await fetch(`${LINK_API}/gasto`, {
       method: "GET",
       credentials: "include",
     });
@@ -23,18 +23,18 @@ export const findFornecedores = async () => {
   }
 };
 
-export const updateFornecedor = async (
+export const updateGastoFixo = async (
   id: number,
-  fornecedor: UpdateFornecedor
+  gastoFixo: UpdateGastoFixo
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor/${id}`, {
+    const response = await fetch(`${LINK_API}/gasto/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
-      body: JSON.stringify(fornecedor),
+      body: JSON.stringify(gastoFixo),
       credentials: "include",
     });
 
@@ -48,15 +48,15 @@ export const updateFornecedor = async (
   }
 };
 
-export const createFornecedor = async (fornecedor: CreateFornecedor) => {
+export const createGastoFixo = async (gastoFixo: CreateGastoFixo) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor`, {
+    const response = await fetch(`${LINK_API}/gasto`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
-      body: JSON.stringify([fornecedor]),
+      body: JSON.stringify([gastoFixo]),
       credentials: "include",
     });
 
@@ -70,9 +70,9 @@ export const createFornecedor = async (fornecedor: CreateFornecedor) => {
   }
 };
 
-export const deleteFornecedor = async (id: number) => {
+export const deleteGastoFixo = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor/${id}`, {
+    const response = await fetch(`${LINK_API}/gasto/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

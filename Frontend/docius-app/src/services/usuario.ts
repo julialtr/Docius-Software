@@ -53,6 +53,8 @@ export const findUsuarios = async () => {
       credentials: "include",
     });
 
+    if (response.status === 204) return [];
+
     const data = await response.json();
 
     if (response.ok) return data;
