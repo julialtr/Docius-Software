@@ -50,6 +50,7 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
     {
         var ingredientes = EntityService.Ingrediente.Entity
             .Where(e => filtro.CategoriaIngredienteId == 0 || e.CategoriaIngredienteId.Equals(filtro.CategoriaIngredienteId))
+            .Where(e => !filtro.Ids.Any() || filtro.Ids.Contains(e.Id))
             .Select(ingrediente => new Ingrediente
             {
                 Id = ingrediente.Id,

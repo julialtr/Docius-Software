@@ -22,14 +22,29 @@ public class IngredienteController : CrudControllerBase<IngredienteEntityService
     [ProducesResponseType(typeof(ReadIngredienteDto[]), StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateIngrediente([FromBody] CreateIngredienteDto[] dadosDto)
     {
-        return await Create<CreateIngredienteDto, ReadIngredienteDto>(dadosDto);
+        var vecData = Mapper.Map<Ingrediente[]>(dadosDto);
+        var createdEntities = await EntityService.CreateRangeAsync(vecData);
+
+        var ingredientes = EntityService.LeIngredientes(new IngredienteFiltro { Ids = createdEntities.Select(x => x.Id).ToArray() });
+
+        return Ok(Mapper.Map<List<ReadIngredienteDto>>(ingredientes));
     }
 
     [HttpPatch("{id:int}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ReadIngredienteDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateIngrediente(int id, [FromBody] UpdateIngredienteDto dadosDto)
     {
-        return await Update(id, dadosDto);
+        Ingrediente data = await EntityService.ReadAsync(id);
+
+        if (data == null)
+            return NotFound();
+
+        Mapper.Map(dadosDto, data);
+        await EntityService.UpdateAsync(data);
+
+        var ingredientes = EntityService.LeIngredientes(new IngredienteFiltro { Ids = [id] });
+
+        return Ok(Mapper.Map<ReadIngredienteDto>(ingredientes[0]));
     }
 
     [HttpDelete("{id:int}")]

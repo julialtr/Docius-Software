@@ -147,27 +147,19 @@ export default function FormularioIngredientes({
 
     try {
       if (dadosIngrediente.id) {
-        await updateIngrediente(
+        const novoDado = await updateIngrediente(
           dadosIngrediente.id,
           updateConvert(dadosIngrediente)
         );
 
-        console.log(
-          dados.map((f) =>
-            f.id === dadosIngrediente.id ? dadosIngrediente : f
-          )
-        );
-
         onDadosChange(
-          dados.map((f) =>
-            f.id === dadosIngrediente.id ? dadosIngrediente : f
-          )
+          dados.map((f) => (f.id === dadosIngrediente.id ? novoDado : f))
         );
       } else {
-        const dadoCriado = await createIngrediente(
+        const novoDado = await createIngrediente(
           createConvert(dadosIngrediente)
         );
-        onDadosChange([...dados, dadoCriado[0]]);
+        onDadosChange([...dados, novoDado[0]]);
       }
 
       toast({

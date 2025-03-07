@@ -13,7 +13,6 @@ public class IngredienteConfiguration : IEntityTypeConfiguration<Ingrediente>
         builder.Property(entity => entity.Nome).IsRequired();
         builder.Property(entity => entity.Marca).IsRequired();
         builder.Property(entity => entity.Preco).IsRequired();
-        builder.Property(entity => entity.Quantidade).IsRequired();
         builder.Property(entity => entity.Medida).IsRequired();
 
         builder.HasOne(entity => entity.UnidadeMedida)

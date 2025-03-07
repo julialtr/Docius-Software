@@ -7,7 +7,7 @@ import { LINK_API } from "@/utils/constants";
 
 export const findIngredientes = async (filtro: FilterIngrediente) => {
   try {
-    const queryParams = new URLSearchParams(filtro as any).toString(); 
+    const queryParams = new URLSearchParams(filtro as any).toString();
 
     const response = await fetch(`${LINK_API}/ingrediente?${queryParams}`, {
       method: "GET",
@@ -45,19 +45,17 @@ export const updateIngrediente = async (
       credentials: "include",
     });
 
-    if (!response.ok) {
-      const data = await response.json();
+    const data = await response.json();
 
-      throw new Error(data.Message || "Erro de conexão com a API.");
-    }
+    if (response.ok) return data;
+
+    throw new Error(data.Message || "Erro de conexão com a API.");
   } catch (error) {
     throw error;
   }
 };
 
-export const createIngrediente = async (
-  ingrediente: CreateIngrediente
-) => {
+export const createIngrediente = async (ingrediente: CreateIngrediente) => {
   try {
     const response = await fetch(`${LINK_API}/ingrediente`, {
       method: "POST",

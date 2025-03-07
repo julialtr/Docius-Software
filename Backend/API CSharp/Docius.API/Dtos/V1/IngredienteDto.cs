@@ -18,7 +18,6 @@ public class CreateIngredienteDto : CreateDtoBase
     [Required]
     public decimal Preco { get; set; }
 
-    [Required]
     public int Quantidade { get; set; }
 
     [Required]
@@ -53,7 +52,7 @@ public class UpdateIngredienteDto : UpdateDtoBase
     [Required]
     public int UnidadeMedidaId { get; set; }
 
-    public int FornecedorId { get; set; }
+    public int? FornecedorId { get; set; }
 
     [Required]
     public int CategoriaIngredienteId { get; set; }
