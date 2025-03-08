@@ -11,7 +11,6 @@ public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
         builder.HasKey(entity => entity.Id);
 
         builder.Property(entity => entity.Nome).IsRequired();
-        builder.Property(entity => entity.Preco).IsRequired();
 
         builder.HasOne(entity => entity.Receita)
             .WithMany()
@@ -20,7 +19,6 @@ public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
 
         builder.HasOne(entity => entity.CategoriaProduto)
             .WithMany()
-            .HasForeignKey(entity => entity.CategoriaProdutoId)
-            .IsRequired();
+            .HasForeignKey(entity => entity.CategoriaProdutoId);
     }
 }

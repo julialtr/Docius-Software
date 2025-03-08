@@ -22,6 +22,7 @@ import {
   Menu,
   Layers,
   PackageCheck,
+  ClipboardList,
 } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
@@ -86,7 +87,9 @@ export default function MenuComponent() {
                   ${isSidebarCollapsed ? "justify-center" : "justify-between"}`}
                 >
                   <div className="flex items-center gap-2">
-                    <FilePlus2 className={isSidebarCollapsed ? "h4 w-4" : "h-6 w-6"} />
+                    <FilePlus2
+                      className={isSidebarCollapsed ? "h4 w-4" : "h-6 w-6"}
+                    />
                     {!isSidebarCollapsed && <span>Cadastros</span>}
                   </div>
                   {!isSidebarCollapsed && <ChevronDown className="h-4 w-4" />}
@@ -124,6 +127,12 @@ export default function MenuComponent() {
                     href={`/${dadosEmpresa?.dominio}/Cadastros/Receitas`}
                     icon={Book}
                     label="Receitas"
+                    isSidebarCollapsed={isSidebarCollapsed}
+                  />
+                  <MenuLink
+                    href={`/${dadosEmpresa?.dominio}/Cadastros/Produtos`}
+                    icon={ClipboardList}
+                    label="Produtos"
                     isSidebarCollapsed={isSidebarCollapsed}
                   />
                   <MenuLink
