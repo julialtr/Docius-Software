@@ -5,7 +5,7 @@ namespace Docius.Repository.ServicosTerceiros.Dados;
 public class WebScrapingFiltroDto
 {
     [Required]
-    public int[] IdsMercados { get; set; }
+    public List<int> IdsMercados { get; set; }
 
     [Required]
     public string TextoPesquisa { get; set; }
@@ -15,7 +15,7 @@ public class ReadWebScrapingRetornoDto
 {
     public string Mensagem { get; set; }
 
-    public ReadWebScrapingDadosDto[] Dados { get; set; }
+    public List<ReadWebScrapingDadosDto> Dados { get; set; }
 }
 
 public class ReadWebScrapingDadosDto

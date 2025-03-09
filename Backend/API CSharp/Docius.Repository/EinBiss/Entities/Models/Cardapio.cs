@@ -10,5 +10,5 @@ public class CardapioFiltro : FiltroBase<int>
 [Table("cardapios")]
 public class Cardapio : EntityBase<int>
 {
-    public virtual CategoriaProduto[] CategoriaProduto { get; set; }
+    public virtual List<CategoriaProduto> CategoriaProduto { get; set; }
 }

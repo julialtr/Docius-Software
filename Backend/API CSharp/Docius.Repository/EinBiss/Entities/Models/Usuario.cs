@@ -38,5 +38,5 @@ public class Usuario : EntityBase<int>
     public int TipoUsuarioId { get; set; }
 
     public virtual TipoUsuario TipoUsuario { get; set; }
-    public virtual Pedido[] Pedido { get; set; }
+    public virtual List<Pedido> Pedido { get; set; }
 }

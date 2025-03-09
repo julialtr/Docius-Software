@@ -18,7 +18,7 @@ public class ReadReceitaProdutoDto : ReadDtoBase<int>
 
     public TimeOnly Tempo { get; set; }
 
-    public virtual ReceitaCategoriaIngrediente[] ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
 }
 
 public class ReadReceitaDto : ReadDtoBase<int>

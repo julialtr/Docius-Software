@@ -16,6 +16,6 @@ public class UnidadeMedida : EntityBase<int>
     [Required]
     public string Sigla { get; set; }
 
-    public virtual ReceitaCategoriaIngrediente[] ReceitaCategoriaIngrediente { get; set; }
-    public virtual Ingrediente[] Ingrediente { get; set; }
+    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<Ingrediente> Ingrediente { get; set; }
 }

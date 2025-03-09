@@ -16,5 +16,5 @@ public class TipoUsuario : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    public virtual Usuario[] Usuarios { get; set; }
+    public virtual List<Usuario> Usuarios { get; set; }
 }

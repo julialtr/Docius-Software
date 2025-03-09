@@ -25,5 +25,5 @@ public class Pedido : EntityBase<int>
     public int StatusPedidoId { get; set; }
 
     public virtual StatusPedido StatusPedido { get; set; }
-    public virtual PedidoProduto[] PedidoProduto { get; set; }
+    public virtual List<PedidoProduto> PedidoProduto { get; set; }
 }

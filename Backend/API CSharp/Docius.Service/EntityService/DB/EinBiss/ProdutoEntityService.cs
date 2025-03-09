@@ -2,6 +2,7 @@
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService.Core;
 using Docius.Service.EntityService.Data;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
@@ -30,7 +31,14 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
     public List<ProdutoDetalhado> LeProdutos(ProdutoFiltro filtro)
     {
         var produtos = EntityService.Produto.Entity
-            .Where(e => (filtro.Ids != null && filtro.Ids.Any()) ? filtro.Ids.Contains(e.Id) : true)
+            .Include(e => e.Receita)
+                .ThenInclude(r => r.ReceitaCategoriaIngrediente)
+                    .ThenInclude(ri => ri.CategoriaIngrediente)
+            .Include(e => e.Receita)
+                .ThenInclude(r => r.ReceitaCategoriaIngrediente)
+                    .ThenInclude(ri => ri.UnidadeMedida)
+            .Include(e => e.PedidoProduto)
+            .Where(e => filtro.Ids != null && filtro.Ids.Any() ? filtro.Ids.Contains(e.Id) : true)
             .ToList();
 
         if (!produtos.Any())
@@ -67,7 +75,7 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
                             Id = receitaIngrediente.UnidadeMedida.Id,
                             Sigla = receitaIngrediente.UnidadeMedida.Sigla
                         } : null
-                    }).ToArray() ?? Array.Empty<ReceitaCategoriaIngredienteProduto>()
+                    }).ToList() ?? new List<ReceitaCategoriaIngredienteProduto>()
             } : null
         }).ToList();
 

@@ -1,6 +1,7 @@
 ﻿using Docius.Repository.EinBiss;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService.Core;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
@@ -49,9 +50,19 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
     public List<Ingrediente> LeIngredientes(IngredienteFiltro filtro)
     {
         var ingredientes = EntityService.Ingrediente.Entity
+            .Include(e => e.UnidadeMedida)
+            .Include(e => e.Fornecedor)
+            .Include(e => e.CategoriaIngrediente)
+            .Where(e => (filtro.Ids != null && filtro.Ids.Any()) ? filtro.Ids.Contains(e.Id) : true)
             .Where(e => filtro.CategoriaIngredienteId == 0 || e.CategoriaIngredienteId.Equals(filtro.CategoriaIngredienteId))
-            .Where(e => !filtro.Ids.Any() || filtro.Ids.Contains(e.Id))
-            .Select(ingrediente => new Ingrediente
+            .ToList();
+
+        if (!ingredientes.Any())
+        {
+            return new List<Ingrediente>();
+        }
+
+        var ingredientesDetalhados = ingredientes.Select(ingrediente => new Ingrediente
             {
                 Id = ingrediente.Id,
                 Nome = ingrediente.Nome,
@@ -77,6 +88,6 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
                 } : null,
             });
 
-        return ingredientes.ToList();
+        return ingredientesDetalhados.ToList();
     }
 }

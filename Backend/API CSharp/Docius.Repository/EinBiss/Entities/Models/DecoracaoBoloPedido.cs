@@ -15,5 +15,5 @@ public class DecoracaoBoloPedido : EntityBase<int>
     [Required]
     public Byte[] Foto { get; set; }
 
-    public virtual DecoracaoBoloPedidoPersonalizacao[] DecoracaoBoloPedidoPersonalizacao { get; set; }
+    public virtual List<DecoracaoBoloPedidoPersonalizacao> DecoracaoBoloPedidoPersonalizacao { get; set; }
 }

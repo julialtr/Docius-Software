@@ -24,5 +24,5 @@ public class Fornecedor : EntityBase<int>
     [MaxLength(100)]
     public string Site { get; set; }
 
-    public virtual Ingrediente[] Ingrediente { get; set; }
+    public virtual List<Ingrediente> Ingrediente { get; set; }
 }

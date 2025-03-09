@@ -16,5 +16,5 @@ public class StatusPedidoProduto : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    public virtual PedidoProduto[] PedidoProduto { get; set; }
+    public virtual List<PedidoProduto> PedidoProduto { get; set; }
 }

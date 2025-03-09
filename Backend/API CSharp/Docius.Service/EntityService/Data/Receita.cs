@@ -14,5 +14,5 @@ public class ReceitaProduto
 
     public TimeOnly Tempo { get; set; }
 
-    public virtual ReceitaCategoriaIngredienteProduto[] ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<ReceitaCategoriaIngredienteProduto> ReceitaCategoriaIngrediente { get; set; }
 }

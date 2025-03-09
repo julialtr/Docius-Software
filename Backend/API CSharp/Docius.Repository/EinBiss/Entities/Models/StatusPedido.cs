@@ -16,5 +16,5 @@ public class StatusPedido : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
-    public virtual Pedido[] Pedido { get; set; }
+    public virtual List<Pedido> Pedido { get; set; }
 }

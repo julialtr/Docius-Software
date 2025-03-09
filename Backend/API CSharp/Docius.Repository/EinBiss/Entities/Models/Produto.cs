@@ -28,5 +28,5 @@ public class Produto : EntityBase<int>
 
     public virtual CategoriaProduto CategoriaProduto { get; set; }
 
-    public virtual PedidoProduto[] PedidoProduto { get; set; }
+    public virtual List<PedidoProduto> PedidoProduto { get; set; }
 }

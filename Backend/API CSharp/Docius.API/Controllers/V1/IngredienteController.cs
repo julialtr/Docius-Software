@@ -56,7 +56,7 @@ public class IngredienteController : CrudControllerBase<IngredienteEntityService
 
     [HttpGet]
     [ProducesResponseType(typeof(ReadIngredienteDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindsIngredientes([FromQuery] IngredienteFiltroDto filtroDto)
+    public IActionResult FindIngredientes([FromQuery] IngredienteFiltroDto filtroDto)
     {
         var ingredientes = EntityService.LeIngredientes(Mapper.Map<IngredienteFiltro>(filtroDto));
 
