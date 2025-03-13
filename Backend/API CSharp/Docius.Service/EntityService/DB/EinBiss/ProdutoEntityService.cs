@@ -53,7 +53,7 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
             Preco = produto.Preco,
             QtdPedidos = produto.PedidoProduto?.Count() ?? 0,
             CategoriaProdutoId = produto.CategoriaProdutoId,
-            Receita = produto.Receita != null ? new ReceitaProduto
+            Receita = produto.Receita != null ? new ReceitaDetalhada
             {
                 Id = produto.Receita.Id,
                 Nome = produto.Receita.Nome,
@@ -61,10 +61,11 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
                 Tempo = produto.Receita.Tempo,
                 QtdPorcoes = produto.Receita.QtdPorcoes,
                 ReceitaCategoriaIngrediente = produto.Receita.ReceitaCategoriaIngrediente?
-                    .Select(receitaIngrediente => new ReceitaCategoriaIngredienteProduto
+                    .Select(receitaIngrediente => new ReceitaCategoriaIngredienteDetalhada
                     {
                         Id = receitaIngrediente.Id,
                         Medida = receitaIngrediente.Medida,
+                        ReceitaId = receitaIngrediente.ReceitaId,
                         CategoriaIngrediente = receitaIngrediente.CategoriaIngrediente != null ? new CategoriaIngrediente
                         {
                             Id = receitaIngrediente.CategoriaIngrediente.Id,
@@ -75,7 +76,7 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
                             Id = receitaIngrediente.UnidadeMedida.Id,
                             Sigla = receitaIngrediente.UnidadeMedida.Sigla
                         } : null
-                    }).ToList() ?? new List<ReceitaCategoriaIngredienteProduto>()
+                    }).ToList() ?? new List<ReceitaCategoriaIngredienteDetalhada>()
             } : null
         }).ToList();
 

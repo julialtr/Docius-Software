@@ -1,8 +1,6 @@
-﻿using Docius.Repository.EinBiss.Entities.Models;
+﻿namespace Docius.Service.EntityService.Data;
 
-namespace Docius.Service.EntityService.Data;
-
-public class ReceitaProduto
+public class ReceitaDetalhada
 {
     public int Id { get; set; }
 
@@ -14,5 +12,5 @@ public class ReceitaProduto
 
     public TimeOnly Tempo { get; set; }
 
-    public virtual List<ReceitaCategoriaIngredienteProduto> ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<ReceitaCategoriaIngredienteDetalhada> ReceitaCategoriaIngrediente { get; set; }
 }

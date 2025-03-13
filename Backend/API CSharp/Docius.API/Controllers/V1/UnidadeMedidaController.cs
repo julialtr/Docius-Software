@@ -20,7 +20,7 @@ public class UnidadeMedidaController : CrudControllerBase<UnidadeMedidaEntitySer
 
     [HttpGet]
     [ProducesResponseType(typeof(ReadUnidadeMedidaDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindsUnidadeMedidas([FromQuery] UnidadeMedidaFiltroDto filtroDto)
+    public IActionResult FindUnidadeMedidas([FromQuery] UnidadeMedidaFiltroDto filtroDto)
     {
         return Find(filtroDto);
     }

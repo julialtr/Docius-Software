@@ -14,10 +14,5 @@ public class ReceitaConfiguration : IEntityTypeConfiguration<Receita>
         builder.Property(entity => entity.Tempo).IsRequired();
 
         builder.Property(entity => entity.QtdPorcoes).HasDefaultValue(1);
-
-        builder.HasOne(entity => entity.Precificacao)
-            .WithOne(entity => entity.Receita)
-            .HasForeignKey<Receita>(entity => entity.PrecificacaoId)
-            .IsRequired();
     }
 }

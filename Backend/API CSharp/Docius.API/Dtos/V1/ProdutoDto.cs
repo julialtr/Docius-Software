@@ -34,5 +34,5 @@ public class ReadProdutoDto : ReadDtoBase<int>
 
     public int? CategoriaProdutoId { get; set; }
 
-    public ReadReceitaProdutoDto Receita { get; set; }
+    public ReadReceitaDto Receita { get; set; }
 }

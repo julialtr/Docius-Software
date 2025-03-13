@@ -1,6 +1,4 @@
-﻿using Docius.Repository.EinBiss.Entities.Models;
-
-namespace Docius.Service.EntityService.Data;
+﻿namespace Docius.Service.EntityService.Data;
 
 public class ProdutoDetalhado
 {
@@ -14,5 +12,5 @@ public class ProdutoDetalhado
 
     public int? CategoriaProdutoId { get; set; }
 
-    public virtual ReceitaProduto Receita { get; set; }
+    public virtual ReceitaDetalhada Receita { get; set; }
 }

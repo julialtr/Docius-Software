@@ -38,5 +38,9 @@ public class Precificacao : EntityBase<int>
     [Column("valor_liquido")]
     public decimal ValorLiquido { get; set; }
 
+    [Column("receita_id")]
+    [Required]
+    public int ReceitaId { get; set; }
+
     public virtual Receita Receita { get; set; }
 }

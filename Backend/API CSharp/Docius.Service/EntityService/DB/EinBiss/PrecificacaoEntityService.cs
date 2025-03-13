@@ -37,5 +37,7 @@ public sealed class PrecificacaoEntityService : EntityServiceBase<EinBissEntityS
 
         if (entity.QtdMesesConsiderarGastos < 0)
             throw new WarningException("Quantidade de meses para considerar gastos deve ser positiva.");
+
+        EntityService.Precificacao.ValidateId(entity.ReceitaId, "Receita deve ser informada.", "Receita informada é inválida.");
     }
 }

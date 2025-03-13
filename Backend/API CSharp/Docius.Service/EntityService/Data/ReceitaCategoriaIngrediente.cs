@@ -2,11 +2,13 @@
 
 namespace Docius.Service.EntityService.Data;
 
-public class ReceitaCategoriaIngredienteProduto
+public class ReceitaCategoriaIngredienteDetalhada
 {
     public int Id { get; set; }
 
     public decimal Medida { get; set; }
+
+    public int ReceitaId {  get; set; }
 
     public CategoriaIngrediente CategoriaIngrediente { get; set; }
 

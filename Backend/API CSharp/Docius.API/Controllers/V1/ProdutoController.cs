@@ -56,7 +56,7 @@ public class ProdutoController : CrudControllerBase<ProdutoEntityService, Produt
 
     [HttpGet]
     [ProducesResponseType(typeof(ReadProdutoDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindsProdutos([FromQuery] ProdutoFiltroDto filtroDto)
+    public IActionResult FindProdutos([FromQuery] ProdutoFiltroDto filtroDto)
     {
         var Produtos = EntityService.LeProdutos(Mapper.Map<ProdutoFiltro>(filtroDto));
 

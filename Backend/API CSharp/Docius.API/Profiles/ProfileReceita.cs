@@ -9,8 +9,9 @@ public class ProfileReceita: ProfileBase
     public ProfileReceita()
     {
         CreateMap<ReceitaFiltroDto, ReceitaFiltro>();
-        CreateMap<Receita, ReadReceitaDto>();
 
-        CreateMap<ReceitaProduto, ReadReceitaProdutoDto>();
+        CreateMap<UpdateReceitaDto, ReceitaDetalhada>();
+        CreateMap<CreateReceitaDto, ReceitaDetalhada>();
+        CreateMap<ReceitaDetalhada, ReadReceitaDto>();
     }
 }

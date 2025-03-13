@@ -41,7 +41,7 @@ public class GastoController : CrudControllerBase<GastoEntityService, Gasto, int
 
     [HttpGet]
     [ProducesResponseType(typeof(ReadGastoDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindsGastos([FromQuery] GastoFiltroDto filtroDto)
+    public IActionResult FindGastos([FromQuery] GastoFiltroDto filtroDto)
     {
         return Find(filtroDto);
     }

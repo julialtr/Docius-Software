@@ -3,6 +3,7 @@ using AutoMapper;
 using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService;
+using Docius.Service.EntityService.Data;
 using Docius.Service.EntityService.DB.EinBiss;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,46 @@ public class ReceitaController : CrudControllerBase<ReceitaEntityService, Receit
         _einBissEntityService = einBissEntityService;
     }
 
+    [HttpPost]
+    [ProducesResponseType(typeof(ReadReceitaDto[]), StatusCodes.Status201Created)]
+    public async Task<IActionResult> CreateReceita([FromBody] CreateReceitaDto dadosDto)
+    {
+        var Receitas = await EntityService.CriaReceitaAsync(Mapper.Map<ReceitaDetalhada>(dadosDto));
+
+        return Ok(Mapper.Map<List<ReadReceitaDto>>(Receitas));
+    }
+
+    [HttpPatch("{id:int}")]
+    [ProducesResponseType(typeof(ReadReceitaDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateReceita(int id, [FromBody] UpdateReceitaDto dadosDto)
+    {
+        Receita data = await EntityService.ReadAsync(id);
+
+        if (data == null)
+            return NotFound();
+
+        Mapper.Map(dadosDto, data);
+        await EntityService.UpdateAsync(data);
+
+        var Receitas = EntityService.LeReceitas(new ReceitaFiltro { Ids = [id] });
+
+        return Ok(Mapper.Map<ReadReceitaDto>(Receitas[0]));
+    }
+
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeleteReceita(int id)
+    {
+        return await Delete(id);
+    }
+
     [HttpGet]
     [ProducesResponseType(typeof(ReadReceitaDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindsReceitas([FromQuery] ReceitaFiltroDto filtroDto)
+    public IActionResult FindReceitas([FromQuery] ReceitaFiltroDto filtroDto)
     {
-        return Find(filtroDto);
+        var Receitas = EntityService.LeReceitas(Mapper.Map<ReceitaFiltro>(filtroDto));
+
+        return Ok(Mapper.Map<List<ReadReceitaDto>>(Receitas));
     }
 
     protected override void OnSetEntityService()

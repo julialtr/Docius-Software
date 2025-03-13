@@ -15,5 +15,10 @@ public class PrecificacaoConfiguration : IEntityTypeConfiguration<Precificacao>
         builder.Property(entity => entity.QtdHorasMensais).IsRequired();
 
         builder.Property(entity => entity.QtdMesesConsiderarGastos).HasDefaultValue(6);
+
+        builder.HasOne(entity => entity.Receita)
+            .WithOne(entity => entity.Precificacao)
+            .HasForeignKey<Precificacao>(entity => entity.ReceitaId)
+            .IsRequired();
     }
 }
