@@ -196,7 +196,7 @@ export function TabelaIngredientes({
                     <TableCell>
                       <div className="flex items-center gap-1">
                         <Scale className="h-4 w-4 text-gray-500" />
-                        {ingrediente.medida} {ingrediente.unidadeMedida.sigla}
+                        {ingrediente.medida} {ingrediente.unidadeMedida?.sigla}
                       </div>
                     </TableCell>
 

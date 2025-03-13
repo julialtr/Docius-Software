@@ -5,12 +5,14 @@ import { useState } from "react";
 import {
   ChevronDown,
   ChevronRight,
+  Clock,
   Pencil,
+  ShoppingCart,
 } from "lucide-react";
 
-import { ReadProduto } from "./interfaces";
+import { ReadReceita } from "./interfaces";
 import AlertaExclusao from "./AlertaExclusao";
-import DetalhesProdutoReceita from "./DetalhesProdutoReceita";
+import DetalhesReceitaIngrediente from "./DetalhesReceitaIngrediente";
 
 import { Button } from "@/app/_components/ui/button";
 import {
@@ -22,44 +24,40 @@ import {
   TableRow,
 } from "@/app/_components/ui/table";
 import SortIcon from "@/app/_components/Sort";
-import { Badge } from "@/app/_components/ui/badge";
 
 import { requestSort, SortConfig, sortData } from "@/utils/sort";
-import { formatMoney } from "@/utils/format";
 
-export default function TabelaProdutos({
+export default function TabelaReceitas({
   dados,
   searchTerm,
   onDadosChange,
   onIsDialogOpenChange,
-  onProdutoChange,
+  onReceitaChange,
 }: {
-  dados: ReadProduto[];
+  dados: ReadReceita[];
   searchTerm: string;
-  onDadosChange: (novosDados: ReadProduto[]) => void;
+  onDadosChange: (novosDados: ReadReceita[]) => void;
   onIsDialogOpenChange: (isDialogOpen: boolean) => void;
-  onProdutoChange: (produto: ReadProduto) => void;
+  onReceitaChange: (receita: ReadReceita) => void;
 }) {
-  const [sortConfig, setSortConfig] = useState<SortConfig<ReadProduto>>(null);
-  const [produtoId, setProdutoId] = useState<number | null>(
-    null
-  );
+  const [sortConfig, setSortConfig] = useState<SortConfig<ReadReceita>>(null);
+  const [receitaId, setReceitaId] = useState<number | null>(null);
 
   const dadosFiltrados = sortData(
     dados?.filter(
       (item) =>
         item?.nome?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item?.receita?.nome.toLowerCase().includes(searchTerm.toLowerCase())
+        item?.descricao?.toLowerCase().includes(searchTerm.toLowerCase())
     ),
     sortConfig
   );
 
-  const toggleProdutoExpand = (id: number) => {
-    setProdutoId(produtoId === id ? null : id);
+  const toggleReceitaExpand = (id: number) => {
+    setReceitaId(receitaId === id ? null : id);
   };
 
-  const handleEdit = (produto: ReadProduto) => {
-    onProdutoChange(produto);
+  const handleEdit = (receita: ReadReceita) => {
+    onReceitaChange(receita);
     onIsDialogOpenChange(true);
   };
 
@@ -75,7 +73,7 @@ export default function TabelaProdutos({
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
                 Nome
-                <SortIcon<ReadProduto>
+                <SortIcon<ReadReceita>
                   columnKey="nome"
                   sortConfig={sortConfig}
                 />
@@ -84,28 +82,42 @@ export default function TabelaProdutos({
             <TableHead>
               <Button
                 variant="ghost"
-                onClick={() => setSortConfig(requestSort("preco", sortConfig))}
+                onClick={() =>
+                  setSortConfig(requestSort("descricao", sortConfig))
+                }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
-                Preço
-                <SortIcon<ReadProduto>
-                  columnKey="preco"
+                Descrição
+                <SortIcon<ReadReceita>
+                  columnKey="descricao"
                   sortConfig={sortConfig}
                 />
               </Button>
             </TableHead>
-
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => setSortConfig(requestSort("tempo", sortConfig))}
+                className="hover:bg-transparent p-0 font-semibold flex items-center"
+              >
+                Tempo
+                <SortIcon<ReadReceita>
+                  columnKey="tempo"
+                  sortConfig={sortConfig}
+                />
+              </Button>
+            </TableHead>
             <TableHead>
               <Button
                 variant="ghost"
                 onClick={() =>
-                  setSortConfig(requestSort("receita", sortConfig))
+                  setSortConfig(requestSort("qtdPorcoes", sortConfig))
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
-                Receita
-                <SortIcon<ReadProduto>
-                  columnKey="receita"
+                Rendimento
+                <SortIcon<ReadReceita>
+                  columnKey="qtdPorcoes"
                   sortConfig={sortConfig}
                 />
               </Button>
@@ -116,18 +128,18 @@ export default function TabelaProdutos({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dadosFiltrados?.map((produto) => (
+          {dadosFiltrados?.map((receita) => (
             <>
-              <TableRow key={produto.id}>
+              <TableRow key={receita.id}>
                 <TableCell>
-                  {produto.receita && (
+                  {receita.ingredientes && (
                     <Button
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8"
-                      onClick={() => toggleProdutoExpand(produto.id)}
+                      onClick={() => toggleReceitaExpand(receita.id)}
                     >
-                      {produtoId === produto.id ? (
+                      {receitaId === receita.id ? (
                         <ChevronDown className="h-4 w-4" />
                       ) : (
                         <ChevronRight className="h-4 w-4" />
@@ -135,19 +147,21 @@ export default function TabelaProdutos({
                     </Button>
                   )}
                 </TableCell>
-                <TableCell className="font-medium">{produto.nome}</TableCell>
-                <TableCell>{formatMoney(produto.preco)}</TableCell>
+                <TableCell className="font-medium">{receita.nome}</TableCell>
+                <TableCell className="max-w-xs truncate">
+                  {receita.descricao}
+                </TableCell>
                 <TableCell>
-                  {produto.receita ? (
-                    <Badge
-                      variant="outline"
-                      className="bg-amber-50 text-amber-700 border-amber-200"
-                    >
-                      {produto.receita.nome}
-                    </Badge>
-                  ) : (
-                    <span className="text-gray-400 text-sm">Nenhuma</span>
-                  )}
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4 text-amber-600" />
+                    {receita.tempo}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-1">
+                    <ShoppingCart className="h-4 w-4 text-amber-600" />
+                    {receita.qtdPorcoes} porções
+                  </div>
                 </TableCell>
 
                 <TableCell>
@@ -156,21 +170,21 @@ export default function TabelaProdutos({
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8 text-amber-700 hover:text-amber-900"
-                      onClick={() => handleEdit(produto)}
+                      onClick={() => handleEdit(receita)}
                     >
                       <Pencil className="h-4 w-4" />
                     </Button>
                     <AlertaExclusao
                       dados={dados}
-                      produto={produto}
+                      receita={receita}
                       onDadosChange={onDadosChange}
                     />
                   </div>
                 </TableCell>
               </TableRow>
-              <DetalhesProdutoReceita
-                produtoId={produtoId}
-                produto={produto}
+              <DetalhesReceitaIngrediente
+                receitaId={receitaId}
+                receita={receita}
               />
             </>
           ))}

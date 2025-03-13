@@ -7,6 +7,9 @@ import { PlusCircle } from "lucide-react";
 import { createConvert, ReadProduto, updateConvert } from "./interfaces";
 import { createProduto, updateProduto } from "@/services/produto";
 
+import { ReadReceita } from "../Receitas/interfaces";
+import { findReceitas } from "@/services/receita";
+
 import {
   Dialog,
   DialogContent,
@@ -19,8 +22,6 @@ import {
 import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 import { Label } from "@/app/_components/ui/label";
-
-import { useToast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
@@ -28,8 +29,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
-import { ReadReceitaProduto } from "../Receitas/interfaces";
-import { findReceitas } from "@/services/receita";
+
+import { useToast } from "@/hooks/use-toast";
 
 export default function FormularioProdutos({
   dados,
@@ -58,13 +59,14 @@ export default function FormularioProdutos({
       id: 0,
       nome: "",
       descricao: "",
-      tempo: new Date(0),
+      tempo: "",
       qtdPorcoes: 0,
       ingredientes: [],
+      qtdProdutos: 0
     },
   });
 
-  const [dadosReceitas, setDadosReceitas] = useState<ReadReceitaProduto[]>([]);
+  const [dadosReceitas, setDadosReceitas] = useState<ReadReceita[]>([]);
 
   useEffect(() => {
     if (produto) {
@@ -173,9 +175,10 @@ export default function FormularioProdutos({
         id: 0,
         nome: "",
         descricao: "",
-        tempo: new Date(0),
+        tempo: "",
         qtdPorcoes: 0,
         ingredientes: [],
+        qtdProdutos: 0
       },
     });
   };

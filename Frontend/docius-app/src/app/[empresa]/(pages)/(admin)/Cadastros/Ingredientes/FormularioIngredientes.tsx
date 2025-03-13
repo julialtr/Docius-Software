@@ -243,7 +243,7 @@ export default function FormularioIngredientes({
             <div className="space-y-2">
               <Label htmlFor="categoriaIngrediente.id">Categoria</Label>
               <Select
-                value={dadosIngrediente.categoriaIngrediente.id.toString()}
+                value={dadosIngrediente.categoriaIngrediente?.id.toString()}
                 onValueChange={(value) =>
                   handleSelectChange("categoriaIngrediente.id", value)
                 }
@@ -307,7 +307,7 @@ export default function FormularioIngredientes({
               <div className="space-y-2">
                 <Label htmlFor="unidadeMedida.id">Unidade medida</Label>
                 <Select
-                  value={dadosIngrediente.unidadeMedida.id.toString()}
+                  value={dadosIngrediente.unidadeMedida?.id.toString()}
                   onValueChange={(value) =>
                     handleSelectChange("unidadeMedida.id", value)
                   }

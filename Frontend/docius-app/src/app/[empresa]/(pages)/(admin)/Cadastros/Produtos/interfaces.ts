@@ -1,4 +1,4 @@
-import { ReadReceitaProduto } from "../Receitas/interfaces";
+import { ReadReceita } from "../Receitas/interfaces";
 
 export interface CreateProduto {
   nome: string;
@@ -16,7 +16,7 @@ export interface ReadProduto {
   preco: number;
   qtdPedidos: number;
   categoriaProdutoId?: number;
-  receita: ReadReceitaProduto;
+  receita: ReadReceita;
 }
 
 export function updateConvert(ingrediente: ReadProduto): UpdateProduto {

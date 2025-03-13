@@ -15,15 +15,15 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 
-export default function TabelaProdutos({
-  expandedProductId,
+export default function DetalhesProdutoReceita({
+  produtoId,
   produto,
 }: {
-  expandedProductId: number | null;
+  produtoId: number | null;
   produto: ReadProduto;
 }) {
   return (
-    expandedProductId === produto.id &&
+    produtoId === produto.id &&
     produto.receita && (
       <TableRow>
         <TableCell colSpan={5} className="p-0 border-t-0">
@@ -41,7 +41,7 @@ export default function TabelaProdutos({
                     <Clock className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
                       <span className="font-medium">Tempo de Preparo:</span>{" "}
-                      {produto.receita.tempo.getTime()} minutos
+                      {produto.receita.tempo}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
