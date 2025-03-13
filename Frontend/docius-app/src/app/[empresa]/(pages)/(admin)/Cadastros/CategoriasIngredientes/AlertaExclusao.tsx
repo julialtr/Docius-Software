@@ -69,6 +69,7 @@ export default function AlertaExclusao({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
+            //Todo: Para excluir a Categoria de Ingrediente ela também não pode estar sendo usada em alguma receita.
             {categoria?.qtdIngredientes
               ? "Aviso exclusão"
               : "Confirmar exclusão"}

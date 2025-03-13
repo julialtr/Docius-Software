@@ -34,23 +34,17 @@ export default function FormularioReceitaIngrediente({
   receita,
   ingrediente,
   onReceitaChange,
+  onIngredienteChange,
 }: {
   receita: ReadReceita | null;
   ingrediente: ReadReceitaCategoriaIngrediente | null;
   onReceitaChange: (receita: ReadReceita | null) => void;
+  onIngredienteChange: (
+    ingrediente: ReadReceitaCategoriaIngrediente | null
+  ) => void;
 }) {
   const { toast } = useToast();
   const [validaCampo, setValidaCampo] = useState<boolean>(false);
-
-  const [dadosReceita, setDadosReceita] = useState<ReadReceita>({
-    id: 0,
-    nome: "",
-    descricao: "",
-    tempo: "",
-    qtdPorcoes: 0,
-    qtdProdutos: 0,
-    ingredientes: [],
-  });
 
   const [dadosIngrediente, setDadosIngrediente] =
     useState<ReadReceitaCategoriaIngrediente>();
@@ -61,12 +55,6 @@ export default function FormularioReceitaIngrediente({
   const [dadosUnidadesMedidas, setDadosUnidadesMedidas] = useState<
     ReadUnidadeMedida[]
   >([]);
-
-  useEffect(() => {
-    if (receita) {
-      setDadosReceita(receita);
-    }
-  }, [receita]);
 
   useEffect(() => {
     if (ingrediente) {
@@ -141,35 +129,52 @@ export default function FormularioReceitaIngrediente({
       return;
     }
 
-    if (!dadosReceita || !dadosIngrediente) return;
+    if (!dadosIngrediente) return;
 
-    console.log(dadosIngrediente);
-    
+    if (!receita) {
+      if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
+        const novoIngrediente = {
+          ...dadosIngrediente,
+          id: 1,
+        };
 
-    if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
-      const novoIngrediente = {
-        ...dadosIngrediente,
-        id: dadosReceita.ingredientes.length + 1,
-      };
-
-      console.log(novoIngrediente);
-      
-
-      const novaListaIngredientes = [
-        ...dadosReceita.ingredientes,
-        novoIngrediente,
-      ];
-
-      onReceitaChange({ ...dadosReceita, ingredientes: novaListaIngredientes });
+        onReceitaChange({
+          ingredientes: [novoIngrediente],
+          id: 0,
+          nome: "",
+          descricao: "",
+          tempo: "",
+          qtdPorcoes: 0,
+          qtdProdutos: 0,
+        });
+      }
     } else {
-      const novaListaIngredientes = dadosReceita.ingredientes.map(
-        (ingrediente) =>
+      const maxId =
+        receita.ingredientes.length > 0
+          ? Math.max(...receita.ingredientes.map((i) => i.id))
+          : 0;
+
+      if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
+        const novoIngrediente = {
+          ...dadosIngrediente,
+          id: maxId + 1,
+        };
+
+        const novaListaIngredientes = [
+          ...receita.ingredientes,
+          novoIngrediente,
+        ];
+
+        onReceitaChange({ ...receita, ingredientes: novaListaIngredientes });
+      } else {
+        const novaListaIngredientes = receita.ingredientes.map((ingrediente) =>
           ingrediente.id === dadosIngrediente.id
             ? dadosIngrediente
             : ingrediente
-      );
+        );
 
-      onReceitaChange({ ...dadosReceita, ingredientes: novaListaIngredientes });
+        onReceitaChange({ ...receita, ingredientes: novaListaIngredientes });
+      }
     }
 
     limparIngrediente();
@@ -191,6 +196,8 @@ export default function FormularioReceitaIngrediente({
         sigla: "",
       },
     });
+
+    onIngredienteChange(null);
   };
 
   const validarCampos = () => {
@@ -240,7 +247,7 @@ export default function FormularioReceitaIngrediente({
                   <SelectItem
                     key={categoria.id.toString()}
                     value={categoria.id.toString()}
-                    disabled={dadosReceita?.ingredientes?.some(
+                    disabled={receita?.ingredientes?.some(
                       (ingrediente) =>
                         ingrediente.categoriaIngrediente.id === categoria.id
                     )}

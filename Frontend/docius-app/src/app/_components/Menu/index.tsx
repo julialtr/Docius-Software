@@ -39,7 +39,7 @@ export default function MenuComponent() {
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  return (
+  return (dadosEmpresa &&
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside

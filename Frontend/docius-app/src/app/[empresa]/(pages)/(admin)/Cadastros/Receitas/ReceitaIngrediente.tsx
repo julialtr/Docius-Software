@@ -32,11 +32,12 @@ export default function ReceitaIngrediente({
         receita={receita}
         onReceitaChange={onReceitaChange}
         onIngredienteChange={handleIngredienteChange}
-      />
+        />
       <FormularioReceitaIngrediente
         receita={receita}
         ingrediente={ingrediente}
         onReceitaChange={onReceitaChange}
+        onIngredienteChange={handleIngredienteChange}
       />
     </div>
   );

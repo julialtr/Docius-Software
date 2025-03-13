@@ -62,7 +62,10 @@ export default function TabelaReceitaIngrediente({
                     variant="ghost"
                     size="icon"
                     className="h-8 w-8 text-red-600 hover:text-red-800 hover:bg-red-50"
-                    onClick={() => removerIngrediente(ingrediente.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removerIngrediente(ingrediente.id);
+                    }}
                   >
                     <X className="h-4 w-4" />
                   </Button>
