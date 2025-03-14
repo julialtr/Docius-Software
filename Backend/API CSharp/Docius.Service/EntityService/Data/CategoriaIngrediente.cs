@@ -7,4 +7,6 @@ public class CategoriaIngredienteIngredientes
     public string Nome { get; set; }
 
     public int QtdIngredientes { get; set; }
+
+    public int QtdReceitas { get; set; }
 }

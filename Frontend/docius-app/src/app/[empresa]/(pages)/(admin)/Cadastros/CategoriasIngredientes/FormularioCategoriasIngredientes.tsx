@@ -47,6 +47,7 @@ export default function FormularioCategoriasIngredientes({
       id: 0,
       nome: "",
       qtdIngredientes: 0,
+      qtdReceitas: 0
     });
 
   useEffect(() => {
@@ -107,6 +108,7 @@ export default function FormularioCategoriasIngredientes({
       id: 0,
       nome: "",
       qtdIngredientes: 0,
+      qtdReceitas: 0
     });
   };
 

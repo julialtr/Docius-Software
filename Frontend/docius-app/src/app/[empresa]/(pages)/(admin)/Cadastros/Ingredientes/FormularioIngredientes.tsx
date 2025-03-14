@@ -72,6 +72,7 @@ export default function FormularioIngredientes({
       id: 0,
       nome: "",
       qtdIngredientes: 0,
+      qtdReceitas: 0
     },
   });
   const [dadosCategorias, setDadosCategorias] = useState<
@@ -207,6 +208,7 @@ export default function FormularioIngredientes({
         id: 0,
         nome: "",
         qtdIngredientes: 0,
+        qtdReceitas: 0
       },
     });
   };

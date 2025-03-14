@@ -30,6 +30,7 @@ public sealed class CategoriaIngredienteEntityService : EntityServiceBase<EinBis
                 Id = categoriaIngrediente.Id,
                 Nome = categoriaIngrediente.Nome,
                 QtdIngredientes = categoriaIngrediente.Ingrediente.Count(),
+                QtdReceitas = categoriaIngrediente.ReceitaCategoriaIngrediente.Count()
             });
 
         return categoriasIngredientes.ToList();

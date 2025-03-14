@@ -2,6 +2,7 @@ export interface ReadCategoriaIngrediente {
   id: number;
   nome: string;
   qtdIngredientes: number;
+  qtdReceitas: number;
 }
 
 export interface CreateCategoriaIngrediente {

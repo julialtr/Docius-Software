@@ -83,12 +83,14 @@ export default function AlertaExclusao({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => handleDelete(produto.id)}
-            className="bg-red-600 hover:bg-red-700"
-          >
-            Excluir
-          </AlertDialogAction>
+          {produto?.qtdPedidos || produto?.categoriaProdutoId ? null : (
+            <AlertDialogAction
+              onClick={() => handleDelete(produto.id)}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Excluir
+            </AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

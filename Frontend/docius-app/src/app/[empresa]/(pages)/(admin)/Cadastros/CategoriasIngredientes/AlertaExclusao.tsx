@@ -69,25 +69,28 @@ export default function AlertaExclusao({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            //Todo: Para excluir a Categoria de Ingrediente ela também não pode estar sendo usada em alguma receita.
-            {categoria?.qtdIngredientes
+            {categoria?.qtdIngredientes || categoria?.qtdReceitas
               ? "Aviso exclusão"
               : "Confirmar exclusão"}
           </AlertDialogTitle>
           <AlertDialogDescription>
             {categoria?.qtdIngredientes
               ? "Não é possível excluir uma categoria com ingredientes vinculados"
+              : categoria?.qtdReceitas
+              ? "Não é possível excluir uma categoria com receitas vinculadas"
               : "Tem certeza que deseja excluir a categoria? Esta ação não pode ser desfeita"}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => handleDelete(categoria.id)}
-            className="bg-red-600 hover:bg-red-700"
-          >
-            Excluir
-          </AlertDialogAction>
+          {categoria?.qtdIngredientes || categoria?.qtdReceitas ? null : (
+            <AlertDialogAction
+              onClick={() => handleDelete(categoria.id)}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Excluir
+            </AlertDialogAction>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

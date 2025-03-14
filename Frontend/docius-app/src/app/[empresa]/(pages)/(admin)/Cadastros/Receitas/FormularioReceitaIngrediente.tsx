@@ -190,6 +190,7 @@ export default function FormularioReceitaIngrediente({
         id: 0,
         nome: "",
         qtdIngredientes: 0,
+        qtdReceitas: 0
       },
       unidadeMedida: {
         id: 0,
