@@ -1,13 +1,12 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { useState } from "react";
 import {
   ChevronDown,
   ChevronRight,
   Clock,
   Pencil,
-  ShoppingCart,
 } from "lucide-react";
 
 import { ReadReceita } from "./interfaces";
@@ -66,6 +65,7 @@ export default function TabelaReceitas({
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead className="w-[50px]" />
             <TableHead>
               <Button
                 variant="ghost"
@@ -129,10 +129,10 @@ export default function TabelaReceitas({
         </TableHeader>
         <TableBody>
           {dadosFiltrados?.map((receita) => (
-            <>
-              <TableRow key={receita.id}>
+            <React.Fragment key={receita.id}>
+              <TableRow>
                 <TableCell>
-                  {receita.ingredientes && (
+                  {receita.receitaCategoriaIngrediente.length ? (
                     <Button
                       variant="ghost"
                       size="icon"
@@ -145,7 +145,7 @@ export default function TabelaReceitas({
                         <ChevronRight className="h-4 w-4" />
                       )}
                     </Button>
-                  )}
+                  ) : null}
                 </TableCell>
                 <TableCell className="font-medium">{receita.nome}</TableCell>
                 <TableCell className="max-w-xs truncate">
@@ -154,14 +154,22 @@ export default function TabelaReceitas({
                 <TableCell>
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4 text-amber-600" />
-                    {receita.tempo}
+                    {new Date(`1970-01-01T${receita.tempo}`).toLocaleTimeString(
+                      "pt-BR",
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    )}
                   </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-1">
-                    <ShoppingCart className="h-4 w-4 text-amber-600" />
-                    {receita.qtdPorcoes} porções
-                  </div>
+                  {receita.qtdPorcoes}{" "}
+                  {receita.qtdPorcoes > 1
+                    ? "porções"
+                    : receita.qtdPorcoes == 0
+                    ? "0"
+                    : "porção"}
                 </TableCell>
 
                 <TableCell>
@@ -186,7 +194,7 @@ export default function TabelaReceitas({
                 receitaId={receitaId}
                 receita={receita}
               />
-            </>
+            </React.Fragment>
           ))}
         </TableBody>
       </Table>

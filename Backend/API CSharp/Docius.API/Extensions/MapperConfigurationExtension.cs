@@ -23,6 +23,7 @@ public static class MapperConfigurationExtension
                 new ProfileGasto(),
                 new ProfileProduto(),
                 new ProfileReceita(),
+                new ProfileReceitaCategoriaIngrediente()
         };
     }
 }

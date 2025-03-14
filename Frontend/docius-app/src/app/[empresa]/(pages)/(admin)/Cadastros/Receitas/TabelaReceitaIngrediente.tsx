@@ -24,11 +24,11 @@ export default function TabelaReceitaIngrediente({
   const removerIngrediente = (ingredienteId: number) => {
     if (!receita) return;
 
-    const novaListaIngredientes = receita.ingredientes.filter(
+    const novaListaIngredientes = receita.receitaCategoriaIngrediente.filter(
       (ingrediente) => ingrediente.id !== ingredienteId
     );
 
-    onReceitaChange({ ...receita, ingredientes: novaListaIngredientes });
+    onReceitaChange({ ...receita, receitaCategoriaIngrediente: novaListaIngredientes });
 
     onIngredienteChange(null);
   };
@@ -42,9 +42,9 @@ export default function TabelaReceitaIngrediente({
   return (
     <div className="mb-6">
       <div className="bg-gray-50 rounded-md border p-4">
-        {receita && receita?.ingredientes?.length > 0 ? (
+        {receita && receita?.receitaCategoriaIngrediente?.length > 0 ? (
           <div className="space-y-2">
-            {receita?.ingredientes.map((ingrediente) => (
+            {receita?.receitaCategoriaIngrediente.map((ingrediente) => (
               <div
                 key={ingrediente.id}
                 className="flex items-center justify-between bg-white p-3 rounded-md border"

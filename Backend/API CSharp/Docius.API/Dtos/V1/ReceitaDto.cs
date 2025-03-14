@@ -10,18 +10,20 @@ public class ReceitaFiltroDto
 public class CreateReceitaDto : CreateDtoBase
 {
     [Required]
+    [MaxLength(100)]
     public string Nome { get; set; }
 
     [MaxLength(5000)]
     public string Descricao { get; set; }
 
+    [Required]
     public int QtdPorcoes { get; set; }
 
     [Required]
     public TimeOnly Tempo { get; set; }
 
     [Required]
-    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<CreateReceitaCategoriaIngredienteDto> ReceitaCategoriaIngrediente { get; set; }
 }
 
 public class UpdateReceitaDto : CreateDtoBase
@@ -38,11 +40,12 @@ public class UpdateReceitaDto : CreateDtoBase
     public TimeOnly Tempo { get; set; }
 
     [Required]
-    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<UpdateReceitaCategoriaIngredienteDto> ReceitaCategoriaIngrediente { get; set; }
 }
 
 public class ReadReceitaDto : ReadDtoBase<int>
 {
+    [MaxLength(100)]
     public string Nome { get; set; }
 
     [MaxLength(5000)]
@@ -52,5 +55,5 @@ public class ReadReceitaDto : ReadDtoBase<int>
 
     public TimeOnly Tempo { get; set; }
 
-    public virtual List<ReceitaCategoriaIngrediente> ReceitaCategoriaIngrediente { get; set; }
+    public virtual List<ReadReceitaCategoriaIngredienteDto> ReceitaCategoriaIngrediente { get; set; }
 }

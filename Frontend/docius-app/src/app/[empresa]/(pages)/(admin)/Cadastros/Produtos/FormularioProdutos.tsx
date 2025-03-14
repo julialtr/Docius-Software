@@ -61,7 +61,7 @@ export default function FormularioProdutos({
       descricao: "",
       tempo: "",
       qtdPorcoes: 0,
-      ingredientes: [],
+      receitaCategoriaIngrediente: [],
       qtdProdutos: 0
     },
   });
@@ -177,7 +177,7 @@ export default function FormularioProdutos({
         descricao: "",
         tempo: "",
         qtdPorcoes: 0,
-        ingredientes: [],
+        receitaCategoriaIngrediente: [],
         qtdProdutos: 0
       },
     });

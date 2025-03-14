@@ -10,7 +10,7 @@ public class ReceitaCategoriaIngredienteDetalhada
 
     public int ReceitaId {  get; set; }
 
-    public CategoriaIngrediente CategoriaIngrediente { get; set; }
+    public virtual CategoriaIngrediente CategoriaIngrediente { get; set; }
 
     public virtual UnidadeMedida UnidadeMedida { get; set; }
 }

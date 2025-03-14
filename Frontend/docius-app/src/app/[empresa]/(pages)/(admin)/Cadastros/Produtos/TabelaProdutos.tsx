@@ -2,11 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
-import {
-  ChevronDown,
-  ChevronRight,
-  Pencil,
-} from "lucide-react";
+import { ChevronDown, ChevronRight, Pencil } from "lucide-react";
 
 import { ReadProduto } from "./interfaces";
 import AlertaExclusao from "./AlertaExclusao";
@@ -41,9 +37,7 @@ export default function TabelaProdutos({
   onProdutoChange: (produto: ReadProduto) => void;
 }) {
   const [sortConfig, setSortConfig] = useState<SortConfig<ReadProduto>>(null);
-  const [produtoId, setProdutoId] = useState<number | null>(
-    null
-  );
+  const [produtoId, setProdutoId] = useState<number | null>(null);
 
   const dadosFiltrados = sortData(
     dados?.filter(
@@ -68,6 +62,7 @@ export default function TabelaProdutos({
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead className="w-[50px]" />
             <TableHead>
               <Button
                 variant="ghost"
@@ -168,10 +163,7 @@ export default function TabelaProdutos({
                   </div>
                 </TableCell>
               </TableRow>
-              <DetalhesProdutoReceita
-                produtoId={produtoId}
-                produto={produto}
-              />
+              <DetalhesProdutoReceita produtoId={produtoId} produto={produto} />
             </>
           ))}
         </TableBody>

@@ -6,7 +6,7 @@ export interface CreateReceita {
   descricao: string;
   tempo: string;
   qtdPorcoes: number;
-  ingredientes: CreateReceitaCategoriaIngrediente[];
+  receitaCategoriaIngrediente: CreateReceitaCategoriaIngrediente[];
 }
 
 export interface UpdateReceita {
@@ -15,7 +15,7 @@ export interface UpdateReceita {
   descricao: string;
   tempo: string;
   qtdPorcoes: number;
-  ingredientes: UpdateReceitaCategoriaIngrediente[];
+  receitaCategoriaIngrediente: UpdateReceitaCategoriaIngrediente[];
 }
 
 export interface ReadReceita {
@@ -25,7 +25,7 @@ export interface ReadReceita {
   tempo: string;
   qtdPorcoes: number;
   qtdProdutos: number;
-  ingredientes: ReadReceitaCategoriaIngrediente[];
+  receitaCategoriaIngrediente: ReadReceitaCategoriaIngrediente[];
 }
 
 export function updateConvert(receita: ReadReceita): UpdateReceita {
@@ -35,7 +35,7 @@ export function updateConvert(receita: ReadReceita): UpdateReceita {
     descricao: receita.descricao,
     tempo: receita.tempo,
     qtdPorcoes: receita.qtdPorcoes,
-    ingredientes: receita.ingredientes.map((ingrediente) => ({
+    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
       id: ingrediente.id,
       medida: ingrediente.medida,
       categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
@@ -51,7 +51,7 @@ export function createConvert(receita: ReadReceita): CreateReceita {
     descricao: receita.descricao,
     tempo: receita.tempo,
     qtdPorcoes: receita.qtdPorcoes,
-    ingredientes: receita.ingredientes.map((ingrediente) => ({
+    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
       id: ingrediente.id,
       medida: ingrediente.medida,
       categoriaIngredienteId: ingrediente.categoriaIngrediente.id,

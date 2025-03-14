@@ -3,6 +3,7 @@ using System;
 using Docius.Repository.EinBiss;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Docius.API.Migrations.EinBiss
 {
     [DbContext(typeof(EinBissContext))]
-    partial class EinBissContextModelSnapshot : ModelSnapshot
+    [Migration("20250313211856_v8")]
+    partial class v8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,29 +388,37 @@ namespace Docius.API.Migrations.EinBiss
                         .HasColumnType("numeric")
                         .HasColumnName("porcentagem_lucro_estimada");
 
+                    b.Property<decimal>("PorcentagemLucroObtida")
+                        .HasColumnType("numeric")
+                        .HasColumnName("porcentagem_lucro_obtida");
+
                     b.Property<int>("QtdHorasMensais")
                         .HasColumnType("integer")
                         .HasColumnName("qtd_horas_mensais");
+
+                    b.Property<int>("QtdMesesConsiderarGastos")
+                        .HasColumnType("integer")
+                        .HasColumnName("qtd_meses_considerar_gastos");
 
                     b.Property<int>("ReceitaId")
                         .HasColumnType("integer")
                         .HasColumnName("receita_id");
 
-                    b.Property<decimal>("ValorAdotado")
+                    b.Property<decimal>("ValorBruto")
                         .HasColumnType("numeric")
-                        .HasColumnName("valor_adotado");
-
-                    b.Property<decimal>("ValorGastosFixos")
-                        .HasColumnType("numeric")
-                        .HasColumnName("valor_gastos_fixos");
+                        .HasColumnName("valor_bruto");
 
                     b.Property<decimal>("ValorInsumos")
                         .HasColumnType("numeric")
                         .HasColumnName("valor_insumos");
 
-                    b.Property<decimal>("ValorSugerido")
+                    b.Property<decimal>("ValorLiquido")
                         .HasColumnType("numeric")
-                        .HasColumnName("valor_sugerido");
+                        .HasColumnName("valor_liquido");
+
+                    b.Property<decimal>("ValorSalario")
+                        .HasColumnType("numeric")
+                        .HasColumnName("valor_salario");
 
                     b.HasKey("Id");
 
@@ -415,32 +426,6 @@ namespace Docius.API.Migrations.EinBiss
                         .IsUnique();
 
                     b.ToTable("precificacoes");
-                });
-
-            modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.PrecificacaoIngrediente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IngredienteId")
-                        .HasColumnType("integer")
-                        .HasColumnName("ingrediente_id");
-
-                    b.Property<int>("PrecificacaoId")
-                        .HasColumnType("integer")
-                        .HasColumnName("precificacao_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IngredienteId");
-
-                    b.HasIndex("PrecificacaoId");
-
-                    b.ToTable("precificacoes_ingredientes");
                 });
 
             modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Produto", b =>
@@ -789,25 +774,6 @@ namespace Docius.API.Migrations.EinBiss
                     b.Navigation("Receita");
                 });
 
-            modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.PrecificacaoIngrediente", b =>
-                {
-                    b.HasOne("Docius.Repository.EinBiss.Entities.Models.Ingrediente", "Ingrediente")
-                        .WithMany("PrecificacaoIngrediente")
-                        .HasForeignKey("IngredienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Docius.Repository.EinBiss.Entities.Models.Precificacao", "Precificacao")
-                        .WithMany("PrecificacaoIngrediente")
-                        .HasForeignKey("PrecificacaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingrediente");
-
-                    b.Navigation("Precificacao");
-                });
-
             modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Produto", b =>
                 {
                     b.HasOne("Docius.Repository.EinBiss.Entities.Models.CategoriaProduto", "CategoriaProduto")
@@ -892,11 +858,6 @@ namespace Docius.API.Migrations.EinBiss
                     b.Navigation("Ingrediente");
                 });
 
-            modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Ingrediente", b =>
-                {
-                    b.Navigation("PrecificacaoIngrediente");
-                });
-
             modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Pedido", b =>
                 {
                     b.Navigation("PedidoProduto");
@@ -907,11 +868,6 @@ namespace Docius.API.Migrations.EinBiss
                     b.Navigation("DecoracaoBoloPedidoPersonalizacao");
 
                     b.Navigation("PedidoProduto");
-                });
-
-            modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Precificacao", b =>
-                {
-                    b.Navigation("PrecificacaoIngrediente");
                 });
 
             modelBuilder.Entity("Docius.Repository.EinBiss.Entities.Models.Produto", b =>

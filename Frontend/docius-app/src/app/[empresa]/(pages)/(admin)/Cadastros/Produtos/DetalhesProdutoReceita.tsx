@@ -41,14 +41,19 @@ export default function DetalhesProdutoReceita({
                     <Clock className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
                       <span className="font-medium">Tempo de Preparo:</span>{" "}
-                      {produto.receita.tempo}
+                      {new Date(
+                        `1970-01-01T${produto.receita.tempo}`
+                      ).toLocaleTimeString("pt-BR", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <ShoppingCart className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
                       <span className="font-medium">Rendimento:</span>{" "}
-                      {produto.receita.qtdPorcoes} {produto.receita.qtdPorcoes}
+                      {produto.receita.qtdPorcoes} porções
                     </span>
                   </div>
                 </div>
@@ -59,22 +64,24 @@ export default function DetalhesProdutoReceita({
                     Ingredientes
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {produto.receita.ingredientes.map((ingrediente) => {
-                      return (
-                        <div
-                          key={ingrediente.id}
-                          className="flex items-center justify-between p-2 bg-white rounded border border-amber-100"
-                        >
-                          <span className="font-medium">
-                            {ingrediente?.categoriaIngrediente.nome}
-                          </span>
-                          <Badge variant="outline" className="bg-amber-50">
-                            {ingrediente.medida}{" "}
-                            {ingrediente.unidadeMedida.sigla}
-                          </Badge>
-                        </div>
-                      );
-                    })}
+                    {produto.receita.receitaCategoriaIngrediente.map(
+                      (ingrediente) => {
+                        return (
+                          <div
+                            key={ingrediente.id}
+                            className="flex items-center justify-between p-2 bg-white rounded border border-amber-100"
+                          >
+                            <span className="font-medium">
+                              {ingrediente?.categoriaIngrediente.nome}
+                            </span>
+                            <Badge variant="outline" className="bg-amber-50">
+                              {ingrediente.medida}{" "}
+                              {ingrediente.unidadeMedida.sigla}
+                            </Badge>
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 </div>
               </CardContent>

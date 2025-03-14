@@ -17,27 +17,24 @@ public sealed class PrecificacaoEntityService : EntityServiceBase<EinBissEntityS
 
     protected override void OnValidateEntity(Precificacao entity)
     {
-        if (entity.ValorInsumos == 0)
-            throw new WarningException("Valor dos insumos deve ser informado.");
+        if (entity.QtdHorasMensais < 0)
+            throw new WarningException("Quantidade de horas semanais deve ser positiva.");
+
+        if (entity.PorcentagemLucroEstimada < 0)
+            throw new WarningException("Porcentagem de lucro estimada deve ser positiva.");
 
         if (entity.ValorInsumos < 0)
             throw new WarningException("Valor dos insumos deve ser positivo.");
 
-        if (entity.ValorSalario == 0)
-            throw new WarningException("Valor do salário deve ser informado.");
+        if (entity.ValorGastosFixos < 0)
+            throw new WarningException("Valor dos gastos fixos deve ser positivo.");
 
-        if (entity.ValorSalario < 0)
-            throw new WarningException("Valor do salário deve ser positivo.");
+        if (entity.ValorSugerido < 0)
+            throw new WarningException("Valor sugerido deve ser positivo.");
 
-        if (entity.QtdHorasMensais == 0)
-            throw new WarningException("Quantidade de horas semanais deve ser informada.");
+        if (entity.ValorAdotado < 0)
+            throw new WarningException("Valor adotado deve ser positivo.");
 
-        if (entity.QtdHorasMensais < 0)
-            throw new WarningException("Quantidade de horas semanais deve ser positiva.");
-
-        if (entity.QtdMesesConsiderarGastos < 0)
-            throw new WarningException("Quantidade de meses para considerar gastos deve ser positiva.");
-
-        EntityService.Precificacao.ValidateId(entity.ReceitaId, "Receita deve ser informada.", "Receita informada é inválida.");
+        EntityService.Receita.ValidateId(entity.ReceitaId, "Receita deve ser informada.", "Receita informada é inválida.");
     }
 }

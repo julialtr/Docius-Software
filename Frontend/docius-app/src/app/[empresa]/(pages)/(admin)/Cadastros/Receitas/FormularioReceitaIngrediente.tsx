@@ -139,7 +139,7 @@ export default function FormularioReceitaIngrediente({
         };
 
         onReceitaChange({
-          ingredientes: [novoIngrediente],
+          receitaCategoriaIngrediente: [novoIngrediente],
           id: 0,
           nome: "",
           descricao: "",
@@ -150,8 +150,8 @@ export default function FormularioReceitaIngrediente({
       }
     } else {
       const maxId =
-        receita.ingredientes.length > 0
-          ? Math.max(...receita.ingredientes.map((i) => i.id))
+        receita.receitaCategoriaIngrediente.length > 0
+          ? Math.max(...receita.receitaCategoriaIngrediente.map((i) => i.id))
           : 0;
 
       if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
@@ -161,19 +161,19 @@ export default function FormularioReceitaIngrediente({
         };
 
         const novaListaIngredientes = [
-          ...receita.ingredientes,
+          ...receita.receitaCategoriaIngrediente,
           novoIngrediente,
         ];
 
-        onReceitaChange({ ...receita, ingredientes: novaListaIngredientes });
+        onReceitaChange({ ...receita, receitaCategoriaIngrediente: novaListaIngredientes });
       } else {
-        const novaListaIngredientes = receita.ingredientes.map((ingrediente) =>
+        const novaListaIngredientes = receita.receitaCategoriaIngrediente.map((ingrediente) =>
           ingrediente.id === dadosIngrediente.id
             ? dadosIngrediente
             : ingrediente
         );
 
-        onReceitaChange({ ...receita, ingredientes: novaListaIngredientes });
+        onReceitaChange({ ...receita, receitaCategoriaIngrediente: novaListaIngredientes });
       }
     }
 
@@ -247,7 +247,7 @@ export default function FormularioReceitaIngrediente({
                   <SelectItem
                     key={categoria.id.toString()}
                     value={categoria.id.toString()}
-                    disabled={receita?.ingredientes?.some(
+                    disabled={receita?.receitaCategoriaIngrediente?.some(
                       (ingrediente) =>
                         ingrediente.categoriaIngrediente.id === categoria.id
                     )}

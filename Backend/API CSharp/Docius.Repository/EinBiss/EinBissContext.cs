@@ -30,4 +30,5 @@ public class EinBissContext : DbContext
     public virtual DbSet<TipoUsuario> TiposUsuarios { get; set; }
     public virtual DbSet<UnidadeMedida> UnidadesMedidas { get; set; }
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public virtual DbSet<PrecificacaoIngrediente> PrecificacoesIngredientes { get; set; }
 }

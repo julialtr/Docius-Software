@@ -11,36 +11,29 @@ public class PrecificacaoFiltro : FiltroBase<int>
 [Table("precificacoes")]
 public class Precificacao : EntityBase<int>
 {
-    [Column("valor_insumos")]
-    [Required]
-    public decimal ValorInsumos { get; set; }
-
-    [Column("valor_salario")]
-    [Required]
-    public decimal ValorSalario { get; set; }
-
     [Column("qtd_horas_mensais")]
-    [Required]
     public int QtdHorasMensais { get; set; }
-
-    [Column("qtd_meses_considerar_gastos")]
-    public int QtdMesesConsiderarGastos { get; set; }
 
     [Column("porcentagem_lucro_estimada")]
     public decimal PorcentagemLucroEstimada { get; set; }
 
-    [Column("porcentagem_lucro_obtida")]
-    public decimal PorcentagemLucroObtida { get; set; }
+    [Column("valor_insumos")]
+    public decimal ValorInsumos { get; set; }
 
-    [Column("valor_bruto")]
-    public decimal ValorBruto { get; set; }
+    [Column("valor_gastos_fixos")]
+    public decimal ValorGastosFixos { get; set; }
 
-    [Column("valor_liquido")]
-    public decimal ValorLiquido { get; set; }
+    [Column("valor_sugerido")]
+    public decimal ValorSugerido { get; set; }
+
+    [Column("valor_adotado")]
+    public decimal ValorAdotado{ get; set; }
 
     [Column("receita_id")]
     [Required]
     public int ReceitaId { get; set; }
 
     public virtual Receita Receita { get; set; }
+
+    public virtual List<PrecificacaoIngrediente> PrecificacaoIngrediente { get; set; }
 }

@@ -43,4 +43,6 @@ public class Ingrediente : EntityBase<int>
     public int CategoriaIngredienteId { get; set; }
 
     public virtual CategoriaIngrediente CategoriaIngrediente { get; set; }
+
+    public virtual List<PrecificacaoIngrediente> PrecificacaoIngrediente { get; set; }
 }

@@ -22,7 +22,7 @@ export default function DetalhesReceitaIngrediente({
 }) {
   return (
     receitaId === receita.id &&
-    receita.ingredientes && (
+    receita.receitaCategoriaIngrediente && (
       <TableRow>
         <TableCell colSpan={6} className="p-0 border-t-0">
           <div className="bg-amber-50/50 p-4">
@@ -34,7 +34,7 @@ export default function DetalhesReceitaIngrediente({
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {receita.ingredientes.map((ingrediente) => {
+                  {receita.receitaCategoriaIngrediente.map((ingrediente) => {
                     return (
                       <div
                         key={ingrediente.id}
@@ -44,7 +44,7 @@ export default function DetalhesReceitaIngrediente({
                           {ingrediente?.categoriaIngrediente?.nome}
                         </div>
                         <Badge variant="outline" className="bg-amber-50">
-                          {ingrediente.medida} {ingrediente.unidadeMedida.sigla}
+                          {ingrediente.medida} {ingrediente.unidadeMedida?.sigla}
                         </Badge>
                       </div>
                     );

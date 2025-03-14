@@ -47,7 +47,6 @@ export default function FormularioCategoriasIngredientes({
       id: 0,
       nome: "",
       qtdIngredientes: 0,
-      ingredientes: [],
     });
 
   useEffect(() => {
@@ -82,9 +81,7 @@ export default function FormularioCategoriasIngredientes({
       }
 
       toast({
-        title: dadosCategoria.id
-          ? "Categoria atualizada"
-          : "Categoria criada",
+        title: dadosCategoria.id ? "Categoria atualizada" : "Categoria criada",
         description: "As informações foram salvas com sucesso",
         variant: "success",
       });
@@ -110,7 +107,6 @@ export default function FormularioCategoriasIngredientes({
       id: 0,
       nome: "",
       qtdIngredientes: 0,
-      ingredientes: [],
     });
   };
 
