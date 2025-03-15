@@ -49,7 +49,7 @@ export default function FormularioReceitas({
     tempo: "",
     qtdPorcoes: 0,
     qtdProdutos: 0,
-    ingredientes: [],
+    receitaCategoriaIngrediente: [],
   });
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function FormularioReceitas({
 
     if (!dadosReceita) return;
 
-    if (!dadosReceita.ingredientes || !dadosReceita.ingredientes.length) {
+    if (!dadosReceita.receitaCategoriaIngrediente || !dadosReceita.receitaCategoriaIngrediente.length) {
       toast({
         title: "Erro ao salvar receita",
         description: "Adicione um ingrediente para continuar",
@@ -92,8 +92,6 @@ export default function FormularioReceitas({
 
       return;
     }
-
-    // aqui, zerar o id dos ingredientes
 
     try {
       if (dadosReceita.id) {
@@ -140,7 +138,7 @@ export default function FormularioReceitas({
       tempo: "",
       qtdPorcoes: 0,
       qtdProdutos: 0,
-      ingredientes: [],
+      receitaCategoriaIngrediente: [],
     });
   };
 

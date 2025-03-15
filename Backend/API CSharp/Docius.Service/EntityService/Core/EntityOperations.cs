@@ -173,6 +173,21 @@ public abstract class EntityOperations<TEntity, TEntityTypeId, TFilter> : IEntit
             throw new WarningException(string.IsNullOrEmpty(invalidIdMessage) ? $"O ID de {typeof(TEntity).Name} informado é inválido." : invalidIdMessage);
     }
 
+    public T ExecuteTransaction<T>(Func<T> func)
+    {
+        return Transaction.ExecuteTransaction(DbContext, func);
+    }
+
+    public async Task<T> ExecuteTransactionAsync<T>(Func<Task<T>> func)
+    {
+        return await Transaction.ExecuteTransactionAsync(DbContext, func);
+    }
+
+    public async Task ExecuteTransactionAsync(Func<Task> func)
+    {
+        await Transaction.ExecuteTransactionAsync(DbContext, func);
+    }
+
     private void ValidateEntity(TEntity entity)
     {
         if (entity == null)

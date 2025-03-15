@@ -26,7 +26,7 @@ export const findReceitas = async () => {
 export const updateReceita = async (id: number, receita: UpdateReceita) => {
   try {
     const response = await fetch(`${LINK_API}/receita/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",

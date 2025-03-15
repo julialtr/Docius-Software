@@ -56,6 +56,7 @@ public sealed class ReceitaEntityService : EntityServiceBase<EinBissEntityServic
                 {
                     Id = receitaIngrediente.Id,
                     Medida = receitaIngrediente.Medida,
+                    ReceitaId = receitaIngrediente.ReceitaId,
                     CategoriaIngrediente = receitaIngrediente.CategoriaIngrediente != null ? new CategoriaIngrediente
                     {
                         Id = receitaIngrediente.CategoriaIngrediente.Id,
@@ -72,39 +73,46 @@ public sealed class ReceitaEntityService : EntityServiceBase<EinBissEntityServic
         return receitasDetalhadas;
     }
 
-    public async Task<List<ReceitaDetalhada>> CriaReceitaAsync(ReceitaDetalhada receitaDetalhada)
+    public async Task<List<ReceitaDetalhada>> CriaReceitaAsync(Receita receita)
     {
-        Receita receita = new Receita
-        {
-            Nome = receitaDetalhada.Nome,
-            Descricao = receitaDetalhada.Descricao,
-            QtdPorcoes = receitaDetalhada.QtdPorcoes,
-            Tempo = receitaDetalhada.Tempo,
-        };
+        return await ExecuteTransactionAsync(async () => {
 
-        var createdEntities = await EntityService.Receita.CreateAsync(receita);
+            var createdEntity = await EntityService.Receita.CreateAsync(receita);
 
-        Precificacao precificacao = new Precificacao { 
-            ReceitaId = createdEntities.Id,
-        };
-    
-        await EntityService.Precificacao.CreateAsync(precificacao);
+            var receitaId = createdEntity.Id;
 
-        foreach (var ingrediente in receitaDetalhada.ReceitaCategoriaIngrediente)
-        {
-            ReceitaCategoriaIngrediente receitaCategoriaIngrediente = new ReceitaCategoriaIngrediente
+            Precificacao precificacao = new Precificacao
             {
-                Medida = ingrediente.Medida,
-                ReceitaId = createdEntities.Id,
-                CategoriaIngredienteId = ingrediente.CategoriaIngrediente.Id,
-                UnidadeMedidaId = ingrediente.UnidadeMedida.Id,
+                ReceitaId = receitaId,
             };
 
-            await EntityService.ReceitaCategoriaIngrediente.CreateAsync(receitaCategoriaIngrediente);
-        }
+            await EntityService.Precificacao.CreateAsync(precificacao);
 
-        var ingredientes = LeReceitas(new ReceitaFiltro { Ids = [createdEntities.Id] });
+            var receitas = LeReceitas(new ReceitaFiltro { Ids = [receitaId] });
 
-        return ingredientes;
+            return receitas;
+        });
+    }
+
+    public async Task<ReceitaDetalhada> AtualizaReceitaAsync(Receita dados)
+    {
+        return await ExecuteTransactionAsync(async () => {
+            var listaIdsIngredientes = new List<int>();
+
+            foreach (var ingrediente in dados.ReceitaCategoriaIngrediente)
+            {
+                listaIdsIngredientes.Add(ingrediente.Id);
+            }
+
+            var listDelete = EntityService.ReceitaCategoriaIngrediente.Entity
+                .Where(entity => !listaIdsIngredientes
+                .Contains(entity.Id) && entity.ReceitaId == dados.Id);
+
+            await EntityService.ReceitaCategoriaIngrediente.DeleteRangeAsync(listDelete);
+
+            await EntityService.Receita.UpdateAsync(dados);
+
+            return LeReceitas(new ReceitaFiltro { Ids = [dados.Id] }).First();
+        });
     }
 }

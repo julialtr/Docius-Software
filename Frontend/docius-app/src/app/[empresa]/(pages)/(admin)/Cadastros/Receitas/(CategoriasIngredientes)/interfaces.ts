@@ -4,13 +4,15 @@ import { ReadCategoriaIngrediente } from "../../CategoriasIngredientes/interface
 export interface ReadReceitaCategoriaIngrediente {
     id: number;
     medida: number;
+    receitaId: number;
     categoriaIngrediente: ReadCategoriaIngrediente;
     unidadeMedida: ReadUnidadeMedida;
   }
-
+  
   export interface CreateReceitaCategoriaIngrediente {
     id: number;
     medida: number;
+    receitaId: number;
     categoriaIngredienteId: number;
     unidadeMedidaId: number;
   }
@@ -18,6 +20,7 @@ export interface ReadReceitaCategoriaIngrediente {
   export interface UpdateReceitaCategoriaIngrediente {
     id: number;
     medida: number;
+    receitaId: number;
     categoriaIngredienteId: number;
     unidadeMedidaId: number;
   }

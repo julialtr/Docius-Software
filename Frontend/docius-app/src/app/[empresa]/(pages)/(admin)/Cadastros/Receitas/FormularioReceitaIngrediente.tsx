@@ -165,15 +165,22 @@ export default function FormularioReceitaIngrediente({
           novoIngrediente,
         ];
 
-        onReceitaChange({ ...receita, receitaCategoriaIngrediente: novaListaIngredientes });
+        onReceitaChange({
+          ...receita,
+          receitaCategoriaIngrediente: novaListaIngredientes,
+        });
       } else {
-        const novaListaIngredientes = receita.receitaCategoriaIngrediente.map((ingrediente) =>
-          ingrediente.id === dadosIngrediente.id
-            ? dadosIngrediente
-            : ingrediente
+        const novaListaIngredientes = receita.receitaCategoriaIngrediente.map(
+          (ingrediente) =>
+            ingrediente.id === dadosIngrediente.id
+              ? dadosIngrediente
+              : ingrediente
         );
 
-        onReceitaChange({ ...receita, receitaCategoriaIngrediente: novaListaIngredientes });
+        onReceitaChange({
+          ...receita,
+          receitaCategoriaIngrediente: novaListaIngredientes,
+        });
       }
     }
 
@@ -186,11 +193,12 @@ export default function FormularioReceitaIngrediente({
     setDadosIngrediente({
       id: 0,
       medida: 0,
+      receitaId: 0,
       categoriaIngrediente: {
         id: 0,
         nome: "",
         qtdIngredientes: 0,
-        qtdReceitas: 0
+        qtdReceitas: 0,
       },
       unidadeMedida: {
         id: 0,

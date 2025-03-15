@@ -3,7 +3,6 @@ using AutoMapper;
 using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService;
-using Docius.Service.EntityService.Data;
 using Docius.Service.EntityService.DB.EinBiss;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,26 +22,20 @@ public class ReceitaController : CrudControllerBase<ReceitaEntityService, Receit
     [ProducesResponseType(typeof(ReadReceitaDto[]), StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateReceita([FromBody] CreateReceitaDto dadosDto)
     {
-        var Receitas = await EntityService.CriaReceitaAsync(Mapper.Map<ReceitaDetalhada>(dadosDto));
+        var receitas = await EntityService.CriaReceitaAsync(Mapper.Map<Receita>(dadosDto));
 
-        return Ok(Mapper.Map<List<ReadReceitaDto>>(Receitas));
+        return Ok(Mapper.Map<List<ReadReceitaDto>>(receitas));
     }
 
-    [HttpPatch("{id:int}")]
+    [HttpPut("{id:int}")]
     [ProducesResponseType(typeof(ReadReceitaDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateReceita(int id, [FromBody] UpdateReceitaDto dadosDto)
     {
-        Receita data = await EntityService.ReadAsync(id);
+        var dados = new Receita();
+        Mapper.Map(dadosDto, dados);
+        dados.Id = id;
 
-        if (data == null)
-            return NotFound();
-
-        Mapper.Map(dadosDto, data);
-        await EntityService.UpdateAsync(data);
-
-        var Receitas = EntityService.LeReceitas(new ReceitaFiltro { Ids = [id] });
-
-        return Ok(Mapper.Map<ReadReceitaDto>(Receitas[0]));
+        return Ok(Mapper.Map<ReadReceitaDto>(await EntityService.AtualizaReceitaAsync(dados)));
     }
 
     [HttpDelete("{id:int}")]

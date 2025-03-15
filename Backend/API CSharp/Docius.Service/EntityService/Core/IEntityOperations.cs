@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Docius.Service.EntityService.Core;
 
@@ -27,4 +28,10 @@ public interface IEntityOperations<TEntity, TEntityTypeId, TFilter> where TEntit
     public IQueryable<TEntity> Find(TFilter filter);
 
     public void ValidateId(TEntityTypeId id, string emptyIdMessage = "", string invalidIdMessage = "");
+
+    public T ExecuteTransaction<T>(Func<T> func);
+
+    public Task<T> ExecuteTransactionAsync<T>(Func<Task<T>> func);
+
+    public Task ExecuteTransactionAsync(Func<Task> func);
 }

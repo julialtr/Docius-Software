@@ -5,6 +5,7 @@ namespace Docius.API.Dtos.V1;
 
 public class ReceitaFiltroDto
 {
+    public int Id { get; set; }
 }
 
 public class CreateReceitaDto : CreateDtoBase
@@ -26,14 +27,16 @@ public class CreateReceitaDto : CreateDtoBase
     public virtual List<CreateReceitaCategoriaIngredienteDto> ReceitaCategoriaIngrediente { get; set; }
 }
 
-public class UpdateReceitaDto : CreateDtoBase
+public class UpdateReceitaDto : UpdateDtoBase
 {
     [Required]
+    [MaxLength(100)]
     public string Nome { get; set; }
 
     [MaxLength(5000)]
     public string Descricao { get; set; }
 
+    [Required]
     public int QtdPorcoes { get; set; }
 
     [Required]

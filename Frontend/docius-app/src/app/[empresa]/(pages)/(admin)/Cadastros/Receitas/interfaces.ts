@@ -1,7 +1,6 @@
 import { CreateReceitaCategoriaIngrediente, ReadReceitaCategoriaIngrediente, UpdateReceitaCategoriaIngrediente } from "./(CategoriasIngredientes)/interfaces";
 
 export interface CreateReceita {
-  id: number;
   nome: string;
   descricao: string;
   tempo: string;
@@ -10,7 +9,6 @@ export interface CreateReceita {
 }
 
 export interface UpdateReceita {
-  id: number;
   nome: string;
   descricao: string;
   tempo: string;
@@ -30,7 +28,6 @@ export interface ReadReceita {
 
 export function updateConvert(receita: ReadReceita): UpdateReceita {
   return {
-    id: receita.id,
     nome: receita.nome,
     descricao: receita.descricao,
     tempo: receita.tempo,
@@ -38,6 +35,7 @@ export function updateConvert(receita: ReadReceita): UpdateReceita {
     receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
       id: ingrediente.id,
       medida: ingrediente.medida,
+      receitaId: ingrediente.receitaId,
       categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
       unidadeMedidaId: ingrediente.unidadeMedida.id
     }))
@@ -46,7 +44,6 @@ export function updateConvert(receita: ReadReceita): UpdateReceita {
 
 export function createConvert(receita: ReadReceita): CreateReceita {
   return {
-    id: receita.id,
     nome: receita.nome,
     descricao: receita.descricao,
     tempo: receita.tempo,
@@ -54,6 +51,7 @@ export function createConvert(receita: ReadReceita): CreateReceita {
     receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
       id: ingrediente.id,
       medida: ingrediente.medida,
+      receitaId: ingrediente.receitaId,
       categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
       unidadeMedidaId: ingrediente.unidadeMedida.id
     }))
