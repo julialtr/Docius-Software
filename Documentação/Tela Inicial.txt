@@ -1,7 +1,22 @@
-O software Docius é uma aplicação voltada para confeitarias por encomenda. O objetivo do software é fazer o gerenciamento da confeitaria de maneira integrada, com funcionalidades que dizem respeito aos clientes, aos confeiteiros ou aos fornecedores. Ele também visa ser um software que adota as tecnologias mais recentes do mercado, com bastante foco na Inteligência Artificial para a solução de problemas.
+Docius – Gestão Inteligente para Confeitarias por Encomenda
 
-Para acessar o Docius, é preciso saber para qual confeitaria você fará o acesso. Portanto, no link, é necessário colocar o domínio da confeitaria, como por exemplo 'www.docius.com.br/ein-biss'. Assim, a página de login é carregada.
+O Docius é um software desenvolvido exclusivamente para confeitarias que trabalham por encomenda. Seu principal objetivo é oferecer um gerenciamento integrado, abrangendo desde a administração de pedidos até a interação com clientes, confeiteiros e fornecedores.
 
-Caso a tela de login não for apresentada, verifique a URL para ter certeza que ela está correta, ou entre em contato com a confeitaria por algum meio de comunicação. Se nenhuma dessas soluções funcionarem, entre em contato com o suporte da Docius.
+Além de otimizar processos, o Docius se destaca pelo uso das tecnologias mais avançadas do mercado, com um forte foco em Inteligência Artificial para aprimorar a tomada de decisões e facilitar o dia a dia da confeitaria.
 
-O acesso a confeitaria pelo Docius pode ser feita por algum consumidor ou pelos funcionários da confeitaria. Caso o acesso for de algum funcionário, este será redirecionado para as páginas de gerenciamento do estabelecimento. Caso for um cliente, será redirecionado para o cardápio da confeitaria, onde o cliente poderá analisar os produtos e realizar pedidos.
+Acesso ao Sistema
+Para acessar o Docius, é necessário informar a confeitaria desejada. O acesso é feito por meio de um link personalizado, que inclui o domínio da confeitaria. Exemplo: www.docius.com.br/ein-biss. Isso garante que a página de login seja carregada corretamente para a confeitaria específica.
+
+Se a tela de login não for exibida:
+- Verifique a URL para garantir que esteja correta.
+- Entre em contato com a confeitaria para confirmar o endereço de acesso.
+- Caso o problema persista, entre em contato com o suporte do Docius.
+
+Diferentes Tipos de Acesso
+O Docius pode ser acessado tanto por clientes quanto por funcionários da confeitaria. Dependendo do tipo de acesso, o usuário será direcionado para diferentes áreas do sistema:
+
+Clientes → São redirecionados para o cardápio da confeitaria, onde podem visualizar produtos e realizar pedidos.
+
+Funcionários → São direcionados para as páginas de gerenciamento do estabelecimento, onde podem administrar pedidos, estoques e demais processos internos.
+
+O Docius foi projetado para ser uma ferramenta intuitiva e eficiente, garantindo uma experiência otimizada para todos os envolvidos na operação da confeitaria.

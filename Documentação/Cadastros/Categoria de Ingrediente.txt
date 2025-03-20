@@ -1,1 +1,40 @@
-Tela disponível apenas para o usuário administrador.
+Tela de Cadastro de Categorias de Ingredientes
+
+Acesso restrito: Disponível apenas para usuários administradores.
+
+Esta tela permite gerenciar categorias de ingredientes utilizados na confeitaria. As categorias organizam os ingredientes de forma mais ampla, facilitando a busca e o controle de estoque.
+
+Funcionalidades
+Lista de Categorias de Ingredientes
+- Exibe todas as categorias cadastradas na confeitaria.
+- Permite buscar categorias através de um campo de pesquisa.
+- Apresenta as informações: Nome da categoria, Quantidade de ingredientes cadastrados na categoria
+- Possibilidade de ordenar a lista de forma crescente ou decrescente.
+
+Cadastro de Nova Categoria
+- Para adicionar uma nova categoria, basta clicar no botão "+".
+- Um formulário será exibido, solicitando o nome da categoria (campo obrigatório).
+
+Edição e Exclusão
+- As categorias podem ser alteradas ou excluídas, garantindo um controle eficiente do sistema.
+
+Visualização de Ingredientes da Categoria
+- Ao clicar no botão ">", o sistema exibe a lista de ingredientes cadastrados dentro da categoria selecionada.
+- As informações disponíveis para cada ingrediente incluem: Nome, Marca, Medida (quantidade e unidade), Preço, Quantidade disponível e Fornecedor.
+- Os ingredientes podem ser ordenados de forma crescente ou decrescente.
+
+Acesso Rápido ao Site do Fornecedor
+Caso um fornecedor tenha um site cadastrado, ao clicar no nome do fornecedor, o sistema abre o site em uma nova aba do navegador.
+
+Organização das Categorias e Ingredientes
+As categorias de ingredientes são informações genéricas, que agrupam diferentes ingredientes sob um mesmo nome. Exemplo:
+
+Categorias: "Leite Condensado", "Creme de Leite", "Chocolate em Pó".
+
+Ingredientes dentro da categoria "Chocolate em Pó":
+
+Marca A – 200g – R$10,00 – Fornecedor X
+
+Marca B – 1kg – R$40,00 – Fornecedor Y
+
+Dessa forma, o cadastro de categorias torna o gerenciamento de ingredientes mais organizado e eficiente, proporcionando um controle preciso sobre os insumos da confeitaria.

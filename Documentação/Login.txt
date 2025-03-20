@@ -1,11 +1,14 @@
-A tela de login é a porta de entrada para a confeitaria. No login é esperado que o usuário já esteja cadastrado no sistema da confeitaria. Sendo assim, ele pode acessar o sistema pelo seu e-mail e senha definidos na hora do cadastro. 
+Tela de Login
+A tela de login é a porta de entrada para a plataforma da confeitaria. Para acessar o sistema, o usuário deve utilizar as credenciais cadastradas previamente, inserindo seu e-mail e senha.
 
-Após efetuar o login, o usuário é redirecionado para a página inicial.
+Após a autenticação bem-sucedida, o usuário será redirecionado para a página inicial da plataforma.
 
-Campos:
-E-mail: e-mail configurado no cadastro do usuário
-Senha: senha configurada no cadastro do usuário
+Campos de Login
+E-mail: Endereço de e-mail utilizado no momento do cadastro.
 
-Ações:
-Botão Entrar: irá redirecionar o usuário autenticado para as telas do software.
-Botão Cadastre-se: irá redirecionar o usuário para o cadastro do usuário.
+Senha: Senha definida durante o cadastro.
+
+Ações Disponíveis
+Entrar: Autentica o usuário e o direciona para as telas do sistema.
+
+Cadastre-se: Redireciona novos usuários para a tela de cadastro.

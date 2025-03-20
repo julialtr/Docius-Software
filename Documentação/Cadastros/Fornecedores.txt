@@ -1,1 +1,24 @@
-Tela disponível apenas para o usuário administrador.
+Tela de Cadastro de Fornecedores
+Acesso restrito: Disponível apenas para usuários administradores.
+Esta tela permite visualizar, cadastrar e gerenciar os fornecedores da confeitaria.
+
+Funcionalidades
+Lista de Fornecedores
+- Exibe todos os fornecedores cadastrados.
+- Permite buscar fornecedores através de um campo de pesquisa.
+- Apresenta as seguintes informações: Nome, Endereço físico e Site.
+- Possibilidade de ordenar os dados de forma crescente ou decrescente.
+
+Acesso Rápido ao Site do Fornecedor
+- Caso o fornecedor tenha um site cadastrado, ao clicar no link, o sistema abre o site em uma nova aba do navegador, permitindo uma consulta mais detalhada de preços e produtos.
+
+Cadastro de Novo Fornecedor
+- Para adicionar um novo fornecedor, basta clicar no botão "+".
+- Será exibido um formulário com os seguintes campos: Nome (obrigatório), Endereço (opcional) e Site (opcional)
+
+Edição e Exclusão de Fornecedores
+- Os fornecedores cadastrados podem ser alterados ou excluídos conforme necessário.
+
+Fornecedores Padrão
+- Os fornecedores Giassi e Fort já vêm cadastrados por padrão no sistema, pois oferecem integração para cotação automática de ingredientes.
+- Caso necessário, esses fornecedores podem ser excluídos pelo administrador.
