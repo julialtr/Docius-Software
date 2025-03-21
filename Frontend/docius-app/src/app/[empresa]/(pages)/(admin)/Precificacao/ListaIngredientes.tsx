@@ -153,24 +153,27 @@ export default function ListaIngredientes({
               value={`categoria-${categoria?.id}`}
               key={categoria?.id}
             >
-              <AccordionTrigger className="px-4 hover:bg-gray-50">
-                <div className="flex items-center gap-2">
-                  <Checkbox
-                    id={`categoria-${categoria?.id}`}
-                    checked={todosSelecionados(
-                      categoria?.categoriaIngrediente.id
-                    )}
-                    onCheckedChange={(checked) => {
-                      toggleTodosIngredientes(
-                        categoria?.categoriaIngrediente.id,
-                        !!checked
-                      );
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                  <span>{categoria?.categoriaIngrediente?.nome}</span>
-                </div>
-              </AccordionTrigger>
+              <div className="flex items-center px-4">
+                <Checkbox
+                  id={`categoria-${categoria?.id}`}
+                  checked={todosSelecionados(
+                    categoria?.categoriaIngrediente.id
+                  )}
+                  onCheckedChange={(checked) => {
+                    toggleTodosIngredientes(
+                      categoria?.categoriaIngrediente.id,
+                      !!checked
+                    );
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+
+                <AccordionTrigger className="flex-1 hover:bg-transparent ml-1">
+                  <span className="mr-1">
+                    {categoria?.categoriaIngrediente?.nome}
+                  </span>
+                </AccordionTrigger>
+              </div>
               <AccordionContent className="px-4 pt-2 pb-3">
                 <div className="space-y-2">
                   {(
