@@ -26,6 +26,7 @@ public sealed class EinBissEntityService
     private readonly Lazy<TipoUsuarioEntityService> _entityServiceTipoUsuario;
     private readonly Lazy<UnidadeMedidaEntityService> _entityServiceUnidadeMedida;
     private readonly Lazy<UsuarioEntityService> _entityServiceUsuario;
+    private readonly Lazy<PrecificacaoIngredienteEntityService> _entityServicePrecificacaoIngrediente;
 
     public CardapioEntityService Cardapio => _entityServiceCardapio.Value;
     public CategoriaIngredienteEntityService CategoriaIngrediente => _entityServiceCategoriaIngrediente.Value;
@@ -48,6 +49,7 @@ public sealed class EinBissEntityService
     public TipoUsuarioEntityService TipoUsuario => _entityServiceTipoUsuario.Value;
     public UnidadeMedidaEntityService UnidadeMedida => _entityServiceUnidadeMedida.Value;
     public UsuarioEntityService Usuario => _entityServiceUsuario.Value;
+    public PrecificacaoIngredienteEntityService PrecificacaoIngrediente => _entityServicePrecificacaoIngrediente.Value;
 
     public EinBissEntityService(EinBissContext context)
     {
@@ -72,5 +74,6 @@ public sealed class EinBissEntityService
         _entityServiceTipoUsuario = new(() => new TipoUsuarioEntityService(this, context));
         _entityServiceUnidadeMedida = new(() => new UnidadeMedidaEntityService(this, context));
         _entityServiceUsuario = new(() => new UsuarioEntityService(this, context));
+        _entityServicePrecificacaoIngrediente = new(() => new PrecificacaoIngredienteEntityService(this, context));
     }
 }
