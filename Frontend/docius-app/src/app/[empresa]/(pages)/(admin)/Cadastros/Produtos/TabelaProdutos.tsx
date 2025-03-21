@@ -1,6 +1,6 @@
 "use client";
 
-import type React from "react";
+import React from "react";
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Pencil } from "lucide-react";
 
@@ -112,8 +112,8 @@ export default function TabelaProdutos({
         </TableHeader>
         <TableBody>
           {dadosFiltrados?.map((produto) => (
-            <>
-              <TableRow key={produto.id}>
+            <React.Fragment key={produto.id}>
+              <TableRow>
                 <TableCell>
                   {produto.receita && (
                     <Button
@@ -164,7 +164,7 @@ export default function TabelaProdutos({
                 </TableCell>
               </TableRow>
               <DetalhesProdutoReceita produtoId={produtoId} produto={produto} />
-            </>
+            </React.Fragment>
           ))}
         </TableBody>
       </Table>

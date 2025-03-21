@@ -2,12 +2,7 @@
 
 import React from "react";
 import { useState } from "react";
-import {
-  ChevronDown,
-  ChevronRight,
-  Clock,
-  Pencil,
-} from "lucide-react";
+import { ChevronDown, ChevronRight, Clock, Pencil } from "lucide-react";
 
 import { ReadReceita } from "./interfaces";
 import AlertaExclusao from "./AlertaExclusao";
@@ -25,6 +20,7 @@ import {
 import SortIcon from "@/app/_components/Sort";
 
 import { requestSort, SortConfig, sortData } from "@/utils/sort";
+import { formatTime } from "@/utils/format";
 
 export default function TabelaReceitas({
   dados,
@@ -154,13 +150,7 @@ export default function TabelaReceitas({
                 <TableCell>
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4 text-amber-600" />
-                    {new Date(`1970-01-01T${receita.tempo}`).toLocaleTimeString(
-                      "pt-BR",
-                      {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      }
-                    )}
+                    {formatTime(receita.tempo)}
                   </div>
                 </TableCell>
                 <TableCell>
@@ -168,7 +158,7 @@ export default function TabelaReceitas({
                   {receita.qtdPorcoes > 1
                     ? "porções"
                     : receita.qtdPorcoes == 0
-                    ? "0"
+                    ? ""
                     : "porção"}
                 </TableCell>
 

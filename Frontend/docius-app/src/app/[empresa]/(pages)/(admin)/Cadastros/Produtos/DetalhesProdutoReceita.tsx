@@ -15,6 +15,8 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 
+import { formatTime } from "@/utils/format";
+
 export default function DetalhesProdutoReceita({
   produtoId,
   produto,
@@ -41,19 +43,19 @@ export default function DetalhesProdutoReceita({
                     <Clock className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
                       <span className="font-medium">Tempo de Preparo:</span>{" "}
-                      {new Date(
-                        `1970-01-01T${produto.receita.tempo}`
-                      ).toLocaleTimeString("pt-BR", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {formatTime(produto.receita.tempo)}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <ShoppingCart className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
                       <span className="font-medium">Rendimento:</span>{" "}
-                      {produto.receita.qtdPorcoes} porções
+                      {produto.receita.qtdPorcoes}{" "}
+                      {produto.receita.qtdPorcoes > 1
+                        ? "porções"
+                        : produto.receita.qtdPorcoes == 0
+                        ? ""
+                        : "porção"}
                     </span>
                   </div>
                 </div>
