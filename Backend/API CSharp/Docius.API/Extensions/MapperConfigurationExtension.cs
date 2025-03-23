@@ -26,6 +26,8 @@ public static class MapperConfigurationExtension
                 new ProfileReceitaCategoriaIngrediente(),
                 new ProfilePrecificacao(),
                 new ProfilePrecificacaoIngrediente(),
+                new ProfileCardapio(),
+                new ProfileCategoriaProduto(),
         };
     }
 }

@@ -22,6 +22,8 @@ public class UpdateProdutoDto : UpdateDtoBase
 
     [Required]
     public int ReceitaId { get; set; }
+
+    public int? CategoriaProdutoId { get; set; }
 }
 
 public class ReadProdutoDto : ReadDtoBase<int>
