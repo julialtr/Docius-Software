@@ -2,12 +2,13 @@ import { ReadReceita } from "../Receitas/interfaces";
 
 export interface CreateProduto {
   nome: string;
-  ReceitaId: number;
+  receitaId: number;
 }
 
 export interface UpdateProduto {
   nome: string;
-  ReceitaId: number;
+  receitaId: number;
+  categoriaProdutoId?: number;
 }
 
 export interface ReadProduto {
@@ -22,13 +23,13 @@ export interface ReadProduto {
 export function updateConvert(ingrediente: ReadProduto): UpdateProduto {
   return {
     nome: ingrediente.nome,
-    ReceitaId: ingrediente.receita.id
+    receitaId: ingrediente.receita.id
   };
 }
 
 export function createConvert(ingrediente: ReadProduto): CreateProduto {
   return {
     nome: ingrediente.nome,
-    ReceitaId: ingrediente.receita.id
+    receitaId: ingrediente.receita.id
   };
 }

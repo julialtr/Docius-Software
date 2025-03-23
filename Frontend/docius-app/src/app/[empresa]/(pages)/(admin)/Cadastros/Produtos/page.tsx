@@ -57,8 +57,8 @@ export default function ProdutosPage() {
     setIsDialogOpen(isDialogOpen);
   };
 
-  const handleProdutoChange = (ingrediente: ReadProduto | null) => {
-    setProduto(ingrediente);
+  const handleProdutoChange = (produto: ReadProduto | null) => {
+    setProduto(produto);
   };
 
   return isLoading ? (
