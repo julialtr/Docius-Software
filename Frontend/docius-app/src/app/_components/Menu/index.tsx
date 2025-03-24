@@ -22,7 +22,7 @@ import {
   Menu,
   Layers,
   ClipboardList,
-  Calculator
+  Calculator,
 } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
@@ -33,8 +33,11 @@ import {
 } from "@/app/_components/ui/collapsible";
 
 import MenuLink from "./Link";
+import { usePathname } from "next/navigation";
 
 export default function MenuComponent() {
+  const pathname = usePathname();
+
   const { dadosEmpresa } = useDadosEmpresa();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -82,10 +85,16 @@ export default function MenuComponent() {
               />
 
               <div>
-                <Collapsible defaultOpen>
+                <Collapsible defaultOpen={pathname.includes("Cadastros/")}>
                   <CollapsibleTrigger
-                    className={`flex w-full items-center px-4 py-2 text-amber-900 bg-amber-50 rounded-md
-                  ${isSidebarCollapsed ? "justify-center" : "justify-between"}`}
+                    className={`flex w-full items-center px-4 py-2 ${
+                      pathname.includes("Cadastros/")
+                        ? "text-amber-900 bg-amber-50"
+                        : "text-gray-700 hover:bg-amber-50 hover:text-amber-700"
+                    } rounded-md
+                    ${
+                      isSidebarCollapsed ? "justify-center" : "justify-between"
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       <FilePlus2
