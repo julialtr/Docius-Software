@@ -7,30 +7,36 @@ export const sortData = <T>(data: T[], sortConfig?: SortConfig<T>): T[] => {
   if (!sortConfig) return data;
 
   return [...data].sort((a, b) => {
-    if (a[sortConfig.key] < b[sortConfig.key]) {
+    let valueA = getNestedValue(a, sortConfig.key as string);
+    let valueB = getNestedValue(b, sortConfig.key as string);
+
+    if (!valueA) valueA = "";
+    if (!valueB) valueB = "";
+
+    if (valueA < valueB) {
       return sortConfig.direction === "asc" ? -1 : 1;
     }
-    if (a[sortConfig.key] > b[sortConfig.key]) {
+    if (valueA > valueB) {
       return sortConfig.direction === "asc" ? 1 : -1;
     }
     return 0;
   });
 };
 
+
 export const requestSort = <T>(
-  key: keyof T,
-  currentSortConfig: SortConfig<T>
+  key: keyof T | string,
+  sortConfig: SortConfig<T>
 ): SortConfig<T> => {
-  let direction: "asc" | "desc" = "asc";
-
-  if (
-    currentSortConfig &&
-    currentSortConfig.key === key &&
-    currentSortConfig.direction === "asc"
-  ) {
-    direction = "desc";
-  }
-
-  return { key, direction };
+  return {
+    key: key as keyof T,
+    direction:
+      sortConfig?.key === key && sortConfig.direction === "asc"
+        ? "desc"
+        : "asc",
+  };
 };
 
+const getNestedValue = (obj: any, path: string): any => {
+  return path.split(".").reduce((acc, key) => acc?.[key], obj);
+};

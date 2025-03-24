@@ -2,7 +2,7 @@ import { SortConfig } from "@/utils/sort";
 import { ArrowUpDown, ChevronUp, ChevronDown } from "lucide-react";
 
 interface SortIconProps<T> {
-  columnKey: keyof T;
+  columnKey: string;
   sortConfig: SortConfig<T>;
 }
 

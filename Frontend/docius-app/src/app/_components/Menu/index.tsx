@@ -21,7 +21,6 @@ import {
   ChevronDown,
   Menu,
   Layers,
-  PackageCheck,
   ClipboardList,
   Calculator
 } from "lucide-react";
@@ -151,13 +150,6 @@ export default function MenuComponent() {
                 href={`/${dadosEmpresa?.dominio}/Pedidos`}
                 icon={ReceiptText}
                 label="Pedidos"
-                isSidebarCollapsed={isSidebarCollapsed}
-              />
-
-              <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Estoque`}
-                icon={PackageCheck}
-                label="Estoque"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
 

@@ -65,13 +65,13 @@ export default function TabelaIngredientes({
               <Button
                 variant="ghost"
                 onClick={() =>
-                  setSortConfig(requestSort("categoriaIngrediente", sortConfig))
+                  setSortConfig(requestSort("categoriaIngrediente.nome", sortConfig))
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
                 Categoria
                 <SortIcon<ReadIngrediente>
-                  columnKey="categoriaIngrediente"
+                  columnKey="categoriaIngrediente.nome"
                   sortConfig={sortConfig}
                 />
               </Button>
@@ -147,13 +147,13 @@ export default function TabelaIngredientes({
               <Button
                 variant="ghost"
                 onClick={() =>
-                  setSortConfig(requestSort("fornecedor", sortConfig))
+                  setSortConfig(requestSort("fornecedor.nome", sortConfig))
                 }
                 className="hover:bg-transparent p-0 font-semibold flex items-center"
               >
                 Fornecedor
                 <SortIcon<ReadIngrediente>
-                  columnKey="fornecedor"
+                  columnKey="fornecedor.nome"
                   sortConfig={sortConfig}
                 />
               </Button>
