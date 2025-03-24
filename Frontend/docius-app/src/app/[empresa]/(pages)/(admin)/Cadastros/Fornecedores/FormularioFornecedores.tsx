@@ -151,7 +151,10 @@ export default function FormularioFornecedores({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="endereco">Endereço</Label>
+            <Label htmlFor="endereco">
+              Endereço{" "}
+              <span className="text-xs text-muted-foreground">(opcional)</span>
+            </Label>
             <Input
               id="endereco"
               name="endereco"
@@ -160,7 +163,10 @@ export default function FormularioFornecedores({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="site">Site</Label>
+            <Label htmlFor="site">
+              Site{" "}
+              <span className="text-xs text-muted-foreground">(opcional)</span>
+            </Label>
             <Input
               id="site"
               name="site"

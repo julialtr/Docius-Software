@@ -65,7 +65,7 @@ export default function FormularioReceitas({
       return { ...prev, [e.target.name]: e.target.value };
     });
 
-    onReceitaChange({...dadosReceita, [e.target.name]: e.target.value})
+    onReceitaChange({ ...dadosReceita, [e.target.name]: e.target.value });
   };
 
   const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -75,7 +75,7 @@ export default function FormularioReceitas({
       return { ...prev, [e.target.name]: e.target.value };
     });
 
-    onReceitaChange({...dadosReceita, [e.target.name]: e.target.value})
+    onReceitaChange({ ...dadosReceita, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -83,7 +83,10 @@ export default function FormularioReceitas({
 
     if (!dadosReceita) return;
 
-    if (!dadosReceita.receitaCategoriaIngrediente || !dadosReceita.receitaCategoriaIngrediente.length) {
+    if (
+      !dadosReceita.receitaCategoriaIngrediente ||
+      !dadosReceita.receitaCategoriaIngrediente.length
+    ) {
       toast({
         title: "Erro ao salvar receita",
         description: "Adicione um ingrediente para continuar",
@@ -208,7 +211,12 @@ export default function FormularioReceitas({
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="descricao">Descrição</Label>
+              <Label htmlFor="descricao">
+                Descrição{" "}
+                <span className="text-xs text-muted-foreground">
+                  (opcional)
+                </span>
+              </Label>
               <Textarea
                 id="descricao"
                 name="descricao"
