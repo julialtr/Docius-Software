@@ -26,8 +26,11 @@ function mapearCategorias(
     cardapioId: categoriaProduto.cardapioId,
     categoriaProdutoSuperiorId: categoriaProduto.categoriaProdutoSuperiorId,
     produto: categoriaProduto.produto.map((produto) => ({
+      id: produto.id,
       nome: produto.nome,
-      receitaId: produto.receita.id,
+      preco: produto.preco,
+      qtdPedidos: produto.qtdPedidos,
+      receitaId: produto.receita?.id,
       categoriaProdutoId: produto.categoriaProdutoId,
     })),
     categoriaProdutoInferior: mapearCategorias(

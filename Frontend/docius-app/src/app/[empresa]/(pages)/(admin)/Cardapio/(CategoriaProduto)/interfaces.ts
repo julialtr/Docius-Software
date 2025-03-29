@@ -1,6 +1,6 @@
 import {
   ReadProduto,
-  UpdateProduto,
+  UpdateProdutoCardapio,
 } from "../../Cadastros/Produtos/interfaces";
 
 export interface UpdateCategoriaProduto {
@@ -8,7 +8,7 @@ export interface UpdateCategoriaProduto {
   cardapioId: number;
   categoriaProdutoInferior: UpdateCategoriaProduto[];
   categoriaProdutoSuperiorId: number;
-  produto: UpdateProduto[];
+  produto: UpdateProdutoCardapio[];
 }
 
 export interface ReadCategoriaProduto {

@@ -11,6 +11,15 @@ export interface UpdateProduto {
   categoriaProdutoId?: number;
 }
 
+export interface UpdateProdutoCardapio {
+  id: number;
+  nome: string;
+  preco: number;
+  qtdPedidos: number;
+  categoriaProdutoId?: number;
+  receitaId: number;
+}
+
 export interface ReadProduto {
   id: number;
   nome: string;
