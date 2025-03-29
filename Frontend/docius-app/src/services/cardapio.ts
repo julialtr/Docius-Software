@@ -25,7 +25,7 @@ export const findCardapios = async () => {
 export const updateCardapio = async (id: number, cardapio: UpdateCardapio) => {
   try {
     const response = await fetch(`${LINK_API}/cardapio/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",

@@ -18,7 +18,7 @@ public class CardapioController : CrudControllerBase<CardapioEntityService, Card
         _einBissEntityService = einBissEntityService;
     }
 
-    [HttpPut("{id:int}")]
+    [HttpPatch("{id:int}")]
     [ProducesResponseType(typeof(ReadCardapioDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateCardapio(int id, [FromBody] UpdateCardapioDto dadosDto)
     {
