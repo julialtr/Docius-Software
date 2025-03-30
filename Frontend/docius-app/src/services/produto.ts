@@ -1,7 +1,7 @@
 import {
   CreateProduto,
   UpdateProduto,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Produtos/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/Produtos/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findProdutos = async () => {

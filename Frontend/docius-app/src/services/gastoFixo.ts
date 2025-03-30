@@ -1,7 +1,7 @@
 import {
   CreateGastoFixo,
   UpdateGastoFixo,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/GastosFixos/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/GastosFixos/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findGastosFixos = async () => {

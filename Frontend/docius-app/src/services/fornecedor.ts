@@ -1,7 +1,7 @@
 import {
   CreateFornecedor,
   UpdateFornecedor,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Fornecedores/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/Fornecedores/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findFornecedores = async () => {

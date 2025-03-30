@@ -14,7 +14,7 @@ import Menu from "@/app/_components/Menu";
 import { useToast } from "@/hooks/use-toast";
 import Loading from "@/app/loading";
 
-export default function CategoriasIngredientes() {
+export default function CadastroCategoriasIngredientes() {
   const { toast } = useToast();
   const [dados, setDados] = useState<ReadCategoriaIngrediente[]>([]);
   const [categoria, setCategoria] = useState<ReadCategoriaIngrediente | null>(

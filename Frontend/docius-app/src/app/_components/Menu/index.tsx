@@ -78,7 +78,7 @@ export default function MenuComponent() {
             {/* Menu Items */}
             <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
               <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Dashboard`}
+                href={`/${dadosEmpresa?.dominio}/Admin/Dashboard`}
                 icon={LayoutDashboard}
                 label="Dashboard"
                 isSidebarCollapsed={isSidebarCollapsed}
@@ -110,43 +110,43 @@ export default function MenuComponent() {
                     }`}
                   >
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/Clientes`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Clientes`}
                       icon={Users}
                       label="Clientes"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/Fornecedores`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Fornecedores`}
                       icon={Truck}
                       label="Fornecedores"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/CategoriasIngredientes`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/CategoriasIngredientes`}
                       icon={Layers}
                       label="Categorias de Ingredientes"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/Ingredientes`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Ingredientes`}
                       icon={Package}
                       label="Ingredientes"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/Receitas`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Receitas`}
                       icon={Book}
                       label="Receitas"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/Produtos`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Produtos`}
                       icon={ClipboardList}
                       label="Produtos"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
                     <MenuLink
-                      href={`/${dadosEmpresa?.dominio}/Cadastros/GastosFixos`}
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/GastosFixos`}
                       icon={DollarSign}
                       label="Gastos Fixos"
                       isSidebarCollapsed={isSidebarCollapsed}
@@ -156,21 +156,21 @@ export default function MenuComponent() {
               </div>
 
               <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Pedidos`}
+                href={`/${dadosEmpresa?.dominio}/Admin/Pedidos`}
                 icon={ReceiptText}
                 label="Pedidos"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
 
               <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Cardapio`}
+                href={`/${dadosEmpresa?.dominio}/Admin/Cardapio`}
                 icon={BookOpenText}
                 label="Cardápio"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
 
               <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Precificacao`}
+                href={`/${dadosEmpresa?.dominio}/Admin/Precificacao`}
                 icon={Calculator}
                 label="Precificação"
                 isSidebarCollapsed={isSidebarCollapsed}

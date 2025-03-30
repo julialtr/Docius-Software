@@ -1,7 +1,7 @@
 import {
   CreateReceita,
   UpdateReceita,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Receitas/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/Receitas/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findReceitas = async () => {

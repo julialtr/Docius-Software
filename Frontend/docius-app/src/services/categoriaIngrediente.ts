@@ -1,7 +1,7 @@
 import {
   CreateCategoriaIngrediente,
   UpdateCategoriaIngrediente,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/CategoriasIngredientes/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/CategoriasIngredientes/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findCategoriasIngredientes = async () => {

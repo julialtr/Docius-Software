@@ -3,7 +3,7 @@ import { Warning } from "@/hooks/warning";
 import {
   CreateUsuario,
   FilterUsuario,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Clientes/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/Clientes/interfaces";
 
 export const login = async (usuario: FilterUsuario) => {
   try {

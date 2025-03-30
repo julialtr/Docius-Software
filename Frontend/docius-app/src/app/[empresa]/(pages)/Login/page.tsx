@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { FilterUsuario } from "../(admin)/Cadastros/Clientes/interfaces";
+import { FilterUsuario } from "../Admin/Cadastros/Clientes/interfaces";
 import { login } from "@/services/usuario";
 
 import Link from "next/link";

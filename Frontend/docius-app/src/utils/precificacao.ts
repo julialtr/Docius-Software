@@ -1,6 +1,6 @@
-import { ReadIngrediente } from "@/app/[empresa]/(pages)/(admin)/Cadastros/Ingredientes/interfaces";
+import { ReadIngrediente } from "@/app/[empresa]/(pages)/Admin/Cadastros/Ingredientes/interfaces";
 import { getMultiplicadorUnidadeMedida } from "./constants";
-import { ReadReceitaCategoriaIngrediente } from "@/app/[empresa]/(pages)/(admin)/Cadastros/Receitas/(CategoriasIngredientes)/interfaces";
+import { ReadReceitaCategoriaIngrediente } from "@/app/[empresa]/(pages)/Admin/Cadastros/Receitas/(CategoriasIngredientes)/interfaces";
 
 export const calculaGastosFixos = (
   gastosFixos: number,

@@ -1,6 +1,6 @@
 import {
   UpdateCardapio,
-} from "@/app/[empresa]/(pages)/(admin)/Cardapio/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findCardapios = async () => {

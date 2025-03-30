@@ -2,7 +2,7 @@ import {
   CreateIngrediente,
   FilterIngrediente,
   UpdateIngrediente,
-} from "@/app/[empresa]/(pages)/(admin)/Cadastros/Ingredientes/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Cadastros/Ingredientes/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findIngredientes = async (filtro: FilterIngrediente) => {

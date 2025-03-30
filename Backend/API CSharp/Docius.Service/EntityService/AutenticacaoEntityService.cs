@@ -18,11 +18,12 @@ public sealed class AutenticacaoEntityService
         _httpContext = httpContextAccessor.HttpContext;
     }
 
-    public void GenerateAccessToken(string email)
+    public void GenerateAccessToken(string email, int tipoUsuario)
     {
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, email),
+            new Claim(ClaimTypes.Role, tipoUsuario.ToString()),
         };
 
         var token = new JwtSecurityToken(

@@ -16,3 +16,9 @@ export interface ReadUsuarioPedidos {
   email: string;
   qtdPedidos: number;
 }
+
+export interface ReadUsuario {
+  id: number;
+  nome: string;
+  email: string;
+}

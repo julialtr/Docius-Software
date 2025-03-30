@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { CreateUsuario } from "../(admin)/Cadastros/Clientes/interfaces";
+import { CreateUsuario } from "../Admin/Cadastros/Clientes/interfaces";
 import { createUsuario } from "@/services/usuario";
 
 import Link from "next/link";

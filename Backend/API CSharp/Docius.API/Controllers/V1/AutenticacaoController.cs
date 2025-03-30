@@ -27,10 +27,14 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
     {
         IActionResult status = Find(filtroDto);
 
-        if (status is not NoContentResult)
+        if (status is not NoContentResult && status is OkObjectResult okResult && okResult.Value is IEnumerable<Usuario> usuarios)
         {
-            _autenticacaoEntityService.GenerateAccessToken(filtroDto.Email);
-            return Ok();
+            var usuario = usuarios.FirstOrDefault();
+            if (usuario != null)
+            {
+                _autenticacaoEntityService.GenerateAccessToken(usuario.Email, usuario.TipoUsuarioId);
+                return Ok();
+            }
         }
 
         return Unauthorized("As credenciais fornecidas estão inválidas.");

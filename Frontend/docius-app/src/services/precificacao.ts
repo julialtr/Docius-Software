@@ -1,6 +1,6 @@
 import {
   UpdatePrecificacao,
-} from "@/app/[empresa]/(pages)/(admin)/Precificacao/interfaces";
+} from "@/app/[empresa]/(pages)/Admin/Precificacao/interfaces";
 import { LINK_API } from "@/utils/constants";
 
 export const findPrecificacoes = async () => {
