@@ -23,6 +23,7 @@ import {
   Layers,
   ClipboardList,
   Calculator,
+  Tag,
 } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
@@ -173,6 +174,13 @@ export default function MenuComponent() {
                 href={`/${dadosEmpresa?.dominio}/Admin/Precificacao`}
                 icon={Calculator}
                 label="Precificação"
+                isSidebarCollapsed={isSidebarCollapsed}
+              />
+
+              <MenuLink
+                href={`/${dadosEmpresa?.dominio}/Admin/CotacaoIngredientes`}
+                icon={Tag}
+                label="Cotação de Ingredientes"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
             </nav>
