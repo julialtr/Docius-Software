@@ -20,12 +20,21 @@ export async function middleware(req: NextRequest) {
     const userRole =
       payload["role"] ||
       payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-      
+
+    const host = req.headers.get("host");
+    const protocol = req.nextUrl.protocol;
+    const baseUrl = `${protocol}//${host}`;
+
+    const match = pathname.match(/^\/([^/]+)\//);
+
+    const resultado =
+      baseUrl + (match ? `/${match[1]}/AcessoNegado` : "/NaoEncontrado");
+
     const adminRoutes = ["/Admin/"];
-    if (userRole != "2") {     
+    if (userRole != "2") {
       for (const adminRoute of adminRoutes) {
         if (pathname.includes(adminRoute))
-          return NextResponse.redirect(new URL("/NaoEncontrado", req.url));
+          return NextResponse.redirect(new URL(resultado));
       }
     }
 
@@ -33,7 +42,7 @@ export async function middleware(req: NextRequest) {
     if (userRole != "1") {
       for (const clientRoute of clientRoutes) {
         if (pathname.includes(clientRoute))
-          return NextResponse.redirect(new URL("/NaoEncontrado", req.url));
+          return NextResponse.redirect(new URL(resultado));
       }
     }
 
