@@ -27,13 +27,20 @@ public class UsuarioController : CrudControllerBase<UsuarioEntityService, Usuari
         return await Create<CreateUsuarioDto, ReadUsuarioDto>(dadosDto);
     }
 
-    [HttpGet]
+    [HttpGet("pedidos")]
     [ProducesResponseType(typeof(ReadUsuarioPedidosDto[]), StatusCodes.Status200OK)]
     public IActionResult FindUsers()
     {
         var usuarioPedidos = EntityService.LePedidosUsuarios();
 
         return Ok(Mapper.Map<List<ReadUsuarioPedidosDto>>(usuarioPedidos));
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ReadUsuarioPedidosDto), StatusCodes.Status200OK)]
+    public IActionResult FindUser([FromQuery] UsuarioFiltroDto filtroDto)
+    {
+        return Find(filtroDto);
     }
 
     protected override void OnSetEntityService()

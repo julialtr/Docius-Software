@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { FilterUsuario } from "../Admin/Cadastros/Clientes/interfaces";
-import { login } from "@/services/usuario";
+import { findUsuario, login } from "@/services/usuario";
 
 import Link from "next/link";
 
@@ -38,8 +38,13 @@ export default function Login() {
 
     try {
       await login(dados);
+      const response = await findUsuario(dados);
 
-      router.push(`/${dadosEmpresa?.dominio}/Cadastros/Clientes`);
+      if (response[0].tipoUsuarioId == 2)
+        router.push(`/${dadosEmpresa?.dominio}/Admin/Cadastros/Clientes`);
+      else router.push(`/${dadosEmpresa?.dominio}/Client/Pagamento`);
+
+      router.refresh();
     } catch (error) {
       if (error instanceof Warning) {
         console.log(error);

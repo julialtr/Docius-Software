@@ -20,16 +20,16 @@ export async function middleware(req: NextRequest) {
     const userRole =
       payload["role"] ||
       payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-    const adminRoutes = ["/Admin"];
-    if (userRole != "2") {
+      
+    const adminRoutes = ["/Admin/"];
+    if (userRole != "2") {     
       for (const adminRoute of adminRoutes) {
         if (pathname.includes(adminRoute))
           return NextResponse.redirect(new URL("/NaoEncontrado", req.url));
       }
     }
 
-    const clientRoutes = ["/Client"];
+    const clientRoutes = ["/Client/"];
     if (userRole != "1") {
       for (const clientRoute of clientRoutes) {
         if (pathname.includes(clientRoute))

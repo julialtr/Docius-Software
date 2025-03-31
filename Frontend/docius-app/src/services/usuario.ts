@@ -32,8 +32,8 @@ export const createUsuario = async (usuario: CreateUsuario) => {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
-        body: JSON.stringify([usuario]),
-        credentials: "include",
+      body: JSON.stringify([usuario]),
+      credentials: "include",
     });
 
     if (!response.ok) {
@@ -48,8 +48,33 @@ export const createUsuario = async (usuario: CreateUsuario) => {
 
 export const findUsuarios = async () => {
   try {
-    const response = await fetch(`${LINK_API}/usuario`, {
+    const response = await fetch(`${LINK_API}/usuario/pedidos`, {
       method: "GET",
+      credentials: "include",
+    });
+
+    if (response.status === 204) return [];
+
+    const data = await response.json();
+
+    if (response.ok) return data;
+
+    throw new Error(data.Message || "Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const findUsuario = async (filtro: FilterUsuario) => {
+  try {
+    const queryParams = new URLSearchParams(filtro as any).toString();
+
+    const response = await fetch(`${LINK_API}/usuario?${queryParams}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
       credentials: "include",
     });
 
