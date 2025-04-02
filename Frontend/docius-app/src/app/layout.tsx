@@ -5,6 +5,7 @@ import { Toaster } from "./_components/ui/toaster";
 
 import { DadosEmpresaProvider } from "@/context/DadosEmpresaContext";
 import { DadosCategoriaProdutoProvider } from "@/context/DadosCategoriaProdutoContext";
+import { DadosCotacaoProvider } from "@/context/DadosCotacaoContext";
 
 export const metadata: Metadata = {
   title: "Docius",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <DadosEmpresaProvider>
       <DadosCategoriaProdutoProvider>
-        <html lang="pt-BR">
-          <body>
-            {children}
-            <Toaster />
-          </body>
-        </html>
+        <DadosCotacaoProvider>
+          <html lang="pt-BR">
+            <body>
+              {children}
+              <Toaster />
+            </body>
+          </html>
+        </DadosCotacaoProvider>
       </DadosCategoriaProdutoProvider>
     </DadosEmpresaProvider>
   );
