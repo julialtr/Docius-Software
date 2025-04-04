@@ -1,0 +1,38 @@
+Tela de Cotação de Ingredientes
+Acesso restrito: Disponível apenas para administradores.
+
+A tela de Cotação de Ingredientes permite realizar cotações diretamente na plataforma de gerenciamento da confeitaria, simplificando o processo de comparação de preços.
+
+Tipos de Cotação
+A cotação pode ser realizada de duas formas:
+
+Cotação Automática
+- Disponível apenas para os fornecedores Giassi e Fort Atacadista, que já vêm cadastrados no sistema.
+- Esse recurso foi desenvolvido especificamente para buscar preços diretamente nos sites desses fornecedores.
+
+Cotação Manual
+- Permite que o administrador adicione, edite e exclua cotações manualmente.
+- Pode ser utilizada para inserir informações de fornecedores que não possuem suporte para a cotação automática.
+
+Fluxo de Cotação
+Aba "Buscar Cotações"
+- Permite inserir um termo de busca para encontrar ingredientes.
+- É possível selecionar quais fornecedores (Giassi, Fort Atacadista ou ambos) serão considerados na cotação automática.
+- Após clicar em "Buscar", o sistema inicia a consulta nos sites dos fornecedores em tempo real, o que pode levar alguns instantes.
+
+Aba "Resultados"
+- Exibe os resultados da cotação automática.
+- Permite a inclusão, edição e exclusão de cotações manuais.
+- As cotações automáticas podem ser alteradas ou excluídas, exceto no campo de fornecedor.
+- Todas as cotações são apresentadas em uma lista com os campos Nome do ingrediente, Preço e Fornecedor, que são os fornecedores cadastrados na tela de fornecedores.
+- As informações podem ser ordenadas e filtradas para facilitar a análise.
+
+Observações Importantes
+- As cotações NÃO são armazenadas no banco de dados.
+- Todos os dados serão perdidos ao recarregar a tela.
+- Para evitar a perda de informações, siga o fluxo corretamente.
+
+Ordem recomendada de uso:
+- Realizar a cotação automática (se necessário).
+- Adicionar cotações manuais (se necessário).
+- Analisar os preços e tomar decisões antes de fechar a página.
