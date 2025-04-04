@@ -51,7 +51,6 @@ export default function FormularioProduto({
     nome: "",
     preco: 0,
     qtdPedidos: 0,
-    categoriaProdutoId: 0,
     receita: {
       id: 0,
       nome: "",
@@ -73,8 +72,8 @@ export default function FormularioProduto({
     categorias: ReadCategoriaProduto[],
     data: ReadProduto,
     parentId?: number
-  ): ReadCategoriaProduto[] => {  
-    return categorias.map((cat) => {
+  ): ReadCategoriaProduto[] => {
+    return categorias?.map((cat) => {
       if (cat.id === parentId) {
         return {
           ...cat,
@@ -100,13 +99,20 @@ export default function FormularioProduto({
 
     let novoCardapio = { ...dados };
 
-    dadosProduto.categoriaProdutoId = categoriaSuperiorId ?? 0;
+    if (categoriaSuperiorId) {
+      dadosProduto.categoriaProdutoId = categoriaSuperiorId;
 
-    novoCardapio.categoriaProduto = updateCardapio(
-      novoCardapio.categoriaProduto,
-      dadosProduto,
-      categoriaSuperiorId ?? 0
-    );
+      novoCardapio.categoriaProduto = updateCardapio(
+        novoCardapio.categoriaProduto,
+        dadosProduto,
+        categoriaSuperiorId
+      );
+    } else {
+      novoCardapio.categoriaProduto = updateCardapio(
+        novoCardapio.categoriaProduto,
+        dadosProduto
+      );
+    }
 
     onDadosChange(novoCardapio);
 
@@ -127,7 +133,6 @@ export default function FormularioProduto({
       nome: "",
       preco: 0,
       qtdPedidos: 0,
-      categoriaProdutoId: 0,
       receita: {
         id: 0,
         nome: "",
@@ -171,7 +176,7 @@ export default function FormularioProduto({
                 <SelectValue placeholder="Selecione um produto..." />
               </SelectTrigger>
               <SelectContent>
-                {produtos.map((produto) => (
+                {produtos?.map((produto) => (
                   <SelectItem key={produto.id} value={produto.id.toString()}>
                     {produto.nome}
                   </SelectItem>

@@ -71,7 +71,7 @@ export default function ListaItens({
     const updateOpenState = (
       categorias: ReadCategoriaProduto[]
     ): ReadCategoriaProduto[] => {
-      return categorias.map((categoria) => {
+      return categorias?.map((categoria) => {
         if (categoria.id === id) {
           return { ...categoria, isOpen: !categoria.isOpen };
         }
@@ -131,7 +131,7 @@ export default function ListaItens({
                       produtos.length ? "" : "opacity-50"
                     }`}
                     onClick={() => {
-                      handleOpenDialog(true, categoria.id);
+                      if (produtos.length) handleOpenDialog(true, categoria.id);
                     }}
                   >
                     <ClipboardList className="mr-2 h-4 w-4" />
@@ -166,12 +166,12 @@ export default function ListaItens({
               />
 
               {/* Subcategorias */}
-              {categoria.categoriaProdutoInferior.map((subcategoria) =>
+              {categoria.categoriaProdutoInferior?.map((subcategoria) =>
                 renderCategoria(subcategoria, level + 1)
               )}
 
               {categoria.produto.length === 0 &&
-                categoria.categoriaProdutoInferior.length === 0 && (
+                categoria.categoriaProdutoInferior?.length === 0 && (
                   <div className="text-center text-gray-500 py-4">
                     Nenhum produto ou subcategoria adicionada.
                   </div>
@@ -186,7 +186,7 @@ export default function ListaItens({
   return (
     <div className="space-y-4">
       {dados.categoriaProduto.length > 0 ? (
-        dados.categoriaProduto.map((categoria) => renderCategoria(categoria))
+        dados.categoriaProduto?.map((categoria) => renderCategoria(categoria))
       ) : (
         <div className="bg-white rounded-lg shadow p-8 text-center">
           <MenuIcon className="h-12 w-12 text-amber-300 mx-auto mb-4" />

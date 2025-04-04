@@ -38,7 +38,7 @@ export default function AlertaExclusao({
     id: number,
     parentId: number
   ): ReadCategoriaProduto[] => {
-    return categorias.map((categoria) => {
+    return categorias?.map((categoria) => {
       if (categoria.id === parentId) {
         return {
           ...categoria,
@@ -61,6 +61,9 @@ export default function AlertaExclusao({
     categorias: ReadCategoriaProduto[],
     id: number
   ): ReadCategoriaProduto | null => {
+    if (!categorias)
+      return null;
+
     for (const categoria of categorias) {
       const itemFound = categoria.produto.find((item) => item.id === id);
       if (itemFound) {

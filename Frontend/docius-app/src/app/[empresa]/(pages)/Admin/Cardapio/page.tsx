@@ -13,7 +13,7 @@ import FormularioCategoriaProduto from "./(CategoriaProduto)/FormularioCategoria
 import { ReadCardapio, updateConvert } from "./interfaces";
 import { ReadProduto } from "../Cadastros/Produtos/interfaces";
 import { ReadCategoriaProduto } from "./(CategoriaProduto)/interfaces";
-import { findCardapios, updateCardapio } from "@/services/cardapio";
+import { findCardapio, updateCardapio } from "@/services/cardapio";
 import { findProdutos } from "@/services/produto";
 
 import { Button } from "@/app/_components/ui/button";
@@ -28,6 +28,7 @@ export default function Cardapio() {
     categoriaProduto: [],
   });
   const [produtos, setProdutos] = useState<ReadProduto[]>([]);
+  const [produtosFiltrados, setProdutosFiltrados] = useState<ReadProduto[]>([]);
   const [produto, setProduto] = useState<ReadProduto | null>(null);
   const [categoria, setCategoria] = useState<ReadCategoriaProduto | null>(null);
 
@@ -38,20 +39,15 @@ export default function Cardapio() {
     null
   );
 
-  const produtosFiltrados = produtos.filter(
-    (produto) =>
-      !dados.categoriaProduto.some((categoria) =>
-        categoria.produto.some((p) => p.id === produto.id)
-      )
-  );
-
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
 
+      let produtosResponse: ReadProduto[] = [];
+
       try {
-        const response = await findProdutos();
-        setProdutos(response);
+        produtosResponse = await findProdutos();
+        setProdutos(produtosResponse);
       } catch (error) {
         if (error instanceof Error) {
           console.error(error);
@@ -64,9 +60,11 @@ export default function Cardapio() {
         }
       }
 
+      let cardapioResponse: ReadCardapio;
+
       try {
-        const response = await findCardapios();
-        setDados(response[0]);
+        cardapioResponse = await findCardapio();
+        setDados(cardapioResponse);
       } catch (error) {
         if (error instanceof Error) {
           console.error(error);
@@ -80,13 +78,46 @@ export default function Cardapio() {
       } finally {
         setIsLoading(false);
       }
+
+      setProdutosFiltrados(
+        produtosResponse.filter(
+          (produto) =>
+            produto.preco !== 0 &&
+            !cardapioResponse.categoriaProduto?.some((categoria) =>
+              produtoEstaNoCardapio(categoria, produto.id)
+            )
+        )
+      );
     };
 
     loadData();
   }, []);
 
+  const produtoEstaNoCardapio = (
+    categoria: ReadCategoriaProduto,
+    produtoId: number
+  ): boolean => {
+    if (categoria?.produto?.some((p) => p.id === produtoId)) {
+      return true;
+    }
+
+    return categoria?.categoriaProdutoInferior?.some((subCategoria) =>
+      produtoEstaNoCardapio(subCategoria, produtoId)
+    );
+  };
+
   const handleDadosChange = (novosDados: ReadCardapio) => {
     setDados(novosDados);
+
+    setProdutosFiltrados(
+      produtos.filter(
+        (produto) =>
+          produto.preco !== 0 &&
+          !novosDados.categoriaProduto?.some((categoria) =>
+            produtoEstaNoCardapio(categoria, produto.id)
+          )
+      )
+    );
   };
 
   const handleIsDialogOpenChange = (isDialogOpen: boolean) => {

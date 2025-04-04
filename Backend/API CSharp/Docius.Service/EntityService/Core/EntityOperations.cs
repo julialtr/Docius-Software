@@ -7,12 +7,24 @@ namespace Docius.Service.EntityService.Core;
 
 public abstract class EntityOperations<TEntity, TEntityTypeId, TFilter> : IEntityOperations<TEntity, TEntityTypeId, TFilter> where TFilter : FiltroBase<TEntityTypeId> where TEntity : EntityBase<TEntityTypeId>, new()
 {
-    protected DbContext DbContext { get; }
+    private DbContext DbContext { get; }
     public DbSet<TEntity> Entity => DbContext.Set<TEntity>();
 
     protected EntityOperations(DbContext dbContext)
     {
         DbContext = dbContext;
+    }
+
+    public void SaveChanges()
+    {
+        try
+        {
+            DbContext.SaveChanges();
+        }
+        catch (Exception)
+        {
+            throw new Exception($"Erro ao salvar alterações.");
+        }
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity)
@@ -85,7 +97,7 @@ public abstract class EntityOperations<TEntity, TEntityTypeId, TFilter> : IEntit
             Entity.UpdateRange(entities);
             await DbContext.SaveChangesAsync();
         }
-        catch (Exception)
+        catch (Exception e)
         {
             throw new Exception($"Erro ao atualizar a entidade {Entity.GetType().Name}.");
         }

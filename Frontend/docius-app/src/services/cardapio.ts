@@ -3,7 +3,7 @@ import {
 } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
 import { LINK_API } from "@/utils/constants";
 
-export const findCardapios = async () => {
+export const findCardapio = async () => {
   try {
     const response = await fetch(`${LINK_API}/cardapio`, {
       method: "GET",

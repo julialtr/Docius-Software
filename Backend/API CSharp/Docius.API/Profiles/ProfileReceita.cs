@@ -13,5 +13,6 @@ public class ProfileReceita: ProfileBase
         CreateMap<CreateReceitaDto, Receita>();
 
         CreateMap<ReceitaDetalhada, ReadReceitaDto>();
+        CreateMap<Receita, ReadReceitaDto>();
     }
 }

@@ -54,7 +54,6 @@ export default function FormularioProdutos({
     nome: "",
     preco: 0,
     qtdPedidos: 0,
-    categoriaProdutoId: 0,
     receita: {
       id: 0,
       nome: "",
@@ -170,7 +169,6 @@ export default function FormularioProdutos({
       nome: "",
       preco: 0,
       qtdPedidos: 0,
-      categoriaProdutoId: 0,
       receita: {
         id: 0,
         nome: "",

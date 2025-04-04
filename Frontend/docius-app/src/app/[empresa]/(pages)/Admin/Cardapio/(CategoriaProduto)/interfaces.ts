@@ -7,7 +7,7 @@ export interface UpdateCategoriaProduto {
   nome: string;
   cardapioId: number;
   categoriaProdutoInferior: UpdateCategoriaProduto[];
-  categoriaProdutoSuperiorId: number;
+  categoriaProdutoSuperiorId?: number;
   produto: UpdateProdutoCardapio[];
 }
 
@@ -16,7 +16,7 @@ export interface ReadCategoriaProduto {
   nome: string;
   cardapioId: number;
   categoriaProdutoInferior: ReadCategoriaProduto[];
-  categoriaProdutoSuperiorId: number;
+  categoriaProdutoSuperiorId?: number;
   produto: ReadProduto[];
   isOpen: boolean;
 }

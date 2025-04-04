@@ -15,18 +15,18 @@ public class UpdateCategoriaProdutoDto : CreateDtoBase
 
     public int CategoriaProdutoSuperiorId { get; set; }
 
-    public virtual List<UpdateProdutoDto> Produto { get; set; }
+    public virtual List<UpdateProdutoCardapioDto> Produto { get; set; }
 }
 
 public class ReadCategoriaProdutoDto : ReadDtoBase<int>
 {
     public string Nome { get; set; }
 
-    public int CardapioId { get; set; }
+    public int? CardapioId { get; set; }
 
     public virtual List<ReadCategoriaProdutoDto> CategoriaProdutoInferior { get; set; }
 
-    public int CategoriaProdutoSuperiorId { get; set; }
+    public int? CategoriaProdutoSuperiorId { get; set; }
 
     public virtual List<ReadProdutoDto> Produto { get; set; }
 }

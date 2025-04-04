@@ -20,9 +20,10 @@ public sealed class CategoriaProdutoEntityService : EntityServiceBase<EinBissEnt
         if (string.IsNullOrEmpty(entity.Nome))
             throw new WarningException("Nome deve ser informado.");
 
-        EntityService.Cardapio.ValidateId(entity.CardapioId, "Cardápio deve ser informado.", "Cardápio informado é inválido.");
+        if (entity.CardapioId != null)
+            EntityService.Cardapio.ValidateId(entity.CardapioId.Value, "Cardápio deve ser informado.", "Cardápio informado é inválido.");
 
-        if (entity.CategoriaProdutoSuperiorId != 0)
-            EntityService.CategoriaProduto.ValidateId(entity.CardapioId, "Categoria superior do produto deve ser informada.", "Categoria superior do produto informada é inválida.");
+        if (entity.CategoriaProdutoSuperiorId != null)
+            EntityService.CategoriaProduto.ValidateId(entity.CategoriaProdutoSuperiorId.Value, "Categoria superior do produto deve ser informada.", "Categoria superior do produto informada é inválida.");
     }
 }

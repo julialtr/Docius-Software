@@ -47,7 +47,6 @@ export default function FormularioCategoriaProduto({
     nome: "",
     cardapioId: 0,
     categoriaProdutoInferior: [],
-    categoriaProdutoSuperiorId: 0,
     produto: [],
     isOpen: false,
   });
@@ -70,7 +69,7 @@ export default function FormularioCategoriaProduto({
     categorias: ReadCategoriaProduto[],
     data: ReadCategoriaProduto
   ): ReadCategoriaProduto[] => {
-    return categorias.map((cat) => {
+    return categorias?.map((cat) => {
       if (cat.id === data.id) {
         return {
           ...cat,
@@ -97,13 +96,13 @@ export default function FormularioCategoriaProduto({
 
     let categoriaAdicionada = false;
 
-    const novaLista = categorias.map((cat) => {
+    const novaLista = categorias?.map((cat) => {
       if (cat.id === dadosCategoria.categoriaProdutoSuperiorId) {
         categoriaAdicionada = true;
         return {
           ...cat,
           categoriaProdutoInferior: [
-            ...cat.categoriaProdutoInferior,
+            ...(cat.categoriaProdutoInferior || []),
             dadosCategoria,
           ],
         };
@@ -146,7 +145,9 @@ export default function FormularioCategoriaProduto({
     } else {
       dadosCategoria.id = incrementaId();
       dadosCategoria.cardapioId = dados.id;
-      dadosCategoria.categoriaProdutoSuperiorId = categoriaSuperiorId ?? 0;
+
+      if (categoriaSuperiorId)
+        dadosCategoria.categoriaProdutoSuperiorId = categoriaSuperiorId;
 
       novoCardapio = {
         ...dados,
@@ -173,7 +174,6 @@ export default function FormularioCategoriaProduto({
       nome: "",
       cardapioId: 0,
       categoriaProdutoInferior: [],
-      categoriaProdutoSuperiorId: 0,
       produto: [],
       isOpen: false,
     });

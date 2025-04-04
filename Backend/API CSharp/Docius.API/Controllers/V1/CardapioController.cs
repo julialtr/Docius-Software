@@ -22,20 +22,21 @@ public class CardapioController : CrudControllerBase<CardapioEntityService, Card
     [ProducesResponseType(typeof(ReadCardapioDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateCardapio(int id, [FromBody] UpdateCardapioDto dadosDto)
     {
-        var dados = new Cardapio();
-        Mapper.Map(dadosDto, dados);
+        var dados = Mapper.Map<Cardapio>(dadosDto);
         dados.Id = id;
 
-        return Ok(Mapper.Map<ReadCardapioDto>(await EntityService.AtualizaCardapioAsync(dados)));
+        await EntityService.AtualizaCardapioAsync(dados);
+
+        var cardapio = await EntityService.LeCardapio();
+        return Ok(Mapper.Map<ReadCardapioDto>(cardapio));
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ReadCardapioDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindCardapios([FromQuery] CardapioFiltroDto filtroDto)
+    [ProducesResponseType(typeof(ReadCardapioDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> FindCardapio([FromQuery] CardapioFiltroDto filtroDto)
     {
-        var cardapios = EntityService.LeCardapios();
-
-        return Ok(Mapper.Map<List<ReadCardapioDto>>(cardapios));
+        var cardapio = await EntityService.LeCardapio();
+        return Ok(Mapper.Map<ReadCardapioDto>(cardapio));
     }
 
     protected override void OnSetEntityService()

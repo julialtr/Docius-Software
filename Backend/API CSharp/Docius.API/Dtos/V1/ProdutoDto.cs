@@ -26,6 +26,25 @@ public class UpdateProdutoDto : UpdateDtoBase
     public int? CategoriaProdutoId { get; set; }
 }
 
+public class UpdateProdutoCardapioDto : UpdateDtoBase
+{
+    [Required]
+    public int Id { get; set; }
+
+    [Required]
+    public string Nome { get; set; }
+
+    [Required]
+    public decimal Preco { get; set; }
+
+    public int QtdPedidos { get; set; }
+
+    [Required]
+    public int ReceitaId { get; set; }
+
+    public int? CategoriaProdutoId { get; set; }
+}
+
 public class ReadProdutoDto : ReadDtoBase<int>
 {
     public string Nome { get; set; }
