@@ -13,8 +13,7 @@ public class EinBissContext : DbContext
     public virtual DbSet<CategoriaIngrediente> CategoriasIngredientes { get; set; }
     public virtual DbSet<CategoriaProduto> CategoriasProdutos { get; set; }
     public virtual DbSet<DecoracaoBolo> DecoracoesBolos { get; set; }
-    public virtual DbSet<DecoracaoBoloPedido> DecoracoesBolosPedidos { get; set; }
-    public virtual DbSet<DecoracaoBoloPedidoPersonalizacao> DecoracoesBolosPedidosPersonalizacoes { get; set; }
+    public virtual DbSet<PersonalizacaoFoto> PersonalizacoesFotos { get; set; }
     public virtual DbSet<Fornecedor> Fornecedores { get; set; }
     public virtual DbSet<Gasto> Gastos { get; set; }
     public virtual DbSet<Ingrediente> Ingredientes { get; set; }

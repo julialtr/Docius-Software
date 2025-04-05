@@ -15,7 +15,7 @@ public class Personalizacao : EntityBase<int>
     [MaxLength(5000)]
     public string Descricao { get; set; }
 
-    public virtual List<DecoracaoBoloPedidoPersonalizacao> DecoracaoBoloPedidoPersonalizacao { get; set; }
+    public virtual List<PersonalizacaoFoto> PersonalizacaoFoto { get; set; }
 
     public virtual PedidoProduto PedidoProduto { get; set; }
 }

@@ -9,8 +9,7 @@ public sealed class EinBissEntityService
     private readonly Lazy<CategoriaIngredienteEntityService> _entityServiceCategoriaIngrediente;
     private readonly Lazy<CategoriaProdutoEntityService> _entityServiceCategoriaProduto;
     private readonly Lazy<DecoracaoBoloEntityService> _entityServiceDecoracaoBolo;
-    private readonly Lazy<DecoracaoBoloPedidoEntityService> _entityServiceDecoracaoBoloPedido;
-    private readonly Lazy<DecoracaoBoloPedidoPersonalizacaoEntityService> _entityServiceDecoracaoBoloPedidoPersonalizacao;
+    private readonly Lazy<PersonalizacaoFotoEntityService> _entityServiceDecoracaoBoloPedido;
     private readonly Lazy<FornecedorEntityService> _entityServiceFornecedor;
     private readonly Lazy<GastoEntityService> _entityServiceGasto;
     private readonly Lazy<IngredienteEntityService> _entityServiceIngrediente;
@@ -32,8 +31,7 @@ public sealed class EinBissEntityService
     public CategoriaIngredienteEntityService CategoriaIngrediente => _entityServiceCategoriaIngrediente.Value;
     public CategoriaProdutoEntityService CategoriaProduto => _entityServiceCategoriaProduto.Value;
     public DecoracaoBoloEntityService DecoracaoBolo => _entityServiceDecoracaoBolo.Value;
-    public DecoracaoBoloPedidoEntityService DecoracaoBoloPedido => _entityServiceDecoracaoBoloPedido.Value;
-    public DecoracaoBoloPedidoPersonalizacaoEntityService DecoracaoBoloPedidoPersonalizacao => _entityServiceDecoracaoBoloPedidoPersonalizacao.Value;
+    public PersonalizacaoFotoEntityService DecoracaoBoloPedido => _entityServiceDecoracaoBoloPedido.Value;
     public FornecedorEntityService Fornecedor => _entityServiceFornecedor.Value;
     public GastoEntityService Gasto => _entityServiceGasto.Value;
     public IngredienteEntityService Ingrediente => _entityServiceIngrediente.Value;
@@ -57,8 +55,7 @@ public sealed class EinBissEntityService
         _entityServiceCategoriaIngrediente = new(() => new CategoriaIngredienteEntityService(this, context));
         _entityServiceCategoriaProduto = new(() => new CategoriaProdutoEntityService(this, context));
         _entityServiceDecoracaoBolo = new(() => new DecoracaoBoloEntityService(this, context));
-        _entityServiceDecoracaoBoloPedido = new(() => new DecoracaoBoloPedidoEntityService(this, context));
-        _entityServiceDecoracaoBoloPedidoPersonalizacao = new(() => new DecoracaoBoloPedidoPersonalizacaoEntityService(this, context));
+        _entityServiceDecoracaoBoloPedido = new(() => new PersonalizacaoFotoEntityService(this, context));
         _entityServiceFornecedor = new(() => new FornecedorEntityService(this, context));
         _entityServiceGasto = new(() => new GastoEntityService(this, context));
         _entityServiceIngrediente = new(() => new IngredienteEntityService(this, context));
