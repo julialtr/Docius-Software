@@ -17,8 +17,8 @@ public sealed class PersonalizacaoFotoEntityService : EntityServiceBase<EinBissE
 
     protected override void OnValidateEntity(PersonalizacaoFoto entity)
     {
-        if (entity.Foto == null || entity.Foto.Length == 0)
-            throw new WarningException("Foto deve ser informada.");
+        if (entity.CaminhoFoto.Length == 0)
+            throw new WarningException("Caminho da foto deve ser informada.");
 
         if (entity.PersonalizacaoId != 0)
             EntityService.Personalizacao.ValidateId(entity.PersonalizacaoId, "Personalização deve ser informada.", "Personalização informada é inválida.");

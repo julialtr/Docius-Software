@@ -11,9 +11,9 @@ public class PersonalizacaoFotoFiltro : FiltroBase<int>
 [Table("personalizacoes_fotos")]
 public class PersonalizacaoFoto : EntityBase<int>
 {
-    [Column("foto")]
+    [Column("caminho_foto")]
     [Required]
-    public Byte[] Foto { get; set; }
+    public string CaminhoFoto { get; set; }
 
     [Column("personalizacao_id")]
     [Required]

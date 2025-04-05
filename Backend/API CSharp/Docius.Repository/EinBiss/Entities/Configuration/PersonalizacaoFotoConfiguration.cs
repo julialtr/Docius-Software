@@ -10,7 +10,7 @@ public class PersonalizacaoFotoConfiguration : IEntityTypeConfiguration<Personal
     {
         builder.HasKey(entity => entity.Id);
 
-        builder.Property(entity => entity.Foto).IsRequired();
+        builder.Property(entity => entity.CaminhoFoto).IsRequired();
         builder.Property(entity => entity.PersonalizacaoId).IsRequired();
     }
 }
