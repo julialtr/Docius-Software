@@ -24,6 +24,7 @@ import { Input } from "@/app/_components/ui/input";
 import { formatMoney } from "@/utils/format";
 import { useDadosCarrinhoCompras } from "@/context/DadosCarrinhoComprasContext";
 import { useDadosPersonalizacaoFoto } from "@/context/DadosPersonalizacaoFotoContext";
+import { calculaTotal } from "@/utils/calculo";
 
 export function FormularioProduto({
   pedidoProduto,
@@ -262,7 +263,7 @@ export function FormularioProduto({
             onClick={handleAdicionaProduto}
           >
             Adicionar ao Carrinho •{" "}
-            {formatMoney(produto?.preco ?? 0 * quantidade)}
+            {formatMoney(calculaTotal(produto?.preco ?? 0, quantidade))}
           </Button>
         </div>
       </DialogContent>

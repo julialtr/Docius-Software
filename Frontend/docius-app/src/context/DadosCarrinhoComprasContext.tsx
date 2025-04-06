@@ -8,6 +8,7 @@ import { CreatePedidoProduto } from "@/app/[empresa]/(pages)/Client/Cardapio/int
 import { findProdutos } from "@/services/produto";
 
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+import { calculaTotal } from "@/utils/calculo";
 
 interface DadosCarrinhoComprasContextProps {
   pedidoProdutos: CreatePedidoProduto[];
@@ -142,7 +143,7 @@ export const DadosCarrinhoComprasProvider = ({
   const precoTotal = pedidoProdutos.reduce((total, item) => {
     const produto = getProduto(item.produtoId);
     const preco = produto?.preco ?? 0;
-    return total + preco * item.quantidade;
+    return total + calculaTotal(preco, item.quantidade);
   }, 0);
 
   return (

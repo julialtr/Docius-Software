@@ -30,6 +30,7 @@ import { Separator } from "@/app/_components/ui/separator";
 
 import { useDadosCarrinhoCompras } from "@/context/DadosCarrinhoComprasContext";
 import { formatMoney } from "@/utils/format";
+import { calculaTotal } from "@/utils/calculo";
 
 export function CarrinhoCompras() {
   const {
@@ -134,8 +135,10 @@ export function CarrinhoCompras() {
                               <span>{pedidoProduto.quantidade}</span>
                               <span className="ml-auto font-medium text-amber-700">
                                 {formatMoney(
-                                  (produto?.preco ?? 0) *
+                                  calculaTotal(
+                                    produto?.preco ?? 0,
                                     pedidoProduto.quantidade
+                                  )
                                 )}
                               </span>
                             </div>
