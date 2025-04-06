@@ -26,7 +26,7 @@ public sealed class PedidoProdutoEntityService : EntityServiceBase<EinBissEntity
         if (entity.StatusPedidoProdutoId != 0)
             EntityService.StatusPedidoProduto.ValidateId(entity.StatusPedidoProdutoId, "Status do pedido do produto deve ser informado.", "Status do pedido do produto informado é inválido.");
 
-        if (entity.PersonalizacaoId != 0)
-            EntityService.Personalizacao.ValidateId(entity.PersonalizacaoId, "Personalização deve ser informada.", "Personalização informada é inválida.");
+        if (entity.PersonalizacaoId != null)
+            EntityService.Personalizacao.ValidateId(entity.PersonalizacaoId.Value, "Personalização deve ser informada.", "Personalização informada é inválida.");
     }
 }

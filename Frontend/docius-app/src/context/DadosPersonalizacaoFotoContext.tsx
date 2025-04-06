@@ -2,16 +2,16 @@
 
 import { createContext, useContext, useState } from "react";
 
-interface DadosCategoriaProdutoContextProps {
+interface DadosPersonalizacaoFotoContextProps {
   id: number;
   incrementaId: () => number;
 }
 
-const DadosCategoriaProdutoContext = createContext<
-  DadosCategoriaProdutoContextProps | undefined
+const DadosPersonalizacaoFotoContext = createContext<
+  DadosPersonalizacaoFotoContextProps | undefined
 >(undefined);
 
-export const DadosCategoriaProdutoProvider = ({
+export const DadosPersonalizacaoFotoProvider = ({
   children,
 }: {
   children: React.ReactNode;
@@ -26,14 +26,14 @@ export const DadosCategoriaProdutoProvider = ({
   };
 
   return (
-    <DadosCategoriaProdutoContext.Provider value={{ id, incrementaId }}>
+    <DadosPersonalizacaoFotoContext.Provider value={{ id, incrementaId }}>
       {children}
-    </DadosCategoriaProdutoContext.Provider>
+    </DadosPersonalizacaoFotoContext.Provider>
   );
 };
 
-export const useDadosCategoriaProduto = () => {
-  const context = useContext(DadosCategoriaProdutoContext);
+export const useDadosPersonalizacaoFoto = () => {
+  const context = useContext(DadosPersonalizacaoFotoContext);
   if (!context) {
     throw new Error("Falha ao usar o contexto.");
   }

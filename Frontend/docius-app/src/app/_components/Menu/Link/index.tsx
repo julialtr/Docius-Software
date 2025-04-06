@@ -17,9 +17,9 @@ export default function MenuLink({
   isSidebarCollapsed = false,
 }: {
   href: string;
-  icon: React.ElementType;
+  icon?: React.ElementType;
   label: string;
-  isSidebarCollapsed: boolean;
+  isSidebarCollapsed?: boolean;
 }) {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -36,9 +36,11 @@ export default function MenuLink({
           ${isSidebarCollapsed ? "justify-center" : ""}
         `}
     >
-      <Icon
-        className={isSidebarCollapsed ? "h4 w-4 flex-shrink-0" : "h-6 w-6"}
-      />
+      {Icon && (
+        <Icon
+          className={isSidebarCollapsed ? "h4 w-4 flex-shrink-0" : "h-6 w-6"}
+        />
+      )}
       {!isSidebarCollapsed && <span>{label}</span>}
     </Link>
   );

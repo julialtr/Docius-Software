@@ -32,7 +32,7 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
             var usuario = usuarios.FirstOrDefault();
             if (usuario != null)
             {
-                _autenticacaoEntityService.GenerateAccessToken(usuario.Email, usuario.TipoUsuarioId);
+                _autenticacaoEntityService.GenerateAccessToken(usuario.Email, usuario.TipoUsuarioId, usuario.Id);
                 return Ok();
             }
         }

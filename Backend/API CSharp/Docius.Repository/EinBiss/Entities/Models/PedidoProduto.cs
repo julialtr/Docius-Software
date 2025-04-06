@@ -33,7 +33,7 @@ public class PedidoProduto : EntityBase<int>
     public StatusPedidoProduto StatusPedidoProduto { get; set; }
 
     [Column("personalizacao_id")]
-    public int PersonalizacaoId { get; set; }
+    public int? PersonalizacaoId { get; set; }
 
     public Personalizacao Personalizacao { get; set; }
 }

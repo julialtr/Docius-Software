@@ -22,11 +22,13 @@ import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
 import Loading from "@/app/loading";
 import { useRouter } from "next/navigation";
+import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export default function Login() {
   const router = useRouter();
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
+  const { setId } = useDadosUsuario();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,6 +41,9 @@ export default function Login() {
     try {
       await login(dados);
       const response = await findUsuario(dados);
+      
+      setId(response[0].id);
+      localStorage.setItem("userId", response[0].id.toString());
 
       if (response[0].tipoUsuarioId == 2)
         router.push(`/${dadosEmpresa?.dominio}/Admin/Cadastros/Clientes`);
