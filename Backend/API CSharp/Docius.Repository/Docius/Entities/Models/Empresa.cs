@@ -18,6 +18,16 @@ public class Empresa : EntityBase<int>
     [Required]
     public string Nome { get; set; }
 
+    [Column("chave_pix")]
+    [MaxLength(100)]
+    [Required]
+    public string ChavePix { get; set; }
+
+    [Column("cidade")]
+    [MaxLength(100)]
+    [Required]
+    public string Cidade { get; set; }
+
     [Column("caminho_logo")]
     [Required]
     public string CaminhoLogo { get; set; }

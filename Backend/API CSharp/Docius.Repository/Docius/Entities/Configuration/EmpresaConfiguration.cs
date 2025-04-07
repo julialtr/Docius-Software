@@ -11,6 +11,8 @@ public class EmpresaConfiguration : IEntityTypeConfiguration<Empresa>
         builder.HasKey(entity => entity.Id);
 
         builder.Property(entity => entity.Nome).IsRequired();
+        builder.Property(entity => entity.ChavePix).IsRequired();
+        builder.Property(entity => entity.Cidade).IsRequired();
         builder.Property(entity => entity.CaminhoLogo).IsRequired();
         builder.Property(entity => entity.CaminhoImagem1).IsRequired();
         builder.Property(entity => entity.CaminhoImagem2).IsRequired();

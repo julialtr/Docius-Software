@@ -22,16 +22,22 @@ public sealed class EmpresaEntityService : EntityServiceBase<DociusEntityService
         if (string.IsNullOrEmpty(entity.Nome))
             throw new WarningException("Nome deve ser informado.");
 
+        if (string.IsNullOrEmpty(entity.ChavePix))
+            throw new WarningException("Chave Pix deve ser informada.");
+
+        if (string.IsNullOrEmpty(entity.Cidade))
+            throw new WarningException("Cidade deve ser informada.");
+
         if (string.IsNullOrEmpty(entity.CaminhoLogo))
-            throw new WarningException("CaminhoLogo deve ser informado.");
+            throw new WarningException("Caminho da logo deve ser informada.");
 
         if (string.IsNullOrEmpty(entity.CaminhoImagem1))
-            throw new WarningException("CaminhoImagem1 deve ser informado.");
+            throw new WarningException("Caminho da primeira imagem deve ser informado.");
 
         if (string.IsNullOrEmpty(entity.CaminhoImagem2))
-            throw new WarningException("CaminhoImagem2 deve ser informado.");
+            throw new WarningException("Caminho da segunda imagem deve ser informado.");
 
         if (string.IsNullOrEmpty(entity.Dominio))
-            throw new WarningException("Dominio deve ser informado.");
+            throw new WarningException("Domínio deve ser informado.");
     }
 }
