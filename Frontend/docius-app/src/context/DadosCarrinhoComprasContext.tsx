@@ -59,7 +59,6 @@ export const DadosCarrinhoComprasProvider = ({
       const response = localStorage.getItem(`carrinhoCompras-${id}`);
       
       if (response) {
-        console.log(JSON.parse(response));
         try {
           setPedidoProdutos(JSON.parse(response));
         } catch (error) {

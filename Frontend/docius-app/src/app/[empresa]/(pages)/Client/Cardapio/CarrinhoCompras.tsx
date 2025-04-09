@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   ShoppingCart,
@@ -14,6 +15,7 @@ import {
 import { FormularioProduto } from "./FormularioProduto";
 import { ReadProduto } from "../../Admin/Cadastros/Produtos/interfaces";
 import { CreatePedidoProduto } from "./interfaces";
+import { DatePickerModal } from "../Pagamento/DatePickerModal";
 
 import {
   Sheet,
@@ -29,10 +31,12 @@ import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { Separator } from "@/app/_components/ui/separator";
 
 import { useDadosCarrinhoCompras } from "@/context/DadosCarrinhoComprasContext";
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { formatMoney } from "@/utils/format";
 import { calculaTotal } from "@/utils/calculo";
 
 export function CarrinhoCompras() {
+  const router = useRouter();
   const {
     pedidoProdutos,
     quantidadeItens,
@@ -42,9 +46,11 @@ export function CarrinhoCompras() {
     limpaCarrinhoCompras,
     getProduto,
   } = useDadosCarrinhoCompras();
+  const { dadosEmpresa } = useDadosEmpresa();
 
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [produto, setProduto] = useState<ReadProduto | null>(null);
   const [pedidoProduto, setPedidoProduto] =
     useState<CreatePedidoProduto | null>(null);
@@ -61,7 +67,26 @@ export function CarrinhoCompras() {
   };
 
   const handleCheckout = () => {
-    return;
+    setIsDatePickerOpen(true);
+  };
+
+  const handleConfirmarPedido = (data: Date, hora: string) => {
+    setIsDatePickerOpen(false);
+    setIsSheetOpen(false);
+
+    const detalhesPedido = {
+      pedidoProdutos,
+      precoTotal,
+      dataEntrega: data.toISOString(),
+      horaEntrega: hora,
+      numeroPedido: `${Math.floor(100000 + Math.random() * 900000)}`,
+    };
+
+    const usuarioId = localStorage.getItem("userId");
+
+    localStorage.setItem(`pedido-${usuarioId}`, JSON.stringify(detalhesPedido));
+
+    router.push(`/${dadosEmpresa?.dominio}/Client/Pagamento`);
   };
 
   return (
@@ -105,7 +130,10 @@ export function CarrinhoCompras() {
               </p>
               <Button
                 className="mt-6 bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700"
-                onClick={() => setIsSheetOpen(false)}
+                onClick={() => {
+                  setIsSheetOpen(false);
+                  router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
+                }}
               >
                 Explorar cardápio
               </Button>
@@ -274,6 +302,12 @@ export function CarrinhoCompras() {
           onIsDialogOpenChange={setIsDialogOpen}
         />
       )}
+
+      <DatePickerModal
+        isDialogOpen={isDatePickerOpen}
+        onIsDialogOpenChange={setIsDatePickerOpen}
+        onConfirmarPedido={handleConfirmarPedido}
+      />
     </>
   );
 }

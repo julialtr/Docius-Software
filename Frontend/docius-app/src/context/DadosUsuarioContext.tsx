@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface DadosUsuarioContextProps {
   id: number;
@@ -16,10 +16,12 @@ export const DadosUsuarioProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [id, setId] = useState<number>(() => {
+  const [id, setId] = useState<number>(0);
+
+  useEffect(() => {
     const stored = localStorage.getItem("userId");
-    return stored ? parseInt(stored) : 0;
-  });
+    if (stored) setId(parseInt(stored));
+  }, []);
 
   return (
     <DadosUsuarioContext.Provider value={{ id, setId }}>

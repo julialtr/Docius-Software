@@ -47,7 +47,7 @@ export default function Login() {
 
       if (response[0].tipoUsuarioId == 2)
         router.push(`/${dadosEmpresa?.dominio}/Admin/Cadastros/Clientes`);
-      else router.push(`/${dadosEmpresa?.dominio}/Client/Pagamento`);
+      else router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
 
       router.refresh();
     } catch (error) {
