@@ -11,6 +11,7 @@ public class PedidoConfiguration : IEntityTypeConfiguration<Pedido>
         builder.HasKey(entity => entity.Id);
 
         builder.Property(entity => entity.DataHoraEntrega).IsRequired();
+        builder.Property(entity => entity.Identificador).IsRequired();
 
         builder.Property(entity => entity.StatusPedidoId).HasDefaultValue(1);
 

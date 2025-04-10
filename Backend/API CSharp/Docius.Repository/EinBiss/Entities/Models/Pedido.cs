@@ -15,6 +15,10 @@ public class Pedido : EntityBase<int>
     [Required]
     public DateTime DataHoraEntrega { get; set; }
 
+    [Column("identificador")]
+    [Required]
+    public string Identificador { get; set; }
+
     [Column("usuario_id")]
     [Required]
     public int UsuarioId { get; set; }

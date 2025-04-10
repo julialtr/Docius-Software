@@ -1,6 +1,7 @@
 export interface CreatePedidoProduto {
   id: number;
   quantidade: number;
+  pedidoId: number;
   produtoId: number;
   personalizacao?: CreatePersonalizacao;
 }
@@ -12,5 +13,5 @@ export interface CreatePersonalizacao {
 
 export interface CreatePersonalizacaoFoto {
   id: number;
-  caminho_foto: string;
+  caminhoFoto: string;
 }

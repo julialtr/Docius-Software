@@ -28,6 +28,10 @@ public static class MapperConfigurationExtension
                 new ProfilePrecificacaoIngrediente(),
                 new ProfileCategoriaProduto(),
                 new ProfileCardapio(),
+                new ProfilePedido(),
+                new ProfilePedidoProduto(),
+                new ProfilePersonalizacao(),
+                new ProfilePersonalizacaoFoto(),
         };
     }
 }

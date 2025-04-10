@@ -15,7 +15,7 @@ import {
 import Loading from "@/app/loading";
 import { ReadProduto } from "../../Admin/Cadastros/Produtos/interfaces";
 import { findProdutos } from "@/services/produto";
-import { DetalhesPedido } from "./interfaces";
+import { CreatePedido, DetalhesPedido } from "../(Pedido)/interfaces";
 
 import { MenuCliente } from "@/app/_components/Menu/Cliente";
 import {
@@ -38,6 +38,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 import { DadosCarrinhoComprasProvider } from "@/context/DadosCarrinhoComprasContext";
+import { createPedido } from "@/services/pedido";
+import { CreatePersonalizacao } from "../Cardapio/interfaces";
 
 export default function Pagamento() {
   const { toast } = useToast();
@@ -140,15 +142,76 @@ export default function Pagamento() {
 
   const handleCloseDialog = () => {
     if (dadosEmpresa) {
+      criaPedido();
+
       localStorage.removeItem(`pedido-${id}`);
+      localStorage.removeItem(`carrinhoCompras-${id}`);
       router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
     }
   };
 
   const redirecionaPedidos = () => {
     if (detalhesPedido && dadosEmpresa) {
+      criaPedido();
+
       localStorage.removeItem(`pedido-${id}`);
+      localStorage.removeItem(`carrinhoCompras-${id}`);
       router.push(`/${dadosEmpresa?.dominio}/Client/Pedidos`);
+    }
+  };
+
+  const criaPedido = async () => {
+    if (!detalhesPedido) return;
+
+    console.log(detalhesPedido.pedidoProduto);
+    
+
+    try {
+      const [horas, minutos] = detalhesPedido.horaEntrega.split(":").map(Number);
+
+      const dataComHora = new Date(detalhesPedido.dataEntrega);
+      dataComHora.setHours(horas);
+      dataComHora.setMinutes(minutos);
+    
+      const pedido: CreatePedido = {
+        identificador: detalhesPedido.numeroPedido,
+        dataHoraEntrega: dataComHora.toISOString(),
+        usuarioId: id,
+        pedidoProduto: detalhesPedido.pedidoProduto?.map((pp) => ({
+          id: pp.id,
+          pedidoId: pp.pedidoId,
+          quantidade: pp.quantidade,
+          produtoId: pp.produtoId,
+          personalizacao: pp.personalizacao
+            ? ({
+                descricao: pp.personalizacao?.descricao,
+                personalizacaoFoto: pp.personalizacao?.personalizacaoFoto.map(
+                  (pf) => ({
+                    caminhoFoto: pf.caminhoFoto,
+                  })
+                ),
+              } as CreatePersonalizacao)
+            : undefined,
+        })),
+      };
+
+      await createPedido(pedido);
+
+      toast({
+        title: "Pedido criado",
+        description: "O pedido foi criado com sucesso",
+        variant: "success",
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+
+        toast({
+          variant: "destructive",
+          title: "Erro ao concluir pedido",
+          description: error.message,
+        });
+      }
     }
   };
 
@@ -263,7 +326,7 @@ export default function Pagamento() {
                         Itens do pedido:
                       </p>
                       <ul className="space-y-2">
-                        {detalhesPedido.pedidoProdutos?.map((item, index) => {
+                        {detalhesPedido.pedidoProduto?.map((item, index) => {
                           const produto = getProduto(item.produtoId);
 
                           return (

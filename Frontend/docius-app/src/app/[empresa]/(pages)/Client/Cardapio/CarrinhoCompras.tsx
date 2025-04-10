@@ -75,7 +75,7 @@ export function CarrinhoCompras() {
     setIsSheetOpen(false);
 
     const detalhesPedido = {
-      pedidoProdutos,
+      pedidoProduto: pedidoProdutos,
       precoTotal,
       dataEntrega: data.toISOString(),
       horaEntrega: hora,
@@ -240,7 +240,7 @@ export function CarrinhoCompras() {
                                     >
                                       <Image
                                         src={
-                                          img.caminho_foto || "/placeholder.svg"
+                                          img.caminhoFoto || "/placeholder.svg"
                                         }
                                         alt="Imagem de inspiração"
                                         fill
