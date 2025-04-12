@@ -2,14 +2,20 @@
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService.Core;
 using Docius.Service.EntityService.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
 
 public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService, Pedido, int, PedidoFiltro>
 {
-    public PedidoEntityService(EinBissEntityService service, EinBissContext context) : base(service, context)
+    private readonly IWebHostEnvironment _env;
+
+    public PedidoEntityService(EinBissEntityService service, EinBissContext context, IWebHostEnvironment env) : base(service, context)
     {
+        _env = env;
     }
 
     protected override void OnCreateQuery(ref IQueryable<Pedido> query, PedidoFiltro filter)
@@ -30,7 +36,7 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
             EntityService.StatusPedido.ValidateId(entity.StatusPedidoId, "Status do pedido deve ser informado.", "Status do pedido informado é inválido.");
     }
 
-    public async Task CriaPedidoAsync(PedidoDetalhado dados)
+    public async Task CriaPedidoAsync(PedidoDetalhado dados, List<IFormFile> imagens)
     {
         await ExecuteTransactionAsync(async () =>
         {
@@ -51,12 +57,32 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
                     {
                         foreach (var personalizacaoFotoPedidoProduto in pedidoProduto.Personalizacao.PersonalizacaoFoto)
                         {
+                            var chaveImagem = personalizacaoFotoPedidoProduto.CaminhoFoto;
+
+                            var imagem = imagens.FirstOrDefault(f => f.FileName == chaveImagem);
+                            if (imagem == null)
+                                continue;
+
+                            var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
+                            if (!Directory.Exists(uploadsFolder))
+                                Directory.CreateDirectory(uploadsFolder);
+                            
+                            var nomeImagem = Guid.NewGuid().ToString() + Path.GetExtension(imagem.FileName);
+                            var caminhoImagem = Path.Combine(uploadsFolder, nomeImagem);
+                            
+                            using (var stream = new FileStream(caminhoImagem, FileMode.Create))
+                            {
+                                await imagem.CopyToAsync(stream);
+                            }
+                            
+                            var caminhoRelativoImagem = $"/uploads/{nomeImagem}";
+                            
                             PersonalizacaoFoto personalizacaoFoto = new PersonalizacaoFoto
                             {
-                                CaminhoFoto = personalizacaoFotoPedidoProduto.CaminhoFoto,
+                                CaminhoFoto = caminhoRelativoImagem,
                                 PersonalizacaoId = createdEntityPersonalizacao.Id,
                             };
-
+                            
                             await EntityService.PersonalizacaoFoto.CreateAsync(personalizacaoFoto);
                         }
                     }

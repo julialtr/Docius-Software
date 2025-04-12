@@ -1,5 +1,6 @@
 ﻿using Docius.Repository.EinBiss;
 using Docius.Service.EntityService.DB.EinBiss;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Docius.Service.EntityService;
 
@@ -49,7 +50,7 @@ public sealed class EinBissEntityService
     public UsuarioEntityService Usuario => _entityServiceUsuario.Value;
     public PrecificacaoIngredienteEntityService PrecificacaoIngrediente => _entityServicePrecificacaoIngrediente.Value;
 
-    public EinBissEntityService(EinBissContext context)
+    public EinBissEntityService(EinBissContext context, IWebHostEnvironment env)
     {
         _entityServiceCardapio = new(() => new CardapioEntityService(this, context));
         _entityServiceCategoriaIngrediente = new(() => new CategoriaIngredienteEntityService(this, context));
@@ -59,7 +60,7 @@ public sealed class EinBissEntityService
         _entityServiceFornecedor = new(() => new FornecedorEntityService(this, context));
         _entityServiceGasto = new(() => new GastoEntityService(this, context));
         _entityServiceIngrediente = new(() => new IngredienteEntityService(this, context));
-        _entityServicePedido = new(() => new PedidoEntityService(this, context));
+        _entityServicePedido = new(() => new PedidoEntityService(this, context, env));
         _entityServicePedidoProduto = new(() => new PedidoProdutoEntityService(this, context));
         _entityServicePersonalizacao = new(() => new PersonalizacaoEntityService(this, context));
         _entityServicePrecificacao = new(() => new PrecificacaoEntityService(this, context));

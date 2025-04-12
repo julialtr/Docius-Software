@@ -16,3 +16,11 @@ public class CreatePedidoDto : CreateDtoBase
     [Required]
     public virtual List<CreatePedidoProdutoDto> PedidoProduto { get; set; }
 }
+
+public class ResponsePedidoDto
+{
+    [Required]
+    public string json { get; set; }
+
+    public List<IFormFile> imagens { get; set; }
+}

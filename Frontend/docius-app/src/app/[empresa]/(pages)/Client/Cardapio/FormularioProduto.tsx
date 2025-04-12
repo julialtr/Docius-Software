@@ -25,6 +25,7 @@ import { formatMoney } from "@/utils/format";
 import { useDadosCarrinhoCompras } from "@/context/DadosCarrinhoComprasContext";
 import { useDadosPersonalizacaoFoto } from "@/context/DadosPersonalizacaoFotoContext";
 import { calculaTotal } from "@/utils/calculo";
+import { useToast } from "@/hooks/use-toast";
 
 export function FormularioProduto({
   pedidoProduto,
@@ -39,6 +40,7 @@ export function FormularioProduto({
 }) {
   const { adicionaItem, alteraItem } = useDadosCarrinhoCompras();
   const { incrementaId } = useDadosPersonalizacaoFoto();
+  const { toast } = useToast();
 
   const [quantidade, setQuantidade] = useState(1);
   const [descricao, setDescricao] = useState("");
@@ -66,19 +68,44 @@ export function FormularioProduto({
     setQuantidade((prev) => Math.max(1, prev + delta));
   };
 
-  const handleImagemUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImagemUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const novasImagens: CreatePersonalizacaoFoto[] = [];
+      const arquivos = Array.from(e.target.files);
 
-      Array.from(e.target.files).forEach((file) => {
-        const imagemUrl = URL.createObjectURL(file);
-        novasImagens.push({
-          id: incrementaId(),
-          caminho_foto: imagemUrl,
+      const lerArquivo = (file: File): Promise<CreatePersonalizacaoFoto> => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            const base64String = reader.result as string;
+            resolve({
+              id: incrementaId(),
+              caminhoFoto: base64String,
+            });
+          };
+
+          reader.onerror = () => {
+            reject(reader.error);
+          };
+
+          reader.readAsDataURL(file);
         });
-      });
+      };
 
-      setImagens((prev) => [...prev, ...novasImagens]);
+      try {
+        const novasImagens = await Promise.all(arquivos.map(lerArquivo));
+        setImagens((prev) => [...prev, ...novasImagens]);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao ler imagem",
+            description: error.message,
+          });
+        }
+      }
     }
   };
 
@@ -105,6 +132,7 @@ export function FormularioProduto({
       adicionaItem({
         id: incrementaId(),
         produtoId: produto.id,
+        pedidoId: 0,
         quantidade: quantidade,
         ...(possuiPersonalizacao && {
           personalizacao: {
@@ -207,7 +235,7 @@ export function FormularioProduto({
                     className="relative h-20 w-full overflow-hidden rounded-md"
                   >
                     <Image
-                      src={img.caminho_foto || "/placeholder.svg"}
+                      src={img.caminhoFoto || "/placeholder.svg"}
                       alt="Imagem de inspiração"
                       fill
                       className="object-cover"

@@ -2,10 +2,12 @@
 using AutoMapper;
 using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
+using Docius.Repository.ServicosTerceiros.Dados;
 using Docius.Service.EntityService;
 using Docius.Service.EntityService.Data;
 using Docius.Service.EntityService.DB.EinBiss;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Docius.API.Controllers.V1;
 
@@ -20,10 +22,20 @@ public class PedidoController : CrudControllerBase<PedidoEntityService, Pedido, 
     }
 
     [HttpPost]
+    [Consumes("multipart/form-data")]
+    [DisableRequestSizeLimit]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreatePedido([FromBody] CreatePedidoDto dadosDto)
+    public async Task<IActionResult> CreatePedido([FromForm] ResponsePedidoDto responseDto)
     {
-        await EntityService.CriaPedidoAsync(Mapper.Map<PedidoDetalhado>(dadosDto));
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() }
+        };
+
+        var dadosDto = JsonSerializer.Deserialize<CreatePedidoDto>(responseDto.json, options);
+
+        await EntityService.CriaPedidoAsync(Mapper.Map<PedidoDetalhado>(dadosDto), responseDto.imagens);
 
         return Ok();
     }

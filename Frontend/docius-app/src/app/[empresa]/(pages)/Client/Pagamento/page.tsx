@@ -161,10 +161,7 @@ export default function Pagamento() {
   };
 
   const criaPedido = async () => {
-    if (!detalhesPedido) return;
-
-    console.log(detalhesPedido.pedidoProduto);
-    
+    if (!detalhesPedido) return;   
 
     try {
       const [horas, minutos] = detalhesPedido.horaEntrega.split(":").map(Number);
@@ -175,7 +172,7 @@ export default function Pagamento() {
     
       const pedido: CreatePedido = {
         identificador: detalhesPedido.numeroPedido,
-        dataHoraEntrega: dataComHora.toISOString(),
+        dataHoraEntrega: dataComHora.toISOString().replace("Z", ""),
         usuarioId: id,
         pedidoProduto: detalhesPedido.pedidoProduto?.map((pp) => ({
           id: pp.id,

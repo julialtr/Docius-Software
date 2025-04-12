@@ -14,6 +14,7 @@ public static class WebApplicationExtensions
         app.MapControllers();
         app.ConfigureSwagger();
         app.UseHttpsRedirection();
+        app.UseStaticFiles();
 
         return app;
     }
