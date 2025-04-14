@@ -1,3 +1,5 @@
+import { format } from 'date-fns'
+
 export const formatMoney = (value: number) => {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -28,3 +30,14 @@ export const formatDate = (dateString?: string) => {
     year: "numeric",
   });
 };
+
+export const formatDateTime = (dataString: string): string => {
+  if (!dataString) return ""
+
+  const data = new Date(dataString)
+
+  const dataFormatada = format(data, "dd/MM/yyyy")
+  const horaFormatada = format(data, "HH:mm")
+
+  return `${dataFormatada} às ${horaFormatada}`
+}

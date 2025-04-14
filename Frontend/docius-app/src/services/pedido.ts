@@ -1,7 +1,26 @@
 import { LINK_API } from "@/utils/constants";
-import { CreatePedido } from "@/app/[empresa]/(pages)/Client/(Pedido)/interfaces";
+import { CreatePedido } from "@/app/[empresa]/(pages)/Admin/Pedidos/interfaces";
 
 import { base64ToFile } from "@/utils/convert";
+
+export const findPedidos = async () => {
+  try {
+    const response = await fetch(`${LINK_API}/pedido`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    if (response.status === 204) return [];
+
+    const data = await response.json();
+
+    if (response.ok) return data;
+
+    throw new Error(data.Message || "Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const createPedido = async (pedido: CreatePedido) => {
   const formData = new FormData();

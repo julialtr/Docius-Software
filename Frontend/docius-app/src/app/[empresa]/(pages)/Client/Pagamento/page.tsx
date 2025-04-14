@@ -15,7 +15,7 @@ import {
 import Loading from "@/app/loading";
 import { ReadProduto } from "../../Admin/Cadastros/Produtos/interfaces";
 import { findProdutos } from "@/services/produto";
-import { CreatePedido, DetalhesPedido } from "../(Pedido)/interfaces";
+import { CreatePedido, DetalhesPedido } from "../../Admin/Pedidos/interfaces";
 
 import { MenuCliente } from "@/app/_components/Menu/Cliente";
 import {
