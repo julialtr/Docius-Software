@@ -4,8 +4,8 @@ using Docius.Service.EntityService.Core;
 using Docius.Service.EntityService.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
 
@@ -36,7 +36,7 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
             EntityService.StatusPedido.ValidateId(entity.StatusPedidoId, "Status do pedido deve ser informado.", "Status do pedido informado é inválido.");
     }
 
-    public async Task CriaPedidoAsync(PedidoDetalhado dados, List<IFormFile> imagens)
+    public async Task CriaPedidoAsync(CreatePedidoDetalhado dados, List<IFormFile> imagens)
     {
         await ExecuteTransactionAsync(async () =>
         {
@@ -113,5 +113,51 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
                 await EntityService.PedidoProduto.CreateAsync(novoPedidoProduto);
             }
         });
+    }
+
+    public List<ReadPedidoDetalhado> LePedidos()
+    {
+        var pedidos = EntityService.Pedido.Entity
+            .Include(p => p.PedidoProduto)
+                .ThenInclude(pp => pp.Personalizacao)
+                    .ThenInclude(pz => pz.PersonalizacaoFoto)
+            .Include(p => p.PedidoProduto)
+                .ThenInclude(pp => pp.Produto)
+            .Include(p => p.Usuario)
+            .ToList();
+
+        if (!pedidos.Any())
+        {
+            return new List<ReadPedidoDetalhado>();
+        }
+
+        var pedidosDetalhados = pedidos.Select(pedido => new ReadPedidoDetalhado
+        {
+            Id = pedido.Id,
+            Identificador = pedido.Identificador,
+            DataHoraEntrega = pedido.DataHoraEntrega,
+            Usuario = pedido.Usuario,
+            StatusPedidoId = pedido.StatusPedidoId,
+            PedidoProduto = pedido.PedidoProduto?
+                .Select(pedidoProduto => new ReadPedidoProdutoDetalhado
+                {
+                    Id = pedidoProduto.Id,
+                    Quantidade = pedidoProduto.Quantidade,
+                    StatusPedidoProdutoId = pedidoProduto.StatusPedidoProdutoId,
+                    Produto = pedidoProduto.Produto,
+                    Personalizacao = pedidoProduto.Personalizacao != null ? new PersonalizacaoDetalhado
+                    {
+                        Descricao = pedidoProduto.Personalizacao.Descricao,
+                        PersonalizacaoFoto = pedidoProduto.Personalizacao.PersonalizacaoFoto?
+                            .Select(personalizacaoFoto => new PersonalizacaoFoto
+                            {
+                                Id = personalizacaoFoto.Id,
+                                CaminhoFoto = personalizacaoFoto.CaminhoFoto
+                            }).ToList() ?? new List<PersonalizacaoFoto>(),
+                    } : null,
+                }).ToList() ?? new List<ReadPedidoProdutoDetalhado>(),
+        });
+
+        return pedidosDetalhados.ToList();
     }
 }

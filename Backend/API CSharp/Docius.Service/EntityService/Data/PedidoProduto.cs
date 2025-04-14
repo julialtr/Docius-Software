@@ -1,6 +1,8 @@
-﻿namespace Docius.Service.EntityService.Data;
+﻿using Docius.Repository.EinBiss.Entities.Models;
 
-public class PedidoProdutoDetalhado
+namespace Docius.Service.EntityService.Data;
+
+public class CreatePedidoProdutoDetalhado
 {
     public int Quantidade { get; set; }
 
@@ -9,6 +11,19 @@ public class PedidoProdutoDetalhado
     public int ProdutoId { get; set; }
 
     public int PersonalizacaoId { get; set; }
+
+    public PersonalizacaoDetalhado Personalizacao { get; set; }
+}
+
+public class ReadPedidoProdutoDetalhado
+{
+    public int Id { get; set; }
+
+    public int Quantidade { get; set; }
+
+    public int StatusPedidoProdutoId { get; set; }
+
+    public virtual Produto Produto { get; set; }
 
     public PersonalizacaoDetalhado Personalizacao { get; set; }
 }

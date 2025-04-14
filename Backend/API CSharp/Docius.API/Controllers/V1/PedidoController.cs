@@ -35,9 +35,17 @@ public class PedidoController : CrudControllerBase<PedidoEntityService, Pedido, 
 
         var dadosDto = JsonSerializer.Deserialize<CreatePedidoDto>(responseDto.json, options);
 
-        await EntityService.CriaPedidoAsync(Mapper.Map<PedidoDetalhado>(dadosDto), responseDto.imagens);
+        await EntityService.CriaPedidoAsync(Mapper.Map<CreatePedidoDetalhado>(dadosDto), responseDto.imagens);
 
         return Ok();
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ReadPedidoDto[]), StatusCodes.Status200OK)]
+    public IActionResult FindPedidos()
+    {
+        var pedidos = EntityService.LePedidos();
+        return Ok(Mapper.Map<List<ReadPedidoDto>>(pedidos));
     }
 
     protected override void OnSetEntityService()

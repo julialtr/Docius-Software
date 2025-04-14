@@ -8,5 +8,6 @@ public class ProfilePersonalizacaoFoto : ProfileBase
     public ProfilePersonalizacaoFoto()
     {
         CreateMap<CreatePersonalizacaoFotoDto, PersonalizacaoFoto>();
+        CreateMap<PersonalizacaoFoto, ReadPersonalizacaoFotoDto>();
     }
 }

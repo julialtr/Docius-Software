@@ -8,5 +8,6 @@ public class ProfilePersonalizacao : ProfileBase
     public ProfilePersonalizacao()
     {
         CreateMap<CreatePersonalizacaoDto, PersonalizacaoDetalhado>();
+        CreateMap<PersonalizacaoDetalhado, ReadPersonalizacaoDto>();
     }
 }

@@ -7,6 +7,7 @@ public class ProfilePedido: ProfileBase
 {
     public ProfilePedido()
     {
-        CreateMap<CreatePedidoDto, PedidoDetalhado>();
+        CreateMap<CreatePedidoDto, CreatePedidoDetalhado>();
+        CreateMap<ReadPedidoDetalhado, ReadPedidoDto>();
     }
 }

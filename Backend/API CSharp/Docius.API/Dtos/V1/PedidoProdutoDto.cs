@@ -15,3 +15,14 @@ public class CreatePedidoProdutoDto : CreateDtoBase
 
     public CreatePersonalizacaoDto Personalizacao { get; set; }
 }
+
+public class ReadPedidoProdutoDto : ReadDtoBase<int>
+{
+    public int Quantidade { get; set; }
+
+    public int StatusPedidoProdutoId { get; set; }
+
+    public virtual ReadProdutoDto Produto { get; set; }
+
+    public ReadPersonalizacaoDto Personalizacao { get; set; }
+}

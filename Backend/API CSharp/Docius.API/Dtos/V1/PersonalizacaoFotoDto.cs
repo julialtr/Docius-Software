@@ -7,3 +7,9 @@ public class CreatePersonalizacaoFotoDto : CreateDtoBase
     [Required]
     public string CaminhoFoto { get; set; }
 }
+
+public class ReadPersonalizacaoFotoDto : ReadDtoBase<int>
+{
+    [Required]
+    public string CaminhoFoto { get; set; }
+}

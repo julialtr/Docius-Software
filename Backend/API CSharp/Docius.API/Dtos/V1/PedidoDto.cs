@@ -17,6 +17,19 @@ public class CreatePedidoDto : CreateDtoBase
     public virtual List<CreatePedidoProdutoDto> PedidoProduto { get; set; }
 }
 
+public class ReadPedidoDto : ReadDtoBase<int>
+{
+    public string Identificador { get; set; }
+
+    public DateTime DataHoraEntrega { get; set; }
+
+    public int StatusPedidoId { get; set; }
+
+    public virtual ReadUsuarioDto Usuario { get; set; }
+
+    public virtual List<ReadPedidoProdutoDto> PedidoProduto { get; set; }
+}
+
 public class ResponsePedidoDto
 {
     [Required]
