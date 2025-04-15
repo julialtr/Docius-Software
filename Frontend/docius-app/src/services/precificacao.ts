@@ -1,11 +1,11 @@
 import {
   UpdatePrecificacao,
 } from "@/app/[empresa]/(pages)/Admin/Precificacao/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findPrecificacoes = async () => {
   try {
-    const response = await fetch(`${LINK_API}/precificacao`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/precificacao`, {
       method: "GET",
       credentials: "include",
     });
@@ -24,7 +24,7 @@ export const findPrecificacoes = async () => {
 
 export const updatePrecificacao = async (id: number, precificacao: UpdatePrecificacao) => {
   try {
-    const response = await fetch(`${LINK_API}/precificacao/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/precificacao/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

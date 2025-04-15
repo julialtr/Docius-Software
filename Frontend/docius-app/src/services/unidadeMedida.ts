@@ -1,8 +1,8 @@
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findUnidadesMedidas = async () => {
   try {
-    const response = await fetch(`${LINK_API}/unidade-medida`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/unidade-medida`, {
       method: "GET",
       credentials: "include",
     });

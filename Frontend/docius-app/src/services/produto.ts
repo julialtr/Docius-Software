@@ -2,11 +2,11 @@ import {
   CreateProduto,
   UpdateProduto,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Produtos/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findProdutos = async () => {
   try {
-    const response = await fetch(`${LINK_API}/produto`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/produto`, {
       method: "GET",
       credentials: "include",
     });
@@ -25,7 +25,7 @@ export const findProdutos = async () => {
 
 export const updateProduto = async (id: number, produto: UpdateProduto) => {
   try {
-    const response = await fetch(`${LINK_API}/produto/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/produto/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const updateProduto = async (id: number, produto: UpdateProduto) => {
 
 export const createProduto = async (produto: CreateProduto) => {
   try {
-    const response = await fetch(`${LINK_API}/produto`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/produto`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const createProduto = async (produto: CreateProduto) => {
 
 export const deleteProduto = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/produto/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/produto/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -1,11 +1,11 @@
 import {
   UpdateCardapio,
 } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findCardapio = async () => {
   try {
-    const response = await fetch(`${LINK_API}/cardapio`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/cardapio`, {
       method: "GET",
       credentials: "include",
     });
@@ -24,7 +24,7 @@ export const findCardapio = async () => {
 
 export const updateCardapio = async (id: number, cardapio: UpdateCardapio) => {
   try {
-    const response = await fetch(`${LINK_API}/cardapio/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/cardapio/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

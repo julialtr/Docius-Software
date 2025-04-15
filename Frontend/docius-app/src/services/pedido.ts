@@ -1,11 +1,11 @@
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 import { CreatePedido } from "@/app/[empresa]/(pages)/Admin/Pedidos/interfaces";
 
 import { base64ToFile } from "@/utils/convert";
 
 export const findPedidos = async () => {
   try {
-    const response = await fetch(`${LINK_API}/pedido`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/pedido`, {
       method: "GET",
       credentials: "include",
     });
@@ -43,7 +43,7 @@ export const createPedido = async (pedido: CreatePedido) => {
   formData.append("json", JSON.stringify(pedidoJson));
 
   try {
-    const response = await fetch(`${LINK_API}/pedido`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/pedido`, {
       method: "POST",
       body: formData,
       credentials: "include",

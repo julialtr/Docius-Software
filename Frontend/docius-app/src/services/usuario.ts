@@ -1,4 +1,4 @@
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 import { Warning } from "@/hooks/warning";
 import {
   CreateUsuario,
@@ -7,7 +7,7 @@ import {
 
 export const login = async (usuario: FilterUsuario) => {
   try {
-    const response = await fetch(`${LINK_API}/autenticacao/login`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/autenticacao/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const login = async (usuario: FilterUsuario) => {
 
 export const createUsuario = async (usuario: CreateUsuario) => {
   try {
-    const response = await fetch(`${LINK_API}/usuario`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/usuario`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const createUsuario = async (usuario: CreateUsuario) => {
 
 export const findUsuarios = async () => {
   try {
-    const response = await fetch(`${LINK_API}/usuario/pedidos`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/usuario/pedidos`, {
       method: "GET",
       credentials: "include",
     });
@@ -69,7 +69,7 @@ export const findUsuario = async (filtro: FilterUsuario) => {
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
-    const response = await fetch(`${LINK_API}/usuario?${queryParams}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/usuario?${queryParams}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -2,11 +2,11 @@ import {
   CreateFornecedor,
   UpdateFornecedor,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Fornecedores/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findFornecedores = async () => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/fornecedor`, {
       method: "GET",
       credentials: "include",
     });
@@ -28,7 +28,7 @@ export const updateFornecedor = async (
   fornecedor: UpdateFornecedor
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/fornecedor/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const updateFornecedor = async (
 
 export const createFornecedor = async (fornecedor: CreateFornecedor) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/fornecedor`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const createFornecedor = async (fornecedor: CreateFornecedor) => {
 
 export const deleteFornecedor = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/fornecedor/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/fornecedor/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

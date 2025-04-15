@@ -2,11 +2,11 @@ import {
   CreateReceita,
   UpdateReceita,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Receitas/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findReceitas = async () => {
   try {
-    const response = await fetch(`${LINK_API}/receita`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/receita`, {
       method: "GET",
       credentials: "include",
     });
@@ -25,7 +25,7 @@ export const findReceitas = async () => {
 
 export const updateReceita = async (id: number, receita: UpdateReceita) => {
   try {
-    const response = await fetch(`${LINK_API}/receita/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const updateReceita = async (id: number, receita: UpdateReceita) => {
 
 export const createReceita = async (receita: CreateReceita) => {
   try {
-    const response = await fetch(`${LINK_API}/receita`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/receita`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const createReceita = async (receita: CreateReceita) => {
 
 export const deleteReceita = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/receita/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

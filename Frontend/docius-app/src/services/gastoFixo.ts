@@ -2,11 +2,11 @@ import {
   CreateGastoFixo,
   UpdateGastoFixo,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/GastosFixos/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findGastosFixos = async () => {
   try {
-    const response = await fetch(`${LINK_API}/gasto`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/gasto`, {
       method: "GET",
       credentials: "include",
     });
@@ -28,7 +28,7 @@ export const updateGastoFixo = async (
   gastoFixo: UpdateGastoFixo
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/gasto/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const updateGastoFixo = async (
 
 export const createGastoFixo = async (gastoFixo: CreateGastoFixo) => {
   try {
-    const response = await fetch(`${LINK_API}/gasto`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/gasto`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ export const createGastoFixo = async (gastoFixo: CreateGastoFixo) => {
 
 export const deleteGastoFixo = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/gasto/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -3,13 +3,13 @@ import {
   FilterIngrediente,
   UpdateIngrediente,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Ingredientes/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findIngredientes = async (filtro: FilterIngrediente) => {
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
-    const response = await fetch(`${LINK_API}/ingrediente?${queryParams}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/ingrediente?${queryParams}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const updateIngrediente = async (
   ingrediente: UpdateIngrediente
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/ingrediente/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/ingrediente/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const updateIngrediente = async (
 
 export const createIngrediente = async (ingrediente: CreateIngrediente) => {
   try {
-    const response = await fetch(`${LINK_API}/ingrediente`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/ingrediente`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export const createIngrediente = async (ingrediente: CreateIngrediente) => {
 
 export const deleteIngrediente = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/ingrediente/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/ingrediente/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

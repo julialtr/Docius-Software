@@ -2,11 +2,11 @@ import {
   CreateCategoriaIngrediente,
   UpdateCategoriaIngrediente,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/CategoriasIngredientes/interfaces";
-import { LINK_API } from "@/utils/constants";
+import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findCategoriasIngredientes = async () => {
   try {
-    const response = await fetch(`${LINK_API}/categoria-ingrediente`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente`, {
       method: "GET",
       credentials: "include",
     });
@@ -28,7 +28,7 @@ export const updateCategoriaIngrediente = async (
   categoriaIngrediente: UpdateCategoriaIngrediente
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/categoria-ingrediente/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const createCategoriaIngrediente = async (
   categoriaIngrediente: CreateCategoriaIngrediente
 ) => {
   try {
-    const response = await fetch(`${LINK_API}/categoria-ingrediente`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const createCategoriaIngrediente = async (
 
 export const deleteCategoriaIngrediente = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API}/categoria-ingrediente/${id}`, {
+    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
