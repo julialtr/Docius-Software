@@ -59,7 +59,7 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
                         {
                             var chaveImagem = personalizacaoFotoPedidoProduto.CaminhoFoto;
 
-                            var imagem = imagens.FirstOrDefault(f => f.FileName == chaveImagem);
+                            var imagem = imagens.FirstOrDefault(f => f.FileName == (chaveImagem + Path.GetExtension(f.FileName)));
                             if (imagem == null)
                                 continue;
 

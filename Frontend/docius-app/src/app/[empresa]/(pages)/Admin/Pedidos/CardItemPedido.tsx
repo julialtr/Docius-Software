@@ -80,7 +80,7 @@ export function CardItemPedido({
                   <div key={index} className="relative group">
                     <img
                       src={
-                        `${LINK_API}${personalizacaoFoto.caminhoFoto}.png` ||
+                        `${LINK_API}${personalizacaoFoto.caminhoFoto}` ||
                         "/placeholder.svg"
                       }
                       alt={`Inspiração ${index + 1}`}
@@ -101,7 +101,7 @@ export function CardItemPedido({
             {itemPedido.personalizacao.personalizacaoFoto && (
               <ImageViewer
                 imagens={itemPedido.personalizacao.personalizacaoFoto.map(
-                  (foto) => `${LINK_API}${foto.caminhoFoto}.png`
+                  (foto) => `${LINK_API}${foto.caminhoFoto}`
                 )}
                 indiceInicial={indiceInicial}
                 isOpen={imageViewerOpen}

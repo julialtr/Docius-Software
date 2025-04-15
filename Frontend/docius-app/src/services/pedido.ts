@@ -31,8 +31,12 @@ export const createPedido = async (pedido: CreatePedido) => {
   pedidoJson.pedidoProduto.forEach((produto) => {
     if (produto.personalizacao) {
       produto.personalizacao.personalizacaoFoto.forEach((foto) => {
+    
+        const base64Data = foto.caminhoFoto;
+        const extension = base64Data.split(';')[0].split('/')[1] || 'png';
         const chaveImagem = `imagem_${idImagem++}`;
-        const imagem = base64ToFile(foto.caminhoFoto, chaveImagem);
+        
+        const imagem = base64ToFile(foto.caminhoFoto, chaveImagem, extension);
 
         formData.append("imagens", imagem);
         foto.caminhoFoto = chaveImagem;
