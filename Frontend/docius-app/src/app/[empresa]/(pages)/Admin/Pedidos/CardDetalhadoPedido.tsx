@@ -44,7 +44,7 @@ export function CardDetalhadoPedido({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md md:max-w-lg p-8">
+      <DialogContent className="sm:max-w-md md:max-w-lg p-8 max-h-[90vh] flex flex-col">
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl">Detalhes do pedido</DialogTitle>
@@ -54,7 +54,7 @@ export function CardDetalhadoPedido({
           </div>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="space-y-4 flex-1 flex flex-col overflow-hidden">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -72,10 +72,10 @@ export function CardDetalhadoPedido({
 
           <Separator />
 
-          <div>
+          <div className="flex-1 flex flex-col min-h-0">
             <h3 className="font-medium mb-2">Itens do pedido</h3>
-            <ScrollArea className="max-h-[300px] pr-4">
-              <div className="space-y-3">
+            <ScrollArea className="flex-1">
+              <div className="space-y-3 pr-4">
                 {pedido.pedidoProduto.map((item) => (
                   <CardItemPedido
                     key={item.id}
