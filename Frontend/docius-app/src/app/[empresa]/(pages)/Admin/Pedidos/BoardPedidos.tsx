@@ -4,8 +4,10 @@ import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
 
 import { ColunaBoardPedidos } from "./ColunaBoardPedidos";
 import { ReadPedido, StatusPedidoColuna } from "./interfaces";
+import { updateItemPedido, updatePedido } from "@/services/pedido";
 
 import { StatusPedido, StatusPedidoProduto } from "@/utils/constants";
+import { useToast } from "@/hooks/use-toast";
 
 const columns: StatusPedidoColuna[] = [
   { id: StatusPedido.PagamentoPendente, titulo: "Pagamento pendente" },
@@ -21,6 +23,8 @@ export function BoardPedidos({
   pedidos: ReadPedido[];
   handlePedidosChange: (pedidos: ReadPedido[]) => void;
 }) {
+  const { toast } = useToast();
+
   const updateStatusItemPedido = (
     pedidoId: number,
     itemId: number,
@@ -45,6 +49,29 @@ export function BoardPedidos({
       return pedido;
     });
     handlePedidosChange(pedidosAtualizados);
+
+    const updatePedido = async () => {
+      try {
+        await updateItemPedido(
+          itemId,
+          completed
+            ? StatusPedidoProduto.Concluido
+            : StatusPedidoProduto.NaoConcluido
+        );
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao atualizar status do item do pedido",
+            description: error.message,
+          });
+        }
+      }
+    };
+
+    updatePedido();
   };
 
   const handleDragEnd = (result: DropResult) => {
@@ -68,6 +95,24 @@ export function BoardPedidos({
       return pedido;
     });
     handlePedidosChange(pedidosAtualizados);
+
+    const updatePedidoStatus = async () => {
+      try {
+        await updatePedido(Number(draggableId), Number(destination.droppableId));
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error);
+
+          toast({
+            variant: "destructive",
+            title: "Erro ao atualizar status do pedido",
+            description: error.message,
+          });
+        }
+      }
+    };
+
+    updatePedidoStatus();
   };
 
   return (

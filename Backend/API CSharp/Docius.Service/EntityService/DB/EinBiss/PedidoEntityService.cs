@@ -160,4 +160,16 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
 
         return pedidosDetalhados.ToList();
     }
+
+    public async Task UpdateItemPedidoAsync(int id, int idStatusItemPedido)
+    {
+        PedidoProduto data = await EntityService.PedidoProduto.ReadAsync(id);
+
+        if (data == null)
+            return;
+
+        data.StatusPedidoProdutoId = idStatusItemPedido;
+
+        await EntityService.PedidoProduto.UpdateAsync(data);
+    }
 }

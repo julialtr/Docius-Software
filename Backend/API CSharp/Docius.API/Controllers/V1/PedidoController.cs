@@ -48,6 +48,30 @@ public class PedidoController : CrudControllerBase<PedidoEntityService, Pedido, 
         return Ok(Mapper.Map<List<ReadPedidoDto>>(pedidos));
     }
 
+    [HttpPatch("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdatePedido(int id, [FromBody] int idStatusPedido)
+    {
+        Pedido data = await EntityService.ReadAsync(id);
+
+        if (data == null)
+            return NotFound();
+
+        data.StatusPedidoId = idStatusPedido;
+
+        await EntityService.UpdateAsync(data);
+
+        return Ok();
+    }
+
+    [HttpPatch("itemPedido/{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateItemPedido(int id, [FromBody] int idStatusItemPedido)
+    {
+        await EntityService.UpdateItemPedidoAsync(id, idStatusItemPedido);
+        return Ok();
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Pedido;

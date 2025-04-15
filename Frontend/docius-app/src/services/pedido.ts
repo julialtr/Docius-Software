@@ -62,3 +62,47 @@ export const createPedido = async (pedido: CreatePedido) => {
     throw error;
   }
 };
+
+export const updatePedido = async (id: number, idStatusPedido: number) => {
+  try {
+    const response = await fetch(`${LINK_API_VERSIONADA}/pedido/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(idStatusPedido),
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.Message || "Erro ao atualizar o pedido.");
+    }
+
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateItemPedido = async (id: number, idStatusItemPedido: number) => {
+  try {
+    const response = await fetch(`${LINK_API_VERSIONADA}/pedido/itemPedido/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(idStatusItemPedido),
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.Message || "Erro ao atualizar o item do pedido.");
+    }
+
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
