@@ -1,0 +1,30 @@
+Tela de Pedidos
+- Disponível para administradores e clientes
+
+- A tela de pedidos apresenta funcionalidades distintas para cada tipo de usuário. Para os administradores, ela se organiza em formato de board, facilitando o controle e acompanhamento de cada etapa do processo. Já os clientes visualizam apenas seus próprios pedidos e seus respectivos detalhes.
+
+Visão do Administrador
+- A tela é dividida em 4 colunas, representando os diferentes estágios do fluxo de produção de um pedido:
+
+- Pagamento Pendente: O pedido foi registrado, mas ainda aguarda validação do pagamento de 50% do valor. A conferência deve ser feita manualmente no aplicativo bancário.
+- Confirmado: O pagamento foi confirmado e o pedido está na fila de produção.
+- Em Produção: Os pedidos que estão em preparo no momento.
+- Concluído: Inclui pedidos finalizados ou que foram cancelados.
+
+Cards de Pedidos
+- Cada pedido é exibido como um card dentro da coluna correspondente. O card apresenta: Número do pedido, Data e hora de retirada, Quantidade total de itens e Status de produção dos itens por meio de um ícone circular.
+
+- Círculo branco: Nenhum item concluído
+- Círculo amarelo: Ao menos um item concluído
+- Círculo verde: Todos os itens concluídos
+
+- Os cards podem ser arrastados entre colunas, atualizando automaticamente o status do pedido.
+
+Visualização Detalhada
+- Ao clicar em um card, ele é expandido para exibir os detalhes completos do pedido: Informações já presentes no card compacto, Valor total do pedido e Lista de itens do pedido com o Nome do produto, 
+Quantidade, Preço unitário, Descrição de personalização (se houver) e Imagens de referência (se fornecidas).
+
+- As imagens de inspiração são exibidas em miniatura, mas é possível clicar para ampliá-las, permitindo uma melhor visualização dos detalhes.
+
+Marcar Itens como Concluídos
+- Cada item inicia com o status de "não concluído" (círculo branco). O administrador pode marcar um item como finalizado clicando sobre o círculo, que muda para verde, indicando sua conclusão.
