@@ -13,6 +13,10 @@ export interface DetalhesPedido {
   numeroPedido: string;
 }
 
+export interface FiltroPedido {
+  usuarioId: number;
+}
+
 export interface CreatePedido {
   identificador: string;
   dataHoraEntrega: string;

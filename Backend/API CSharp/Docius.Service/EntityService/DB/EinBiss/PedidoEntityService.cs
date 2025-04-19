@@ -115,7 +115,7 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
         });
     }
 
-    public List<ReadPedidoDetalhado> LePedidos()
+    public List<ReadPedidoDetalhado> LePedidos(PedidoFiltro filtro)
     {
         var pedidos = EntityService.Pedido.Entity
             .Include(p => p.PedidoProduto)
@@ -124,6 +124,7 @@ public sealed class PedidoEntityService : EntityServiceBase<EinBissEntityService
             .Include(p => p.PedidoProduto)
                 .ThenInclude(pp => pp.Produto)
             .Include(p => p.Usuario)
+            .Where(e => filtro.UsuarioId == 0 || e.UsuarioId.Equals(filtro.UsuarioId))
             .ToList();
 
         if (!pedidos.Any())

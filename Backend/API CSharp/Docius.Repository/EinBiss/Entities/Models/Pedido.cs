@@ -6,6 +6,7 @@ namespace Docius.Repository.EinBiss.Entities.Models;
 
 public class PedidoFiltro : FiltroBase<int>
 {
+    public int UsuarioId { get; set; }
 }
 
 [Table("pedidos")]

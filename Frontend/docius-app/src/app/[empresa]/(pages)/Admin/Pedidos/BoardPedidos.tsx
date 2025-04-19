@@ -85,6 +85,8 @@ export function BoardPedidos({
       return;
     }
 
+    if (Number(destination.droppableId) < Number(source.droppableId)) return;
+
     const pedidosAtualizados = pedidos.map((pedido: ReadPedido) => {
       if (pedido.id.toString() === draggableId) {
         return {
@@ -98,7 +100,10 @@ export function BoardPedidos({
 
     const updatePedidoStatus = async () => {
       try {
-        await updatePedido(Number(draggableId), Number(destination.droppableId));
+        await updatePedido(
+          Number(draggableId),
+          Number(destination.droppableId)
+        );
       } catch (error) {
         if (error instanceof Error) {
           console.error(error);

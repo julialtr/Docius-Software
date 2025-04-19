@@ -1,14 +1,26 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
-import { CreatePedido } from "@/app/[empresa]/(pages)/Admin/Pedidos/interfaces";
+import {
+  CreatePedido,
+  FiltroPedido,
+} from "@/app/[empresa]/(pages)/Admin/Pedidos/interfaces";
 
 import { base64ToFile } from "@/utils/convert";
 
-export const findPedidos = async () => {
+export const findPedidos = async (filtro: FiltroPedido) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/pedido`, {
-      method: "GET",
-      credentials: "include",
-    });
+    const queryParams = new URLSearchParams(filtro as any).toString();
+
+    const response = await fetch(
+      `${LINK_API_VERSIONADA}/pedido?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        credentials: "include",
+      }
+    );
 
     if (response.status === 204) return [];
 
@@ -31,11 +43,10 @@ export const createPedido = async (pedido: CreatePedido) => {
   pedidoJson.pedidoProduto.forEach((produto) => {
     if (produto.personalizacao) {
       produto.personalizacao.personalizacaoFoto.forEach((foto) => {
-    
         const base64Data = foto.caminhoFoto;
-        const extension = base64Data.split(';')[0].split('/')[1] || 'png';
+        const extension = base64Data.split(";")[0].split("/")[1] || "png";
         const chaveImagem = `imagem_${idImagem++}`;
-        
+
         const imagem = base64ToFile(foto.caminhoFoto, chaveImagem, extension);
 
         formData.append("imagens", imagem);
@@ -85,16 +96,22 @@ export const updatePedido = async (id: number, idStatusPedido: number) => {
   }
 };
 
-export const updateItemPedido = async (id: number, idStatusItemPedido: number) => {
+export const updateItemPedido = async (
+  id: number,
+  idStatusItemPedido: number
+) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/pedido/itemPedido/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(idStatusItemPedido),
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${LINK_API_VERSIONADA}/pedido/itemPedido/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(idStatusItemPedido),
+        credentials: "include",
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();

@@ -2,6 +2,11 @@
 
 namespace Docius.API.Dtos.V1;
 
+public class PedidoFiltroDto
+{
+    public int UsuarioId { get; set; }
+}
+
 public class CreatePedidoDto : CreateDtoBase
 {
     [Required]

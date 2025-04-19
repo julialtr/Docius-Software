@@ -42,9 +42,9 @@ public class PedidoController : CrudControllerBase<PedidoEntityService, Pedido, 
 
     [HttpGet]
     [ProducesResponseType(typeof(ReadPedidoDto[]), StatusCodes.Status200OK)]
-    public IActionResult FindPedidos()
+    public IActionResult FindPedidos([FromQuery] PedidoFiltroDto filtroDto)
     {
-        var pedidos = EntityService.LePedidos();
+        var pedidos = EntityService.LePedidos(Mapper.Map<PedidoFiltro>(filtroDto));
         return Ok(Mapper.Map<List<ReadPedidoDto>>(pedidos));
     }
 

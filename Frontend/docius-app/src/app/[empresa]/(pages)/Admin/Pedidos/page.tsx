@@ -21,7 +21,7 @@ export default function Pedidos() {
       setIsLoading(true);
 
       try {
-        const response = await findPedidos();
+        const response = await findPedidos({ usuarioId: 0 });
         setPedidos(response);
       } catch (error) {
         if (error instanceof Error) {

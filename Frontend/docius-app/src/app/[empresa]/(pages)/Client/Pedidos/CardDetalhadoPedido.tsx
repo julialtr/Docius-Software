@@ -2,8 +2,9 @@
 
 import { Calendar } from "lucide-react";
 
-import { ReadPedido } from "./interfaces";
+import { ReadPedido } from "../../Admin/Pedidos/interfaces";
 import { CardItemPedido } from "./CardItemPedido";
+import { ReadPedidoProduto } from "../Cardapio/interfaces";
 
 import {
   Dialog,
@@ -22,25 +23,18 @@ export function CardDetalhadoPedido({
   pedido,
   isOpen,
   onClose,
-  updateStatusItemPedido,
 }: {
   pedido: ReadPedido;
   isOpen: boolean;
   onClose: () => void;
-  updateStatusItemPedido: (
-    orderId: number,
-    itemId: number,
-    completed: boolean
-  ) => void;
 }) {
-  const handleStatusItemPedidoChange = (itemId: number, completed: boolean) => {
-    updateStatusItemPedido(pedido.id, itemId, completed);
-  };
-
-  const precoTotal = pedido.pedidoProduto.reduce((total, item) => {
-    const preco = item.produto.preco ?? 0;
-    return total + calculaTotal(preco, item.quantidade);
-  }, 0);
+  const precoTotal = pedido.pedidoProduto.reduce(
+    (total: number, item: ReadPedidoProduto) => {
+      const preco = item.produto.preco ?? 0;
+      return total + calculaTotal(preco, item.quantidade);
+    },
+    0
+  );
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -63,11 +57,6 @@ export function CardDetalhadoPedido({
                 {formatDateTime(pedido.dataHoraEntrega)}
               </span>
             </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">Cliente:</span>
-              <span className="text-sm">{pedido.usuario?.nome}</span>
-            </div>
           </div>
 
           <Separator />
@@ -77,13 +66,7 @@ export function CardDetalhadoPedido({
             <ScrollArea className="flex-1">
               <div className="space-y-3 pr-4">
                 {pedido.pedidoProduto.map((item) => (
-                  <CardItemPedido
-                    key={item.id}
-                    itemPedido={item}
-                    onStatusItemPedidoChange={(completed) =>
-                      handleStatusItemPedidoChange(item.id, completed)
-                    }
-                  />
+                  <CardItemPedido key={item.id} itemPedido={item} />
                 ))}
               </div>
             </ScrollArea>
