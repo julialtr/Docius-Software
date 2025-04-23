@@ -32,6 +32,7 @@ public static class MapperConfigurationExtension
                 new ProfilePedidoProduto(),
                 new ProfilePersonalizacao(),
                 new ProfilePersonalizacaoFoto(),
+                new ProfileDashboard(),
         };
     }
 }

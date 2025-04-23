@@ -46,7 +46,7 @@ export default function Login() {
       localStorage.setItem("userId", response[0].id.toString());
 
       if (response[0].tipoUsuarioId == 2)
-        router.push(`/${dadosEmpresa?.dominio}/Admin/Cadastros/Clientes`);
+        router.push(`/${dadosEmpresa?.dominio}/Admin/Dashboard`);
       else router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
 
       router.refresh();
