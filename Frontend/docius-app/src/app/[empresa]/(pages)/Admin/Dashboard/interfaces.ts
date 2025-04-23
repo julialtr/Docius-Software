@@ -20,7 +20,6 @@ export interface ReadDashboardProdutosMaisVendidos {
 
 export interface ReadDashboard {
   valorFaturamentoBruto: number;
-  variacaoFaturamentoBruto: number;
   valorMedioPedido: number;
   quantidadePedidos: number;
   valorFaturamentoBrutoProximoMes: number;

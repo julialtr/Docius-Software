@@ -13,3 +13,8 @@ export function base64ToFile(base64String: string, fileName: string, extension?:
 
   return new File([u8arr], fullFileName, { type: mime });
 }
+
+export function toLocalDate(dateString: string): Date {
+  const [year, month, day] = dateString.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}

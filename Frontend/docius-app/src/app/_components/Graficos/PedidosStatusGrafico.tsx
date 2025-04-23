@@ -36,7 +36,9 @@ export function PedidosStatusGrafico({
     <Card>
       <CardHeader>
         <CardTitle>Pedidos por status</CardTitle>
-        <CardDescription>Distribuição de pedidos por situação</CardDescription>
+        <CardDescription>
+          Distribuição de pedidos por situação no período selecionado
+        </CardDescription>
       </CardHeader>
       <CardContent className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">

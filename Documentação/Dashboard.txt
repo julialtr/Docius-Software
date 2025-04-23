@@ -1,0 +1,43 @@
+Tela de Dashboard
+- Acesso exclusivo para administradores
+
+- A tela de dashboard oferece uma visão panorâmica da operação da confeitaria, reunindo indicadores essenciais para a gestão estratégica do negócio. Ela é composta por 7 cards principais, cada um com dados específicos, além de dois gráficos interativos e uma lista com os produtos mais vendidos.
+
+Filtro por Período
+Na parte superior da tela, há um filtro de data que permite selecionar um intervalo personalizado. É possível:
+- Selecionar uma data inicial e uma data final.
+- Clicar duas vezes na mesma data para filtrar apenas um único dia.
+- Por padrão, o dashboard é carregado com o período do início do mês até a data atual.
+- Este filtro impacta diretamente a maioria dos indicadores apresentados na tela.
+
+Cards de Indicadores
+Faturamento Bruto
+- Exibe o valor total faturado no período selecionado.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+
+Ticket Médio
+- Apresenta o valor médio por pedido no período.
+- É calculado dividindo o faturamento bruto pelo total de pedidos no período.
+
+Total de Pedidos
+- Mostra a quantidade total de pedidos realizados cuja data de entrega esteja no intervalo selecionado.
+
+Previsão de Faturamento
+- Estima o faturamento do mês seguinte à data final selecionada no filtro.
+- Considera todos os pedidos com entrega prevista para aquele mês.
+
+Gráficos
+Pedidos por Mês
+- Um gráfico de barras verticais que exibe a variação do número de pedidos nos últimos 6 meses, com base na data de entrega.
+- Este gráfico não é afetado pelo filtro de data.
+- Ao passar o mouse sobre as barras, é possível visualizar a quantidade exata de pedidos em cada mês.
+
+Pedidos por Status
+- Um gráfico de pizza que mostra a distribuição percentual dos pedidos por status, com base no período do filtro.
+- Os status considerados são: Pagamento pendente, Confirmado, Em produção, Concluído
+- O gráfico é interativo: ao posicionar o cursor sobre uma fatia, são exibidos os valores absolutos de cada status.
+
+Produtos Mais Vendidos
+- Apresenta uma lista ordenada dos produtos mais populares entre os pedidos realizados dentro do intervalo de tempo filtrado.
+- Cada item da lista exibe: Nome do produto, Quantidade de vezes que apareceu nos pedidos
+- A ordenação é feita de forma decrescente, destacando os produtos de maior saída.

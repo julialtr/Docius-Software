@@ -32,8 +32,6 @@ public class ReadDashboardDto
 {
     public decimal ValorFaturamentoBruto { get; set; }
 
-    public decimal VariacaoFaturamentoBruto { get; set; }
-
     public decimal ValorMedioPedido { get; set; }
 
     public int QuantidadePedidos { get; set; }

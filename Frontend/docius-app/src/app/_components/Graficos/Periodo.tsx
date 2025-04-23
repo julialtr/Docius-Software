@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -13,15 +13,26 @@ import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
+import { toLocalDate } from "@/utils/convert";
+
 export function Periodo({
+  filtro,
   onFiltroChange,
 }: {
+  filtro: FilterDashboard;
   onFiltroChange: (filtro: FilterDashboard) => void;
 }) {
   const [periodo, setPeriodo] = useState<DateRange | undefined>({
-    from: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-    to: new Date(),
+    from: toLocalDate(filtro.dataInicial),
+    to: toLocalDate(filtro.dataFinal),
   });
+
+  useEffect(() => {
+    setPeriodo({
+      from: toLocalDate(filtro.dataInicial),
+      to: toLocalDate(filtro.dataFinal),
+    });
+  }, [filtro]);
 
   const handlePeriodoChange = (dateRange: DateRange | undefined) => {
     if (!dateRange?.from) return;
@@ -65,6 +76,7 @@ export function Periodo({
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
+            key={periodo?.from?.toISOString()}
             initialFocus
             mode="range"
             defaultMonth={periodo?.from}

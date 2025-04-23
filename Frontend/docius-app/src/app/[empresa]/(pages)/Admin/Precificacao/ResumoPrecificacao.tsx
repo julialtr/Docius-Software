@@ -186,12 +186,14 @@ export default function ResumoPrecificacao({
                   step="0.01"
                   min="0"
                   value={precificacao.valorAdotado}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const novoValor = e.target.value === "" ? 0 : Number(e.target.value);
+
                     onPrecificacaoChange({
                       ...precificacao,
-                      valorAdotado: Number(e.target.value),
-                    })
-                  }
+                      valorAdotado: novoValor,
+                    });
+                  }}
                   className="w-24 text-right"
                 />
                 <Button

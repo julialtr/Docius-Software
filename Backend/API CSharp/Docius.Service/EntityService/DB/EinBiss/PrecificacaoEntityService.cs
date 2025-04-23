@@ -125,7 +125,7 @@ public sealed class PrecificacaoEntityService : EntityServiceBase<EinBissEntityS
 
             foreach (var produto in listaProdutos)
             {
-                produto.Preco = dados.ValorAdotado / produto.Receita.QtdPorcoes;
+                produto.Preco = Math.Round(dados.ValorAdotado / produto.Receita.QtdPorcoes, 2);
             }
 
             await EntityService.Produto.UpdateRangeAsync(listaProdutos);

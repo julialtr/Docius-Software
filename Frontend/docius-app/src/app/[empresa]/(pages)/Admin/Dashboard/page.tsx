@@ -25,6 +25,7 @@ export default function Dashboard() {
       .split("T")[0],
     dataFinal: new Date().toISOString().split("T")[0],
   });
+  
   const [dashboard, setDashboard] = useState<ReadDashboard>();
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function Dashboard() {
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
                 Dashboard
               </h1>
-              <Periodo onFiltroChange={setFiltro} />
+              <Periodo onFiltroChange={setFiltro} filtro={filtro} />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -72,7 +73,6 @@ export default function Dashboard() {
                 titulo="Faturamento bruto"
                 valor={dashboard.valorFaturamentoBruto}
                 descricao="Total no período selecionado"
-                variacao={dashboard.variacaoFaturamentoBruto}
                 ehDecimal={true}
               />
               <DashboardCard
