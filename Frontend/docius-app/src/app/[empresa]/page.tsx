@@ -3,13 +3,13 @@
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 
 import NotFound from "@/app/not-found";
-import Login from "@/app/[empresa]/(pages)/Login/page";
+import Cardapio from "./(pages)/Client/Cardapio/page";
 
 export default function Main() {
   const { dadosEmpresa } = useDadosEmpresa();
 
   return dadosEmpresa ? (
-    <Login />
+    <Cardapio />
   ) : (
     <NotFound />
   );

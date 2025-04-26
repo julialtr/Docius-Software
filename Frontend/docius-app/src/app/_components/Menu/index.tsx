@@ -35,13 +35,21 @@ import {
 
 import MenuLink from "./Link";
 import { usePathname } from "next/navigation";
+import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export default function MenuComponent() {
   const pathname = usePathname();
 
   const { dadosEmpresa } = useDadosEmpresa();
+  const { setId } = useDadosUsuario();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const handleLogout = () => {
+    setId(0);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userType");
+  };
 
   return (
     dadosEmpresa && (
@@ -190,6 +198,7 @@ export default function MenuComponent() {
               <Link href={`/${dadosEmpresa?.dominio}`} passHref legacyBehavior>
                 <Button
                   variant="ghost"
+                  onClick={handleLogout}
                   className={`w-full text-gray-700 hover:text-red-600 hover:bg-red-50
                 ${
                   isSidebarCollapsed

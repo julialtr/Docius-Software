@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, BookOpenText, ReceiptText, LogOut } from "lucide-react";
+import { Menu, BookOpenText, ReceiptText, LogOut, LogIn } from "lucide-react";
 
 import MenuLink from "../Link";
 import { CarrinhoCompras } from "@/app/[empresa]/(pages)/Client/Cardapio/CarrinhoCompras";
@@ -13,31 +13,78 @@ import { Button } from "../../ui/button";
 
 import { usePathname } from "next/navigation";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
+import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export function MenuCliente() {
   const pathname = usePathname();
-
+  
   const { dadosEmpresa } = useDadosEmpresa();
-
+  const { id, setId } = useDadosUsuario();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [ehAdmin, setEhAdmin] = useState(false);
 
-  const navLinks = [
-    {
-      href: `/${dadosEmpresa?.dominio}/Client/Cardapio`,
-      label: "Cardápio",
-      icon: BookOpenText,
-    },
-    {
-      href: `/${dadosEmpresa?.dominio}/Client/Pedidos`,
-      label: "Pedidos",
-      icon: ReceiptText,
-    },
-    {
-      href: `/${dadosEmpresa?.dominio}/`,
-      label: "Sair",
-      icon: LogOut,
-    },
-  ];
+  useEffect(() => {
+    const userType = localStorage.getItem("userType");
+    setEhAdmin(userType === "2");
+  }, []);
+
+  const handleLogout = () => {
+    setId(0);
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userType");
+  };
+
+  const navLinks = id
+    ? ehAdmin
+      ? [
+          {
+            href: `/${dadosEmpresa?.dominio}/`,
+            label: "Cardápio",
+            icon: BookOpenText,
+          },
+          {
+            href: "#",
+            label: "Sair",
+            icon: LogOut,
+            onClick: () => {
+              handleLogout();
+              window.location.href = `/${dadosEmpresa?.dominio}/`;
+            },
+          },
+        ]
+      : [
+          {
+            href: `/${dadosEmpresa?.dominio}/Client/Cardapio`,
+            label: "Cardápio",
+            icon: BookOpenText,
+          },
+          {
+            href: `/${dadosEmpresa?.dominio}/Client/Pedidos`,
+            label: "Pedidos",
+            icon: ReceiptText,
+          },
+          {
+            href: "#",
+            label: "Sair",
+            icon: LogOut,
+            onClick: () => {
+              handleLogout();
+              window.location.href = `/${dadosEmpresa?.dominio}/`;
+            },
+          },
+        ]
+    : [
+        {
+          href: `/${dadosEmpresa?.dominio}/`,
+          label: "Cardápio",
+          icon: BookOpenText,
+        },
+        {
+          href: `/${dadosEmpresa?.dominio}/Login`,
+          label: "Entrar",
+          icon: LogIn,
+        },
+      ];
 
   const isActive = (path: string) => pathname === path;
 
@@ -61,13 +108,21 @@ export function MenuCliente() {
           {/* Menu expandido */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <MenuLink key={link.href} href={link.href} label={link.label} />
+              <MenuLink
+                key={link.href}
+                href={link.href}
+                label={link.label}
+                onClick={() => {
+                  setIsSheetOpen(false);
+                  if (link.onClick) link.onClick();
+                }}
+              />
             ))}
           </nav>
 
           {/* Carrinho de compras */}
           <div className="flex items-center gap-2">
-            <CarrinhoCompras />
+            {id && !ehAdmin ? <CarrinhoCompras /> : null}
 
             {/* Menu discreto */}
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
@@ -80,7 +135,7 @@ export function MenuCliente() {
                   <Menu className="h-5 w-5 text-amber-800" />
                 </Button>
               </SheetTrigger>
-              <SheetTitle/>
+              <SheetTitle />
               <SheetContent side="right" className="w-[250px] sm:w-[300px]">
                 <div className="flex flex-col h-full">
                   <div
@@ -101,11 +156,14 @@ export function MenuCliente() {
                         key={link.href}
                         href={link.href}
                         className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-                          isActive(link.href)
+                          isActive(link.href) || (link.label === "Cardápio" && isActive(`/${dadosEmpresa?.dominio}/`))
                             ? "bg-amber-100 text-amber-900"
                             : "text-gray-700 hover:bg-amber-50 hover:text-amber-800"
                         }`}
-                        onClick={() => setIsSheetOpen(false)}
+                        onClick={() => {
+                          setIsSheetOpen(false);
+                          if (link.onClick) link.onClick();
+                        }}
                       >
                         <link.icon className="h-5 w-5" />
                         {link.label}

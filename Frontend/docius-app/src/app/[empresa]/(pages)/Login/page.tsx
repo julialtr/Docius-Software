@@ -46,6 +46,7 @@ export default function Login() {
       
       setId(response[0].id);
       localStorage.setItem("userId", response[0].id.toString());
+      localStorage.setItem("userType", response[0].tipoUsuarioId.toString());
 
       if (response[0].tipoUsuarioId == 2)
         router.push(`/${dadosEmpresa?.dominio}/Admin/Dashboard`);

@@ -10,23 +10,34 @@ import {
   TooltipTrigger,
 } from "../../ui/tooltip";
 
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
+
 export default function MenuLink({
   href,
   icon: Icon,
   label,
+  onClick,
   isSidebarCollapsed = false,
 }: {
   href: string;
   icon?: React.ElementType;
   label: string;
+  onClick?: () => void;
   isSidebarCollapsed?: boolean;
 }) {
+  const { dadosEmpresa } = useDadosEmpresa();
+  
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive =
+    pathname === href ||
+    (label === "Cardápio" && pathname === `/${dadosEmpresa?.dominio}`);
 
   const content = (
     <Link
       href={href}
+      onClick={() => {
+        if (onClick) onClick();
+      }}
       className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors
           ${
             isActive

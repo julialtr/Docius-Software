@@ -10,9 +10,13 @@ import { Card, CardContent, CardFooter } from "@/app/_components/ui/card";
 import { Button } from "@/app/_components/ui/button";
 
 import { formatMoney } from "@/utils/format";
+import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export function Produto({ produto }: { produto: ReadProduto }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const { id } = useDadosUsuario();
+  const ehAdmin = localStorage.getItem("userType") == "2";
 
   return (
     <>
@@ -31,6 +35,7 @@ export function Produto({ produto }: { produto: ReadProduto }) {
           <Button
             size="sm"
             className="flex-1 bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700"
+            disabled={id == 0 || ehAdmin}
             onClick={() => setIsDialogOpen(true)}
           >
             <PlusCircle className="mr-1 h-4 w-4" />
