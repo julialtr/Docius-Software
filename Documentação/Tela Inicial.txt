@@ -12,6 +12,8 @@ Se a tela de login não for exibida:
 - Entre em contato com a confeitaria para confirmar o endereço de acesso.
 - Caso o problema persista, entre em contato com o suporte do Docius.
 
+É possível acessar o cardápio da confeitaria sem necessidade de login. Para fazer pedidos e adicionar o item ao carrinho, há necessidade de realizar o cadastro ou o login. Para acessar o cardápio, basta fazer o acesso ao sistema.
+
 Diferentes Tipos de Acesso
 O Docius pode ser acessado tanto por clientes quanto por funcionários da confeitaria. Dependendo do tipo de acesso, o usuário será direcionado para diferentes áreas do sistema:
 

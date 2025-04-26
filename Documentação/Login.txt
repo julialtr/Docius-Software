@@ -12,3 +12,5 @@ Ações Disponíveis
 Entrar: Autentica o usuário e o direciona para as telas do sistema.
 
 Cadastre-se: Redireciona novos usuários para a tela de cadastro.
+
+Ver a senha: Ao clicar no ícone de olho, é possível mostrar ou esconder a senha que foi digitada.
