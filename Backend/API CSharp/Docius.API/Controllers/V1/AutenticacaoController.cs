@@ -40,6 +40,15 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
         return Unauthorized("As credenciais fornecidas estão inválidas.");
     }
 
+    [AllowAnonymous]
+    [HttpPost("esqueceu-senha")]
+    public async Task<IActionResult> SendEsqueceuSenhaAsync([FromBody] EsqueceuSenhaDto dadosDto)
+    {
+        await _autenticacaoEntityService.SendEsqueceuSenhaAsync(dadosDto.Email);
+    
+        return Ok();
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Usuario;

@@ -4,6 +4,7 @@ import {
   CreateUsuario,
   FilterUsuario,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Clientes/interfaces";
+import { EsqueceuSenha } from "@/app/[empresa]/(pages)/EsqueceuSenha/interfaces";
 
 export const login = async (usuario: FilterUsuario) => {
   try {
@@ -19,6 +20,31 @@ export const login = async (usuario: FilterUsuario) => {
 
     if (response.status == 401) throw new Warning("Email ou senha inválidos.");
     else if (!response.ok) throw new Error("Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const esqueceuSenha = async (dados: EsqueceuSenha) => {
+  try {
+    const response = await fetch(
+      `${LINK_API_VERSIONADA}/autenticacao/esqueceu-senha`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        body: JSON.stringify(dados),
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw new Error(errorData.Message || "Erro de conexão com a API.");
+    }
   } catch (error) {
     throw error;
   }
@@ -69,14 +95,17 @@ export const findUsuario = async (filtro: FilterUsuario) => {
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
-    const response = await fetch(`${LINK_API_VERSIONADA}/usuario?${queryParams}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      credentials: "include",
-    });
+    const response = await fetch(
+      `${LINK_API_VERSIONADA}/usuario?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        credentials: "include",
+      }
+    );
 
     if (response.status === 204) return [];
 

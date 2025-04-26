@@ -103,6 +103,7 @@ public static class ServiceExtensions
         services.AddScoped<EinBissEntityService>();
         services.AddScoped<AutenticacaoEntityService>();
         services.AddScoped<DashboardEntityService>();
+        services.AddScoped<EmailEntityService>();
         services.AddScoped<ProxyEntityService>().AddHttpClient<ProxyEntityService>();
     }
 }

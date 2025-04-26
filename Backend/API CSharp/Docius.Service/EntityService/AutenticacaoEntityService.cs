@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
+using Docius.Repository.EinBiss.Entities.Models;
 
 namespace Docius.Service.EntityService;
 
@@ -12,10 +14,16 @@ public sealed class AutenticacaoEntityService
     private readonly IConfiguration _configuration;
     private readonly HttpContext _httpContext;
 
-    public AutenticacaoEntityService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+    private readonly EinBissEntityService _einBissEntityService;
+    private readonly EmailEntityService _emailEntityService;
+
+    public AutenticacaoEntityService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, EinBissEntityService einBissEntityService, EmailEntityService emailEntityService)
     {
         _configuration = configuration;
         _httpContext = httpContextAccessor.HttpContext;
+
+        _einBissEntityService = einBissEntityService;
+        _emailEntityService = emailEntityService;
     }
 
     public void GenerateAccessToken(string email, int tipoUsuario, int id)
@@ -47,5 +55,34 @@ public sealed class AutenticacaoEntityService
                 Secure = true,
                 SameSite = SameSiteMode.None,
             });
+    }
+
+    private string GerarCodigo()
+    {
+        Random random = new Random();
+        int numero = random.Next(0, 1000000);
+        return numero.ToString("D6");
+    }
+
+    public async Task SendEsqueceuSenhaAsync(string email)
+    {
+        var usuario = _einBissEntityService.Usuario.Entity
+            .Where(u => u.Email == email)
+            .FirstOrDefault();
+
+        if (usuario == null)
+            throw new WarningException("O email informado é inválido.");
+
+        Token token = new Token()
+        {
+            Codigo = GerarCodigo(),
+            DataHoraExpiracao = DateTime.Now.AddMinutes(15),
+            Valido = true,
+            UsuarioId = usuario.Id
+        };
+
+        await _einBissEntityService.Token.CreateAsync(token);
+
+        await _emailEntityService.SendMailAsync(email, "ein-biss", token.Codigo);
     }
 }
