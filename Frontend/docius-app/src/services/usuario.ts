@@ -1,10 +1,12 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
 import { Warning } from "@/hooks/warning";
+
 import {
   CreateUsuario,
   FilterUsuario,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Clientes/interfaces";
 import { EsqueceuSenha } from "@/app/[empresa]/(pages)/EsqueceuSenha/interfaces";
+import { VerificacaoCodigo } from "@/app/[empresa]/(pages)/VerificacaoCodigo/interfaces";
 
 export const login = async (usuario: FilterUsuario) => {
   try {
@@ -43,7 +45,36 @@ export const esqueceuSenha = async (dados: EsqueceuSenha) => {
     if (!response.ok) {
       const errorData = await response.json();
 
-      throw new Error(errorData.Message || "Erro de conexão com a API.");
+      if (response.status == 400)
+        throw new Warning(errorData.Message || "Email inválido");
+      else throw new Error(errorData.Message || "Erro de conexão com a API.");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const verificacaoCodigo = async (dados: VerificacaoCodigo) => {
+  try {
+    const response = await fetch(
+      `${LINK_API_VERSIONADA}/autenticacao/verificacao-codigo`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+        body: JSON.stringify(dados),
+        credentials: "include",
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      if (response.status == 400)
+        throw new Warning(errorData.Message || "Código inválido");
+      else throw new Error(errorData.Message || "Erro de conexão com a API.");
     }
   } catch (error) {
     throw error;

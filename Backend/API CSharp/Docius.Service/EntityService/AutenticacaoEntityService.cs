@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
 using Docius.Repository.EinBiss.Entities.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Docius.Service.EntityService;
 
@@ -84,5 +86,32 @@ public sealed class AutenticacaoEntityService
         await _einBissEntityService.Token.CreateAsync(token);
 
         await _emailEntityService.SendMailAsync(email, "ein-biss", token.Codigo);
+    }
+
+    public async Task SendVerificacaoCodigoAsync(string codigo)
+    {
+        var usuario = _einBissEntityService.Usuario.Entity
+            .Include(u => u.Token)
+            .Where(u => u.Token.Any(t => t.Codigo.Equals(codigo)))
+            .FirstOrDefault();
+
+        if (usuario == null)
+            throw new WarningException("O código informado é inválido.");
+
+        var token = usuario.Token
+            .Where(t => t.Codigo.Equals(codigo))
+            .FirstOrDefault();
+
+        if (token.DataHoraExpiracao < DateTime.Now)
+            throw new WarningException("O código informado está expirado.");
+
+        if (token.Valido == false)
+            throw new WarningException("O código informado não é mais válido.");
+
+        token.Valido = false;
+
+        await _einBissEntityService.Token.UpdateAsync(token);
+
+        GenerateAccessToken(usuario.Email, usuario.TipoUsuarioId, usuario.Id);
     }
 }

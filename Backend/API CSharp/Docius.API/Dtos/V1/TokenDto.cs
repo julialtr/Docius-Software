@@ -2,8 +2,14 @@
 
 namespace Docius.API.Dtos.V1;
 
-public class EsqueceuSenhaDto : CreateDtoBase
+public class EsqueceuSenhaDto
 {
     [Required]
     public string Email { get; set; }
+}
+
+public class VerificacaoCodigoDto
+{
+    [Required]
+    public string Codigo { get; set; }
 }

@@ -49,6 +49,15 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
         return Ok();
     }
 
+    [AllowAnonymous]
+    [HttpPost("verificacao-codigo")]
+    public async Task<IActionResult> SendVerificacaoCodigoAsync([FromBody] VerificacaoCodigoDto dadosDto)
+    {
+        await _autenticacaoEntityService.SendVerificacaoCodigoAsync(dadosDto.Codigo);
+
+        return Ok();
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Usuario;

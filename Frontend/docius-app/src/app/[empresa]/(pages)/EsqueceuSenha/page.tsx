@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { esqueceuSenha } from "@/services/usuario";
-
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Loading from "@/app/loading";
+
+import { esqueceuSenha } from "@/services/usuario";
+import { EsqueceuSenha } from "./interfaces";
 
 import Logo from "@/app/_components/Logo";
 import { Button } from "@/app/_components/ui/button";
@@ -18,9 +20,9 @@ import {
 } from "@/app/_components/ui/card";
 
 import { useToast } from "@/hooks/use-toast";
-import Loading from "@/app/loading";
-import { useRouter } from "next/navigation";
-import { EsqueceuSenha } from "./interfaces";
+import { Warning } from "@/hooks/warning";
+
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 
 export default function Login() {
   const router = useRouter();
@@ -38,15 +40,29 @@ export default function Login() {
     try {
       await esqueceuSenha(dados);
 
-      router.push(`/${dadosEmpresa?.dominio}/Login`);
+      toast({
+        title: "E-mail enviado",
+        description: "Verifique a sua caixa de entrada",
+        variant: "success",
+      });
+
+      router.push(`/${dadosEmpresa?.dominio}/VerificacaoCodigo`);
       router.refresh();
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof Warning) {
+        console.log(error);
+
+        toast({
+          variant: "warning",
+          title: "Erro ao enviar e-mail",
+          description: error.message,
+        });
+      } else if (error instanceof Error) {
         console.error(error);
 
         toast({
           variant: "destructive",
-          title: "Erro ao enviar e-mail de redefinição de senha",
+          title: "Erro ao enviar e-mail",
           description: error.message,
         });
       }
