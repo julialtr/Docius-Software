@@ -36,7 +36,7 @@ public sealed class EmailEntityService
         {
             string htmlEmailContent = File.ReadAllText(Path.Combine("Template", "EmailTemplate.html"));
             bodyBuilder.HtmlBody = htmlEmailContent.Replace("{{codigo}}", codigo)
-                                                   .Replace("{{link}}", string.Format(_configuration["Urls:RedefinirSenhaFrontend"], empresa, codigo));
+                                                   .Replace("{{link}}", string.Format(_configuration["Urls:VerificacaoCodigoFrontend"], empresa, codigo));
         }
         catch (Exception e)
         {
