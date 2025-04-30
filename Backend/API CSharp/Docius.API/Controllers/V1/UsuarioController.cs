@@ -36,6 +36,7 @@ public class UsuarioController : CrudControllerBase<UsuarioEntityService, Usuari
         return Ok(Mapper.Map<List<ReadUsuarioPedidosDto>>(usuarioPedidos));
     }
 
+    [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType(typeof(ReadUsuarioPedidosDto), StatusCodes.Status200OK)]
     public IActionResult FindUser([FromQuery] UsuarioFiltroDto filtroDto)

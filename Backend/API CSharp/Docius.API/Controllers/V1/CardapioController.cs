@@ -4,6 +4,7 @@ using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService;
 using Docius.Service.EntityService.DB.EinBiss;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Docius.API.Controllers.V1;
@@ -31,6 +32,7 @@ public class CardapioController : CrudControllerBase<CardapioEntityService, Card
         return Ok(Mapper.Map<ReadCardapioDto>(cardapio));
     }
 
+    [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType(typeof(ReadCardapioDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> FindCardapio([FromQuery] CardapioFiltroDto filtroDto)

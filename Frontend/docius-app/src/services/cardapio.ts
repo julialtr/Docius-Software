@@ -1,13 +1,10 @@
-import {
-  UpdateCardapio,
-} from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
+import { UpdateCardapio } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
 import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findCardapio = async () => {
   try {
     const response = await fetch(`${LINK_API_VERSIONADA}/cardapio`, {
       method: "GET",
-      credentials: "include",
     });
 
     if (response.status === 204) return [];

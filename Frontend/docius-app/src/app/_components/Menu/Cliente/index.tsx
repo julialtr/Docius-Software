@@ -7,6 +7,7 @@ import { Menu, BookOpenText, ReceiptText, LogOut, LogIn } from "lucide-react";
 
 import MenuLink from "../Link";
 import { CarrinhoCompras } from "@/app/[empresa]/(pages)/Client/Cardapio/CarrinhoCompras";
+import { logout } from "@/services/usuario";
 
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
 import { Button } from "../../ui/button";
@@ -14,10 +15,12 @@ import { Button } from "../../ui/button";
 import { usePathname } from "next/navigation";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+import { useToast } from "@/hooks/use-toast";
 
 export function MenuCliente() {
   const pathname = usePathname();
-  
+  const { toast } = useToast();
+
   const { dadosEmpresa } = useDadosEmpresa();
   const { id, setId } = useDadosUsuario();
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -28,10 +31,23 @@ export function MenuCliente() {
     setEhAdmin(userType === "2");
   }, []);
 
-  const handleLogout = () => {
-    setId(0);
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userType");
+  const handleLogout = async () => {
+    try {
+      setId(0);
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userType");
+      await logout();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+
+        toast({
+          variant: "destructive",
+          title: "Erro ao fazer login",
+          description: error.message,
+        });
+      }
+    }
   };
 
   const navLinks = id
@@ -156,7 +172,9 @@ export function MenuCliente() {
                         key={link.href}
                         href={link.href}
                         className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors ${
-                          isActive(link.href) || (link.label === "Cardápio" && isActive(`/${dadosEmpresa?.dominio}/`))
+                          isActive(link.href) ||
+                          (link.label === "Cardápio" &&
+                            isActive(`/${dadosEmpresa?.dominio}/`))
                             ? "bg-amber-100 text-amber-900"
                             : "text-gray-700 hover:bg-amber-50 hover:text-amber-800"
                         }`}

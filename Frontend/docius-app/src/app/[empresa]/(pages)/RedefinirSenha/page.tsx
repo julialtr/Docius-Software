@@ -41,6 +41,19 @@ export default function Login() {
     setIsLoading(true);
 
     try {
+  //Todo: finalizar a lógica assim que o token for refatorado
+
+      //Verificou o codigo
+        //api retorna o id do usuario
+        //salvar id no localstorage
+      //Digitar nova senha
+      //Enviar nova senha para API - com o usuario ID
+      //API altera a senha
+      //remove o id do usuario do local storage
+      //Redireciona para o login
+
+
+
       await login(dados);
       const response = await findUsuario(dados);
 
@@ -49,8 +62,8 @@ export default function Login() {
       localStorage.setItem("userType", response[0].tipoUsuarioId.toString());
 
       if (response[0].tipoUsuarioId == 2)
-        window.location.href = `/${dadosEmpresa?.dominio}/Admin/Dashboard`;
-      else window.location.href = `/${dadosEmpresa?.dominio}/Client/Cardapio`;
+        router.push(`/${dadosEmpresa?.dominio}/Admin/Dashboard`);
+      else router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
 
       router.refresh();
     } catch (error) {
@@ -92,36 +105,17 @@ export default function Login() {
         <Card className="w-full max-w-md border-none bg-white/80 backdrop-blur-sm order-2">
           <CardHeader className="space-y-2">
             <CardTitle className="text-2xl font-bold text-amber-900">
-              Bem-vindo de volta
+              Redefinir senha
             </CardTitle>
             <p className="text-muted-foreground">
-              Entre com sua conta para fazer pedidos especiais
+              Crie uma nova senha para sua conta
             </p>
           </CardHeader>
           <CardContent>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  disabled={isLoading}
-                  value={dados?.email}
-                  onChange={handleChange}
-                  className="border-amber-200 focus:border-amber-500"
-                />
-              </div>
-              <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="senha">Senha</Label>
-                  <Link
-                    href={`/${dadosEmpresa?.dominio}/EsqueceuSenha`}
-                    className="text-sm text-amber-700 hover:text-amber-900"
-                  >
-                    Esqueceu a senha?
-                  </Link>
+                  <Label htmlFor="senha">Nova senha</Label>
                 </div>
                 <div className="relative">
                   <Input
@@ -155,18 +149,9 @@ export default function Login() {
                 type="submit"
                 disabled={isLoading}
               >
-                {isLoading ? "Entrando..." : "Entrar"}
+                {isLoading ? "Redefinindo..." : "Redefinir senha"}
               </Button>
             </form>
-            <div className="mt-6 text-center text-sm">
-              Ainda não tem uma conta?{" "}
-              <Link
-                href={`/${dadosEmpresa?.dominio}/Cadastro`}
-                className="text-amber-700 hover:text-amber-900 hover:underline"
-              >
-                Cadastre-se
-              </Link>
-            </div>
           </CardContent>
         </Card>
       </div>

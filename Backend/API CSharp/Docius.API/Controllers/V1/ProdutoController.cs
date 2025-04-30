@@ -4,6 +4,7 @@ using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService;
 using Docius.Service.EntityService.DB.EinBiss;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Docius.API.Controllers.V1;
@@ -54,6 +55,7 @@ public class ProdutoController : CrudControllerBase<ProdutoEntityService, Produt
         return await Delete(id);
     }
 
+    [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType(typeof(ReadProdutoDto[]), StatusCodes.Status200OK)]
     public IActionResult FindProdutos([FromQuery] ProdutoFiltroDto filtroDto)

@@ -59,6 +59,16 @@ public sealed class AutenticacaoEntityService
             });
     }
 
+    public void Logout()
+    {
+        _httpContext.Response.Cookies.Delete("accessToken", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = false,
+            SameSite = SameSiteMode.Lax,
+        });
+    }
+
     private string GerarCodigo()
     {
         Random random = new Random();

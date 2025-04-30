@@ -8,43 +8,60 @@ const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const token = req.cookies.get("accessToken")?.value;
+  const host = req.headers.get("host");
+  const protocol = req.nextUrl.protocol;
+  const baseUrl = `${protocol}//${host}`;
 
-  const publicRoutes = ["/Login", "/Cadastro"];
-  if (!token && !publicRoutes.includes(pathname))
-    return NextResponse.redirect(new URL("/", req.url));
+  const empresaAuxiliar = pathname.match(/^\/([^/]+)/);
+  const empresa = empresaAuxiliar ? empresaAuxiliar[1] : "";
+
+  const publicRoutes = [
+    `/${empresa}/Login`,
+    `/${empresa}/Cadastro`,
+    `/${empresa}/AcessoNegado`,
+    `/${empresa}/NaoEncontrado`,
+    `/${empresa}/EsqueceuSenha`,
+    `/${empresa}/VerificacaoCodigo`,
+    `/${empresa}/RedefinirSenha`,
+  ];
+
+  if (publicRoutes.includes(pathname) || pathname == `/${empresa}`)
+    return NextResponse.next();
+
+  const resultado =
+    baseUrl + (empresa != "" ? `/${empresa}/AcessoNegado` : "/NaoEncontrado");
+
+//Todo: Recolocar assim que o token estiver correto
+
+ //const token = req.cookies.get("accessToken")?.value;
+ //console.log(token, "iotoken");
+
+ //if (!token) return NextResponse.redirect(new URL(resultado));
 
   try {
-    const { payload } = await jwtVerify(token!, secretKey);
+   //const { payload } = await jwtVerify(token!, secretKey);
 
-    const userRole =
-      payload["role"] ||
-      payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+   //const userRole =
+   //  payload["role"] ||
+   //  payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-    const host = req.headers.get("host");
-    const protocol = req.nextUrl.protocol;
-    const baseUrl = `${protocol}//${host}`;
+   //console.log(userRole);
 
-    const match = pathname.match(/^\/([^/]+)\//);
+   //const adminRoutes = ["/Admin/"];
+   //if (userRole != "2") {
+   //  for (const adminRoute of adminRoutes) {
+   //    if (pathname.includes(adminRoute))
+   //      return NextResponse.redirect(new URL(resultado));
+   //  }
+   //}
 
-    const resultado =
-      baseUrl + (match ? `/${match[1]}/AcessoNegado` : "/NaoEncontrado");
-
-    const adminRoutes = ["/Admin/"];
-    if (userRole != "2") {
-      for (const adminRoute of adminRoutes) {
-        if (pathname.includes(adminRoute))
-          return NextResponse.redirect(new URL(resultado));
-      }
-    }
-
-    const clientRoutes = ["/Client/"];
-    if (userRole != "1") {
-      for (const clientRoute of clientRoutes) {
-        if (pathname.includes(clientRoute))
-          return NextResponse.redirect(new URL(resultado));
-      }
-    }
+   //const clientRoutes = ["/Client/"];
+   //if (userRole != "1") {
+   //  for (const clientRoute of clientRoutes) {
+   //    if (pathname.includes(clientRoute))
+   //      return NextResponse.redirect(new URL(resultado));
+   //  }
+   //}
 
     return NextResponse.next();
   } catch (error) {

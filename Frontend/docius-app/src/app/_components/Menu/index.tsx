@@ -26,6 +26,8 @@ import {
   Tag,
 } from "lucide-react";
 
+import { logout } from "@/services/usuario";
+
 import { Button } from "@/app/_components/ui/button";
 import {
   Collapsible,
@@ -36,8 +38,10 @@ import {
 import MenuLink from "./Link";
 import { usePathname } from "next/navigation";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+import { useToast } from "@/hooks/use-toast";
 
 export default function MenuComponent() {
+  const { toast } = useToast();
   const pathname = usePathname();
 
   const { dadosEmpresa } = useDadosEmpresa();
@@ -45,10 +49,23 @@ export default function MenuComponent() {
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const handleLogout = () => {
-    setId(0);
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userType");
+  const handleLogout = async () => {
+    try {
+      setId(0);
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userType");
+      await logout();
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error);
+
+        toast({
+          variant: "destructive",
+          title: "Erro ao fazer login",
+          description: error.message,
+        });
+      }
+    }
   };
 
   return (

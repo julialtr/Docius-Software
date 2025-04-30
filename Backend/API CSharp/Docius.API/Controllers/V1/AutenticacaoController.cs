@@ -41,6 +41,14 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
     }
 
     [AllowAnonymous]
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        _autenticacaoEntityService.Logout();
+        return Ok();
+    }
+
+    [AllowAnonymous]
     [HttpPost("esqueceu-senha")]
     public async Task<IActionResult> SendEsqueceuSenhaAsync([FromBody] EsqueceuSenhaDto dadosDto)
     {

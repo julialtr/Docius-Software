@@ -17,11 +17,26 @@ export const login = async (usuario: FilterUsuario) => {
         Accept: "*/*",
       },
       body: JSON.stringify(usuario),
-      credentials: "include",
     });
 
     if (response.status == 401) throw new Warning("Email ou senha inválidos.");
     else if (!response.ok) throw new Error("Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await fetch(`${LINK_API_VERSIONADA}/autenticacao/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      }
+    });
+
+    if (!response.ok) throw new Error("Erro de conexão com a API.");
   } catch (error) {
     throw error;
   }
@@ -37,8 +52,7 @@ export const esqueceuSenha = async (dados: EsqueceuSenha) => {
           "Content-Type": "application/json",
           Accept: "*/*",
         },
-        body: JSON.stringify(dados),
-        credentials: "include",
+        body: JSON.stringify(dados)
       }
     );
 
@@ -64,8 +78,7 @@ export const verificacaoCodigo = async (dados: VerificacaoCodigo) => {
           "Content-Type": "application/json",
           Accept: "*/*",
         },
-        body: JSON.stringify(dados),
-        credentials: "include",
+        body: JSON.stringify(dados)
       }
     );
 
@@ -89,8 +102,7 @@ export const createUsuario = async (usuario: CreateUsuario) => {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
-      body: JSON.stringify([usuario]),
-      credentials: "include",
+      body: JSON.stringify([usuario])
     });
 
     if (!response.ok) {
@@ -122,7 +134,7 @@ export const findUsuarios = async () => {
   }
 };
 
-export const findUsuario = async (filtro: FilterUsuario) => {
+export const findUsuario = async (filtro: FilterUsuario) => { 
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
@@ -133,8 +145,7 @@ export const findUsuario = async (filtro: FilterUsuario) => {
         headers: {
           "Content-Type": "application/json",
           Accept: "*/*",
-        },
-        credentials: "include",
+        }
       }
     );
 

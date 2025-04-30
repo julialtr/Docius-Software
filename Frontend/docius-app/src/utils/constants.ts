@@ -1,5 +1,5 @@
-export const LINK_API_VERSIONADA = "https://localhost:7295/api/v1";
-export const LINK_API = "https://localhost:7295";
+export const LINK_API_VERSIONADA = "http://localhost:5273/api/v1";
+export const LINK_API = "http://localhost:5273";
 
 export const getMultiplicadorUnidadeMedida = (sigla: string) => {
   if (sigla === "ml") return 1;
