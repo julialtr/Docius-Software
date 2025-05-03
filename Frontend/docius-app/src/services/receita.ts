@@ -1,14 +1,15 @@
+import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
+
 import {
   CreateReceita,
   UpdateReceita,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/Receitas/interfaces";
-import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findReceitas = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/receita`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/receita`, {
       method: "GET",
-      credentials: "include",
     });
 
     if (response.status === 204) return [];
@@ -25,14 +26,9 @@ export const findReceitas = async () => {
 
 export const updateReceita = async (id: number, receita: UpdateReceita) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
       body: JSON.stringify(receita),
-      credentials: "include",
     });
 
     const data = await response.json();
@@ -47,14 +43,9 @@ export const updateReceita = async (id: number, receita: UpdateReceita) => {
 
 export const createReceita = async (receita: CreateReceita) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/receita`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/receita`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
       body: JSON.stringify(receita),
-      credentials: "include",
     });
 
     const data = await response.json();
@@ -69,12 +60,8 @@ export const createReceita = async (receita: CreateReceita) => {
 
 export const deleteReceita = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/receita/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
     });
 
     if (!response.ok) {

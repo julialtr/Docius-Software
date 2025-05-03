@@ -8,10 +8,6 @@ const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const host = req.headers.get("host");
-  const protocol = req.nextUrl.protocol;
-  const baseUrl = `${protocol}//${host}`;
-
   const empresaAuxiliar = pathname.match(/^\/([^/]+)/);
   const empresa = empresaAuxiliar ? empresaAuxiliar[1] : "";
 
@@ -25,38 +21,52 @@ export async function middleware(req: NextRequest) {
     `/${empresa}/RedefinirSenha`,
   ];
 
-  if (publicRoutes.includes(pathname) || pathname == `/${empresa}` || pathname.startsWith(`/${empresa}/VerificacaoCodigo/`))
+  if (
+    publicRoutes.includes(pathname) ||
+    pathname == `/${empresa}` ||
+    pathname.startsWith(`/${empresa}/VerificacaoCodigo/`)
+  )
     return NextResponse.next();
 
-  const resultado =
-    baseUrl + (empresa != "" ? `/${empresa}/AcessoNegado` : "/NaoEncontrado");
+  const host = req.headers.get("host");
+  const protocol = req.nextUrl.protocol;
+  const baseUrl = `${protocol}//${host}`;
 
- const token = req.cookies.get("accessToken")?.value;
+  let token = req.cookies.get("accessToken")?.value;
 
- if (!token) return NextResponse.redirect(new URL(resultado));
+  if (!token) token = req.cookies.get("refreshAccessToken")?.value;
+
+  if (!token) {
+    const redirecionamentoLogin =
+      baseUrl + (empresa != "" ? `/${empresa}/Login` : "/NaoEncontrado");
+    return NextResponse.redirect(new URL(redirecionamentoLogin));
+  }
 
   try {
-   const { payload } = await jwtVerify(token!, secretKey);
+    const resultado =
+      baseUrl + (empresa != "" ? `/${empresa}/AcessoNegado` : "/NaoEncontrado");
 
-   const userRole =
-     payload["role"] ||
-     payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    const { payload } = await jwtVerify(token!, secretKey);
 
-   const adminRoutes = ["/Admin/"];
-   if (userRole != "2") {
-     for (const adminRoute of adminRoutes) {
-       if (pathname.includes(adminRoute))
-         return NextResponse.redirect(new URL(resultado));
-     }
-   }
+    const userRole =
+      payload["role"] ||
+      payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-   const clientRoutes = ["/Client/"];
-   if (userRole != "1") {
-     for (const clientRoute of clientRoutes) {
-       if (pathname.includes(clientRoute))
-         return NextResponse.redirect(new URL(resultado));
-     }
-   }
+    const adminRoutes = ["/Admin/"];
+    if (userRole != "2") {
+      for (const adminRoute of adminRoutes) {
+        if (pathname.includes(adminRoute))
+          return NextResponse.redirect(new URL(resultado));
+      }
+    }
+
+    const clientRoutes = ["/Client/"];
+    if (userRole != "1") {
+      for (const clientRoute of clientRoutes) {
+        if (pathname.includes(clientRoute))
+          return NextResponse.redirect(new URL(resultado));
+      }
+    }
 
     return NextResponse.next();
   } catch (error) {

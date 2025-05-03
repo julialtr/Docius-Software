@@ -1,15 +1,19 @@
+import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
+
 import {
   CreateCategoriaIngrediente,
   UpdateCategoriaIngrediente,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/CategoriasIngredientes/interfaces";
-import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findCategoriasIngredientes = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente`, {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/categoria-ingrediente`,
+      {
+        method: "GET",
+      }
+    );
 
     if (response.status === 204) return [];
 
@@ -28,15 +32,13 @@ export const updateCategoriaIngrediente = async (
   categoriaIngrediente: UpdateCategoriaIngrediente
 ) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      body: JSON.stringify(categoriaIngrediente),
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(categoriaIngrediente),
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();
@@ -52,15 +54,13 @@ export const createCategoriaIngrediente = async (
   categoriaIngrediente: CreateCategoriaIngrediente
 ) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      body: JSON.stringify([categoriaIngrediente]),
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/categoria-ingrediente`,
+      {
+        method: "POST",
+        body: JSON.stringify([categoriaIngrediente]),
+      }
+    );
 
     const data = await response.json();
 
@@ -74,13 +74,12 @@ export const createCategoriaIngrediente = async (
 
 export const deleteCategoriaIngrediente = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/categoria-ingrediente/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       const data = await response.json();

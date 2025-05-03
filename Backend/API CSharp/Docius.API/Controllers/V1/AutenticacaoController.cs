@@ -74,6 +74,15 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
         return Ok();
     }
 
+    [AllowAnonymous]
+    [HttpPost("refresh-token")]
+    public IActionResult SendRefreshTokenAsync()
+    {
+        _autenticacaoEntityService.SendRefreshTokenAsync();
+
+        return Ok();
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Usuario;

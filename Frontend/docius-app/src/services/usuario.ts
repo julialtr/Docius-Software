@@ -1,4 +1,5 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
 
 import {
   CreateUsuario,
@@ -7,14 +8,9 @@ import {
 
 export const createUsuario = async (usuario: CreateUsuario) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/usuario`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/usuario`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      credentials: "include",
-      body: JSON.stringify([usuario])
+      body: JSON.stringify([usuario]),
     });
 
     if (!response.ok) {
@@ -29,10 +25,12 @@ export const createUsuario = async (usuario: CreateUsuario) => {
 
 export const findUsuarios = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/usuario/pedidos`, {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/usuario/pedidos`,
+      {
+        method: "GET",
+      }
+    );
 
     if (response.status === 204) return [];
 
@@ -46,19 +44,14 @@ export const findUsuarios = async () => {
   }
 };
 
-export const findUsuario = async (filtro: FilterUsuario) => { 
+export const findUsuario = async (filtro: FilterUsuario) => {
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
-    const response = await fetch(
+    const response = await secureFetch(
       `${LINK_API_VERSIONADA}/usuario?${queryParams}`,
       {
         method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "*/*",
-        }
       }
     );
 

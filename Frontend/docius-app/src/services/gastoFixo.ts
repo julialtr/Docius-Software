@@ -1,14 +1,15 @@
+import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
+
 import {
   CreateGastoFixo,
   UpdateGastoFixo,
 } from "@/app/[empresa]/(pages)/Admin/Cadastros/GastosFixos/interfaces";
-import { LINK_API_VERSIONADA } from "@/utils/constants";
 
 export const findGastosFixos = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/gasto`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/gasto`, {
       method: "GET",
-      credentials: "include",
     });
 
     if (response.status === 204) return [];
@@ -28,14 +29,9 @@ export const updateGastoFixo = async (
   gastoFixo: UpdateGastoFixo
 ) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
       body: JSON.stringify(gastoFixo),
-      credentials: "include",
     });
 
     if (!response.ok) {
@@ -50,14 +46,9 @@ export const updateGastoFixo = async (
 
 export const createGastoFixo = async (gastoFixo: CreateGastoFixo) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/gasto`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/gasto`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
       body: JSON.stringify([gastoFixo]),
-      credentials: "include",
     });
 
     const data = await response.json();
@@ -72,12 +63,8 @@ export const createGastoFixo = async (gastoFixo: CreateGastoFixo) => {
 
 export const deleteGastoFixo = async (id: number) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/gasto/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
     });
 
     if (!response.ok) {

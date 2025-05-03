@@ -1,4 +1,6 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch, secureFetchForm } from "./base";
+
 import {
   CreatePedido,
   FiltroPedido,
@@ -10,15 +12,10 @@ export const findPedidos = async (filtro: FiltroPedido) => {
   try {
     const queryParams = new URLSearchParams(filtro as any).toString();
 
-    const response = await fetch(
+    const response = await secureFetch(
       `${LINK_API_VERSIONADA}/pedido?${queryParams}`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "*/*",
-        },
-        credentials: "include",
       }
     );
 
@@ -58,10 +55,9 @@ export const createPedido = async (pedido: CreatePedido) => {
   formData.append("json", JSON.stringify(pedidoJson));
 
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/pedido`, {
+    const response = await secureFetchForm(`${LINK_API_VERSIONADA}/pedido`, {
       method: "POST",
       body: formData,
-      credentials: "include",
     });
 
     if (!response.ok) {
@@ -76,13 +72,9 @@ export const createPedido = async (pedido: CreatePedido) => {
 
 export const updatePedido = async (id: number, idStatusPedido: number) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/pedido/${id}`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/pedido/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(idStatusPedido),
-      credentials: "include",
     });
 
     if (!response.ok) {
@@ -101,15 +93,11 @@ export const updateItemPedido = async (
   idStatusItemPedido: number
 ) => {
   try {
-    const response = await fetch(
+    const response = await secureFetch(
       `${LINK_API_VERSIONADA}/pedido/itemPedido/${id}`,
       {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(idStatusItemPedido),
-        credentials: "include",
       }
     );
 

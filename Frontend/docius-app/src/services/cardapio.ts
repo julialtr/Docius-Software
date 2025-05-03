@@ -1,11 +1,12 @@
-import { UpdateCardapio } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
 import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
+
+import { UpdateCardapio } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
 
 export const findCardapio = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/cardapio`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/cardapio`, {
       method: "GET",
-      credentials: "include",
     });
 
     if (response.status === 204) return [];
@@ -22,15 +23,13 @@ export const findCardapio = async () => {
 
 export const updateCardapio = async (id: number, cardapio: UpdateCardapio) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/cardapio/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      body: JSON.stringify(cardapio),
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/cardapio/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(cardapio),
+      }
+    );
 
     const data = await response.json();
 

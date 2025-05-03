@@ -1,13 +1,12 @@
-import {
-  UpdatePrecificacao,
-} from "@/app/[empresa]/(pages)/Admin/Precificacao/interfaces";
 import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { secureFetch } from "./base";
+
+import { UpdatePrecificacao } from "@/app/[empresa]/(pages)/Admin/Precificacao/interfaces";
 
 export const findPrecificacoes = async () => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/precificacao`, {
+    const response = await secureFetch(`${LINK_API_VERSIONADA}/precificacao`, {
       method: "GET",
-      credentials: "include",
     });
 
     if (response.status === 204) return [];
@@ -22,17 +21,18 @@ export const findPrecificacoes = async () => {
   }
 };
 
-export const updatePrecificacao = async (id: number, precificacao: UpdatePrecificacao) => {
+export const updatePrecificacao = async (
+  id: number,
+  precificacao: UpdatePrecificacao
+) => {
   try {
-    const response = await fetch(`${LINK_API_VERSIONADA}/precificacao/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "*/*",
-      },
-      body: JSON.stringify(precificacao),
-      credentials: "include",
-    });
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/precificacao/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(precificacao),
+      }
+    );
 
     const data = await response.json();
 

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
 using Docius.Repository.EinBiss.Entities.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Docius.Service.EntityService;
@@ -56,11 +55,32 @@ public sealed class AutenticacaoEntityService
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
             });
+
+        var refreshToken = new JwtSecurityToken(
+            issuer: _configuration["JwtSettings:Audience"],
+            audience: _configuration["JwtSettings:Audience"],
+            claims: claims,
+            expires: DateTime.UtcNow.AddDays(10),
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
+                SecurityAlgorithms.HmacSha256)
+        );
+
+        string refreshTokenString = new JwtSecurityTokenHandler().WriteToken(refreshToken);
+
+        _httpContext.Response.Cookies.Append("refreshAccessToken", refreshTokenString,
+            new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddDays(10),
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+            });
     }
 
     public void Logout()
     {
         _httpContext.Response.Cookies.Delete("accessToken");
+        _httpContext.Response.Cookies.Delete("refreshAccessToken");
     }
 
     private string GerarCodigo()
@@ -123,7 +143,7 @@ public sealed class AutenticacaoEntityService
     {
         string idUsuario = _httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (String.IsNullOrEmpty(idUsuario))
+        if (string.IsNullOrEmpty(idUsuario))
             throw new WarningException("Ocorreu um erro inesperado, faça o processo de recuperação de senha novamente.");
 
         if (!int.TryParse(idUsuario, out int idUsuarioNumero))
@@ -141,5 +161,32 @@ public sealed class AutenticacaoEntityService
         await _einBissEntityService.Usuario.UpdateAsync(usuario);
 
         Logout();
+    }
+
+    public void SendRefreshTokenAsync()
+    {
+        var refreshToken = _httpContext.Request.Cookies["refreshAccessToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+            throw new WarningException("Falha na operação, faça o login novamente.");
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        var claims = tokenHandler.ValidateToken(refreshToken, new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = _configuration["JwtSettings:Audience"],
+            ValidAudience = _configuration["JwtSettings:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
+            ValidateLifetime = true
+        }, out var tokenValidado);
+
+        var email = claims.Identity.Name;
+        var tipoUsuario = claims.FindFirst(ClaimTypes.Role)?.Value;
+        var id = claims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        GenerateAccessToken(email, int.Parse(tipoUsuario), int.Parse(id));
     }
 }
