@@ -16,6 +16,7 @@ export const login = async (usuario: FilterUsuario) => {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
+      credentials: "include",
       body: JSON.stringify(usuario),
     });
 
@@ -30,6 +31,7 @@ export const logout = async () => {
   try {
     const response = await fetch(`${LINK_API_VERSIONADA}/autenticacao/logout`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Accept: "*/*",
@@ -52,6 +54,7 @@ export const esqueceuSenha = async (dados: EsqueceuSenha) => {
           "Content-Type": "application/json",
           Accept: "*/*",
         },
+        credentials: "include",
         body: JSON.stringify(dados)
       }
     );
@@ -78,6 +81,7 @@ export const verificacaoCodigo = async (dados: VerificacaoCodigo) => {
           "Content-Type": "application/json",
           Accept: "*/*",
         },
+        credentials: "include",
         body: JSON.stringify(dados)
       }
     );
@@ -102,6 +106,7 @@ export const createUsuario = async (usuario: CreateUsuario) => {
         "Content-Type": "application/json",
         Accept: "*/*",
       },
+      credentials: "include",
       body: JSON.stringify([usuario])
     });
 
@@ -142,6 +147,7 @@ export const findUsuario = async (filtro: FilterUsuario) => {
       `${LINK_API_VERSIONADA}/usuario?${queryParams}`,
       {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Accept: "*/*",

@@ -7,7 +7,8 @@ import { LINK_API_VERSIONADA } from "@/utils/constants";
 export const findProdutos = async () => {
   try {
     const response = await fetch(`${LINK_API_VERSIONADA}/produto`, {
-      method: "GET"
+      method: "GET",
+      credentials: "include",
     });
 
     if (response.status === 204) return [];

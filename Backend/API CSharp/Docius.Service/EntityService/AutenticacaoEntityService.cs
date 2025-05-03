@@ -53,20 +53,14 @@ public sealed class AutenticacaoEntityService
             {
                 Expires = DateTime.UtcNow.AddDays(7),
                 HttpOnly = true,
-                IsEssential = true,
                 Secure = true,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Strict,
             });
     }
 
     public void Logout()
     {
-        _httpContext.Response.Cookies.Delete("accessToken", new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = false,
-            SameSite = SameSiteMode.Lax,
-        });
+        _httpContext.Response.Cookies.Delete("accessToken");
     }
 
     private string GerarCodigo()

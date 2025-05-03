@@ -5,6 +5,7 @@ export const findCardapio = async () => {
   try {
     const response = await fetch(`${LINK_API_VERSIONADA}/cardapio`, {
       method: "GET",
+      credentials: "include",
     });
 
     if (response.status === 204) return [];

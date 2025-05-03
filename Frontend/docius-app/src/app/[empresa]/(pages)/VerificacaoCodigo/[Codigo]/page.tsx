@@ -13,7 +13,7 @@ export default function Login() {
 
   const [codigo, setCodigo] = useState<string[]>(Array(6).fill(""));
 
-  useEffect(() => {
+  useEffect(() => {   
     if (params?.Codigo && typeof params.Codigo === "string") {
       setCodigo(params.Codigo.split("").slice(0, 6));
     }

@@ -21,7 +21,7 @@ export const DadosEmpresaProvider = ({
 }) => {
   const [dadosEmpresa, setDadosEmpresa] = useState<Empresa | null>(null);
 
-  const carregarDados = async () => {
+  const carregarDados = async () => {   
     try {
       const dominio = window.location.pathname.split("/")[1];
 
