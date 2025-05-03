@@ -1,0 +1,18 @@
+Visualização e Cadastro Automático de Clientes
+
+Esta tela permite visualizar e gerenciar a lista de clientes cadastrados na confeitaria.
+
+Funcionalidades
+Lista de Clientes
+- Exibe todos os clientes que possuem cadastro na confeitaria.
+- Permite buscar clientes através de um campo de pesquisa.
+- Apresenta as seguintes informações: Nome, E-mail e Quantidade de pedidos realizados.
+- Possibilidade de ordenar os dados de forma crescente ou decrescente.
+
+Cadastro e Edição de Clientes
+- A inclusão, edição e exclusão de clientes não são realizadas manualmente pela equipe administrativa.
+- O cadastro é realizado automaticamente quando o cliente acessa o sistema pela primeira vez e preenche seus dados no processo de registro.
+
+Essa abordagem garante que os clientes tenham autonomia para se cadastrar, enquanto a administração pode monitorar e acompanhar suas atividades dentro do sistema.
+
+Os dados cadastrados pelos clientes são armazenados de forma segura e podem ser visualizados apenas por usuários com permissões administrativas.

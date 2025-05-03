@@ -1,4 +1,5 @@
 Tela de Cadastro
+
 A tela de cadastro é destinada a novos usuários que desejam se tornar clientes da confeitaria. Ao se cadastrar, o usuário obtém acesso à plataforma, incluindo funcionalidades como visualização do cardápio, realização de pedidos, acompanhamento de entregas e outros recursos.
 
 Após o cadastro, o usuário poderá acessar a plataforma utilizando suas credenciais de login.

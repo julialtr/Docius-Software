@@ -1,0 +1,17 @@
+Nome da regra: Tela de cotação de ingredientes.
+
+Regras:
+
+As cotações de ingredientes não são armazenadas no banco de dados. Então todos os dados serão perdidos ao recarregar a tela. Tome decisões antes de trocar de página.
+
+Cotação Automática: 
+- Disponível para os fornecedores padrões.
+- Esse recurso foi desenvolvido para buscar preços diretamente nos sites desses fornecedores.
+- Pode ser excluída.
+- Pode ter os campos de nome e preço alterados.
+
+Cotação Manual:
+- Permite adicionar, editar e excluir cotações manualmente.
+- Utilizada para inserir informações de fornecedores que não possuem suporte para a cotação automática.
+- Assemelha-se a um bloco de notas para anotações de preço.
+

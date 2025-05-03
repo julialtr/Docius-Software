@@ -1,0 +1,27 @@
+Nome da tela: Cadastro de Categorias de ingredientes
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir as categorias de ingredientes da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome
+
+Validações:
+- Nome deve ser informado.
+
+Lista:
+- Colunas: Nome, quantidade de ingredientes e ações.
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Lista de ingredientes:
+- Colunas: Nome, marca, medida (quantidade e unidade de medida), preço, quantidade e fornecedor.
+- Ordenação: Presente em todas as colunas, podendo ser crescente ou decrescente.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Visualização da lista de ingredientes vinculados a categoria (Ícone de '>')
+- Acesso rápido ao site do fornecedor (Clique sobre o link do fornecedor no registro da lista de ingredientes)

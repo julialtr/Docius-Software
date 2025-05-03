@@ -1,0 +1,17 @@
+Nome da tela: Login
+
+Descrição: Esta tela permite o usuário fazer ao acesso a plataforma Docius.
+
+Campos:
+- E-mail
+- Senha
+
+Validações:
+- E-mail deve ser informado.
+- Senha deve ser informada.
+
+Ações:
+- Esqueci minha senha
+- Ícone olho: revela ou esconde a senha digitada no campo.
+- Entrar
+- Cadastre-se: para ter acesso a plataforma Docius em modo de administrador, é necessário entrar em contato com o suporte da Docius.

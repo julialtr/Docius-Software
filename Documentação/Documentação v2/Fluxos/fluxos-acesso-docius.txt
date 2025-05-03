@@ -1,0 +1,27 @@
+Nome do fluxo: Acesso a plataforma Docius
+
+Descrição: Este fluxo permite o usuário acessar a plataforma para fazer o gerenciamento de sua confeitaria.
+
+Passos:
+1. Informar na url a confeitaria desejada.
+Explicação auxiliar: O acesso é feito por meio de um link personalizado, que inclui o domínio da confeitaria. Exemplo: www.docius.com.br/ein-biss. Isso garante que a página de login seja carregada corretamente para a confeitaria específica.
+
+2. Clicar no item de menu 'Login'.
+2.1. Caso não lembre da senha da conta, clique no botão de 'Esqueci minha senha'.
+2.2. Informe o e-mail para o envio do código de redefinição de senha.
+2.3. Verique a caixa de entrada do e-mail informado.
+2.4. Clique no link de redirecionamento no e-mail.
+2.5. Informe a nova senha.
+
+3. Informe o e-mail e senha.
+4. Clique no botão de 'Entrar'.
+
+Validações:
+- Url deve ser válida para encontrar a confeitaria dentro da base de dados da Docius.
+- E-mail deve ser válido.
+- E-mail e senha devem ser informados.
+- Código enviado para o e-mail deve ser válido e ser usado apenas uma vez.
+- Código enviado para o e-mail deve estar dentro da data e hora de expiração (Próximos 15 minutos desde o envio do e-mail).
+
+
+

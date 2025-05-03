@@ -1,0 +1,7 @@
+Nome da regra: Tela de cadastro dos gastos fixos.
+
+Regras:
+
+Os gastos fixos devem ser atualizados frequentemente, pois impactam diretamente sobre a precificação dos produtos.
+
+O valor total dos gastos fixos cadastrados na plataforma deve ser aproximadamente o valor dos gastos fixos mensais da sua confeitaria.

@@ -1,7 +1,5 @@
 Tela de Cadastro de Receitas
 
-Acesso restrito: Disponível apenas para usuários administradores.
-
 Esta tela permite cadastrar, editar ou remover receitas para a confeitaria. As receitas estão diretamente vinculadas à precificação e ao cardápio, sendo essenciais para o funcionamento da plataforma.
 
 Funcionalidades

@@ -1,5 +1,4 @@
 Tela de Pedidos
-- Disponível para administradores e clientes
 
 - A tela de pedidos apresenta funcionalidades distintas para cada tipo de usuário. Para os administradores, ela se organiza em formato de board, facilitando o controle e acompanhamento de cada etapa do processo. Já os clientes visualizam apenas seus próprios pedidos e seus respectivos detalhes.
 

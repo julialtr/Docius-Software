@@ -1,5 +1,4 @@
 Tela de Dashboard
-- Acesso exclusivo para administradores
 
 - A tela de dashboard oferece uma visão panorâmica da operação da confeitaria, reunindo indicadores essenciais para a gestão estratégica do negócio. Ela é composta por 7 cards principais, cada um com dados específicos, além de dois gráficos interativos e uma lista com os produtos mais vendidos.
 
@@ -23,8 +22,7 @@ Total de Pedidos
 - Mostra a quantidade total de pedidos realizados cuja data de entrega esteja no intervalo selecionado.
 
 Previsão de Faturamento
-- Estima o faturamento do mês seguinte à data final selecionada no filtro.
-- Considera todos os pedidos com entrega prevista para aquele mês.
+- Considera todos os pedidos com entrega prevista para o mês seguinte à data final selecionada no filtro. Soma o valor total de todos esses pedidos.
 
 Gráficos
 Pedidos por Mês

@@ -19,6 +19,6 @@ O Docius pode ser acessado tanto por clientes quanto por funcionários da confei
 
 Clientes → São redirecionados para o cardápio da confeitaria, onde podem visualizar produtos e realizar pedidos.
 
-Funcionários → São direcionados para as páginas de gerenciamento do estabelecimento, onde podem administrar pedidos, estoques e demais processos internos.
+Administradores → São direcionados para as páginas de gerenciamento do estabelecimento, onde podem administrar pedidos, estoques e demais processos internos.
 
 O Docius foi projetado para ser uma ferramenta intuitiva e eficiente, garantindo uma experiência otimizada para todos os envolvidos na operação da confeitaria.

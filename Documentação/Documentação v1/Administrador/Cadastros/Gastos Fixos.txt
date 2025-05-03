@@ -1,18 +1,16 @@
 Tela de Cadastro de Gastos Fixos
 
-Acesso restrito: Disponível apenas para usuários administradores.
-
 Essa tela permite cadastrar, editar e excluir gastos fixos que serão considerados no cálculo da precificação dos produtos. Como os gastos fixos impactam diretamente no preço final, é essencial mantê-los atualizados e utilizar valores médios e aproximados da realidade.
 
 Funcionalidades
 Lista de Gastos Fixos
-- Exibe todos os gastos fixos cadastrados, apresentando: Nome, Valor
+- Exibe todos os gastos fixos cadastrados, apresentando: nome e valor.
 - As informações podem ser ordenadas de forma crescente ou decrescente.
 - É possível localizar um gasto fixo por meio de um campo de pesquisa.
 
 Cadastro de Novo Gasto Fixo
 - Para adicionar um novo gasto fixo, basta clicar no botão "+".
-- Os campos obrigatórios são: Nome do gasto fixo, Valor
+- O formulário exige os campos: nome do gasto fixo e valor.
 
 Edição e Exclusão de Gastos Fixos
 - Os gastos fixos podem ser editados ou removidos conforme necessário.
@@ -20,6 +18,6 @@ Edição e Exclusão de Gastos Fixos
 Total de Gastos Fixos Mensais
 - No final da lista, é exibido o total dos gastos fixos mensais, calculado a partir da soma de todos os valores cadastrados.
 
-Importância do Cadastro de Gastos Fixos
+Relevância dos Gastos Fixos na Precificação
 - Os gastos fixos são essenciais para o cálculo da precificação.
-- Como representam custos mensais da confeitaria, é importante cadastrá-los corretamente e mantê-los atualizados para garantir que os preços dos produtos reflitam a realidade do negócio.
+- Como representam custos mensais da confeitaria, mantê-los atualizados é fundamental para que os preços reflitam os custos reais da confeitaria..

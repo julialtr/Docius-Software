@@ -1,0 +1,10 @@
+Nome da regra: Tela de cadastro das categorias de ingredientes.
+
+Regras:
+
+Categoria de ingrediente: é um cadastro genérico em que podem ser vinculados uma lista de ingredientes.
+
+Exemplo:
+
+Categorias: Leite Condensado, Creme de Leite, Chocolate em Pó.
+Ingredientes: Marca A – 200g – R$10,00 – Fornecedor X - Categoria Chocolate em Pó, Marca B – 1kg – R$40,00 – Fornecedor Y - Categoria Chocolate em Pó

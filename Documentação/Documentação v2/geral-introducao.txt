@@ -1,0 +1,5 @@
+Docius – Gestão Inteligente para Confeitarias por Encomenda
+
+O Docius é um software desenvolvido exclusivamente para confeitarias que trabalham por encomenda. Seu principal objetivo é oferecer um gerenciamento integrado, abrangendo desde a administração de pedidos até a interação com clientes, confeiteiros e fornecedores.
+
+Além de otimizar processos, o Docius se destaca pelo uso das tecnologias mais avançadas do mercado, com um forte foco em Inteligência Artificial para aprimorar a tomada de decisões e facilitar o dia a dia da confeitaria.

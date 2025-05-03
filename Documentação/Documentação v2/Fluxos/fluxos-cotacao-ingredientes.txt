@@ -1,0 +1,14 @@
+Nome do fluxo: Cotação de ingredientes
+
+Descrição: Este fluxo permite o usuário fazer a cotação de ingredientes.
+
+Passos:
+1. Inserir um termo de busca
+2. Caso queria fazer a cotação automática, selecione quais fornecedores serão considerados na cotação de ingredientes
+2.1. Clique em buscar
+3. Clicar na aba Resultados
+4. Caso queira incluir cotações manuais, clique no '+'
+
+
+Validações:
+- Termo de busca deve ser informado.

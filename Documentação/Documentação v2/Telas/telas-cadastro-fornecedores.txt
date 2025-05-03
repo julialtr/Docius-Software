@@ -1,0 +1,24 @@
+Nome da tela: Cadastro de Fornecedores
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir os fornecedores da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome
+- Endereço físico
+- Site
+
+Validações:
+- Nome deve ser informado.
+
+Lista:
+- Colunas: Nome, endereço físico, site e ações.
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)

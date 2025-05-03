@@ -1,6 +1,5 @@
 Tela de Cardápio
 
-Acesso restrito: Disponível apenas para administradores.
 A tela de Cardápio permite configurar um único cardápio para a confeitaria, garantindo que os clientes tenham acesso a uma apresentação bem organizada dos produtos disponíveis.
 
 Funcionalidades

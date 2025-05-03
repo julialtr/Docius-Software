@@ -1,0 +1,20 @@
+Tela de Cardápio
+
+A tela de Cardápio permite configurar um único cardápio para a confeitaria, garantindo que os clientes tenham acesso a uma apresentação bem organizada dos produtos disponíveis.
+
+Funcionalidades
+Estruturação do Cardápio
+- O cardápio é organizado em categorias e subcategorias, permitindo uma estrutura flexível e adaptável às necessidades da confeitaria.
+- Categorias: Cada categoria possui um nome e serve para agrupar produtos e categorias semelhantes. Uma categoria pode conter quantas subcategorias forem necessárias, tal como produtos.
+- Produtos: Devem ser adicionados dentro de uma categoria. Apenas produtos já precificados estarão disponíveis para inclusão no cardápio. Um mesmo produto não pode ser adicionado mais de uma vez.
+
+Adição de Categorias e Produtos
+- É possível criar quantas categorias desejar, organizando o cardápio da melhor forma para a confeitaria.
+- Produtos podem ser adicionados dentro das categorias existentes, desde que já tenham sido precificados.
+
+Restrições do Cardápio
+- Não é possível criar nem excluir cardápios. A confeitaria terá apenas um cardápio, que pode ser personalizado e ajustado conforme necessário.
+
+Importância da Configuração do Cardápio
+- A estrutura do cardápio impacta diretamente na experiência do cliente, tornando a navegação mais intuitiva.
+- Uma boa organização facilita a busca por produtos, incentivando os pedidos.

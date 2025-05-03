@@ -1,0 +1,24 @@
+Nome da tela: Cadastro de Gastos Fixos
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir os gastos fixos da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome
+- Valor
+
+Validações:
+- Nome deve ser informado.
+- Valor deve ser informado.
+
+Lista:
+- Colunas: Nome, valor e ações.
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+- Totalização: Exibição do valor total dos gastos fixos cadastrados.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)

@@ -1,0 +1,15 @@
+Nome da tela: Cadastro de Clientes
+
+Descrição: Esta tela permite o usuário visualizar as informações dos clientes cadastrados da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Lista:
+- Colunas: Nome, e-mail e quantidade de pedidos.
+- Ordenação: Presente em todas as colunas, podendo ser crescente ou decrescente.
+
+Ações:
+- Edição: Não permitida pelo administradores da confeitaria.
+- Exclusão: Não permitida pelo administradores da confeitaria.
+- Cadastro: Não permitida pelo administradores da confeitaria. O cliente poderá realizar o cadastro na tela de Login.

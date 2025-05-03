@@ -1,0 +1,55 @@
+Tela de Precificação
+A tela de precificação permite calcular o preço dos produtos da confeitaria com base nos custos dos ingredientes, nos gastos fixos e no percentual de lucro desejado.
+
+Funcionamento da Precificação
+Requisitos
+Para realizar a precificação, é necessário que:
+
+- Uma receita esteja cadastrada: A precificação está diretamente vinculada a uma receita, pois depende dos ingredientes utilizados. Dessa forma, a precificação é criada automaticamente ao cadastrar uma receita e removida quando a receita é excluída.
+- Os gastos fixos estejam cadastrados: O sistema utiliza esses valores para distribuir os custos operacionais no cálculo.
+- A quantidade de horas mensais trabalhadas seja informada: Esse dado é essencial para calcular a proporção dos gastos fixos atribuídos à receita.
+
+Interface da Tela
+A tela apresenta uma lista de receitas cadastradas, exibindo informações essenciais como:
+
+- Nome da receita
+- Tempo de preparo
+- Quantidade de porções
+
+Ao selecionar uma receita, a precificação correspondente é carregada, permitindo ajustes e visualização dos detalhes do cálculo.
+
+Processo de Precificação
+
+1. Cálculo do custo dos ingredientes
+- Cada receita possui uma lista de categorias de ingredientes.
+- Para cada categoria, são exibidos os ingredientes disponíveis em estoque.
+- Como os ingredientes podem ter preços variáveis, o sistema permite selecionar quais serão considerados no cálculo.
+- A média de preço dos ingredientes selecionados em cada categoria é calculada.
+- A soma dessas médias resulta no custo total dos ingredientes da receita.
+
+2. Cálculo da proporção dos gastos fixos
+- O valor total dos gastos fixos cadastrados é proporcionalizado de acordo com o tempo necessário para preparar a receita.
+- O cálculo utilizado é: Valor dos gastos fixos cadastrados × Tempo da receita / Quantidade de horas mensais trabalhadas
+ 
+3. Cálculo do valor final da receita
+- O custo total dos ingredientes e os gastos fixos são somados.
+- Sobre esse valor, é aplicado o percentual de lucro definido pelo usuário.
+
+4. Valor sugerido e valor adotado
+- O sistema sugere um valor final somando o custo dos ingredientes, o valor proporcional dos gastos fixos e o valor de lucro esperado.
+- Caso o valor sugerido não seja adequado, o usuário pode ajustar o preço manualmente no campo "Valor Adotado".
+- Esse valor adotado será salvo como o preço do produto vinculado à receita.
+
+Outras Informações
+- O sistema exibe os valores sugeridos e adotados por porção, considerando a quantidade de porções definida no cadastro da receita.
+- Não é possível criar ou excluir precificações manualmente, pois essas ações ocorrem automaticamente com o cadastro e a exclusão de receitas.
+
+Resumo
+Para definir um preço para um produto, é necessário seguir estas etapas:
+
+1. Cadastrar a receita
+2. Cadastrar os gastos fixos
+3. Informar a quantidade de horas mensais trabalhadas
+4. Selecionar a receita e definir o percentual de lucro
+5. Realizar a precificação
+6. Ajustar o valor adotado, se necessário

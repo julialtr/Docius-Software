@@ -1,0 +1,43 @@
+Nome da tela: Dashboard
+
+Descrição: Esta tela permite o usuário visualizar as informações mais relevantes da confeitaria.
+
+Filtro:
+- Data inicial e Data final.
+
+Cards:
+1. Faturamento Bruto
+- Exibe o valor total faturado no período selecionado.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+
+2. Ticket Médio
+- Exibe o valor médio por pedido no período selecionado.
+- É calculado dividindo o faturamento bruto pelo total de pedidos no período selecionado.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+
+3. Total de Pedidos
+- Exibe a quantidade total de pedidos realizados no período selecionado.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+
+4. Previsão de Faturamento
+- Exibe o valor total dos pedidos com data de entrega prevista para o mês seguinte à data final selecionada no filtro.
+
+Gráficos:
+1. Pedidos por mês
+- Visualização: Gráfico de barras verticais.
+- Exibe o número de pedidos em cada um dos últimos 6 meses.
+- Considera os pedidos cuja data de entrega esteja dentro dos últimos 6 meses.
+- Não é afetado pelo filtro.
+
+2. Pedidos por status
+- Visualização: Gráfico de pizza.
+- Exibe a distribuição percentual dos pedidos por status.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+- Status: Pagamento pendente, confirmado, em produção e concluído.
+
+Listas:
+1. Produtos mais vendidos
+- Exibe uma lista ordenada dos produtos mais populares dos pedidos.
+- Considera os pedidos cuja data de entrega esteja dentro do intervalo definido no filtro.
+- Colunas: Nome do produto e quantidade (Quantidade de vezes que o produto apareceu nos pedidos).
+- Ordenação: Decrescente em relação a quantidade.

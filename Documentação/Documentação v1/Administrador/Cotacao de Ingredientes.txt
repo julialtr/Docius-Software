@@ -1,5 +1,4 @@
 Tela de Cotação de Ingredientes
-Acesso restrito: Disponível apenas para administradores.
 
 A tela de Cotação de Ingredientes permite realizar cotações diretamente na plataforma de gerenciamento da confeitaria, simplificando o processo de comparação de preços.
 

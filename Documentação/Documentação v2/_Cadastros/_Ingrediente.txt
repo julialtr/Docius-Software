@@ -1,7 +1,5 @@
 Tela de Cadastro de Ingredientes
 
-Acesso restrito: Disponível apenas para usuários administradores.
-
 Nesta tela, é possível cadastrar, editar e excluir ingredientes utilizados na confeitaria.
 
 Funcionalidades

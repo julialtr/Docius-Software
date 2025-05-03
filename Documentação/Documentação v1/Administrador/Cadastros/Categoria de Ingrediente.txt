@@ -1,18 +1,16 @@
-Tela de Cadastro de Categorias de Ingredientes
-
-Acesso restrito: Disponível apenas para usuários administradores.
+Cadastro e Gerenciamento de Categorias de Ingredientes
 
 Esta tela permite gerenciar categorias de ingredientes utilizados na confeitaria. As categorias organizam os ingredientes de forma mais ampla, facilitando a busca e o controle de estoque.
 
 Funcionalidades
-Lista de Categorias de Ingredientes
+Visualização e Busca de Categorias de Ingredientes
 - Exibe todas as categorias cadastradas na confeitaria.
 - Permite buscar categorias através de um campo de pesquisa.
-- Apresenta as informações: Nome da categoria, Quantidade de ingredientes cadastrados na categoria
+- Apresenta o nome da categoria e a quantidade de ingredientes cadastrados em cada uma.
 - Possibilidade de ordenar a lista de forma crescente ou decrescente.
 
 Cadastro de Nova Categoria
-- Para adicionar uma nova categoria, basta clicar no botão "+".
+- Para adicionar uma nova categoria, clique no botão '+'.
 - Um formulário será exibido, solicitando o nome da categoria (campo obrigatório).
 
 Edição e Exclusão

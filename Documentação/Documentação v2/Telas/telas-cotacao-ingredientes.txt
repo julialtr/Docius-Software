@@ -1,0 +1,43 @@
+Nome da tela: Cotação de Ingredientes
+
+Descrição: Esta tela permite o usuário realizar cotações automáticas ou manuais de ingredientes.
+
+Aba Buscar cotações:
+
+Termo de busca:
+- Campo de texto livre.
+
+Lista de fornecedores padrões:
+- Colunas: Nome, endereço físico, site
+- Ordenação: Presente em todas as colunas, podendo ser crescente ou decrescente.
+
+Validações:
+- Termo de busca deve ser informado.
+
+Ações:
+- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)
+- Buscar cotações
+
+Aba Resultados:
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome do ingrediente
+- Preço
+- Fornecedor (Vínculo com o cadastro de fornecedores)
+
+Validações:
+- Nome deve ser informado.
+- Preço deve ser informado.
+- Fornecedor deve ser informado.
+
+Lista:
+- Colunas: Nome do ingrediente, preço, fornecedor e ações.
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)

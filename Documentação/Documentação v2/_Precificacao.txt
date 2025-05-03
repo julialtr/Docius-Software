@@ -1,5 +1,5 @@
 Tela de Precificação
-A tela de precificação está disponível exclusivamente para usuários administradores e permite calcular o preço dos produtos da confeitaria com base nos custos dos ingredientes, nos gastos fixos e no percentual de lucro desejado.
+A tela de precificação permite calcular o preço dos produtos da confeitaria com base nos custos dos ingredientes, nos gastos fixos e no percentual de lucro desejado.
 
 Funcionamento da Precificação
 Requisitos
