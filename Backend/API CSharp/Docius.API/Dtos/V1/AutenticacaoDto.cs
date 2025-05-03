@@ -13,3 +13,9 @@ public class VerificacaoCodigoDto
     [Required]
     public string Codigo { get; set; }
 }
+
+public class RedefinirSenhaDto
+{
+    [Required]
+    public string Senha { get; set; }
+}

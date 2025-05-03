@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
-import { FilterUsuario } from "../Admin/Cadastros/Clientes/interfaces";
-import { findUsuario, login } from "@/services/usuario";
+import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
-import Link from "next/link";
+import { redefinirSenha } from "@/services/autenticacao";
+import { RedefinirSenha } from "./interfaces";
 
 import Logo from "@/app/_components/Logo";
 import { Button } from "@/app/_components/ui/button";
@@ -19,52 +19,35 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 
+import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
+
 import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
-import Loading from "@/app/loading";
-import { useRouter } from "next/navigation";
-import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export default function Login() {
   const router = useRouter();
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
-  const { setId } = useDadosUsuario();
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [dados, setDados] = useState<FilterUsuario>({ email: "", senha: "" });
+  const [dados, setDados] = useState<RedefinirSenha>({ senha: "" });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-  //Todo: finalizar a lógica assim que o token for refatorado
+      await redefinirSenha(dados);
 
-      //Verificou o codigo
-        //api retorna o id do usuario
-        //salvar id no localstorage
-      //Digitar nova senha
-      //Enviar nova senha para API - com o usuario ID
-      //API altera a senha
-      //remove o id do usuario do local storage
-      //Redireciona para o login
+      toast({
+        title: "Senha alterada com sucesso",
+        description: "Você será redirecionado para fazer o login",
+        variant: "success",
+      });
 
-
-
-      await login(dados);
-      const response = await findUsuario(dados);
-
-      setId(response[0].id);
-      localStorage.setItem("userId", response[0].id.toString());
-      localStorage.setItem("userType", response[0].tipoUsuarioId.toString());
-
-      if (response[0].tipoUsuarioId == 2)
-        router.push(`/${dadosEmpresa?.dominio}/Admin/Dashboard`);
-      else router.push(`/${dadosEmpresa?.dominio}/Client/Cardapio`);
-
+      router.push(`/${dadosEmpresa?.dominio}/Login`);
       router.refresh();
     } catch (error) {
       if (error instanceof Warning) {
@@ -72,7 +55,7 @@ export default function Login() {
 
         toast({
           variant: "warning",
-          title: "Erro ao fazer login",
+          title: "Erro ao fazer redefinir a senha",
           description: error.message,
         });
       } else if (error instanceof Error) {
@@ -80,7 +63,7 @@ export default function Login() {
 
         toast({
           variant: "destructive",
-          title: "Erro ao fazer login",
+          title: "Erro ao fazer redefinir a senha",
           description: error.message,
         });
       }

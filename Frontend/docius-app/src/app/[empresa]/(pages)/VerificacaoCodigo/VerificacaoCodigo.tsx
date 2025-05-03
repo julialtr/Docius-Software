@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import { verificacaoCodigo } from "@/services/usuario";
+import { verificacaoCodigo } from "@/services/autenticacao";
 
 import Logo from "@/app/_components/Logo";
 import { Input } from "@/app/_components/ui/input";

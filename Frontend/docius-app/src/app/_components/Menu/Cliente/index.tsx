@@ -7,7 +7,7 @@ import { Menu, BookOpenText, ReceiptText, LogOut, LogIn } from "lucide-react";
 
 import MenuLink from "../Link";
 import { CarrinhoCompras } from "@/app/[empresa]/(pages)/Client/Cardapio/CarrinhoCompras";
-import { logout } from "@/services/usuario";
+import { logout } from "@/services/autenticacao";
 
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
 import { Button } from "../../ui/button";

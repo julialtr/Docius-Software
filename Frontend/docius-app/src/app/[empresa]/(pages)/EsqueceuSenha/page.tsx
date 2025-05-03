@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/loading";
 
-import { esqueceuSenha } from "@/services/usuario";
+import { esqueceuSenha } from "@/services/autenticacao";
 import { EsqueceuSenha } from "./interfaces";
 
 import Logo from "@/app/_components/Logo";

@@ -26,7 +26,7 @@ import {
   Tag,
 } from "lucide-react";
 
-import { logout } from "@/services/usuario";
+import { logout } from "@/services/autenticacao";
 
 import { Button } from "@/app/_components/ui/button";
 import {

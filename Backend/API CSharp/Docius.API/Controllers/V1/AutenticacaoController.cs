@@ -66,6 +66,14 @@ public class AutenticacaoController : CrudControllerBase<UsuarioEntityService, U
         return Ok();
     }
 
+    [HttpPost("redefinir-senha")]
+    public async Task<IActionResult> SendRedefinirSenhaAsync([FromBody] RedefinirSenhaDto dadosDto)
+    {
+        await _autenticacaoEntityService.SendRedefinirSenhaAsync(dadosDto.Senha);
+
+        return Ok();
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Usuario;

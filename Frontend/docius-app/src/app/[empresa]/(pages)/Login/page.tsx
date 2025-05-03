@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { FilterUsuario } from "../Admin/Cadastros/Clientes/interfaces";
-import { findUsuario, login } from "@/services/usuario";
+import { findUsuario } from "@/services/usuario";
+import { login } from "@/services/autenticacao";
 
 import Link from "next/link";
 

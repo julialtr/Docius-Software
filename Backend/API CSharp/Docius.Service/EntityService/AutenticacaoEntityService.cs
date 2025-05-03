@@ -118,4 +118,28 @@ public sealed class AutenticacaoEntityService
 
         GenerateAccessToken(usuario.Email, usuario.TipoUsuarioId, usuario.Id);
     }
+
+    public async Task SendRedefinirSenhaAsync(string senha)
+    {
+        string idUsuario = _httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (String.IsNullOrEmpty(idUsuario))
+            throw new WarningException("Ocorreu um erro inesperado, faça o processo de recuperação de senha novamente.");
+
+        if (!int.TryParse(idUsuario, out int idUsuarioNumero))
+            throw new WarningException("Ocorreu um erro inesperado, faça o processo de recuperação de senha novamente.");
+
+        var usuario = _einBissEntityService.Usuario.Entity
+            .Where(u => u.Id.Equals(idUsuarioNumero))
+            .FirstOrDefault();
+
+        if (usuario == null)
+            throw new WarningException("Ocorreu um erro inesperado, faça o processo de recuperação de senha novamente.");
+
+        usuario.Senha = senha;
+
+        await _einBissEntityService.Usuario.UpdateAsync(usuario);
+
+        Logout();
+    }
 }
