@@ -23,11 +23,9 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Warning } from "@/hooks/warning";
 import Loading from "@/app/loading";
-import { useRouter } from "next/navigation";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export default function Login() {
-  const router = useRouter();
   const { toast } = useToast();
   const { dadosEmpresa } = useDadosEmpresa();
   const { setId } = useDadosUsuario();
@@ -52,8 +50,6 @@ export default function Login() {
       if (response[0].tipoUsuarioId == 2)
         window.location.href = `/${dadosEmpresa?.dominio}/Admin/Dashboard`;
       else window.location.href = `/${dadosEmpresa?.dominio}/Client/Cardapio`;
-
-      router.refresh();
     } catch (error) {
       if (error instanceof Warning) {
         console.log(error);
