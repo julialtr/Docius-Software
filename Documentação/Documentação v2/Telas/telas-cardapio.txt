@@ -2,8 +2,8 @@ Nome da tela: Cardápio
 
 Descrição: Esta tela permite o usuário visualizar o cardápio da confeitaria.
 
-Ações:
-- A tela não permite ações como a adição de itens ao carrinho pois é necessário login para isso.
+Ações: 
+- Expandir e recolher categorias e subcategorias.
 
 Visualização:
 - Lista com categorias, subcategorias e produtos. 

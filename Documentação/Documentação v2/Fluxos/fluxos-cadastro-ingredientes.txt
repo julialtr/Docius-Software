@@ -1,0 +1,9 @@
+Nome do fluxo: Cadastro de ingredientes
+
+Descrição: Este fluxo permite o usuário fazer o cadastro de ingredientes.
+
+Passos:
+1. Opcionalmente, na tela de cadastro de fornecedores, incluir um novo fornecedor.
+2. Na tela de cadastro de categorias de ingredientes, incluir uma nova categoria.
+
+Agora, é possível cadastrar um ingrediente, pois ele pode ter essas duas informações.

@@ -7,7 +7,7 @@ Filtro:
 
 Campos:
 - Nome
-- Valor
+- Valor (R$)
 
 Validações:
 - Nome deve ser informado.
@@ -16,7 +16,7 @@ Validações:
 Lista:
 - Colunas: Nome, valor e ações.
 - Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
-- Totalização: Exibição do valor total dos gastos fixos cadastrados.
+- Totalização (Total de gastos fixos mensais): Exibição do valor total dos gastos fixos cadastrados.
 
 Ações:
 - Inclusão (Botão '+')

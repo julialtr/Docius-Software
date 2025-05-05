@@ -1,0 +1,35 @@
+Nome da tela: Cadastro de Ingredientes
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir os ingredientes da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Categoria (Cadastro de Categorias de Ingredientes)
+- Nome
+- Marca
+- Medida
+- Unidade medida (g, kg, ml ou l)
+- Preço (R$)
+- Quantidade
+- Fornecedor (Cadastro de Fornecedores)
+
+Validações:
+- Categoria deve ser informada.
+- Nome deve ser informado.
+- Marca deve ser informada.
+- Medida deve ser informada.
+- Unidade medida deve ser informada.
+- Preço (R$) deve ser informado.
+- Quantidade deve ser informada.
+
+Lista:
+- Colunas: Categoria (Nome), nome, marca, medida (medida e unidade de medida), preço, quantidade, fornecedor (Nome) e ações
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)

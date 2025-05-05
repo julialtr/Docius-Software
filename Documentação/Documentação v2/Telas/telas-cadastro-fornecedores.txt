@@ -7,14 +7,14 @@ Filtro:
 
 Campos:
 - Nome
-- Endereço físico
+- Endereço
 - Site
 
 Validações:
 - Nome deve ser informado.
 
 Lista:
-- Colunas: Nome, endereço físico, site e ações.
+- Colunas: Nome, endereço, site e ações.
 - Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
 
 Ações:

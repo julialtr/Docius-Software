@@ -2,7 +2,9 @@ Nome da regra: Tela de cadastro dos fornecedores.
 
 Regras:
 
-Fornecedor padrão: os fornecedores Giassi e Fort já vêm cadastrados por padrão no sistema, pois oferecem integração para cotação automática de ingredientes.
+Não é possível excluir um fornecedor que está vinculado a algum ingrediente.
+
+Fornecedor padrão: os fornecedores Giassi e Fort Atacadista já vêm cadastrados por padrão no sistema, pois oferecem integração para cotação automática de ingredientes.
 
 Os fornecedores padrões não podem ser editados, somente excluídos.
 

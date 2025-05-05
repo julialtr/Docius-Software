@@ -4,6 +4,8 @@ Regras:
 
 Categoria de ingrediente: é um cadastro genérico em que podem ser vinculados uma lista de ingredientes.
 
+Não é possível excluir uma categoria de ingrediente que está vinculada a alguma receita ou ingrediente.
+
 Exemplo:
 
 Categorias: Leite Condensado, Creme de Leite, Chocolate em Pó.

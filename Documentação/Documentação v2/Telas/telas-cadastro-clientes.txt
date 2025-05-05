@@ -8,8 +8,3 @@ Filtro:
 Lista:
 - Colunas: Nome, e-mail e quantidade de pedidos.
 - Ordenação: Presente em todas as colunas, podendo ser crescente ou decrescente.
-
-Ações:
-- Edição: Não permitida pelo administradores da confeitaria.
-- Exclusão: Não permitida pelo administradores da confeitaria.
-- Cadastro: Não permitida pelo administradores da confeitaria. O cliente poderá realizar o cadastro na tela de Login.

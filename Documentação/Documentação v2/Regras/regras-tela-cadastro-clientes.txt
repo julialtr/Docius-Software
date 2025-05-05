@@ -1,0 +1,7 @@
+Nome da regra: Tela de cadastro dos clientes.
+
+Regras:
+
+Edição: Não permitida pelo administradores da confeitaria.
+Exclusão: Não permitida pelo administradores da confeitaria.
+Cadastro: Não permitida pelo administradores da confeitaria. O cliente poderá realizar o cadastro na tela de Login.

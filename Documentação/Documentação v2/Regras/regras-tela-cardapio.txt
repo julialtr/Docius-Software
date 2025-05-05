@@ -1,0 +1,6 @@
+Nome da regra: Tela de cardápio.
+
+Regras:
+
+A tela não permite ações como a adição de itens ao carrinho pois é necessário login para isso. E ter um usuário do tipo cliente, usuários do tipo administradores que gerenciam a confeitaria não tem acesso a realização de pedidos.
+

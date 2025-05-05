@@ -1,0 +1,8 @@
+Nome do fluxo: Cadastro de ingredientes
+
+Descrição: Este fluxo permite o usuário fazer o cadastro de receitas.
+
+Passos:
+1. Na tela de cadastro de categorias de ingredientes, incluir uma nova categoria.
+
+Agora, é possível cadastrar uma receita, pois ela precisa de pelo menos uma categoria de ingrediente.

@@ -1,0 +1,43 @@
+Nome da tela: Cadastro de Receitas
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir as receitas da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome
+- Tempo de preparo
+- Quantidade de porções
+- Descrição
+- Lista de categorias de ingredientes
+
+Campos da adição de uma categoria de ingrediente:
+- Ingrediente (Cadastro de Categorias de Ingredientes)
+- Medida 
+- Unidade de medida (g, kg, ml, l)
+
+Validações:
+- Nome deve ser informado.
+- Tempo de preparo deve ser informado.
+- Quantidade de porções deve ser informado.
+- No mínimo, um ingrediente deve ser informado.
+
+Validações da adição de uma categoria de ingrediente:
+- Categoria de ingrediente deve ser informada.
+- Medida deve ser informada.
+- Unidade de medida deve ser informada.
+
+Lista:
+- Colunas: Nome, descrição, tempo (HH:MM), rendimento (Em porções) e ações
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Lista de categorias de ingredientes:
+- Em forma de cards
+- Informações: Categoria de Ingrediente (Nome) e medida (medida e unidade de medida)
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Visualização da lista de categorias de ingredientes vinculados a receita (Ícone de '>')

@@ -4,27 +4,28 @@ Descrição: Esta tela permite o usuário realizar cotações automáticas ou ma
 
 Aba Buscar cotações:
 
-Termo de busca:
+Buscar ingredientes:
 - Campo de texto livre.
 
 Lista de fornecedores padrões:
-- Colunas: Nome, endereço físico, site
-- Ordenação: Presente em todas as colunas, podendo ser crescente ou decrescente.
+- Em forma de card
+- Informações: Nome, endereço e site
 
 Validações:
 - Termo de busca deve ser informado.
+- No mínimo um fornecedor padrão deve ser selecionado.
 
 Ações:
-- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)
-- Buscar cotações
+- Acesso rápido ao site do fornecedor (Clique sobre o link do site no card da lista)
+- Buscar (Buscar cotações automáticas)
 
 Aba Resultados:
 Filtro:
 - Campo de texto livre.
 
 Campos:
-- Nome do ingrediente
-- Preço
+- Nome
+- Preço (R$)
 - Fornecedor (Vínculo com o cadastro de fornecedores)
 
 Validações:
@@ -33,11 +34,10 @@ Validações:
 - Fornecedor deve ser informado.
 
 Lista:
-- Colunas: Nome do ingrediente, preço, fornecedor e ações.
+- Colunas: Nome com tag de 'manual' ou não (Em caso de cotação automática ou manual), preço, fornecedor (Nome) e ações.
 - Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
 
 Ações:
-- Inclusão (Botão '+')
+- Inclusão (Botão Adicionar cotação manual)
 - Exclusão (Ícone de lixeira ao lado do registro na lista)
 - Edição (Ícone de lápis ao lado do registro na lista)
-- Acesso rápido ao site do fornecedor (Clique sobre o link do site no registro da lista)
