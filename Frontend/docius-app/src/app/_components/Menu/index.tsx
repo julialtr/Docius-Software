@@ -3,9 +3,12 @@
 import type React from "react";
 import { useState } from "react";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
+import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+import { useDadosMenu } from "@/context/DadosMenuContext";
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   LayoutDashboard,
@@ -36,14 +39,14 @@ import {
 } from "@/app/_components/ui/collapsible";
 
 import MenuLink from "./Link";
-import { usePathname } from "next/navigation";
-import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+
 import { useToast } from "@/hooks/use-toast";
 
 export default function MenuComponent() {
   const { toast } = useToast();
   const pathname = usePathname();
 
+  const {isCadastroMenuOpen, setIsCadastroMenuOpen} = useDadosMenu();
   const { dadosEmpresa } = useDadosEmpresa();
   const { setId } = useDadosUsuario();
 
@@ -111,7 +114,7 @@ export default function MenuComponent() {
               />
 
               <div>
-                <Collapsible defaultOpen={pathname.includes("Cadastros/")}>
+                <Collapsible defaultOpen={isCadastroMenuOpen}>
                   <CollapsibleTrigger
                     className={`flex w-full items-center px-4 py-2 ${
                       pathname.includes("Cadastros/")
@@ -121,6 +124,7 @@ export default function MenuComponent() {
                     ${
                       isSidebarCollapsed ? "justify-center" : "justify-between"
                     }`}
+                    onClick={() => setIsCadastroMenuOpen(!isCadastroMenuOpen)}
                   >
                     <div className="flex items-center gap-2">
                       <FilePlus2

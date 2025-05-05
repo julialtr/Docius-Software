@@ -8,6 +8,7 @@ import { DadosCategoriaProdutoProvider } from "@/context/DadosCategoriaProdutoCo
 import { DadosCotacaoProvider } from "@/context/DadosCotacaoContext";
 import { DadosPersonalizacaoFotoProvider } from "@/context/DadosPersonalizacaoFotoContext";
 import { DadosUsuarioProvider } from "@/context/DadosUsuarioContext";
+import { DadosMenuProvider } from "@/context/DadosMenuContext";
 
 export const metadata: Metadata = {
   title: "Docius",
@@ -24,12 +25,14 @@ export default function RootLayout({
         <DadosCategoriaProdutoProvider>
           <DadosCotacaoProvider>
             <DadosPersonalizacaoFotoProvider>
+<DadosMenuProvider>
               <html lang="pt-BR">
                 <body>
                   {children}
                   <Toaster />
                 </body>
               </html>
+            </DadosMenuProvider>
             </DadosPersonalizacaoFotoProvider>
           </DadosCotacaoProvider>
         </DadosCategoriaProdutoProvider>
