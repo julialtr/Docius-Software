@@ -15,7 +15,7 @@ export function CategoriaProduto({
   categoria: ReadCategoriaProduto;
   nivel: number;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const possuiCategoriaInferior =
     categoria.categoriaProdutoInferior &&
