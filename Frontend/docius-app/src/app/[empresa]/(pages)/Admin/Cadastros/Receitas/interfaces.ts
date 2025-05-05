@@ -1,4 +1,8 @@
-import { CreateReceitaCategoriaIngrediente, ReadReceitaCategoriaIngrediente, UpdateReceitaCategoriaIngrediente } from "./(CategoriasIngredientes)/interfaces";
+import {
+  CreateReceitaCategoriaIngrediente,
+  ReadReceitaCategoriaIngrediente,
+  UpdateReceitaCategoriaIngrediente,
+} from "./(CategoriasIngredientes)/interfaces";
 
 export interface CreateReceita {
   nome: string;
@@ -32,13 +36,16 @@ export function updateConvert(receita: ReadReceita): UpdateReceita {
     descricao: receita.descricao,
     tempo: receita.tempo,
     qtdPorcoes: receita.qtdPorcoes,
-    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
-      id: ingrediente.id,
-      medida: ingrediente.medida,
-      receitaId: ingrediente.receitaId,
-      categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
-      unidadeMedidaId: ingrediente.unidadeMedida.id
-    }))
+    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map(
+      (receitaCategoriaIngrediente) => ({
+        id: receitaCategoriaIngrediente.id,
+        medida: receitaCategoriaIngrediente.medida,
+        receitaId: receitaCategoriaIngrediente.receitaId,
+        categoriaIngredienteId:
+          receitaCategoriaIngrediente.categoriaIngrediente.id,
+        unidadeMedidaId: receitaCategoriaIngrediente.unidadeMedida.id,
+      })
+    ),
   };
 }
 
@@ -48,12 +55,15 @@ export function createConvert(receita: ReadReceita): CreateReceita {
     descricao: receita.descricao,
     tempo: receita.tempo,
     qtdPorcoes: receita.qtdPorcoes,
-    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map((ingrediente) => ({
-      id: ingrediente.id,
-      medida: ingrediente.medida,
-      receitaId: ingrediente.receitaId,
-      categoriaIngredienteId: ingrediente.categoriaIngrediente.id,
-      unidadeMedidaId: ingrediente.unidadeMedida.id
-    }))
+    receitaCategoriaIngrediente: receita.receitaCategoriaIngrediente.map(
+      (receitaCategoriaIngrediente) => ({
+        id: receitaCategoriaIngrediente.id,
+        medida: receitaCategoriaIngrediente.medida,
+        receitaId: receitaCategoriaIngrediente.receitaId,
+        categoriaIngredienteId:
+          receitaCategoriaIngrediente.categoriaIngrediente.id,
+        unidadeMedidaId: receitaCategoriaIngrediente.unidadeMedida.id,
+      })
+    ),
   };
 }

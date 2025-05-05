@@ -3,7 +3,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { PlusCircle, Save } from "lucide-react";
-import ReceitaIngrediente from "./ReceitaIngrediente";
+import ReceitaCategoriaIngrediente from "./ReceitaCategoriaIngrediente";
 
 import { createConvert, ReadReceita, updateConvert } from "./interfaces";
 import { createReceita, updateReceita } from "@/services/receita";
@@ -89,7 +89,7 @@ export default function FormularioReceitas({
     ) {
       toast({
         title: "Erro ao salvar receita",
-        description: "Adicione um ingrediente para continuar",
+        description: "Adicione uma categoria de ingrediente para continuar",
         variant: "warning",
       });
 
@@ -226,7 +226,7 @@ export default function FormularioReceitas({
               />
             </div>
             <Separator />
-            <ReceitaIngrediente
+            <ReceitaCategoriaIngrediente
               receita={receita}
               onReceitaChange={onReceitaChange}
             />

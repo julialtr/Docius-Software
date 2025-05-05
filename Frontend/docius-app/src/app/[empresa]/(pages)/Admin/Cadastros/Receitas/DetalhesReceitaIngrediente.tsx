@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/app/_components/ui/card";
 
-export default function DetalhesReceitaIngrediente({
+export default function DetalhesReceitaCategoriaIngrediente({
   receitaId,
   receita,
 }: {
@@ -29,26 +29,32 @@ export default function DetalhesReceitaIngrediente({
             <Card className="border-amber-200">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">
-                  Ingredientes da receita
+                  Categorias de ingredientes da receita
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {receita.receitaCategoriaIngrediente.map((ingrediente) => {
-                    return (
-                      <div
-                        key={ingrediente.id}
-                        className="flex items-center justify-between bg-white p-3 rounded-md border"
-                      >
-                        <div className="font-medium">
-                          {ingrediente?.categoriaIngrediente?.nome}
+                  {receita.receitaCategoriaIngrediente.map(
+                    (receitaCategoriaIngrediente) => {
+                      return (
+                        <div
+                          key={receitaCategoriaIngrediente.id}
+                          className="flex items-center justify-between bg-white p-3 rounded-md border"
+                        >
+                          <div className="font-medium">
+                            {
+                              receitaCategoriaIngrediente?.categoriaIngrediente
+                                ?.nome
+                            }
+                          </div>
+                          <Badge variant="outline" className="bg-amber-50">
+                            {receitaCategoriaIngrediente.medida}{" "}
+                            {receitaCategoriaIngrediente.unidadeMedida?.sigla}
+                          </Badge>
                         </div>
-                        <Badge variant="outline" className="bg-amber-50">
-                          {ingrediente.medida} {ingrediente.unidadeMedida?.sigla}
-                        </Badge>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
                 </div>
               </CardContent>
             </Card>

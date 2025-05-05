@@ -6,7 +6,7 @@ import { ChevronDown, ChevronRight, Clock, Pencil } from "lucide-react";
 
 import { ReadReceita } from "./interfaces";
 import AlertaExclusao from "./AlertaExclusao";
-import DetalhesReceitaIngrediente from "./DetalhesReceitaIngrediente";
+import DetalhesReceitaCategoriaIngrediente from "./DetalhesReceitaIngrediente";
 
 import { Button } from "@/app/_components/ui/button";
 import {
@@ -180,7 +180,7 @@ export default function TabelaReceitas({
                   </div>
                 </TableCell>
               </TableRow>
-              <DetalhesReceitaIngrediente
+              <DetalhesReceitaCategoriaIngrediente
                 receitaId={receitaId}
                 receita={receita}
               />

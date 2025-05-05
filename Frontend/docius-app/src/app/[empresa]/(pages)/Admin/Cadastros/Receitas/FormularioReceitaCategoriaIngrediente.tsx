@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
 import { ReadReceita } from "./interfaces";
+import { ReadUnidadeMedida } from "../(UnidadeMedida)/interfaces";
+import { ReadReceitaCategoriaIngrediente } from "./(CategoriasIngredientes)/interfaces";
+import { ReadCategoriaIngrediente } from "../CategoriasIngredientes/interfaces";
+import { findUnidadesMedidas } from "@/services/unidadeMedida";
+import { findCategoriasIngredientes } from "@/services/categoriaIngrediente";
 
 import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 import { Label } from "@/app/_components/ui/label";
-
-import { useToast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
@@ -18,35 +21,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
-import { ReadCategoriaIngrediente } from "../CategoriasIngredientes/interfaces";
-import { findCategoriasIngredientes } from "@/services/categoriaIngrediente";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/app/_components/ui/card";
-import { findUnidadesMedidas } from "@/services/unidadeMedida";
-import { ReadUnidadeMedida } from "../(UnidadeMedida)/interfaces";
-import { ReadReceitaCategoriaIngrediente } from "./(CategoriasIngredientes)/interfaces";
 
-export default function FormularioReceitaIngrediente({
+import { useToast } from "@/hooks/use-toast";
+
+export default function FormularioReceitaCategoriaIngrediente({
   receita,
-  ingrediente,
+  categoriaIngrediente,
   onReceitaChange,
-  onIngredienteChange,
+  onCategoriaIngredienteChange,
 }: {
   receita: ReadReceita | null;
-  ingrediente: ReadReceitaCategoriaIngrediente | null;
+  categoriaIngrediente: ReadReceitaCategoriaIngrediente | null;
   onReceitaChange: (receita: ReadReceita | null) => void;
-  onIngredienteChange: (
-    ingrediente: ReadReceitaCategoriaIngrediente | null
+  onCategoriaIngredienteChange: (
+    categoriaIngrediente: ReadReceitaCategoriaIngrediente | null
   ) => void;
 }) {
   const { toast } = useToast();
   const [validaCampo, setValidaCampo] = useState<boolean>(false);
 
-  const [dadosIngrediente, setDadosIngrediente] =
+  const [dadosCategoriaIngrediente, setDadosCategoriaIngrediente] =
     useState<ReadReceitaCategoriaIngrediente>();
 
   const [dadosCategoriasIngredientes, setDadosCategoriasIngredientes] =
@@ -57,10 +57,10 @@ export default function FormularioReceitaIngrediente({
   >([]);
 
   useEffect(() => {
-    if (ingrediente) {
-      setDadosIngrediente(ingrediente);
+    if (categoriaIngrediente) {
+      setDadosCategoriaIngrediente(categoriaIngrediente);
     }
-  }, [ingrediente]);
+  }, [categoriaIngrediente]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -84,7 +84,7 @@ export default function FormularioReceitaIngrediente({
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDadosIngrediente((prev) => {
+    setDadosCategoriaIngrediente((prev) => {
       if (!prev) return prev;
 
       return { ...prev, [e.target.name]: e.target.value };
@@ -97,7 +97,7 @@ export default function FormularioReceitaIngrediente({
     labelPath?: string,
     label?: string
   ) => {
-    setDadosIngrediente((prev) => {
+    setDadosCategoriaIngrediente((prev) => {
       const updated = updateNestedValue(prev, path, Number(value));
 
       if (labelPath && label)
@@ -123,23 +123,23 @@ export default function FormularioReceitaIngrediente({
     return newObj;
   };
 
-  const adicionarIngrediente = () => {
+  const adicionarCategoriaIngrediente = () => {
     if (!validarCampos()) {
       setValidaCampo(true);
       return;
     }
 
-    if (!dadosIngrediente) return;
+    if (!dadosCategoriaIngrediente) return;
 
     if (!receita) {
-      if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
-        const novoIngrediente = {
-          ...dadosIngrediente,
+      if (!dadosCategoriaIngrediente.id || dadosCategoriaIngrediente.id === 0) {
+        const novaCategoriaIngrediente = {
+          ...dadosCategoriaIngrediente,
           id: 1,
         };
 
         onReceitaChange({
-          receitaCategoriaIngrediente: [novoIngrediente],
+          receitaCategoriaIngrediente: [novaCategoriaIngrediente],
           id: 0,
           nome: "",
           descricao: "",
@@ -154,43 +154,43 @@ export default function FormularioReceitaIngrediente({
           ? Math.max(...receita.receitaCategoriaIngrediente.map((i) => i.id))
           : 0;
 
-      if (!dadosIngrediente.id || dadosIngrediente.id === 0) {
-        const novoIngrediente = {
-          ...dadosIngrediente,
+      if (!dadosCategoriaIngrediente.id || dadosCategoriaIngrediente.id === 0) {
+        const novaCategoriaIngrediente = {
+          ...dadosCategoriaIngrediente,
           id: maxId + 1,
         };
 
-        const novaListaIngredientes = [
+        const novaListaCategoriasIngredientes = [
           ...receita.receitaCategoriaIngrediente,
-          novoIngrediente,
+          novaCategoriaIngrediente,
         ];
 
         onReceitaChange({
           ...receita,
-          receitaCategoriaIngrediente: novaListaIngredientes,
+          receitaCategoriaIngrediente: novaListaCategoriasIngredientes,
         });
       } else {
-        const novaListaIngredientes = receita.receitaCategoriaIngrediente.map(
-          (ingrediente) =>
-            ingrediente.id === dadosIngrediente.id
-              ? dadosIngrediente
-              : ingrediente
+        const novaListaCategoriasIngredientes = receita.receitaCategoriaIngrediente.map(
+          (categoriaIngrediente) =>
+            categoriaIngrediente.id === dadosCategoriaIngrediente.id
+              ? dadosCategoriaIngrediente
+              : categoriaIngrediente
         );
 
         onReceitaChange({
           ...receita,
-          receitaCategoriaIngrediente: novaListaIngredientes,
+          receitaCategoriaIngrediente: novaListaCategoriasIngredientes,
         });
       }
     }
 
-    limparIngrediente();
+    limparCategoriaIngrediente();
 
     setValidaCampo(false);
   };
 
-  const limparIngrediente = () => {
-    setDadosIngrediente({
+  const limparCategoriaIngrediente = () => {
+    setDadosCategoriaIngrediente({
       id: 0,
       medida: 0,
       receitaId: 0,
@@ -206,30 +206,30 @@ export default function FormularioReceitaIngrediente({
       },
     });
 
-    onIngredienteChange(null);
+    onCategoriaIngredienteChange(null);
   };
 
   const validarCampos = () => {
-    if (!dadosIngrediente) return false;
+    if (!dadosCategoriaIngrediente) return false;
 
     return (
-      dadosIngrediente.categoriaIngrediente.id > 0 &&
-      dadosIngrediente.medida > 0 &&
-      dadosIngrediente.unidadeMedida.id > 0
+      dadosCategoriaIngrediente.categoriaIngrediente.id > 0 &&
+      dadosCategoriaIngrediente.medida > 0 &&
+      dadosCategoriaIngrediente.unidadeMedida.id > 0
     );
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Adicionar ingrediente</CardTitle>
+        <CardTitle className="text-base">Adicionar categoria de ingrediente</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="categoriaIngrediente.id">Ingrediente</Label>
+            <Label htmlFor="categoriaIngrediente.id">Categoria de ingrediente</Label>
             <Select
-              value={dadosIngrediente?.categoriaIngrediente.id.toString()}
+              value={dadosCategoriaIngrediente?.categoriaIngrediente.id.toString()}
               onValueChange={(value) => {
                 const categoria = dadosCategoriasIngredientes.find(
                   (c) => c.id.toString() === value
@@ -244,24 +244,24 @@ export default function FormularioReceitaIngrediente({
             >
               <SelectTrigger
                 className={
-                  !dadosIngrediente?.categoriaIngrediente?.id && validaCampo
+                  !dadosCategoriaIngrediente?.categoriaIngrediente?.id && validaCampo
                     ? "border-red-500"
                     : ""
                 }
               >
-                <SelectValue placeholder="Selecione um ingrediente" />
+                <SelectValue placeholder="Selecione uma categoria de ingrediente" />
               </SelectTrigger>
               <SelectContent>
-                {dadosCategoriasIngredientes.map((categoria) => (
+                {dadosCategoriasIngredientes.map((categoriaIngrediente) => (
                   <SelectItem
-                    key={categoria.id.toString()}
-                    value={categoria.id.toString()}
+                    key={categoriaIngrediente.id.toString()}
+                    value={categoriaIngrediente.id.toString()}
                     disabled={receita?.receitaCategoriaIngrediente?.some(
-                      (ingrediente) =>
-                        ingrediente.categoriaIngrediente.id === categoria.id
+                      (receitaCategoriaIngrediente) =>
+                        receitaCategoriaIngrediente.categoriaIngrediente.id === categoriaIngrediente.id
                     )}
                   >
-                    {categoria.nome}
+                    {categoriaIngrediente.nome}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -275,17 +275,17 @@ export default function FormularioReceitaIngrediente({
               type="number"
               step="1"
               min="0"
-              value={dadosIngrediente?.medida ?? 0}
+              value={dadosCategoriaIngrediente?.medida ?? 0}
               onChange={handleChange}
               className={
-                !dadosIngrediente?.medida && validaCampo ? "border-red-500" : ""
+                !dadosCategoriaIngrediente?.medida && validaCampo ? "border-red-500" : ""
               }
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="unidadeMedida.id">Unidade de medida</Label>
             <Select
-              value={dadosIngrediente?.unidadeMedida?.id.toString()}
+              value={dadosCategoriaIngrediente?.unidadeMedida?.id.toString()}
               onValueChange={(value) => {
                 const unidade = dadosUnidadesMedidas.find(
                   (u) => u.id.toString() === value
@@ -300,7 +300,7 @@ export default function FormularioReceitaIngrediente({
             >
               <SelectTrigger
                 className={
-                  !dadosIngrediente?.unidadeMedida?.id && validaCampo
+                  !dadosCategoriaIngrediente?.unidadeMedida?.id && validaCampo
                     ? "border-red-500"
                     : ""
                 }
@@ -320,7 +320,7 @@ export default function FormularioReceitaIngrediente({
 
         <div
           className={
-            dadosIngrediente?.id && dadosIngrediente?.id > 0
+            dadosCategoriaIngrediente?.id && dadosCategoriaIngrediente?.id > 0
               ? "grid grid-cols-1 md:grid-cols-2 gap-4"
               : "grid-cols-1"
           }
@@ -329,19 +329,19 @@ export default function FormularioReceitaIngrediente({
             type="button"
             variant="outline"
             className="mt-4 w-full"
-            onClick={adicionarIngrediente}
+            onClick={adicionarCategoriaIngrediente}
           >
             <Plus className="h-4 w-4 mr-2" />
-            {dadosIngrediente?.id
-              ? "Editar ingrediente"
-              : "Adicionar ingrediente"}
+            {dadosCategoriaIngrediente?.id
+              ? "Editar categoria de ingrediente"
+              : "Adicionar categoria de ingrediente"}
           </Button>
-          {dadosIngrediente?.id && dadosIngrediente?.id > 0 ? (
+          {dadosCategoriaIngrediente?.id && dadosCategoriaIngrediente?.id > 0 ? (
             <Button
               type="button"
               variant="outline"
               className="mt-4 w-full"
-              onClick={limparIngrediente}
+              onClick={limparCategoriaIngrediente}
             >
               Limpar
             </Button>
