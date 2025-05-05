@@ -47,9 +47,12 @@ export default function FormularioFornecedores({
     qtdIngredientes: 0,
   });
 
+  const [ehFornecedorPadrao, setEhFornecedorPadrao] = useState<boolean>(false);
+
   useEffect(() => {
     if (fornecedor) {
       setDadosFornecedor(fornecedor);
+      setEhFornecedorPadrao(fornecedor.id === 1 || fornecedor.id === 2);
     }
   }, [fornecedor]);
 
@@ -148,6 +151,7 @@ export default function FormularioFornecedores({
               value={dadosFornecedor?.nome}
               onChange={handleChange}
               required
+              disabled={ehFornecedorPadrao}
             />
           </div>
           <div className="space-y-2">
@@ -172,6 +176,7 @@ export default function FormularioFornecedores({
               name="site"
               value={dadosFornecedor?.site}
               onChange={handleChange}
+              disabled={ehFornecedorPadrao}
             />
           </div>
           <DialogFooter>
