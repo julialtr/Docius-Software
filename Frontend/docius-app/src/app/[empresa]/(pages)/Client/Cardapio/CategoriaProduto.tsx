@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { Produto } from "./Produto";
-import { ReadCategoriaProduto } from "../../Admin/Cardapio/(CategoriaProduto)/interfaces";
+import { ReadCategoriaProduto } from "../../Admin/Cadastros/Cardapio/(CategoriaProduto)/interfaces";
 
 import { Button } from "@/app/_components/ui/button";
 

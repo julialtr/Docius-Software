@@ -1,7 +1,7 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
 import { secureFetch } from "./base";
 
-import { UpdateCardapio } from "@/app/[empresa]/(pages)/Admin/Cardapio/interfaces";
+import { UpdateCardapio } from "@/app/[empresa]/(pages)/Admin/Cadastros/Cardapio/interfaces";
 
 export const findCardapio = async () => {
   try {

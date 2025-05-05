@@ -5,7 +5,7 @@ import { Trash2 } from "lucide-react";
 
 import { ReadCategoriaProduto } from "../(CategoriaProduto)/interfaces";
 import { ReadCardapio } from "../interfaces";
-import { ReadProduto } from "../../Cadastros/Produtos/interfaces";
+import { ReadProduto } from "../../Produtos/interfaces";
 
 import { Button } from "@/app/_components/ui/button";
 import {

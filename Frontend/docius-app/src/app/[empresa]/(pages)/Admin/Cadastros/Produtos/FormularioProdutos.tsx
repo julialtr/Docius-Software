@@ -75,8 +75,8 @@ export default function FormularioProdutos({
 
   const [lerFotoServidor, setLerFotoServidor] = useState<boolean>(false);
 
-  useEffect(() => {   
-    if (produto) {      
+  useEffect(() => {
+    if (produto) {
       setLerFotoServidor(produto.caminhoFoto != "");
 
       setDadosProduto(produto);
@@ -286,7 +286,11 @@ export default function FormularioProdutos({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="caminhoFoto">Imagem ilustrativa</Label>
+            <Label htmlFor="caminhoFoto">
+              Imagem ilustrativa{" "}
+              <span className="text-xs text-muted-foreground">(opcional)</span>
+            </Label>
+
             <div className="grid grid-cols-3 gap-2">
               {dadosProduto?.caminhoFoto ? (
                 <div

@@ -177,6 +177,18 @@ export default function MenuComponent() {
                       label="Gastos Fixos"
                       isSidebarCollapsed={isSidebarCollapsed}
                     />
+                    <MenuLink
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Precificacao`}
+                      icon={Calculator}
+                      label="Precificação"
+                      isSidebarCollapsed={isSidebarCollapsed}
+                    />
+                    <MenuLink
+                      href={`/${dadosEmpresa?.dominio}/Admin/Cadastros/Cardapio`}
+                      icon={BookOpenText}
+                      label="Cardápio"
+                      isSidebarCollapsed={isSidebarCollapsed}
+                    />
                   </CollapsibleContent>
                 </Collapsible>
               </div>
@@ -185,20 +197,6 @@ export default function MenuComponent() {
                 href={`/${dadosEmpresa?.dominio}/Admin/Pedidos`}
                 icon={ReceiptText}
                 label="Pedidos"
-                isSidebarCollapsed={isSidebarCollapsed}
-              />
-
-              <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Admin/Cardapio`}
-                icon={BookOpenText}
-                label="Cardápio"
-                isSidebarCollapsed={isSidebarCollapsed}
-              />
-
-              <MenuLink
-                href={`/${dadosEmpresa?.dominio}/Admin/Precificacao`}
-                icon={Calculator}
-                label="Precificação"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
 

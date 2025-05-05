@@ -42,7 +42,7 @@ export default function DetalhesProdutoReceita({
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-amber-600" />
                     <span className="text-sm">
-                      <span className="font-medium">Tempo de Preparo:</span>{" "}
+                      <span className="font-medium">Tempo de preparo:</span>{" "}
                       {formatTime(produto.receita.tempo)}
                     </span>
                   </div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 
 import { CategoriaProduto } from "@/app/[empresa]/(pages)/Client/Cardapio/CategoriaProduto";
-import { ReadCardapio } from "../../Admin/Cardapio/interfaces";
+import { ReadCardapio } from "../../Admin/Cadastros/Cardapio/interfaces";
 import { findCardapio } from "@/services/cardapio";
 
 import { MenuCliente } from "@/app/_components/Menu/Cliente";

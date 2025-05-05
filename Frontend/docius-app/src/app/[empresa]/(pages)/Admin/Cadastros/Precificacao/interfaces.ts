@@ -1,4 +1,4 @@
-import { ReadReceita } from "../Cadastros/Receitas/interfaces";
+import { ReadReceita } from "../Receitas/interfaces";
 import { ReadPrecificacaoIngrediente, UpdatePrecificacaoIngrediente } from "./(PrecificacoesIngredientes)/interfaces";
 
 export interface UpdatePrecificacao {

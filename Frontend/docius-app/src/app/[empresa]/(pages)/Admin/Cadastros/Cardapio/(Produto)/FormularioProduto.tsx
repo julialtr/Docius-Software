@@ -3,7 +3,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 
-import { ReadProduto } from "../../Cadastros/Produtos/interfaces";
+import { ReadProduto } from "../../Produtos/interfaces";
 import { ReadCardapio } from "../interfaces";
 import { ReadCategoriaProduto } from "../(CategoriaProduto)/interfaces";
 

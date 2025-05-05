@@ -1,7 +1,7 @@
 import {
   ReadProduto,
   UpdateProdutoCardapio,
-} from "../../Cadastros/Produtos/interfaces";
+} from "../../Produtos/interfaces";
 
 export interface UpdateCategoriaProduto {
   nome: string;

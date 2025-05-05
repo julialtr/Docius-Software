@@ -1,7 +1,7 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
 import { secureFetch } from "./base";
 
-import { UpdatePrecificacao } from "@/app/[empresa]/(pages)/Admin/Precificacao/interfaces";
+import { UpdatePrecificacao } from "@/app/[empresa]/(pages)/Admin/Cadastros/Precificacao/interfaces";
 
 export const findPrecificacoes = async () => {
   try {

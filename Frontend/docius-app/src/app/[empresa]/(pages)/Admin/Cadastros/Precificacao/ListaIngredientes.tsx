@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Package } from "lucide-react";
 
 import { ReadPrecificacao } from "./interfaces";
-import { ReadIngrediente } from "../Cadastros/Ingredientes/interfaces";
+import { ReadIngrediente } from "../Ingredientes/interfaces";
 import { findIngredientes } from "@/services/ingrediente";
 import { ReadPrecificacaoIngrediente } from "./(PrecificacoesIngredientes)/interfaces";
 

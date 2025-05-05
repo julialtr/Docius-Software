@@ -11,7 +11,7 @@ import FormularioProduto from "./(Produto)/FormularioProduto";
 import FormularioCategoriaProduto from "./(CategoriaProduto)/FormularioCategoriaProduto";
 
 import { ReadCardapio, updateConvert } from "./interfaces";
-import { ReadProduto } from "../Cadastros/Produtos/interfaces";
+import { ReadProduto } from "../Produtos/interfaces";
 import { ReadCategoriaProduto } from "./(CategoriaProduto)/interfaces";
 import { findCardapio, updateCardapio } from "@/services/cardapio";
 import { findProdutos } from "@/services/produto";
