@@ -42,25 +42,31 @@ export function PedidosStatusGrafico({
       </CardHeader>
       <CardContent className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={pedidosStatus}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="quantidadePedidos"
-              nameKey="status"
-              label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-            >
-              {pedidosStatus.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={cores[index]} />
-              ))}
-            </Pie>
-            <Tooltip formatter={(value) => [`${value} pedidos`]} />
-            <Legend wrapperStyle={{ fontSize: "13px" }} />
-          </PieChart>
+          {pedidosStatus.length == 0 ? (
+            <span className="text-amber-700 text-sm">
+              Gráfico sem dados para demonstração.
+            </span>
+          ) : (
+            <PieChart>
+              <Pie
+                data={pedidosStatus}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="quantidadePedidos"
+                nameKey="status"
+                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+              >
+                {pedidosStatus.map((_, index) => (
+                  <Cell key={`cell-${index}`} fill={cores[index]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => [`${value} pedidos`]} />
+              <Legend wrapperStyle={{ fontSize: "13px" }} />
+            </PieChart>
+          )}
         </ResponsiveContainer>
       </CardContent>
     </Card>
