@@ -1,0 +1,30 @@
+Nome da tela: Cadastro de Produtos
+
+Descrição: Esta tela permite o usuário a cadastrar, editar, visualizar ou excluir os produtos da confeitaria.
+
+Filtro:
+- Campo de texto livre.
+
+Campos:
+- Nome
+- Receita (Cadastro de Receitas)
+- Imagem ilustrativa
+
+Validações:
+- Nome deve ser informado.
+- Receita deve ser informada.
+
+Lista:
+- Colunas: Nome (com imagem ilustrativa), preço, receita (Nome) e ações
+- Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
+
+Ações:
+- Inclusão (Botão '+')
+- Exclusão (Ícone de lixeira ao lado do registro na lista)
+- Edição (Ícone de lápis ao lado do registro na lista)
+- Visualização da receita vinculada ao produto (Ícone de '>')
+- Amplificação da imagem ilustrativa (Clicar sobre a imagem)
+
+Visualização da receita:
+- Em forma de card
+- Informações: Nome, tempo de preparo (HH:MM), rendimento (Em porções) e lista de ingredientes (Nome e medida (medida e unidade de medida))

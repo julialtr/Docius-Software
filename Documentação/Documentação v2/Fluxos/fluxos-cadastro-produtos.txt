@@ -1,0 +1,8 @@
+Nome do fluxo: Cadastro de produtos
+
+Descrição: Este fluxo permite o usuário fazer o cadastro de produtos.
+
+Passos:
+1. Na tela de cadastro de receitas, incluir uma nova receita.
+
+Agora, é possível cadastrar um produto, pois ele precisa de uma receita.

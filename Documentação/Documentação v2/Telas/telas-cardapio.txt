@@ -6,4 +6,6 @@ Ações:
 - Expandir e recolher categorias e subcategorias.
 
 Visualização:
-- Lista com categorias, subcategorias e produtos. 
+- Lista com categorias (Nome), subcategorias (Nome) e produtos (Nome, imagem e preço). 
+
+

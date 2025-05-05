@@ -3,3 +3,5 @@ Nome da regra: Tela de cadastro das receitas.
 Regras:
 
 Não é permitido adicionar a mesma categoria de ingrediente mais de uma vez na receita.
+
+Não é possível excluir uma receita que está vinculada a algum produto.
