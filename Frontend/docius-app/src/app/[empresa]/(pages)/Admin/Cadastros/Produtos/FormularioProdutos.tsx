@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useEffect, useState } from "react";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Upload, X } from "lucide-react";
 
 import { createConvert, ReadProduto, updateConvert } from "./interfaces";
 import { createProduto, updateProduto } from "@/services/produto";
@@ -29,8 +29,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
+import { ImageViewer } from "@/app/_components/ImageViewer";
 
 import { useToast } from "@/hooks/use-toast";
+import { LINK_API } from "@/utils/constants";
 
 export default function FormularioProdutos({
   dados,
@@ -53,6 +55,7 @@ export default function FormularioProdutos({
     id: 0,
     nome: "",
     preco: 0,
+    caminhoFoto: "",
     qtdPedidos: 0,
     receita: {
       id: 0,
@@ -61,14 +64,21 @@ export default function FormularioProdutos({
       tempo: "",
       qtdPorcoes: 0,
       receitaCategoriaIngrediente: [],
-      qtdProdutos: 0
+      qtdProdutos: 0,
     },
   });
 
   const [dadosReceitas, setDadosReceitas] = useState<ReadReceita[]>([]);
+  const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(
+    null
+  );
 
-  useEffect(() => {
-    if (produto) {
+  const [lerFotoServidor, setLerFotoServidor] = useState<boolean>(false);
+
+  useEffect(() => {   
+    if (produto) {      
+      setLerFotoServidor(produto.caminhoFoto != "");
+
       setDadosProduto(produto);
     }
   }, [produto]);
@@ -138,7 +148,7 @@ export default function FormularioProdutos({
         );
       } else {
         const novoDado = await createProduto(createConvert(dadosProduto));
-        onDadosChange([...dados, novoDado[0]]);
+        onDadosChange([...dados, novoDado]);
       }
 
       toast({
@@ -169,6 +179,7 @@ export default function FormularioProdutos({
       nome: "",
       preco: 0,
       qtdPedidos: 0,
+      caminhoFoto: "",
       receita: {
         id: 0,
         nome: "",
@@ -176,9 +187,36 @@ export default function FormularioProdutos({
         tempo: "",
         qtdPorcoes: 0,
         receitaCategoriaIngrediente: [],
-        qtdProdutos: 0
+        qtdProdutos: 0,
       },
     });
+  };
+
+  const handleImagemUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        setDadosProduto({
+          ...dadosProduto,
+          caminhoFoto: base64String,
+        });
+
+        setLerFotoServidor(false);
+      };
+
+      reader.onerror = () => {
+        toast({
+          variant: "destructive",
+          title: "Erro ao ler imagem",
+          description: "Não foi possível ler o arquivo da imagem",
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -246,6 +284,72 @@ export default function FormularioProdutos({
               </Select>
             </div>
           </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="caminhoFoto">Imagem ilustrativa</Label>
+            <div className="grid grid-cols-3 gap-2">
+              {dadosProduto?.caminhoFoto ? (
+                <div
+                  className="relative h-30 w-30 rounded-md overflow-hidden cursor-pointer border border-gray-200"
+                  onClick={() =>
+                    setImagemSelecionada(
+                      lerFotoServidor == true
+                        ? `${LINK_API}${dadosProduto.caminhoFoto}`
+                        : dadosProduto.caminhoFoto || null
+                    )
+                  }
+                >
+                  <img
+                    src={
+                      lerFotoServidor == true
+                        ? `${LINK_API}${dadosProduto.caminhoFoto}`
+                        : dadosProduto.caminhoFoto || "/placeholder.svg"
+                    }
+                    alt="Imagem ilustrativa"
+                    className="h-full w-full object-cover"
+                  />
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="icon"
+                    className="absolute right-1 top-1 h-6 w-6 z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDadosProduto({ ...dadosProduto, caminhoFoto: "" });
+                      setLerFotoServidor(false);
+                    }}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex h-20 w-full items-center justify-center rounded-md border border-dashed border-gray-300 bg-gray-50">
+                  <Label
+                    htmlFor="imagem-upload"
+                    className="flex cursor-pointer flex-col items-center justify-center text-xs text-gray-500"
+                  >
+                    <Upload className="mb-1 h-4 w-4" />
+                    <span>Upload</span>
+                    <Input
+                      id="imagem-upload"
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={handleImagemUpload}
+                    />
+                  </Label>
+                </div>
+              )}
+            </div>
+          </div>
+          {imagemSelecionada && (
+            <ImageViewer
+              imagens={[imagemSelecionada]}
+              isOpen={!!imagemSelecionada}
+              onClose={() => setImagemSelecionada(null)}
+            />
+          )}
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleCloseDialog}>

@@ -1,5 +1,6 @@
 import { LINK_API_VERSIONADA } from "@/utils/constants";
-import { secureFetch } from "./base";
+import { secureFetch, secureFetchForm } from "./base";
+import { base64ToFile } from "@/utils/convert";
 
 import {
   CreateProduto,
@@ -25,11 +26,36 @@ export const findProdutos = async () => {
 };
 
 export const updateProduto = async (id: number, produto: UpdateProduto) => {
+  const formData = new FormData();
+
+  const produtoJson = structuredClone(produto);
+  let idImagem = 0;
+
+  if (produtoJson.caminhoFoto != "") {
+    const base64Data = produtoJson.caminhoFoto;
+    const extension = base64Data.split(";")[0].split("/")[1] || "png";
+    const chaveImagem = `imagem_${idImagem++}`;
+
+    const imagem = base64ToFile(
+      produtoJson.caminhoFoto,
+      chaveImagem,
+      extension
+    );
+
+    formData.append("imagens", imagem);
+    produtoJson.caminhoFoto = chaveImagem;
+  }
+
+  formData.append("json", JSON.stringify(produtoJson));
+
   try {
-    const response = await secureFetch(`${LINK_API_VERSIONADA}/produto/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(produto),
-    });
+    const response = await secureFetchForm(
+      `${LINK_API_VERSIONADA}/produto/${id}`,
+      {
+        method: "PATCH",
+        body: formData,
+      }
+    );
 
     const data = await response.json();
 
@@ -42,10 +68,32 @@ export const updateProduto = async (id: number, produto: UpdateProduto) => {
 };
 
 export const createProduto = async (produto: CreateProduto) => {
+  const formData = new FormData();
+
+  const produtoJson = structuredClone(produto);
+  let idImagem = 0;
+
+  if (produtoJson.caminhoFoto != "") {
+    const base64Data = produtoJson.caminhoFoto;
+    const extension = base64Data.split(";")[0].split("/")[1] || "png";
+    const chaveImagem = `imagem_${idImagem++}`;
+
+    const imagem = base64ToFile(
+      produtoJson.caminhoFoto,
+      chaveImagem,
+      extension
+    );
+
+    formData.append("imagens", imagem);
+    produtoJson.caminhoFoto = chaveImagem;
+  }
+
+  formData.append("json", JSON.stringify(produtoJson));
+
   try {
-    const response = await secureFetch(`${LINK_API_VERSIONADA}/produto`, {
+    const response = await secureFetchForm(`${LINK_API_VERSIONADA}/produto`, {
       method: "POST",
-      body: JSON.stringify([produto]),
+      body: formData,
     });
 
     const data = await response.json();

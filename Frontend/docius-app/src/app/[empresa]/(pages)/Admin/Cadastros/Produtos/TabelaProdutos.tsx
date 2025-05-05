@@ -19,9 +19,11 @@ import {
 } from "@/app/_components/ui/table";
 import SortIcon from "@/app/_components/Sort";
 import { Badge } from "@/app/_components/ui/badge";
+import { ImageViewer } from "@/app/_components/ImageViewer";
 
 import { requestSort, SortConfig, sortData } from "@/utils/sort";
 import { formatMoney } from "@/utils/format";
+import { LINK_API } from "@/utils/constants";
 
 export default function TabelaProdutos({
   dados,
@@ -38,6 +40,9 @@ export default function TabelaProdutos({
 }) {
   const [sortConfig, setSortConfig] = useState<SortConfig<ReadProduto>>(null);
   const [produtoId, setProdutoId] = useState<number | null>(null);
+  const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(
+    null
+  );
 
   const dadosFiltrados = sortData(
     dados?.filter(
@@ -130,7 +135,28 @@ export default function TabelaProdutos({
                     </Button>
                   )}
                 </TableCell>
-                <TableCell className="font-medium">{produto.nome}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    {produto.caminhoFoto && (
+                      <div
+                        className="h-10 w-10 rounded-md overflow-hidden cursor-pointer border border-gray-200"
+                        onClick={() =>
+                          setImagemSelecionada(`${LINK_API}${produto.caminhoFoto}` || null)
+                        }
+                      >
+                        <img
+                          src={
+                            `${LINK_API}${produto.caminhoFoto}` ||
+                            "/placeholder.svg"
+                          }
+                          alt={produto.nome}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <span className="font-medium">{produto.nome}</span>
+                  </div>
+                </TableCell>
                 <TableCell>{formatMoney(produto.preco)}</TableCell>
                 <TableCell>
                   {produto.receita ? (
@@ -164,6 +190,13 @@ export default function TabelaProdutos({
                 </TableCell>
               </TableRow>
               <DetalhesProdutoReceita produtoId={produtoId} produto={produto} />
+              {imagemSelecionada && (
+                <ImageViewer
+                  imagens={[imagemSelecionada]}
+                  isOpen={!!imagemSelecionada}
+                  onClose={() => setImagemSelecionada(null)}
+                />
+              )}
             </React.Fragment>
           ))}
         </TableBody>

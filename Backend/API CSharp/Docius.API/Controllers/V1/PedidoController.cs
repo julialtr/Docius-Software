@@ -1,8 +1,8 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
+using Docius.API.Dtos;
 using Docius.API.Dtos.V1;
 using Docius.Repository.EinBiss.Entities.Models;
-using Docius.Repository.ServicosTerceiros.Dados;
 using Docius.Service.EntityService;
 using Docius.Service.EntityService.Data;
 using Docius.Service.EntityService.DB.EinBiss;
@@ -25,7 +25,7 @@ public class PedidoController : CrudControllerBase<PedidoEntityService, Pedido, 
     [Consumes("multipart/form-data")]
     [DisableRequestSizeLimit]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreatePedido([FromForm] ResponsePedidoDto responseDto)
+    public async Task<IActionResult> CreatePedido([FromForm] ClassWithFilesDto responseDto)
     {
         var options = new JsonSerializerOptions
         {

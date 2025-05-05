@@ -66,7 +66,7 @@ public sealed class EinBissEntityService
         _entityServicePedidoProduto = new(() => new PedidoProdutoEntityService(this, context));
         _entityServicePersonalizacao = new(() => new PersonalizacaoEntityService(this, context));
         _entityServicePrecificacao = new(() => new PrecificacaoEntityService(this, context));
-        _entityServiceProduto = new(() => new ProdutoEntityService(this, context));
+        _entityServiceProduto = new(() => new ProdutoEntityService(this, context, env));
         _entityServiceReceita = new(() => new ReceitaEntityService(this, context));
         _entityServiceReceitaCategoriaIngrediente = new(() => new ReceitaCategoriaIngredienteEntityService(this, context));
         _entityServiceStatusPedido = new(() => new StatusPedidoEntityService(this, context));

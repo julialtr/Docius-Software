@@ -34,11 +34,3 @@ public class ReadPedidoDto : ReadDtoBase<int>
 
     public virtual List<ReadPedidoProdutoDto> PedidoProduto { get; set; }
 }
-
-public class ResponsePedidoDto
-{
-    [Required]
-    public string json { get; set; }
-
-    public List<IFormFile> imagens { get; set; }
-}

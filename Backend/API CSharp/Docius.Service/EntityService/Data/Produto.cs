@@ -6,6 +6,8 @@ public class ProdutoDetalhado
 
     public string Nome { get; set; }
 
+    public string CaminhoFoto { get; set; }
+
     public decimal Preco { get; set; }
 
     public int QtdPedidos { get; set; }

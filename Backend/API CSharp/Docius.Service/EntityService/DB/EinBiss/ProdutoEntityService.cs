@@ -2,15 +2,21 @@
 using Docius.Repository.EinBiss.Entities.Models;
 using Docius.Service.EntityService.Core;
 using Docius.Service.EntityService.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Docius.Service.EntityService.DB.EinBiss;
 
 public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityService, Produto, int, ProdutoFiltro>
 {
-    public ProdutoEntityService(EinBissEntityService service, EinBissContext context) : base(service, context)
+    private readonly IWebHostEnvironment _env;
+
+    public ProdutoEntityService(EinBissEntityService service, EinBissContext context, IWebHostEnvironment env) : base(service, context)
     {
+        _env = env;
     }
 
     protected override void OnCreateQuery(ref IQueryable<Produto> query, ProdutoFiltro filter)
@@ -53,6 +59,7 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
             Preco = produto.Preco,
             QtdPedidos = produto.PedidoProduto?.Count() ?? 0,
             CategoriaProdutoId = produto.CategoriaProdutoId,
+            CaminhoFoto = produto.CaminhoFoto,
             Receita = produto.Receita != null ? new ReceitaDetalhada
             {
                 Id = produto.Receita.Id,
@@ -81,5 +88,112 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
         }).ToList();
 
         return produtosDetalhados;
+    }
+
+    public async Task DeletaProdutoAsync(int id)
+    {
+        var produto = EntityService.Produto.Entity
+            .Where(p => p.Id.Equals(id))
+            .FirstOrDefault();
+
+        var caminhoFisico = Path.Combine(_env.WebRootPath ?? "wwwroot", produto.CaminhoFoto.TrimStart('/'));
+
+        if (File.Exists(caminhoFisico))
+            File.Delete(caminhoFisico);
+
+        await DeleteAsync(produto);
+    }
+
+    public async Task<ProdutoDetalhado> CriaProdutoAsync(Produto dados, List<IFormFile> imagens)
+    {
+        if (!string.IsNullOrEmpty(dados.CaminhoFoto) && imagens != null && imagens.Count != 0)
+        {
+            var chaveImagem = dados.CaminhoFoto;
+
+            var imagem = imagens.FirstOrDefault(f => f.FileName == (chaveImagem + Path.GetExtension(f.FileName)));
+            if (imagem == null)
+                return null;
+
+            var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var nomeImagem = Guid.NewGuid().ToString() + Path.GetExtension(imagem.FileName);
+            var caminhoImagem = Path.Combine(uploadsFolder, nomeImagem);
+
+            using (var stream = new FileStream(caminhoImagem, FileMode.Create))
+            {
+                await imagem.CopyToAsync(stream);
+            }
+
+            var caminhoRelativoImagem = $"/uploads/{nomeImagem}";
+
+            dados.CaminhoFoto = caminhoRelativoImagem;
+        }
+
+        var createdEntity = await EntityService.Produto.CreateAsync(dados);
+
+        return LeProdutos(new ProdutoFiltro { Ids = new int[] { createdEntity.Id } }).FirstOrDefault();
+    }
+
+    public async Task<ProdutoDetalhado> UpdateProdutoAsync(int id, Produto dados, List<IFormFile> imagens)
+    {
+        Produto data = await ReadAsync(id);
+
+        if (data == null)
+            return null;
+
+        bool bAlterarFoto = true;
+
+        if (!string.IsNullOrEmpty(dados.CaminhoFoto))
+        {
+            var caminhoAntigo = Path.Combine(_env.WebRootPath ?? "wwwroot", dados.CaminhoFoto.TrimStart('/'));
+            if (File.Exists(caminhoAntigo))
+                bAlterarFoto = false;
+        }
+
+        if (bAlterarFoto)
+        {
+            if (!string.IsNullOrEmpty(data.CaminhoFoto))
+            {
+                var caminhoAntigo = Path.Combine(_env.WebRootPath ?? "wwwroot", data.CaminhoFoto.TrimStart('/'));
+                if (File.Exists(caminhoAntigo))
+                    File.Delete(caminhoAntigo);
+            }
+
+            if (imagens != null && imagens.Count != 0)
+            {
+                var chaveImagem = dados.CaminhoFoto;
+
+                var imagem = imagens.FirstOrDefault(f => f.FileName == (chaveImagem + Path.GetExtension(f.FileName)));
+                if (imagem == null)
+                    return null;
+
+                var uploadsFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                var nomeImagem = Guid.NewGuid().ToString() + Path.GetExtension(imagem.FileName);
+                var caminhoImagem = Path.Combine(uploadsFolder, nomeImagem);
+
+                using (var stream = new FileStream(caminhoImagem, FileMode.Create))
+                {
+                    await imagem.CopyToAsync(stream);
+                }
+
+                var caminhoRelativoImagem = $"/uploads/{nomeImagem}";
+
+                dados.CaminhoFoto = caminhoRelativoImagem;
+            }
+        }
+
+        data.Nome = dados.Nome;
+        data.ReceitaId = dados.ReceitaId;
+        data.CategoriaProdutoId = dados.CategoriaProdutoId;
+        data.CaminhoFoto = dados.CaminhoFoto;
+
+        await UpdateAsync(data);
+
+        return LeProdutos(new ProdutoFiltro { Ids = new int[] { id } }).FirstOrDefault();
     }
 }

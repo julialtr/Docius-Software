@@ -18,6 +18,9 @@ public class Produto : EntityBase<int>
     [Column("preco")]
     public decimal Preco { get; set; }
 
+    [Column("caminho_foto")]
+    public string CaminhoFoto { get; set; }
+
     [Column("receita_id")]
     public int ReceitaId { get; set; }
 

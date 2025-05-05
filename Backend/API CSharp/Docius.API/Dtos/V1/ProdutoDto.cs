@@ -13,6 +13,8 @@ public class CreateProdutoDto : CreateDtoBase
 
     [Required]
     public int ReceitaId { get; set; }
+
+    public string CaminhoFoto { get; set; }
 }
 
 public class UpdateProdutoDto : UpdateDtoBase
@@ -22,6 +24,8 @@ public class UpdateProdutoDto : UpdateDtoBase
 
     [Required]
     public int ReceitaId { get; set; }
+
+    public string CaminhoFoto { get; set; }
 
     public int? CategoriaProdutoId { get; set; }
 }
@@ -37,6 +41,8 @@ public class UpdateProdutoCardapioDto : UpdateDtoBase
     [Required]
     public decimal Preco { get; set; }
 
+    public string CaminhoFoto { get; set; }
+
     public int QtdPedidos { get; set; }
 
     [Required]
@@ -50,6 +56,8 @@ public class ReadProdutoDto : ReadDtoBase<int>
     public string Nome { get; set; }
 
     public decimal Preco { get; set; }
+
+    public string CaminhoFoto { get; set; }
 
     public int QtdPedidos { get; set; }
 
