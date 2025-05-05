@@ -29,7 +29,7 @@ export default function DetalhesReceitaIngrediente({
             <Card className="border-amber-200">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">
-                  Ingredientes da Receita
+                  Ingredientes da receita
                 </CardTitle>
               </CardHeader>
               <CardContent>

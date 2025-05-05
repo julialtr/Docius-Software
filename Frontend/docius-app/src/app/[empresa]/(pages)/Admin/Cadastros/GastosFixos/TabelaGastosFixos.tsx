@@ -133,7 +133,7 @@ export default function TabelaGastosFixos({
         <div className="mt-6 bg-white rounded-lg shadow p-4">
           <div className="flex justify-between items-center">
             <h3 className="font-medium text-gray-700">
-              Total de Gastos Fixos Mensais
+              Total de gastos fixos mensais
             </h3>
             <Badge
               variant="outline"

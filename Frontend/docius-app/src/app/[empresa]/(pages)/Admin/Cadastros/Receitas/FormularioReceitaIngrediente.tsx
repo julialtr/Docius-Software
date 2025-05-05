@@ -283,7 +283,7 @@ export default function FormularioReceitaIngrediente({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="unidadeMedida.id">Unidade de Medida</Label>
+            <Label htmlFor="unidadeMedida.id">Unidade de medida</Label>
             <Select
               value={dadosIngrediente?.unidadeMedida?.id.toString()}
               onValueChange={(value) => {

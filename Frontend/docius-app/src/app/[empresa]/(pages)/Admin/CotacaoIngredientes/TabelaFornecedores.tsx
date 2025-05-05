@@ -36,9 +36,9 @@ export default function TabelaFornecedores({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Fornecedores</CardTitle>
+        <CardTitle className="text-lg">Fornecedores padrões</CardTitle>
         <CardDescription>
-          Selecione os fornecedores para incluir na busca de cotações
+          Selecione os fornecedores padrões para incluir na busca de cotações
           automáticas
         </CardDescription>
       </CardHeader>
