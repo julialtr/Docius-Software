@@ -138,7 +138,16 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
 
     public async Task<ProdutoDetalhado> UpdateProdutoAsync(int id, Produto dados, List<IFormFile> imagens)
     {
-        Produto data = await ReadAsync(id);
+        Produto data = EntityService.Produto.Entity
+            .Include(e => e.Receita)
+                .ThenInclude(r => r.ReceitaCategoriaIngrediente)
+                    .ThenInclude(ri => ri.CategoriaIngrediente)
+            .Include(e => e.Receita)
+                .ThenInclude(r => r.ReceitaCategoriaIngrediente)
+                    .ThenInclude(ri => ri.UnidadeMedida)
+            .Include(e => e.PedidoProduto)
+            .Where(e => e.Id.Equals(id))
+            .FirstOrDefault();
 
         if (data == null)
             return null;
@@ -189,7 +198,6 @@ public sealed class ProdutoEntityService : EntityServiceBase<EinBissEntityServic
 
         data.Nome = dados.Nome;
         data.ReceitaId = dados.ReceitaId;
-        data.CategoriaProdutoId = dados.CategoriaProdutoId;
         data.CaminhoFoto = dados.CaminhoFoto;
 
         await UpdateAsync(data);

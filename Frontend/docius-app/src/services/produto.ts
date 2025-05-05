@@ -42,8 +42,10 @@ export const updateProduto = async (id: number, produto: UpdateProduto) => {
       extension
     );
 
-    formData.append("imagens", imagem);
-    produtoJson.caminhoFoto = chaveImagem;
+    if (imagem != null) {
+      formData.append("imagens", imagem);
+      produtoJson.caminhoFoto = chaveImagem;
+    }
   }
 
   formData.append("json", JSON.stringify(produtoJson));
@@ -84,8 +86,10 @@ export const createProduto = async (produto: CreateProduto) => {
       extension
     );
 
-    formData.append("imagens", imagem);
-    produtoJson.caminhoFoto = chaveImagem;
+    if (imagem != null) {
+      formData.append("imagens", imagem);
+      produtoJson.caminhoFoto = chaveImagem;
+    }
   }
 
   formData.append("json", JSON.stringify(produtoJson));

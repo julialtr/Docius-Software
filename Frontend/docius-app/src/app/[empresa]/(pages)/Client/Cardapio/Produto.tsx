@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter } from "@/app/_components/ui/card";
 import { Button } from "@/app/_components/ui/button";
 
 import { formatMoney } from "@/utils/format";
+import { LINK_API } from "@/utils/constants";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
 
 export function Produto({ produto }: { produto: ReadProduto }) {
@@ -21,6 +22,13 @@ export function Produto({ produto }: { produto: ReadProduto }) {
   return (
     <>
       <Card className="overflow-hidden transition-all hover:shadow-md">
+        <div className="relative h-48 w-full overflow-hidden bg-amber-50">
+          <img
+            src={produto.caminhoFoto ? `${LINK_API}${produto.caminhoFoto}` : "/assets/produto-sem-imagem.png"}
+            alt={`Produto ${produto.nome}`}
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
         <CardContent className="p-4">
           <div className="mb-1 flex items-center justify-between">
             <h3 className="font-semibold text-lg text-amber-900">

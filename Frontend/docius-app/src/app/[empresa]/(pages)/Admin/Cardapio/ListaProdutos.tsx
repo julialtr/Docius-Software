@@ -10,11 +10,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/app/_components/ui/card";
 
 import { formatMoney } from "@/utils/format";
+import { LINK_API } from "@/utils/constants";
 
 export default function ListaItens({
   dados,
@@ -41,13 +43,32 @@ export default function ListaItens({
                 />
               </div>
             </CardHeader>
-            <CardContent className="py-3">
+            <CardContent className="py-2">
+              <div className="flex items-start gap-4">
+                <div
+                  className={
+                    "relative overflow-hidden rounded-md group w-20 h-20 flex-shrink-0"
+                  }
+                >
+                  <img
+                    src={
+                      produto.caminhoFoto
+                        ? `${LINK_API}${produto.caminhoFoto}`
+                        : "/assets/produto-sem-imagem.png"
+                    }
+                    alt={produto.nome}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="py-3">
               <CardDescription>
                 <div className="flex items-center text-green-700 font-medium">
                   {formatMoney(produto.preco)}
                 </div>
               </CardDescription>
-            </CardContent>
+            </CardFooter>
           </Card>
         ))}
       </div>

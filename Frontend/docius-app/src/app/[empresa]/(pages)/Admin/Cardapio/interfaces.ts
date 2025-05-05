@@ -32,6 +32,7 @@ function mapearCategorias(
       qtdPedidos: produto.qtdPedidos,
       receitaId: produto.receita?.id,
       categoriaProdutoId: produto.categoriaProdutoId,
+      caminhoFoto: produto.caminhoFoto,
     })),
     categoriaProdutoInferior: mapearCategorias(
       categoriaProduto.categoriaProdutoInferior ?? []

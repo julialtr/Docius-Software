@@ -46,8 +46,10 @@ export const createPedido = async (pedido: CreatePedido) => {
 
         const imagem = base64ToFile(foto.caminhoFoto, chaveImagem, extension);
 
-        formData.append("imagens", imagem);
-        foto.caminhoFoto = chaveImagem;
+        if (imagem != null) {
+          formData.append("imagens", imagem);
+          foto.caminhoFoto = chaveImagem;
+        }
       });
     }
   });
