@@ -1,0 +1,19 @@
+Nome da tela: Cadastro de Precificação
+
+Descrição: Esta tela permite o usuário a editar e visualizar as precificações das receitas da confeitaria.
+
+Campos:
+- Lista de receitas
+
+Lista de receitas:
+- Em forma de cards
+- Informações: Nome, tempo de preparo (HH:MM), rendimento (Em porções) e tag precificada ou não
+
+Ações:
+- Visualização da precificação (Clique sobre o card da receita)
+- Recalcular Valor dos gastos fixos (Botão Recalcular)
+- Visualização da lista ingredientes vinculados a categoria de ingrediente (Clique sobre a categoria de inrgediente)
+- Considerar ou desconsiderar ingrediente no cálculo da precificação (Clique sobre o ingrediente para desmarcar ou marcar o checkbox)
+- Considerar ou desconsiderar todos os ingredientes da categoria de ingrediente no cálculo da precificação (Clique sobre a categoria de ingrediente para desmarcar ou marcar o checkbox)
+- Edição do valor adotado (Ícone de lápis e folha no Resumo da precificação)
+- Salvar (Botão de Salvar)

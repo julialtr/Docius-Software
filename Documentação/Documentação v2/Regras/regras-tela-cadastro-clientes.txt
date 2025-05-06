@@ -4,4 +4,4 @@ Regras:
 
 Edição: Não permitida pelo administradores da confeitaria.
 Exclusão: Não permitida pelo administradores da confeitaria.
-Cadastro: Não permitida pelo administradores da confeitaria. O cliente poderá realizar o cadastro na tela de Login.
+Cadastro: Não permitida pelo administradores da confeitaria. O cliente poderá realizar o cadastro na tela de Login. Essa opção não está disponível na tela de cadastro de clientes.

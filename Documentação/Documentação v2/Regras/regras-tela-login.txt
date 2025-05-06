@@ -1,0 +1,7 @@
+Nome da regra: Tela de login.
+
+Regras:
+
+Para cadastrar/editar/visualizar/excluir funcionários e/ou administradores na plataforma, é necessário entrar em contato com o suporte.
+
+A funcionalidade de cadastro de usuário disponível na plataforma na área de login é apenas para novos usuários do tipo cliente.

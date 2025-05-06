@@ -1,0 +1,9 @@
+Nome da regra: Tela de cadastro das receitas.
+
+Regras:
+
+Para alterar o preço do produto, o único modo é alterá-lo pela tela de precificação.
+
+O preço do produto só será alterado assim que a precificação da receita for feita.
+
+Para o produto ser incluído no cardápio, ele precisa de um preço diferente de R$ 0,00.

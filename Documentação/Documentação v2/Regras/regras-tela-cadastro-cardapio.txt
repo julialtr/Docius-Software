@@ -1,0 +1,19 @@
+Nome da regra: Tela de cadastro de cardápio.
+
+Regras:
+
+A confeitaria só pode ter um cardápio.
+
+O cardápio é organizado em categorias, subcategorias e produtos.
+
+Cada categoria pode ter subcategorias e produtos.
+Cada subcategoria pode ter outras subcategorias e produtos.
+O produto deve estar dentro de uma categoria ou subcategoria.
+
+As categorias e subcategorias servem para agrupar produtos semelhantes.
+
+Apenas produtos já precificados podem ser adicionados ao cardápio.
+
+O produto só pode ser adicionado uma vez ao cardápio.
+
+Não é possível excluir nem incluir cardápios. A confeitaria deve ter um cardápio disponível.

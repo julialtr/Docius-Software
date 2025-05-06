@@ -1,0 +1,20 @@
+Nome do fluxo: Cadastro de precificações
+
+Descrição: Este fluxo permite o usuário fazer o cadastro de precificações.
+
+Passos:
+1. Na tela de cadastro de receitas, cadastrar uma nova receita.
+2. Na tela de cadastro de gastos fixos, cadastrar novos gastos fixos.
+
+Agora, é possível cadastrar uma precificação, pois ela precisa de uma receita e dos gastos fixos para o cálculo.
+
+Passo a passo de como calcular a precificação de uma receita:
+1. Na tela de cadastro de precificação, clique em uma das receitas da lista.
+2. Informe o percentual de lucro desejado.
+3. Informe as horas mensais trabalhadas.
+4. Clique em recalcular.
+5. A lista "Ingredientes para cálculo de média" mostra uma lista de categorias de ingredientes cadastrados na receita. Clique sobre o nome da categoria de ingrediente para expandi-lá.
+6. Em cada categoria de ingrediente expandida, terá a lista de ingredientes vinculados a categoria. Selecione apenas os ingredientes que serão utilizados para o cálculo da receita.
+7. Com isso, será calculado o valor dos ingredientes, valor dos gastos fixos, valor dor lucro e por fim, o valor sugerido para a receita. Para alterar o valor sugerido, modifique o valor adotado clicando no ícone de papel e lápis.
+8. Verifique se o valor por porção está a seu grado.
+9. Clique em salvar.

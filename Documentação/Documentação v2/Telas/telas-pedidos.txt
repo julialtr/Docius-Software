@@ -1,0 +1,33 @@
+Nome da tela: Pedidos
+
+Descrição: Esta tela permite o usuário visualizar os pedidos da confeitaria.
+
+Visão em formato de boards
+- Colunas: Pagamento pendente, confirmado, em produção e concluído.
+
+Pagamento pendente: o pedido foi efetuado pelo cliente, mas é necessário verificar o aplicativo do banco para confirmar o pagamento de 50% do pedido antecipadamente.
+
+Confirmado: o pedido foi efetuado pelo cliente e o pagamento de 50% do pedido foi confirmado.
+
+Em produção: o pedido está em processo de produção.
+
+Concluído: o pedido teve o processo de produção finalizado e está pronto para retirada. Ou o produto foi cancelado pelo cliente.
+
+Lista de pedidos
+- Em formato de card
+- Informações: Número do pedido, data e hora de retirada, quantidade de itens (produtos) e ícone circular do progresso dos itens (Pendente, parcialmente pendente e concluído)
+
+Visualização de pedido detalhado
+- Em formato de card
+- Informações: Número do pedido, data e hora de retirada, Cliente (Nome), lista de itens (produtos) e valor total
+
+Lista de itens do pedido
+- Em formato de card
+- Informações: Produto (Nome), quantidade, preço, ícone circular do status do item (Concluído ou não concluído) e imagens de inspiração.
+
+Ações:
+- Arrastar pedidos entre colunas
+- Visualizar detalhes do pedido (Clicar sobre o card de pedido)
+- Ampliar imagem de inspiração (Clicar sobre a imagem)
+- Concluir item do pedido (Clicar sobre o checkbox do item do pedido)
+

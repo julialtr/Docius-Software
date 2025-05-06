@@ -1,0 +1,40 @@
+Nome da regra: Tela de cadastro das precificações.
+
+Regras:
+
+A precificação só pode ser feita caso tenha receitas cadastradas, pois elas são diretamente ligadas. Então, ao incluir uma nova receita ela aparece na tela de precificação. E caso ela for excluída, a precificação também é excluída.
+
+A precificação dos produtos tem base em 3 fatores: Custo dos ingredientes, valor dos gastos fixos e perncentual de lucro desejado.
+
+Cálculo e explicação de valores na tela:
+
+1. Cálculo do custo dos ingredientes (Valor dos ingredientes - Card 'Resumo da Precificação')
+- Cada receita possui uma lista de categorias de ingredientes.
+- Para cada categoria, são exibidos os ingredientes cadastrados.
+- Como os ingredientes podem ter preços variáveis, o sistema permite selecionar quais serão considerados no cálculo.
+- A média de preço dos ingredientes selecionados em cada categoria de ingrediente é calculada.
+- A soma dessas médias resulta no valor dos ingredientes da receita.
+
+2. Cálculo da proporção dos gastos fixos (Valor dos gastos fixos - Card 'Resumo da Precificação')
+- O valor total dos gastos fixos cadastrados é proporcionalizado de acordo com o tempo necessário para preparar a receita.
+- O cálculo utilizado é: Valor dos gastos fixos cadastrados × Tempo da receita / Quantidade de horas mensais trabalhadas
+
+3. Valor do lucro - Card 'Resumo da Precificação'
+- Esse valor é o que será lucrado sobre o valor da receita, o que será retornado de forma 'limpa'.
+- (Valor dos ingredientes + Valor total dos gastos fixos) x Percentual de lucro desejado.
+
+4. Cálculo do valor final da receita (Valor sugerido - Card 'Resumo da Precificação')
+- É o valor final da receita que foi calculado.
+- Soma entre o Valor dos ingredientes, valor dos gastos fixos e valor do lucro. Ou seja, soma do resultado dos 3 últimos itens calculados.
+
+4. Valor sugerido e valor adotado - Card 'Resumo da Precificação'
+- O sistema sugere um valor final somando o custo dos ingredientes, o valor proporcional dos gastos fixos e o valor de lucro esperado.
+- Caso o valor sugerido não seja adequado, o usuário pode ajustar o preço manualmente no campo "Valor Adotado".
+
+5. Valor sugerido e valor adotado por porção - Card 'Resumo da Precificação'
+- A precificação leva em conta que a receita será vendida por unidade. Portanto, o valor por porção fará essa proporção.
+- Valor sugerido ou adotado dividido pela quantidade de porções da receita.
+- O valor sugerido é o resultado da precificação. 
+- O valor adotado é o que será salva no cadastro de produto.
+
+Assim que a precificação é salva, o preço de todos os produtos com a receita vinculada são alterados para o novo valor.

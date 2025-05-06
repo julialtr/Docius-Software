@@ -1,0 +1,33 @@
+Nome da tela: Cadastro de Cardápio
+
+Descrição: Esta tela permite o usuário a editar e visualizar o cardápio da confeitaria.
+
+Campos:
+- Lista de categorias
+
+Campos da adição de uma categoria ou subcategoria:
+- Nome
+
+Validações da adição de uma categoria ou subcategoria:
+- Nome deve ser informado.
+
+Campos da adição de um produto:
+- Produto (Cadastro de produtos)
+
+Lista categorias ou subcategorias:
+- Em forma de card
+- Informações: Nome, lista de subcategorias e lista de produtos
+
+Lista de produtos:
+- Em forma de card
+- Informações: Nome, imagem ilustrativa e preço
+
+Ações:
+- Inclusão (Botão Salvar cardápio)
+- Inclusão de categoria (Botão Nova categoria)
+- Inclusão de subcategoria (Botão '+' ao lado da categoria ou subcategoria na lista, botão de Adicionar subcategoria)
+- Inclusão de produto (Botão '+' ao lado da categoria ou subcategoria na lista, botão de Adicionar produto)
+- Exclusão de categoria ou subcategoria (Ícone de lixeira ao lado do registro na lista)
+- Exclusão de produto (Ícone de lixeira ao lado do registro na lista)
+- Edição de categoria ou subcategoria (Ícone de lápis ao lado do registro na lista)
+- Visualização da lista de subcategorias e produtos vinculados ao registro da lista (Clique sobre o registro da lista)

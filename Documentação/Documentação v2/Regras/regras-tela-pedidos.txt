@@ -1,0 +1,16 @@
+Nome da regra: Tela de pedidos.
+
+Regras:
+
+Essa tela mostra o fluxo de produção dos pedidos.
+
+O administrador não pode criar nem cancelar pedidos. Ele só pode editar o status dos pedidos, ao mover ele entre as colunas do boards.
+
+Não é possível mover os itens do board em sentido contrário (Voltar uma ação).
+
+O cliente só pode cancelar pedidos que estão na coluna de pagamento pendente ou confirmado.
+
+Ícone circular do progresso dos itens do pedido:
+- Branco: Nenhum item do pedido foi concluído.
+- Amarelo: Pelo menos um item do pedido foi concluído.
+- Verde: Todos os itens do pedido foram concluídos.

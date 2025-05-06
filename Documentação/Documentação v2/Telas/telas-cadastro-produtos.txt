@@ -15,7 +15,7 @@ Validações:
 - Receita deve ser informada.
 
 Lista:
-- Colunas: Nome (com imagem ilustrativa), preço, receita (Nome) e ações
+- Colunas: Nome (com imagem ilustrativa), preço (Calculado a partir da precificação), receita (Nome) e ações
 - Ordenação: Presente em todas as colunas exceto ações, podendo ser crescente ou decrescente.
 
 Ações:

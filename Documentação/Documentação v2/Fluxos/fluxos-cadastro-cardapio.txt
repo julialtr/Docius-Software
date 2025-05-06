@@ -1,0 +1,9 @@
+Nome do fluxo: Cadastro de cardápio
+
+Descrição: Este fluxo permite o usuário fazer o cadastro de cardápio.
+
+Passos:
+1. Na tela de cadastro de produtos, incluir um novo produto.
+2. Na tela de precificação, realizar a precificação da receita vinculada ao produto.
+
+Agora, é possível cadastrar um cardápio com produtos.

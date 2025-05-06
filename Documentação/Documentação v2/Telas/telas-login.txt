@@ -14,4 +14,4 @@ Ações:
 - Esqueceu a senha?
 - Ícone olho: revela ou esconde a senha digitada.
 - Entrar
-- Cadastre-se: para ter acesso a plataforma Docius em modo de administrador, caso você ainda não esteja cadastrado, é necessário entrar em contato com o suporte da Docius.
+- Cadastre-se: para ter acesso a plataforma Docius em modo de administrador ou funcionário, caso você ainda não esteja cadastrado, é necessário entrar em contato com o suporte da Docius. 
