@@ -201,7 +201,7 @@ export default function Cardapio() {
               onClick={() => handleOpenDialog(false)}
             >
               <PlusCircle className="h-4 w-4 mr-2" />
-              Nova Categoria
+              Nova categoria
             </Button>
             <Button
               variant="outline"
@@ -209,7 +209,7 @@ export default function Cardapio() {
               onClick={salvarCardapio}
             >
               <Save className="h-4 w-4" />
-              Salvar Cardápio
+              Salvar cardápio
             </Button>
           </div>
 

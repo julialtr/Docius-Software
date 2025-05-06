@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import { Toaster } from "./_components/ui/toaster";
+import { FloatingChat } from "@/app/_components/Chatbot/floating-chat";
 
 import { DadosEmpresaProvider } from "@/context/DadosEmpresaContext";
 import { DadosCategoriaProdutoProvider } from "@/context/DadosCategoriaProdutoContext";
@@ -25,11 +26,12 @@ export default function RootLayout({
         <DadosCategoriaProdutoProvider>
           <DadosCotacaoProvider>
             <DadosPersonalizacaoFotoProvider>
-<DadosMenuProvider>
+            <DadosMenuProvider>
               <html lang="pt-BR">
                 <body>
                   {children}
                   <Toaster />
+                  <FloatingChat />
                 </body>
               </html>
             </DadosMenuProvider>
