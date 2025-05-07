@@ -33,6 +33,7 @@ public static class MapperConfigurationExtension
                 new ProfilePersonalizacao(),
                 new ProfilePersonalizacaoFoto(),
                 new ProfileDashboard(),
+                new ProfileChatbot(),
         };
     }
 }

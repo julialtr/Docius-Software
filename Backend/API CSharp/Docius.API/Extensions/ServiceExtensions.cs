@@ -104,6 +104,7 @@ public static class ServiceExtensions
         services.AddScoped<AutenticacaoEntityService>();
         services.AddScoped<DashboardEntityService>();
         services.AddScoped<EmailEntityService>();
+        services.AddScoped<ChatbotEntityService>();
         services.AddScoped<ProxyEntityService>().AddHttpClient<ProxyEntityService>();
     }
 }
