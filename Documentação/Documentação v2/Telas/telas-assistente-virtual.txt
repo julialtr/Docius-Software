@@ -1,0 +1,17 @@
+Nome da tela: Assistente Virtual
+
+Descrição: Esta tela permite o usuário a tirar as dúvidas e ter suporte sobre o software da confeitaria.
+
+Visão em formato de chat
+- Mensagens do usuário ficam no lado direito
+- Mensagens do assistente virtual ficam no lado esquerdo
+
+Mensagem de texto
+- Campo de texto livre para fazer as perguntas
+
+Lista de mensagens
+- Informações: mensagem, horário e quem enviou (Usuário ou chatbot)
+
+Ações
+- Enviar mensagem (Ícone de seta para a direta)
+- Limpar o histórico da conversa (Ícone de lixeira)

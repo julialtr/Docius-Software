@@ -1,0 +1,11 @@
+Nome da regra: Tela de assistente virtual.
+
+Regras:
+
+O chatbot está disponível com toda uma documentação sobre o sistema, sobre todas as telas, regras e fluxos do sistema. Ele está disponível para te ajudar a sanar a maior possibilidade de dúvidas possíveis. 
+
+Caso ainda fique com alguma dúvida ou caso o chatbot não consiga te ajudar, entre em contato com o suporte.
+
+Faça perguntas com contexto para que o chatbot seja mais assertivo.
+
+Ao deslogar do sistema, o histórico do chat é limpo automaticamente. Caso o usuário permaneça logado, o histórico do chat permanecerá presente, a não ser que o histórico seja limpo pelo próprio usuário.
