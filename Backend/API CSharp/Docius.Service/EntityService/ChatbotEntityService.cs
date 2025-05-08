@@ -112,24 +112,41 @@ public sealed class ChatbotEntityService
             .EnumerateArray()
             .Select((mensagem, index) =>
             {
-                var conteudo = mensagem.GetProperty("content")
-                    .EnumerateArray()
-                    .FirstOrDefault(c => c.GetProperty("type").GetString() == "text");
+                string tipoAutor = mensagem.TryGetProperty("role", out var roleProp)
+                    ? roleProp.GetString()
+                    : "desconhecido";
 
-                var texto = conteudo.GetProperty("text").GetProperty("value").GetString();
+                DateTime dataHora = mensagem.TryGetProperty("created_at", out var createdAtProp)
+                    ? DateTimeOffset.FromUnixTimeSeconds(createdAtProp.GetInt64()).ToLocalTime().DateTime
+                    : DateTime.MinValue;
 
-                var textoFormatado = Regex.Replace(texto, "【.*?】", "");
+                string textoFormatado = "";
+
+                if (mensagem.TryGetProperty("content", out var conteudos))
+                {
+                    var conteudoTexto = conteudos.EnumerateArray()
+                        .FirstOrDefault(c => c.TryGetProperty("type", out var tipo) && tipo.GetString() == "text");
+
+                    if (conteudoTexto.ValueKind != JsonValueKind.Undefined &&
+                        conteudoTexto.TryGetProperty("text", out var textProp) &&
+                        textProp.TryGetProperty("value", out var valueProp))
+                    {
+                        var texto = valueProp.GetString();
+                        textoFormatado = Regex.Replace(texto ?? "", "【.*?】", "");
+                    }
+                }
 
                 return new ReadMensagem
                 {
                     Id = index + 1,
-                    TipoAutor = mensagem.GetProperty("role").GetString(),
+                    TipoAutor = tipoAutor,
                     Mensagem = textoFormatado,
-                    DataHora = DateTimeOffset.FromUnixTimeSeconds(mensagem.GetProperty("created_at").GetInt64()).ToLocalTime().DateTime
+                    DataHora = dataHora
                 };
             })
-            .OrderBy(mensagem => mensagem.DataHora)
+            .OrderBy(m => m.DataHora)
             .ToList();
+
 
         return mensagens;
     }
