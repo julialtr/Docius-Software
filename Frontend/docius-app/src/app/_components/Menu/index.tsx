@@ -27,6 +27,7 @@ import {
   ClipboardList,
   Calculator,
   Tag,
+  Bot,
 } from "lucide-react";
 
 import { logout } from "@/services/autenticacao";
@@ -41,14 +42,16 @@ import {
 import MenuLink from "./Link";
 
 import { useToast } from "@/hooks/use-toast";
+import { useDadosChatbot } from "@/context/DadosChatbotContext";
 
 export default function MenuComponent() {
   const { toast } = useToast();
   const pathname = usePathname();
 
-  const {isCadastroMenuOpen, setIsCadastroMenuOpen} = useDadosMenu();
+  const { isCadastroMenuOpen, setIsCadastroMenuOpen } = useDadosMenu();
   const { dadosEmpresa } = useDadosEmpresa();
   const { setId } = useDadosUsuario();
+  const { deletaThread } = useDadosChatbot();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -57,6 +60,9 @@ export default function MenuComponent() {
       setId(0);
       localStorage.removeItem("userId");
       localStorage.removeItem("userType");
+
+      deletaThread();
+
       await logout();
     } catch (error) {
       if (error instanceof Error) {
@@ -208,6 +214,13 @@ export default function MenuComponent() {
                 href={`/${dadosEmpresa?.dominio}/Admin/CotacaoIngredientes`}
                 icon={Tag}
                 label="Cotação de Ingredientes"
+                isSidebarCollapsed={isSidebarCollapsed}
+              />
+
+              <MenuLink
+                href={`/${dadosEmpresa?.dominio}/Admin/Chatbot`}
+                icon={Bot}
+                label="Assistente Virtual"
                 isSidebarCollapsed={isSidebarCollapsed}
               />
             </nav>

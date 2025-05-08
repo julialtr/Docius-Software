@@ -34,6 +34,15 @@ public class ChatbotController : ControllerBase
         return Ok(new { response = mensagens });
     }
 
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ReadMensagem[]), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetMessages(string id)
+    {
+        var mensagens = await _chatbotEntityService.GetMessages(id);
+
+        return Ok(new { response = mensagens });
+    }
+
     [HttpDelete("thread/{id}")]
     public async Task<IActionResult> DeleteThread(string id)
     {

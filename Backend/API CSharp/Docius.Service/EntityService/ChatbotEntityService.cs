@@ -100,6 +100,40 @@ public sealed class ChatbotEntityService
         return mensagens;
     }
 
+    public async Task<List<ReadMensagem>> GetMessages(string id)
+    {
+        var client = GetClient();
+
+        var messageResponse = await client.GetAsync($"https://api.openai.com/v1/threads/{id}/messages");
+        var messageResponseJson = JsonDocument.Parse(await messageResponse.Content.ReadAsStringAsync());
+
+        var mensagens = messageResponseJson.RootElement
+            .GetProperty("data")
+            .EnumerateArray()
+            .Select((mensagem, index) =>
+            {
+                var conteudo = mensagem.GetProperty("content")
+                    .EnumerateArray()
+                    .FirstOrDefault(c => c.GetProperty("type").GetString() == "text");
+
+                var texto = conteudo.GetProperty("text").GetProperty("value").GetString();
+
+                var textoFormatado = Regex.Replace(texto, "【.*?】", "");
+
+                return new ReadMensagem
+                {
+                    Id = index + 1,
+                    TipoAutor = mensagem.GetProperty("role").GetString(),
+                    Mensagem = textoFormatado,
+                    DataHora = DateTimeOffset.FromUnixTimeSeconds(mensagem.GetProperty("created_at").GetInt64()).ToLocalTime().DateTime
+                };
+            })
+            .OrderBy(mensagem => mensagem.DataHora)
+            .ToList();
+
+        return mensagens;
+    }
+
     public async Task DeletaThread(string id)
     {
         var client = GetClient();

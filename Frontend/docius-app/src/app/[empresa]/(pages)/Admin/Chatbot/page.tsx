@@ -1,128 +1,118 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Bot, ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
-import { MessageItem, MessageType } from "./message-item";
-import { MessageInput } from "./message-input";
-import { Button } from "@/app/_components/ui/button";
+import { getMessages, sendMessage } from "@/services/chatbot";
+import { ReadMensagem } from "./interfaces";
+
+import { CaixaConversa } from "./CaixaConversa";
+import { CaixaPergunta } from "./CaixaPergunta";
+import { AguardeResposta } from "./AguardeResposta";
+
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
+import Menu from "@/app/_components/Menu";
 
-// Dados de exemplo para mensagens - mesmos do componente flutuante
-const initialMessages: MessageType[] = [
-  {
-    id: "1",
-    content: "Olá! Como posso ajudar você hoje?",
-    sender: "bot",
-    timestamp: new Date(Date.now() - 1000 * 60 * 5),
-  },
-  {
-    id: "2",
-    content: "Preciso de ajuda com o cadastro de um novo produto.",
-    sender: "user",
-    timestamp: new Date(Date.now() - 1000 * 60 * 4),
-  },
-  {
-    id: "3",
-    content:
-      "Claro! Para cadastrar um novo produto, vá até o menu 'Produtos' e clique no botão '+' no canto superior direito da tela.",
-    sender: "bot",
-    timestamp: new Date(Date.now() - 1000 * 60 * 3),
-  },
-  {
-    id: "4",
-    content: "Como faço para adicionar uma imagem ao produto?",
-    sender: "user",
-    timestamp: new Date(Date.now() - 1000 * 60 * 2),
-  },
-  {
-    id: "5",
-    content:
-      "No formulário de cadastro de produto, você encontrará um botão 'Adicionar imagem'. Clique nele e selecione a imagem do seu computador. Formatos suportados: JPG, PNG e GIF.",
-    sender: "bot",
-    timestamp: new Date(Date.now() - 1000 * 60 * 1),
-  },
-  {
-    id: "6",
-    content: "Obrigado pela ajuda!",
-    sender: "user",
-    timestamp: new Date(Date.now() - 1000 * 30),
-  },
-  {
-    id: "7",
-    content:
-      "Por nada! Estou sempre à disposição para ajudar. Tem mais alguma dúvida?",
-    sender: "bot",
-    timestamp: new Date(Date.now()),
-  },
-];
+import { useDadosChatbot } from "@/context/DadosChatbotContext";
 
-export default function ChatbotPage() {
-  const [messages, setMessages] = useState<MessageType[]>(initialMessages);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+export default function Chatbot() {
+  const [mensagens, setMensagens] = useState<ReadMensagem[]>([]);
+  const mensagensEndRef = useRef<HTMLDivElement>(null);
 
-  const handleSendMessage = (content: string) => {
-    const newMessage: MessageType = {
-      id: Date.now().toString(),
-      content,
-      sender: "user",
-      timestamp: new Date(),
-    };
+  const { threadId, criaThread } = useDadosChatbot();
 
-    setMessages((prev) => [...prev, newMessage]);
+  const [aguardeResposta, setAguardeResposta] = useState(false);
 
-    // Simular resposta do bot após 1 segundo
-    setTimeout(() => {
-      const botResponse: MessageType = {
-        id: (Date.now() + 1).toString(),
-        content:
-          "Obrigado pela sua mensagem! Um atendente irá analisar sua solicitação em breve.",
-        sender: "bot",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botResponse]);
-    }, 1000);
+  const handleEnviarMensagem = async (conteudo: string) => {
+    if (!threadId) return;
+
+    setMensagens([
+      ...mensagens,
+      {
+        id: 99,
+        mensagem: conteudo,
+        tipoAutor: "user",
+        dataHora: new Date(),
+      },
+    ]);
+
+    setAguardeResposta(true);
+
+    const response = await sendMessage({
+      mensagem: conteudo,
+      threadId: threadId,
+    });
+
+    setMensagens(response);
+    setAguardeResposta(false);
   };
 
-  // Rolar para a última mensagem quando novas mensagens são adicionadas
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    const cria = async () => {
+      if (threadId) {
+        const mensagensObtidas = await getMessages(threadId);
+        setMensagens(mensagensObtidas);
+      } else criaThread();
+    };
+
+    cria();
+  }, []);
+
+  useEffect(() => {
+    mensagensEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [mensagens]);
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col">
-      <div className="flex items-center gap-2 border-b bg-white p-4">
-        <Link href="/admin/dashboard">
-          <Button variant="ghost" size="icon" className="mr-2">
-            <ArrowLeft className="h-5 w-5" />
-            <span className="sr-only">Voltar</span>
-          </Button>
-        </Link>
-        <Bot className="h-6 w-6 text-amber-600" />
-        <h1 className="text-xl font-semibold">Assistente Virtual</h1>
-      </div>
+    <div className="flex h-screen bg-gray-100">
+      <Menu />
+      <main className="flex-1 overflow-auto">
+        <div className="p-8">
+          <div className="flex h-[calc(100vh-4rem)] flex-col">
+            <div className="flex items-center gap-2 border-b">
+              <div className="mb-8">
+                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  Assistente Virtual
+                </h1>
+                <p className="text-gray-600">
+                  Converse com o assistente virtual para obter informações e
+                  suporte.
+                </p>
+              </div>
+            </div>
 
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <ScrollArea className="flex-1 p-4">
-          <div className="mx-auto max-w-4xl">
-            {messages.map((message, index) => (
-              <MessageItem
-                key={message.id}
-                message={message}
-                isLast={index === messages.length - 1}
-              />
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-        </ScrollArea>
+            <div className="flex flex-1 flex-col overflow-hidden">
+              <ScrollArea className="flex-1 p-4">
+                <div className="mx-auto max-w-4xl">
+                  {mensagens.map((mensagem, index) => (
+                    <CaixaConversa
+                      key={mensagem.id}
+                      mensagem={mensagem}
+                      ehUltimaMensagem={index === mensagens.length - 1}
+                      floatingChat={false}
+                    />
+                  ))}
+                  {aguardeResposta && (
+                    <div className="ml-2 mt-2 self-start">
+                      <AguardeResposta />
+                    </div>
+                  )}
+                  <div ref={mensagensEndRef} />
+                </div>
+              </ScrollArea>
 
-        <div className="border-t bg-white p-4">
-          <div className="mx-auto max-w-4xl">
-            <MessageInput onSendMessage={handleSendMessage} />
+              <div className="bg-muted p-4">
+                <div className="mx-auto max-w-4xl">
+                  <CaixaPergunta
+                    floatingChat={false}
+                    aguardeResposta={aguardeResposta}
+                    onEnviarMensagem={handleEnviarMensagem}
+                    onDadosChange={setMensagens}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

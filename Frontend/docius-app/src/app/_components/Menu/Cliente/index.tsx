@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, BookOpenText, ReceiptText, LogOut, LogIn } from "lucide-react";
 
 import MenuLink from "../Link";
@@ -12,9 +13,10 @@ import { logout } from "@/services/autenticacao";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../../ui/sheet";
 import { Button } from "../../ui/button";
 
-import { usePathname } from "next/navigation";
 import { useDadosEmpresa } from "@/context/DadosEmpresaContext";
 import { useDadosUsuario } from "@/context/DadosUsuarioContext";
+import { useDadosChatbot } from "@/context/DadosChatbotContext";
+
 import { useToast } from "@/hooks/use-toast";
 
 export function MenuCliente() {
@@ -23,6 +25,8 @@ export function MenuCliente() {
 
   const { dadosEmpresa } = useDadosEmpresa();
   const { id, setId } = useDadosUsuario();
+  const { deletaThread } = useDadosChatbot();
+  
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [ehAdmin, setEhAdmin] = useState(false);
 
@@ -36,6 +40,9 @@ export function MenuCliente() {
       setId(0);
       localStorage.removeItem("userId");
       localStorage.removeItem("userType");
+
+      deletaThread();
+
       await logout();
     } catch (error) {
       if (error instanceof Error) {
