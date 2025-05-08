@@ -10,7 +10,7 @@ Mensagem de texto
 - Campo de texto livre para fazer as perguntas
 
 Lista de mensagens
-- Informações: mensagem, horário e quem enviou (Usuário ou chatbot)
+- Informações: mensagem, horário e quem enviou (Usuário ou chatbot/assistente virtual)
 
 Ações
 - Enviar mensagem (Ícone de seta para a direta)
