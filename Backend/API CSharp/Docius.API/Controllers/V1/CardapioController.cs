@@ -41,6 +41,15 @@ public class CardapioController : CrudControllerBase<CardapioEntityService, Card
         return Ok(Mapper.Map<ReadCardapioDto>(cardapio));
     }
 
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(ReadProdutoDto[]), StatusCodes.Status200OK)]
+    public async Task<IActionResult> FindUltimosProdutosPedidos(int id)
+    {
+        var produtos = await EntityService.LeUltimosProdutosPedidos(id);
+
+        return Ok(Mapper.Map<List<Produto>>(produtos));
+    }
+
     protected override void OnSetEntityService()
     {
         EntityService = _einBissEntityService.Cardapio;

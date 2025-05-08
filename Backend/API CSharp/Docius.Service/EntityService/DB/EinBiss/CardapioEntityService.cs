@@ -138,4 +138,30 @@ public sealed class CardapioEntityService : EntityServiceBase<EinBissEntityServi
             return await LeCardapio();
         });
     }
+
+    public async Task<List<Produto>> LeUltimosProdutosPedidos(int idUsuario)
+    {
+        var pedidos = await EntityService.Pedido.Entity
+            .Include(p => p.PedidoProduto)
+                .ThenInclude(pp => pp.Produto)
+            .Where(p => p.UsuarioId.Equals(idUsuario))
+            .OrderByDescending(p => p.DataHoraEntrega)
+            .ToListAsync();
+
+        var produtos = pedidos
+            .SelectMany(p => p.PedidoProduto)
+            .Select(pp => pp.Produto)
+            .Distinct()
+            .Take(5)
+            .Select(p => new Produto
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Preco = p.Preco,
+                CaminhoFoto = p.CaminhoFoto,
+            })
+            .ToList();
+
+        return produtos;
+    }
 }

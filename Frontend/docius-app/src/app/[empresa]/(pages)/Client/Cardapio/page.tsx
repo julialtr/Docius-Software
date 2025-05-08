@@ -5,7 +5,9 @@ import { Search } from "lucide-react";
 
 import { CategoriaProduto } from "@/app/[empresa]/(pages)/Client/Cardapio/CategoriaProduto";
 import { ReadCardapio } from "../../Admin/Cadastros/Cardapio/interfaces";
-import { findCardapio } from "@/services/cardapio";
+import { findCardapio, findUltimosProdutosPedidos } from "@/services/cardapio";
+import { ReadProduto } from "../../Admin/Cadastros/Produtos/interfaces";
+import { Produto } from "./Produto";
 
 import { MenuCliente } from "@/app/_components/Menu/Cliente";
 
@@ -25,13 +27,24 @@ export default function Cardapio() {
     categoriaProduto: [],
   });
 
+  const [ultimosProdutos, setUltimosProdutos] = useState<ReadProduto[]>([]);
+
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
 
       try {
-        const response = await findCardapio();
+        var response = await findCardapio();
         setCardapio(response);
+
+        const userType = localStorage.getItem("userType");
+        const usuarioId = localStorage.getItem("userId");       
+
+        if (userType == "1" && usuarioId) {
+          response = await findUltimosProdutosPedidos(Number(usuarioId));
+          
+          setUltimosProdutos(response);
+        }
       } catch (error) {
         if (error instanceof Error) {
           console.error(error);
@@ -71,6 +84,21 @@ export default function Cardapio() {
               </p>
             </div>
           </div>
+
+          {ultimosProdutos.length ? (
+            <div className="mb-12">
+              <h2 className="mb-4 text-2xl font-bold text-amber-900 border-l-4 border-amber-500 pl-3">
+                Os seus queridinhos s2
+              </h2>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {ultimosProdutos.map((produto) => (
+                  <div key={`featured-${produto.id}`}>
+                    <Produto produto={produto} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           {/* Categorias */}
           {cardapio.categoriaProduto.length > 0 ? (

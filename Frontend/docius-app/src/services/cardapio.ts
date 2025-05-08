@@ -40,3 +40,24 @@ export const updateCardapio = async (id: number, cardapio: UpdateCardapio) => {
     throw error;
   }
 };
+
+export const findUltimosProdutosPedidos = async (idUsuario: number) => {
+  try {
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/cardapio/${idUsuario}`,
+      {
+        method: "GET",
+      }
+    );
+
+    if (response.status === 204) return [];
+
+    const data = await response.json();
+
+    if (response.ok) return data;
+
+    throw new Error(data.Message || "Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
