@@ -28,11 +28,13 @@ export default function DetalhesReceitaCategoriaIngrediente({
           <div className="bg-amber-50/50 p-4">
             <Card className="border-amber-200">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg">
-                  Categorias de ingredientes da receita
-                </CardTitle>
+                <CardTitle className="text-lg">Detalhes da receita</CardTitle>
               </CardHeader>
               <CardContent>
+                <div className="pb-2">
+                  <span className="text-sm">{receita.descricao}</span>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {receita.receitaCategoriaIngrediente.map(
                     (receitaCategoriaIngrediente) => {

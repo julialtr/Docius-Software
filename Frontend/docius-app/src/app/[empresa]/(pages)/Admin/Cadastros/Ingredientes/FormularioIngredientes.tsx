@@ -283,7 +283,6 @@ export default function FormularioIngredientes({
                 name="marca"
                 value={dadosIngrediente.marca}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="grid grid-cols-2 gap-2">

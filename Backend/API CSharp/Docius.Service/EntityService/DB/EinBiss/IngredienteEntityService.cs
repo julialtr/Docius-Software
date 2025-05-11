@@ -21,9 +21,6 @@ public sealed class IngredienteEntityService : EntityServiceBase<EinBissEntitySe
         if (string.IsNullOrEmpty(entity.Nome))
             throw new WarningException("Nome deve ser informado.");
 
-        if (string.IsNullOrEmpty(entity.Marca))
-            throw new WarningException("Marca deve ser informada.");
-
         if (entity.Preco == 0)
             throw new WarningException("Preço deve ser informado.");
 

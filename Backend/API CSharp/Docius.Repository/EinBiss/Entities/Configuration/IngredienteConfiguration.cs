@@ -11,7 +11,6 @@ public class IngredienteConfiguration : IEntityTypeConfiguration<Ingrediente>
         builder.HasKey(entity => entity.Id);
 
         builder.Property(entity => entity.Nome).IsRequired();
-        builder.Property(entity => entity.Marca).IsRequired();
         builder.Property(entity => entity.Preco).IsRequired();
         builder.Property(entity => entity.Medida).IsRequired();
 

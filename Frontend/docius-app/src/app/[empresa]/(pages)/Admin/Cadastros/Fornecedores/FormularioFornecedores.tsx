@@ -53,7 +53,7 @@ export default function FormularioFornecedores({
     if (fornecedor) {
       setDadosFornecedor(fornecedor);
       setEhFornecedorPadrao(fornecedor.id === 1 || fornecedor.id === 2);
-    }
+    } else setEhFornecedorPadrao(false);
   }, [fornecedor]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

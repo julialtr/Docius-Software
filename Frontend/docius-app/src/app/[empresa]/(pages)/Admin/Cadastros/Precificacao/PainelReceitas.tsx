@@ -33,7 +33,7 @@ export default function PainelReceitas({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[400px] pr-4">
+        <ScrollArea className={precificacao ? "pr-4" : "pr-4 h-[70vh]"}>
           {dados.map((dadosPrecificacao) => {
             return (
               <div

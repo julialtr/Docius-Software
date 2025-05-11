@@ -12,7 +12,6 @@ public class CreateIngredienteDto : CreateDtoBase
     [Required]
     public string Nome { get; set; }
 
-    [Required]
     public string Marca { get; set; }
 
     [Required]
@@ -37,7 +36,6 @@ public class UpdateIngredienteDto : UpdateDtoBase
     [Required]
     public string Nome { get; set; }
 
-    [Required]
     public string Marca { get; set; }
 
     [Required]

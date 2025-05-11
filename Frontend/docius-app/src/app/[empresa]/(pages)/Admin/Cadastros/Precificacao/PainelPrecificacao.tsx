@@ -64,47 +64,45 @@ export default function PainelPrecificacao({
   };
 
   return (
-    <Card className="lg:col-span-2">
+    <Card className="lg:col-span-2 flex flex-col h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Calculator className="h-5 w-5 text-amber-600" />
           Precificação
         </CardTitle>
       </CardHeader>
+      
       <CardContent>
         {!precificacao ? (
-          <div className="text-center py-12 text-gray-500">
-            <ShoppingCart className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+          <div className="flex flex-1 flex-col items-center justify-center text-gray-500 text-center">
+            <ShoppingCart className="h-12 w-12 mb-4 text-gray-300" />
             <p>
               Selecione uma receita ao lado para visualizar e editar sua
               precificação.
             </p>
           </div>
         ) : (
-          <div className="space-y-6">
-            {/* Configurações Específicas */}
+          <div className="flex-1 overflow-y-auto space-y-6">
             <ConfiguracoesEspecificas
               precificacao={precificacao}
               onPrecificacaoChange={onPrecificacaoChange}
             />
 
-            {/* Seleção de Ingredientes */}
             <ListaIngredientes
               precificacao={precificacao}
               onPrecificacaoChange={onPrecificacaoChange}
             />
 
-            {/* Resumo da Precificação */}
             <ResumoPrecificacao
               precificacao={precificacao}
               onPrecificacaoChange={onPrecificacaoChange}
             />
 
-            {/* Valor por Porção */}
             <ValorPorcao precificacao={precificacao} />
           </div>
         )}
       </CardContent>
+
       <CardFooter className="flex justify-end">
         <Button
           className="bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700"

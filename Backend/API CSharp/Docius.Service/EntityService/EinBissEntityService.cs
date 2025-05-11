@@ -9,7 +9,6 @@ public sealed class EinBissEntityService
     private readonly Lazy<CardapioEntityService> _entityServiceCardapio;
     private readonly Lazy<CategoriaIngredienteEntityService> _entityServiceCategoriaIngrediente;
     private readonly Lazy<CategoriaProdutoEntityService> _entityServiceCategoriaProduto;
-    private readonly Lazy<DecoracaoBoloEntityService> _entityServiceDecoracaoBolo;
     private readonly Lazy<PersonalizacaoFotoEntityService> _entityServicePersonalizacaoFoto;
     private readonly Lazy<FornecedorEntityService> _entityServiceFornecedor;
     private readonly Lazy<GastoEntityService> _entityServiceGasto;
@@ -32,7 +31,6 @@ public sealed class EinBissEntityService
     public CardapioEntityService Cardapio => _entityServiceCardapio.Value;
     public CategoriaIngredienteEntityService CategoriaIngrediente => _entityServiceCategoriaIngrediente.Value;
     public CategoriaProdutoEntityService CategoriaProduto => _entityServiceCategoriaProduto.Value;
-    public DecoracaoBoloEntityService DecoracaoBolo => _entityServiceDecoracaoBolo.Value;
     public PersonalizacaoFotoEntityService PersonalizacaoFoto => _entityServicePersonalizacaoFoto.Value;
     public FornecedorEntityService Fornecedor => _entityServiceFornecedor.Value;
     public GastoEntityService Gasto => _entityServiceGasto.Value;
@@ -57,7 +55,6 @@ public sealed class EinBissEntityService
         _entityServiceCardapio = new(() => new CardapioEntityService(this, context));
         _entityServiceCategoriaIngrediente = new(() => new CategoriaIngredienteEntityService(this, context));
         _entityServiceCategoriaProduto = new(() => new CategoriaProdutoEntityService(this, context));
-        _entityServiceDecoracaoBolo = new(() => new DecoracaoBoloEntityService(this, context));
         _entityServicePersonalizacaoFoto = new(() => new PersonalizacaoFotoEntityService(this, context));
         _entityServiceFornecedor = new(() => new FornecedorEntityService(this, context));
         _entityServiceGasto = new(() => new GastoEntityService(this, context));
