@@ -25,6 +25,15 @@ public class ChatbotController : ControllerBase
         return Ok(new { response = threadId });
     }
 
+    [HttpPost("thread/validacao/{id}")]
+    [ProducesResponseType(typeof(object), StatusCodes.Status201Created)]
+    public async Task<IActionResult> ValidadeThread(string id)
+    {
+        var threadId = await _chatbotEntityService.ValidaThread(id);
+
+        return Ok(new { response = threadId });
+    }
+
     [HttpPost]
     [ProducesResponseType(typeof(ReadMensagem[]), StatusCodes.Status201Created)]
     public async Task<IActionResult> SendMessage([FromBody] CreateMensagemDto dadosDto)

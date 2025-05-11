@@ -36,6 +36,18 @@ public sealed class ChatbotEntityService
         return threadId;
     }
 
+    public async Task<string> ValidaThread(string id)
+    {
+        var client = GetClient();
+
+        var response = await client.GetAsync($"https://api.openai.com/v1/threads/{id}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            return await CriaThread();
+
+        return id;
+    }
+
     public async Task<List<ReadMensagem>> SendMessage(CreateMensagem dados)
     {
         var client = GetClient();

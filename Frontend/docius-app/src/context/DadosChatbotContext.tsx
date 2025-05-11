@@ -1,6 +1,6 @@
 "use client";
 
-import { createThread, deleteThread } from "@/services/chatbot";
+import { createThread, deleteThread, validateThread } from "@/services/chatbot";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface DadosChatbotContextProps {
@@ -21,9 +21,20 @@ export const DadosChatbotProvider = ({
   const [threadId, setThreadId] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("threadId");
+    const validaThread = async () => {
+      try {
+        const stored = localStorage.getItem("threadId");
 
-    if (stored) setThreadId(stored);
+        if (stored) {
+          const id = await validateThread(stored);
+          setThreadId(id);
+        }
+      } catch (error) {
+        console.error("Erro ao validar thread", error);
+      }
+    };
+
+    validaThread();
   }, []);
 
   const criaThread = async () => {

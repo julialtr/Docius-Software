@@ -22,6 +22,25 @@ export const createThread = async () => {
   }
 };
 
+export const validateThread = async (id: string) => {
+  try {
+    const response = await secureFetch(
+      `${LINK_API_VERSIONADA}/chatbot/thread/validacao/${id}`,
+      {
+        method: "POST",
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) return data.response;
+
+    throw new Error(data.Message || "Erro de conexão com a API.");
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const sendMessage = async (mensagem: CreateMensagem) => {
   try {
     const response = await secureFetch(`${LINK_API_VERSIONADA}/chatbot`, {
