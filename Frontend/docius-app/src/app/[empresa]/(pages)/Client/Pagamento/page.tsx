@@ -157,6 +157,7 @@ export default function Pagamento() {
       localStorage.removeItem(`pedido-${id}`);
       localStorage.removeItem(`carrinhoCompras-${id}`);
       router.push(`/${dadosEmpresa?.dominio}/Client/Pedidos`);
+      router.refresh();
     }
   };
 
