@@ -1,5 +1,5 @@
-export const LINK_API_VERSIONADA = "http://localhost:5273/api/v1";
-export const LINK_API = "http://localhost:5273";
+export const LINK_API_VERSIONADA = "https://docius-api-csharp.fly.dev/api/v1";
+export const LINK_API = "https://docius-api-csharp.fly.dev";
 
 export const getMultiplicadorUnidadeMedida = (sigla: string) => {
   if (sigla === "ml") return 1;
