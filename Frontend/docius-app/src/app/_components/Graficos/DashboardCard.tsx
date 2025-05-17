@@ -1,5 +1,3 @@
-import { TrendingUp, TrendingDown } from "lucide-react";
-
 import {
   Card,
   CardContent,

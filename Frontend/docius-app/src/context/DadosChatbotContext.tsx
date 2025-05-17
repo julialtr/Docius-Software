@@ -24,6 +24,9 @@ export const DadosChatbotProvider = ({
     const validaThread = async () => {
       try {
         const stored = localStorage.getItem("threadId");
+        const userType = localStorage.getItem("userType");
+
+        if (userType != "2" || userType != "2") return;
 
         if (stored) {
           const id = await validateThread(stored);

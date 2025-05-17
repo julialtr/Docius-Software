@@ -50,13 +50,13 @@ export function CaixaConversa({
       >
         <ReactMarkdown
           components={{
-            ol: ({ node, ...props }) => (
+            ol: ({ ...props }) => (
               <ol
                 style={{ listStyle: "decimal", paddingLeft: "2rem" }}
                 {...props}
               />
             ),
-            ul: ({ node, ...props }) => (
+            ul: ({ ...props }) => (
               <ul
                 style={{ listStyle: "disc", paddingLeft: "2rem" }}
                 {...props}

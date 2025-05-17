@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ReadCategoriaProduto } from "./interfaces";
 import { ReadCardapio } from "../interfaces";
