@@ -51,6 +51,7 @@ export default function FormularioProduto({
     nome: "",
     preco: 0,
     qtdPedidos: 0,
+    caminhoFoto: "",
     receita: {
       id: 0,
       nome: "",
@@ -97,7 +98,7 @@ export default function FormularioProduto({
 
     if (!dadosProduto) return;
 
-    let novoCardapio = { ...dados };
+    const novoCardapio = { ...dados };
 
     if (categoriaSuperiorId) {
       dadosProduto.categoriaProdutoId = categoriaSuperiorId;
@@ -133,6 +134,7 @@ export default function FormularioProduto({
       nome: "",
       preco: 0,
       qtdPedidos: 0,
+      caminhoFoto: "",
       receita: {
         id: 0,
         nome: "",
