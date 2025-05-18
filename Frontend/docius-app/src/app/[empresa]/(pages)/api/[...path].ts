@@ -1,33 +1,34 @@
+// pages/api/[...proxy].ts
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { path = [] } = req.query;
-  const targetUrl = `https://docius-api-csharp.fly.dev/api/${
-    Array.isArray(path) ? path.join("/") : path
-  }`;
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { proxy } = req.query;
+  const path = Array.isArray(proxy) ? proxy.join("/") : proxy;
+  const url = `https://docius-api-csharp.fly.dev/api/${path}`;
 
-  const headers = new Headers();
+  // Converter os headers para um formato que o fetch aceita
+  const headers: HeadersInit = {};
   for (const [key, value] of Object.entries(req.headers)) {
-    if (value) headers.set(key, value as string);
+    // Ignora headers que não devem ser reenviados
+    if (typeof value === "string") {
+      headers[key] = value;
+    }
   }
-  headers.delete("host");
 
-  const proxyRes = await fetch(targetUrl, {
+  const response = await fetch(url, {
     method: req.method,
     headers,
-    body: ["GET", "HEAD"].includes(req.method || "") ? undefined : req.body,
+    body: req.method !== "GET" && req.method !== "HEAD" ? req.body : undefined,
+    credentials: "include",
   });
 
-  res.status(proxyRes.status);
-  proxyRes.headers.forEach((value, key) => {
-    if (key.toLowerCase() !== "content-encoding") {
+  // Copia os headers da resposta
+  response.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== "set-cookie") {
       res.setHeader(key, value);
     }
   });
 
-  const buffer = await proxyRes.arrayBuffer();
-  res.send(Buffer.from(buffer));
+  const data = await response.arrayBuffer();
+  res.status(response.status).send(Buffer.from(data));
 }
