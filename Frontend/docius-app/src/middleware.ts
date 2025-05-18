@@ -11,10 +11,6 @@ export async function middleware(req: NextRequest) {
   const empresaAuxiliar = pathname.match(/^\/([^/]+)/);
   const empresa = empresaAuxiliar ? empresaAuxiliar[1] : "";
 
-  let token = req.cookies.get("accessToken")?.value;
-
-  console.log("token", token);
-
   const publicRoutes = [
     `/${empresa}/Login`,
     `/${empresa}/Cadastro`,
@@ -36,11 +32,11 @@ export async function middleware(req: NextRequest) {
   const protocol = req.nextUrl.protocol;
   const baseUrl = `${protocol}//${host}`;
 
+  let token = req.cookies.get("accessToken")?.value;
+
   if (!token) token = req.cookies.get("refreshAccessToken")?.value;
-  console.log("refreshAccessToken", token);
-  
+
   if (!token) {
-    console.log("redirecionamento", "sim");
     const redirecionamentoLogin =
       baseUrl + (empresa != "" ? `/${empresa}/Login` : "/NaoEncontrado");
     return NextResponse.redirect(new URL(redirecionamentoLogin));
@@ -81,13 +77,14 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
+    /**
      * Match all request paths except for the ones starting with:
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     * - uploads (imagens públicas)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|assets/).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|uploads/).*)",
   ],
 };
