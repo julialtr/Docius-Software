@@ -34,9 +34,14 @@ export async function middleware(req: NextRequest) {
 
   let token = req.cookies.get("accessToken")?.value;
 
+  console.log("token", token);
+  
+  
   if (!token) token = req.cookies.get("refreshAccessToken")?.value;
-
+  console.log("refreshAccessToken", token);
+  
   if (!token) {
+    console.log("redirecionamento", "sim");
     const redirecionamentoLogin =
       baseUrl + (empresa != "" ? `/${empresa}/Login` : "/NaoEncontrado");
     return NextResponse.redirect(new URL(redirecionamentoLogin));
