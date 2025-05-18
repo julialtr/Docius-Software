@@ -11,6 +11,10 @@ export async function middleware(req: NextRequest) {
   const empresaAuxiliar = pathname.match(/^\/([^/]+)/);
   const empresa = empresaAuxiliar ? empresaAuxiliar[1] : "";
 
+  let token = req.cookies.get("accessToken")?.value;
+
+  console.log("token", token);
+
   const publicRoutes = [
     `/${empresa}/Login`,
     `/${empresa}/Cadastro`,
@@ -32,11 +36,6 @@ export async function middleware(req: NextRequest) {
   const protocol = req.nextUrl.protocol;
   const baseUrl = `${protocol}//${host}`;
 
-  let token = req.cookies.get("accessToken")?.value;
-
-  console.log("token", token);
-  
-  
   if (!token) token = req.cookies.get("refreshAccessToken")?.value;
   console.log("refreshAccessToken", token);
   
