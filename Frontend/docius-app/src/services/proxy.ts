@@ -1,4 +1,4 @@
-import { LINK_API_VERSIONADA } from "@/utils/constants";
+import { LINK_API, LINK_API_VERSIONADA } from "@/utils/constants";
 import { secureFetch } from "./base";
 
 import { FilterWebScraping } from "@/app/[empresa]/(pages)/Admin/CotacaoIngredientes/interfaces";
@@ -14,7 +14,7 @@ export const findProdutos = async (filtro: FilterWebScraping) => {
     queryParams.append("TextoPesquisa", filtro.textoPesquisa);
 
     const response = await secureFetch(
-      `${LINK_API_VERSIONADA}/proxy?${queryParams.toString()}`,
+      `${LINK_API}${LINK_API_VERSIONADA}/proxy?${queryParams.toString()}`,
       {
         method: "GET",
       }
