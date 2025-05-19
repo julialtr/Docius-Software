@@ -1,4 +1,4 @@
-export const LINK_API_VERSIONADA = "/api/proxy/v1";
+export const LINK_API_VERSIONADA = "/api/v1";
 export const LINK_API = "https://docius-api-csharp.fly.dev/";
 
 export const getMultiplicadorUnidadeMedida = (sigla: string) => {
