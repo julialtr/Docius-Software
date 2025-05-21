@@ -124,6 +124,19 @@ export default function TabBuscaCotacoes({
         </AlertDescription>
       </Alert>
 
+      {/* Alerta sobre instabilidades */}
+      <Alert
+        variant="warning"
+        className="bg-amber-50 border-amber-200 text-amber-800"
+      >
+        <AlertTriangle className="h-4 w-4" />
+        <AlertDescription>
+          Essa funcionalidade está apresentando instabilidade em ambiente de
+          produção. Estamos trabalhando para corrigir o problema o mais breve
+          possível.
+        </AlertDescription>
+      </Alert>
+
       {/* Campo de busca */}
       <Card>
         <CardHeader>
