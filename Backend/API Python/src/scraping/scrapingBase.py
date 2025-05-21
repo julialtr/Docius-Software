@@ -41,9 +41,9 @@ def scraping(ids_mercados, texto_pesquisa):
             produtos.extend(novosProdutos)
 
     produtos = [
-        {"nome": produto[0], "preco": produto[1], "id_mercado": produto[2]}
+        {"nome": produto.nome, "preco": produto.preco, "id_mercado": produto.id_mercado}
         for produto in produtos
     ]
-
+    
     driver.quit()
     return produtos, 200

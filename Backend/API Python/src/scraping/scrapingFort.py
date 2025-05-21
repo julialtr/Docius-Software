@@ -13,14 +13,14 @@ import re
 def scraping(driver, url, conteudoPesquisa):
     try:
         produtos = []
+        wait = WebDriverWait(driver, 3)
 
         driver.get(url)
-        time.sleep(3)
 
         cookies = driver.find_element(By.ID, "privacytools-banner-consent")
         driver.execute_script("arguments[0].remove();", cookies)
 
-        cookies = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "cc-btn.cc-deny")))
+        cookies = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.CLASS_NAME, "cc-btn.cc-deny")))
         cookies.click()
 
         ignorarCEP = driver.find_element(By.CLASS_NAME, "modalCep-content--see-more")

@@ -37,8 +37,6 @@ public sealed class AutenticacaoEntityService
         };
 
         var token = new JwtSecurityToken(
-            issuer: _configuration["JwtSettings:Audience"],
-            audience: _configuration["JwtSettings:Audience"],
             claims: claims,
             expires: DateTime.UtcNow.AddDays(7),
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
@@ -53,12 +51,11 @@ public sealed class AutenticacaoEntityService
                 Expires = DateTime.UtcNow.AddDays(7),
                 HttpOnly = true,
                 Secure = true,
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
+                IsEssential = true,
             });
 
         var refreshToken = new JwtSecurityToken(
-            issuer: _configuration["JwtSettings:Audience"],
-            audience: _configuration["JwtSettings:Audience"],
             claims: claims,
             expires: DateTime.UtcNow.AddDays(10),
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
@@ -73,7 +70,8 @@ public sealed class AutenticacaoEntityService
                 Expires = DateTime.UtcNow.AddDays(10),
                 HttpOnly = true,
                 Secure = true,
-                SameSite = SameSiteMode.Strict,
+                SameSite = SameSiteMode.None,
+                IsEssential = true,
             });
     }
 
@@ -174,11 +172,9 @@ public sealed class AutenticacaoEntityService
 
         var claims = tokenHandler.ValidateToken(refreshToken, new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = _configuration["JwtSettings:Audience"],
-            ValidAudience = _configuration["JwtSettings:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"])),
             ValidateLifetime = true
         }, out var tokenValidado);

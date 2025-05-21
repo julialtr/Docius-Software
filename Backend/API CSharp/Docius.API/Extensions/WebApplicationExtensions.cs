@@ -1,4 +1,5 @@
-﻿using Swashbuckle.AspNetCore.SwaggerUI;
+﻿using Microsoft.AspNetCore.HttpOverrides;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Docius.API.Extensions;
 
@@ -6,18 +7,23 @@ public static class WebApplicationExtensions
 {
     public static WebApplication Configure(this WebApplication app)
     {
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
+        app.UseHttpsRedirection();
         app.ConfigureExceptionHandling();
+        app.UseStaticFiles();
         app.UseCors("CorsPolicy");
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
         app.ConfigureSwagger();
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
 
         return app;
     }
+
     public static WebApplication ConfigureSwagger(this WebApplication app)
     {
         if (!app.Environment.IsDevelopment())
