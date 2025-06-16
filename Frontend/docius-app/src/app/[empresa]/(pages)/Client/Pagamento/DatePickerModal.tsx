@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { format, addDays, isBefore, startOfDay } from "date-fns";
+import { addDays, isBefore, startOfDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { cn } from "@/lib/utils";
-import { CalendarIcon } from "lucide-react";
 
 import { Calendar } from "@/app/_components/ui/calendar";
 import {
@@ -15,12 +13,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/app/_components/ui/dialog";
-import { Label } from "@/app/_components/ui/label";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/app/_components/ui/popover";
 import { Button } from "@/app/_components/ui/button";
 import {
   Select,
@@ -29,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
+import { Card, CardContent } from "@/app/_components/ui/card";
 
 export function DatePickerModal({
   isDialogOpen,
@@ -65,7 +58,7 @@ export function DatePickerModal({
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={onIsDialogOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[350px]">
         <DialogHeader>
           <DialogTitle className="text-amber-900">
             Selecione a data de entrega
@@ -75,59 +68,66 @@ export function DatePickerModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="data">Data</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id="data"
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !data && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {data ? (
-                    format(data, "PPP", { locale: ptBR })
-                  ) : (
-                    <span>Selecione uma data</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={data}
-                  onSelect={setData}
-                  disabled={disabledDays}
-                  initialFocus
-                  locale={ptBR}
-                />
-              </PopoverContent>
-            </Popover>
-            <p className="text-xs text-muted-foreground">
-              É necessário pelo menos 2 dias de antecedência para prepararmos
-              seu pedido.
-            </p>
-          </div>
+        <div className="grid gap-2">
+          <Card className="border-amber-200">
+            <CardContent className="p-0">
+              <Calendar
+                mode="single"
+                selected={data}
+                onSelect={setData}
+                disabled={disabledDays}
+                initialFocus
+                locale={ptBR}
+                className="rounded-md mx-auto"
+                classNames={{
+                  months: "flex flex-col items-center",
+                  month: "space-y-4",
+                  caption: "flex justify-center pt-1 relative items-center",
+                  caption_label: "text-sm font-medium",
+                  nav: "space-x-1 flex items-center",
+                  nav_button:
+                    "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+                  nav_button_previous: "absolute left-1",
+                  nav_button_next: "absolute right-1",
+                  table: "w-full border-collapse space-y-1",
+                  head_row: "flex",
+                  head_cell:
+                    "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
+                  row: "flex w-full mt-2",
+                  cell: "text-center text-sm p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                  day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-amber-100 hover:text-amber-900 rounded-md",
+                  day_selected:
+                    "bg-amber-600 text-white hover:bg-amber-700 hover:text-white focus:bg-amber-600 focus:text-white",
+                  day_today: "bg-amber-100 text-amber-900 font-semibold",
+                  day_outside: "text-muted-foreground opacity-50",
+                  day_disabled:
+                    "text-muted-foreground opacity-50 cursor-not-allowed bg-transparent pointer-events-none",
 
-          <div className="grid gap-2">
-            <Label htmlFor="hora">Horário</Label>
-            <Select value={hora} onValueChange={setHora}>
-              <SelectTrigger id="hora">
-                <SelectValue placeholder="Selecione um horário" />
-              </SelectTrigger>
-              <SelectContent>
-                {horasDisponiveis.map((t) => (
-                  <SelectItem key={t} value={t}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+                  day_range_middle:
+                    "aria-selected:bg-accent aria-selected:text-accent-foreground",
+                  day_hidden: "invisible",
+                }}
+              />
+            </CardContent>
+          </Card>
+
+          <p className="text-xs text-muted-foreground">
+            É necessário pelo menos 2 dias de antecedência para prepararmos seu
+            pedido.
+          </p>
+
+          <Select value={hora} onValueChange={setHora}>
+            <SelectTrigger id="hora">
+              <SelectValue placeholder="Selecione um horário" />
+            </SelectTrigger>
+            <SelectContent>
+              {horasDisponiveis.map((t) => (
+                <SelectItem key={t} value={t}>
+                  {t}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <DialogFooter>
