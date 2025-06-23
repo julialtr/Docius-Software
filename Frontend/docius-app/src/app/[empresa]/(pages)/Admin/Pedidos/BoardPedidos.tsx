@@ -122,18 +122,20 @@ export function BoardPedidos({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex gap-4 overflow-x-auto pb-4 h-full">
-        {columns.map((column) => (
-          <ColunaBoardPedidos
-            key={column.id}
-            column={column}
-            pedidos={pedidos.filter(
-              (pedido) => pedido.statusPedidoId == column.id
-            )}
-            updateStatusItemPedido={updateStatusItemPedido}
-          />
-        ))}
+  <div className="flex gap-4 overflow-x-auto pb-4 h-full w-full">
+    {columns.map((column) => (
+      <div key={column.id} className="flex-1 min-w-[250px]">
+        <ColunaBoardPedidos
+          column={column}
+          pedidos={pedidos.filter(
+            (pedido) => pedido.statusPedidoId == column.id
+          )}
+          updateStatusItemPedido={updateStatusItemPedido}
+        />
       </div>
-    </DragDropContext>
+    ))}
+  </div>
+</DragDropContext>
+
   );
 }

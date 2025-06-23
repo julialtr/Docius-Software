@@ -20,7 +20,7 @@ export function ColunaBoardPedidos({
   ) => void;
 }) {
   return (
-    <div className="flex flex-col h-full w-80 bg-slate-50 rounded-md">
+    <div className="flex flex-col h-full bg-slate-50 rounded-md">
       <div className="p-3 font-medium border-b bg-slate-100 rounded-t-md">
         <h3>{column.titulo}</h3>
         <div className="text-xs text-muted-foreground mt-1">

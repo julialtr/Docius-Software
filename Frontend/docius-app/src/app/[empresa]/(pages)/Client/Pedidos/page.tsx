@@ -53,7 +53,7 @@ export default function Pedidos() {
         <MenuCliente />
 
         <main className="container mx-auto px-4">
-          <div className="p-8 h-full flex flex-col">
+          <div className="p-5 h-full flex flex-col">
             <div className="bg-white p-4 rounded-lg border shadow-sm flex-1 min-h-0">
               <BoardPedidos
                 pedidos={pedidos}
