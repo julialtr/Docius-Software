@@ -13,7 +13,9 @@ export default async function handler(
   const path = Array.isArray(proxy) ? proxy.join("/") : proxy;
   console.log("path", path);
 
-  const url = `https://docius-api-csharp.fly.dev/api/${path}`;
+  //Produção
+  //const url = https://docius-api-csharp.fly.dev/api/${path};
+  const url = `http://localhost:5273/api/${path}`;
   console.log("URL", url);
 
   // Converter os headers para um formato que o fetch aceita

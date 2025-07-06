@@ -61,7 +61,9 @@ public static class ServiceExtensions
         services.AddCors(options =>
         {
             options.AddPolicy("CorsPolicy", builder =>
-               builder.WithOrigins("https://docius-software-4xaq4.ondigitalocean.app")
+            //Produção
+               //builder.WithOrigins(https://docius-software-4xaq4.ondigitalocean.app)
+               builder.WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());

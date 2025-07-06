@@ -48,11 +48,17 @@ public sealed class AutenticacaoEntityService
         _httpContext.Response.Cookies.Append("accessToken", tokenString,
             new CookieOptions
             {
+                //Produção
+                //Expires = DateTime.UtcNow.AddDays(7),
+                //HttpOnly = true,
+                //Secure = true,
+                //SameSite = SameSiteMode.None,
+                //IsEssential = true,
+
                 Expires = DateTime.UtcNow.AddDays(7),
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.None,
-                IsEssential = true,
+                Secure = false,
+                SameSite = SameSiteMode.Strict,
             });
 
         var refreshToken = new JwtSecurityToken(
@@ -67,11 +73,17 @@ public sealed class AutenticacaoEntityService
         _httpContext.Response.Cookies.Append("refreshAccessToken", refreshTokenString,
             new CookieOptions
             {
+                //Produção
+                //Expires = DateTime.UtcNow.AddDays(7),
+                //HttpOnly = true,
+                //Secure = true,
+                //SameSite = SameSiteMode.None,
+                //IsEssential = true,
+
                 Expires = DateTime.UtcNow.AddDays(10),
                 HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.None,
-                IsEssential = true,
+                Secure = false,
+                SameSite = SameSiteMode.Strict,
             });
     }
 
